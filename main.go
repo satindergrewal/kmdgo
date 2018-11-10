@@ -6,6 +6,10 @@ import (
 )
 
 func main() {
-    dir := kmdutil.AppDataDir("komodo", false)
-    fmt.Println(dir)
+	appName := "VRSC"
+	dir := kmdutil.AppDataDir(appName, false)
+	fmt.Println(dir)
+
+	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
+	fmt.Printf("RPC User: %s\nRPC Password: %s\nRPC Port: %s\n", rpcuser, rpcpass, rpcport)
 }

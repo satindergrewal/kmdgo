@@ -23,7 +23,7 @@ func appDataDir(goos, appName string, roaming bool) string {
 		return "."
 	}
 
-	if appName != "komodo" || appName != strings.TrimPrefix("komodo", ".") {
+	if strings.ToLower(appName) != "komodo" || strings.ToLower(appName) != strings.TrimPrefix(strings.ToLower(appName), ".") {
 		appName = ".komodo/"+strings.ToUpper(appName)
 	}
 
