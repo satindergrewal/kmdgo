@@ -10,7 +10,6 @@ import (
 	"strings"
 	"regexp"
 	"io/ioutil"
-	//"github.com/satindergrewal/kmdgo/kmdutil"
 )
 
 func BytesToString(data []byte) string {
