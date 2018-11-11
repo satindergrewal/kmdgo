@@ -51,7 +51,9 @@ func AppRPCInfo(appName string) (string, string, string) {
 	AppRPCpass := strings.TrimLeft(rpcpass_line,`rpcpassword`)[1:]
 	//AppRPCport := strings.TrimLeft(rpcpport_line,`rpcport`)[1:]
 
-
+	if AppRPCport == "" && appName == "komodo" {
+		AppRPCport = "7771"
+	}
 
 	return AppRPCuser, AppRPCpass, AppRPCport
 }
