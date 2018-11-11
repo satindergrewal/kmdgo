@@ -42,9 +42,16 @@ func AppRPCInfo(appName string) (string, string, string) {
 	rpcpass_line := rpcpass.FindString(bytestr)
 	rpcpport_line := rpcport.FindString(bytestr)
 
-	AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuser_line,`rpcuser`),`=`)
-	AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpass_line,`rpcpassword`),`=`)
+	//AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuser_line,`rpcuser`),`=`)
+	//AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpass_line,`rpcpassword`),`=`)
 	AppRPCport := strings.TrimLeft(strings.TrimLeft(rpcpport_line,`rpcport`),`=`)
+
+	//AppRPCuser := rpcuser_line[8:]
+	AppRPCuser := strings.TrimLeft(rpcuser_line,`rpcuser`)[1:]
+	AppRPCpass := strings.TrimLeft(rpcpass_line,`rpcpassword`)[1:]
+	//AppRPCport := strings.TrimLeft(rpcpport_line,`rpcport`)[1:]
+
+
 
 	return AppRPCuser, AppRPCpass, AppRPCport
 }
