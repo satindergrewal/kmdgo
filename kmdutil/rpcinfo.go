@@ -6,6 +6,7 @@ package kmdutil
 
 import (
 	"path/filepath"
+	"runtime"
 	"log"
 	"strings"
 	"regexp"
@@ -22,7 +23,11 @@ func AppRPCInfo(appName string) (string, string, string) {
 	var appConf string
 
 	if strings.ToLower(appName) == "komodo" || strings.ToLower(appName) == ".komodo" {
-		appConf = filepath.Join(appDir, strings.ToLower(appName)+`.conf`)
+		if runtime.GOOS == "darwin" {
+				appConf = filepath.Join(appDir, strings.Title(appName)+`.conf`)
+			} else {
+				appConf = filepath.Join(appDir, strings.ToLower(appName)+`.conf`)
+			}
 	} else {
 		appConf = filepath.Join(appDir, strings.ToUpper(appName)+`.conf`)
 	}
