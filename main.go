@@ -1,4 +1,4 @@
-package main
+package kmdgo
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	appName := "VRSC"
+	appName := "komodo"
 	dir := kmdutil.AppDataDir(appName, false)
 	fmt.Println(dir)
 
