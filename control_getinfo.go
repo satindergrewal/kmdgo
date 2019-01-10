@@ -1,12 +1,8 @@
 package kmdgo
 
-import(
-    "net/http"
-    "io/ioutil"
-    "log"
-    "bytes"
+import (
+    "errors"
     "encoding/json"
-    "github.com/satindergrewal/kmdgo/kmdutil"
 )
 
 type GetInfo struct {
@@ -46,46 +42,33 @@ type GetInfo struct {
         Halving             int     `json:"halving"`
         Commission          int     `json:"commission"`
     } `json:"result"`
-    Error interface{} `json:"error"`
+    Error Error `json:"error"`
     ID    string      `json:"id"`
 }
 
-func GetinfoJsonValue(appName string) string {
-    //appName := "komodo"
-    rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
-
-    client := &http.Client{}
-    url := `http://127.0.0.1:`+rpcport
-
-    query_byte := []byte(`{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }`)
-
-    req, err := http.NewRequest("POST", url, bytes.NewBuffer(query_byte))
-    req.Header.Set("Content-Type", "application/json")
-
-    //req, err := http.NewRequest("POST", , nil)
-    req.SetBasicAuth(rpcuser, rpcpass)
-    resp, err := client.Do(req)
-    if err != nil{
-        log.Fatal(err)
-    }
-    bodyText, err := ioutil.ReadAll(resp.Body)
-
-    var query_result map[string]interface{}
-    if err := json.Unmarshal(bodyText, &query_result); err != nil {
-        panic(err)
+func (appName AppType) GetInfo() (GetInfo, error) {
+    query := APIQuery {
+        Method:     "getinfo",
+        Params:   "[]",
     }
 
-    s := string(bodyText)
-    return s
-}
-
-func (i GetInfo) DisplayGetinfo() GetInfo {
-    return i
-}
-
-func ResultGetInfo(appName string) GetInfo {
-    getinfoJson := GetinfoJsonValue(appName)
     var getinfo GetInfo
+
+    getinfoJson := appName.APICall(query)
+    
+    
+    var result APIResult
+
+    json.Unmarshal([]byte(getinfoJson), &result)
+    
+    if result.Result == nil {
+        answer_error, err := json.Marshal(result.Error)
+        if err != nil {
+        }
+        json.Unmarshal([]byte(getinfoJson), &getinfo)
+        return getinfo, errors.New(string(answer_error))
+    }
+
     json.Unmarshal([]byte(getinfoJson), &getinfo)
-    return getinfo
+    return getinfo, nil
 }
