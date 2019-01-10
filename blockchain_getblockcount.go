@@ -6,7 +6,7 @@ import (
 )
 
 type GetBlockCount struct {
-    Result interface{} `json:"result"`
+    Result int64 `json:"result"`
     Error  Error       `json:"error"`
     ID     string      `json:"id"`
 }
