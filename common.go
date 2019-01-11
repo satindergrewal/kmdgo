@@ -1,6 +1,7 @@
 package kmdgo
 
 import (
+    //"fmt"
     "net/http"
     "io/ioutil"
     "log"
@@ -35,6 +36,7 @@ func (appName AppType) APICall(q APIQuery) string {
 
     var query_str string
     query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "`+q.Method+`", "params": `+q.Params+` }`
+    //fmt.Println(query_str)
 
     query_byte := []byte(query_str)
 
