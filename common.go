@@ -56,6 +56,8 @@ func (appName AppType) APICall(q APIQuery) string {
         panic(err)
     }
 
+    //fmt.Println(string(bodyText))
+
     s := string(bodyText)
     return s
 }
