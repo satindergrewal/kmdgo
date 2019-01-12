@@ -44,6 +44,9 @@ RPC Port: 27486
 
 ## Supported API Calls
 
+- [x]	AppDataDir - Gives the path of cryptocurrency's Data directory based on it's symbol. Supports Only Komodo and Assetchains so far.
+- [x]	AppRPCInfo - Provides RPC username, password and it's port by reading it's config file from data directory.
+
 
 #### FSM
 - [ ]	FSMaddress [pubkey]
