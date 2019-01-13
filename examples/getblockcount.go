@@ -13,7 +13,9 @@ func main() {
 	var bc kmdgo.GetBlockCount
 	bc, err := appName.GetBlockCount()
 	if err != nil {
-		log.Println("err happened", err)
+		fmt.Printf("Code: %v\n", bc.Error.Code)
+		fmt.Printf("Message: %v\n\n", bc.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 
 	fmt.Println("bc value", bc)

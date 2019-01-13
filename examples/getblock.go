@@ -20,7 +20,9 @@ func main() {
 	// Get output of the GetBlock() method and store it to GetBlock struct type variable
 	gb, err := appName.GetBlock("08cddc39c6a04e0a7c9bb57477b1f4fa2ad218aa8c67f7ed406bfb470c4e0acd",2)
 	if err != nil {
-		log.Println("err happened", err)
+		fmt.Printf("Code: %v\n", gb.Error.Code)
+		fmt.Printf("Message: %v\n\n", gb.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 	
 	// Can print and use the struct variable outputs in further code logic. Check GetBlock struct in package file.
@@ -36,7 +38,7 @@ func main() {
 	fmt.Println("Merkleroot", gb.Result.Merkleroot)
 	fmt.Println("Segid", gb.Result.Segid)
 	fmt.Println("Finalsaplingroot", gb.Result.Finalsaplingroot)
-	fmt.Println("Tx", gb.Result.Tx[0])
+	fmt.Println("Tx", gb.Result.Tx)
 
 	for txi, txv := range gb.Result.Tx {
 		fmt.Printf("-->%v\n", txi)
@@ -45,7 +47,4 @@ func main() {
 		fmt.Println("Version", txv.Version)
 		fmt.Println("Locktime", txv.Locktime)
 	}
-
-	//fmt.Println(gb.Error)
-	//fmt.Println(gb.ID)
 }

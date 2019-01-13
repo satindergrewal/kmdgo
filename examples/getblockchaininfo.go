@@ -20,7 +20,9 @@ func main() {
 	// Get output of the GetBlockchainInfo() method and store it to GetBlockchainInfo struct type variable
 	gb, err := appName.GetBlockchainInfo()
 	if err != nil {
-		log.Println("err happened", err)
+		fmt.Printf("Code: %v\n", gb.Error.Code)
+		fmt.Printf("Message: %v\n\n", gb.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 	
 	// Can print and use the struct variable outputs in further code logic. Check GetBlockchainInfo struct in package file.

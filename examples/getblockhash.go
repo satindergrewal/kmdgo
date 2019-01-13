@@ -20,7 +20,9 @@ func main() {
 	// Get output of the GetBlockHash() method and store it to GetBlockHash struct type variable
 	gb, err := appName.GetBlockHash(1000)
 	if err != nil {
-		log.Println("Error happened:", err)
+		fmt.Printf("Code: %v\n", gb.Error.Code)
+		fmt.Printf("Message: %v\n\n", gb.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 	
 	// Can print and use the struct variable outputs in further code logic. Check GetBlockHash struct in package file.

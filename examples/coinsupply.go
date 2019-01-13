@@ -20,7 +20,9 @@ func main() {
 	// Get output of the CoinSupply() method and store it to CoinSupply struct type variable
 	cs, err := appName.CoinSupply(100)
 	if err != nil {
-		log.Println("err happened", err)
+		fmt.Printf("Code: %v\n", cs.Error.Code)
+		fmt.Printf("Message: %v\n\n", cs.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 	
 	// Can print and use the struct variable outputs in further code logic. Check CoinSupply struct in package file.

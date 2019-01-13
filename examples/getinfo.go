@@ -20,7 +20,9 @@ func main() {
     // Get output of the ResultGetinfo function and store it to GetInfo struct variable
     info, err := appName.GetInfo()
     if err != nil {
-        log.Println("err happened", err)
+        fmt.Printf("Code: %v\n", info.Error.Code)
+        fmt.Printf("Message: %v\n\n", info.Error.Message)
+        log.Fatalln("Err happened", err)
     }
 
     // Can print and use the struct variable outputs in further code logic. Check GetInfo struct in package file.

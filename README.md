@@ -75,7 +75,7 @@ RPC Port: 27486
 - [x]	getblockcount
 - [x]	getblockhash index
 - [ ]	getblockhashes timestamp
-- [ ]	getblockheader "hash" ( verbose )
+- [x]	getblockheader "hash" ( verbose )
 - [ ]	getchaintips
 - [ ]	getdifficulty
 - [ ]	getmempoolinfo
