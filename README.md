@@ -79,7 +79,7 @@ RPC Port: 27486
 - [x]	getchaintips
 - [x]	getdifficulty
 - [x]	getmempoolinfo
-- [ ]	getrawmempool ( verbose )
+- [x]	getrawmempool ( verbose )
 - [ ]	getspentinfo
 - [ ]	gettxout "txid" n ( includemempool )
 - [ ]	gettxoutproof ["txid",...] ( blockhash )
