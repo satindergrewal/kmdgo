@@ -74,13 +74,13 @@ RPC Port: 27486
 - [x]	getblockchaininfo
 - [x]	getblockcount
 - [x]	getblockhash index
-- [ ]	getblockhashes timestamp
+- [ ]	getblockhashes timestamp -- Todo
 - [x]	getblockheader "hash" ( verbose )
 - [x]	getchaintips
 - [x]	getdifficulty
 - [x]	getmempoolinfo
 - [x]	getrawmempool ( verbose )
-- [ ]	getspentinfo
+- [ ]	getspentinfo -- Todo
 - [ ]	gettxout "txid" n ( includemempool )
 - [ ]	gettxoutproof ["txid",...] ( blockhash )
 - [ ]	gettxoutsetinfo
