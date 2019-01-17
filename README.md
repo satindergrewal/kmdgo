@@ -305,8 +305,8 @@ RPC Port: 27486
 - [x]	signmessage "t-addr" "message"
 - [x]	walletlock
 - [x]	walletpassphrase "passphrase" seconds
-- [ ]	z_exportkey "zaddr"
-- [ ]	z_exportviewingkey "zaddr"
+- [x]	z_exportkey "zaddr"
+- [x]	z_exportviewingkey "zaddr"
 - [ ]	z_exportwallet "filename"
 - [ ]	z_getbalance "address" ( minconf )
 - [x]	z_getnewaddress ( type )
