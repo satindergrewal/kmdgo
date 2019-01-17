@@ -86,7 +86,7 @@ RPC Port: 27486
 - [x]	gettxoutsetinfo
 - [ ]	kvsearch key
 - [ ]	kvupdate key "value" days passphrase
-- [ ]	minerids needs height
+- [x]	minerids needs height
 - [ ]	notaries height timestamp
 - [ ]	verifychain ( checklevel numblocks )
 - [ ]	verifytxoutproof "proof"
