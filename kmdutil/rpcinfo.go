@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019 Satinder Grewal
+// Copyright (c) 2018-2019 Satinderjit Singh
 // Use of this source code is governed by an GPLv2
 // license that can be found in the LICENSE file
 // and LEGAL directory
