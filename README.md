@@ -81,9 +81,9 @@ RPC Port: 27486
 - [x]	getmempoolinfo
 - [x]	getrawmempool ( verbose )
 - [ ]	getspentinfo -- Todo
-- [ ]	gettxout "txid" n ( includemempool )
-- [ ]	gettxoutproof ["txid",...] ( blockhash )
-- [ ]	gettxoutsetinfo
+- [x]	gettxout "txid" n ( includemempool )
+- [x]	gettxoutproof ["txid",...] ( blockhash )
+- [x]	gettxoutsetinfo
 - [ ]	kvsearch key
 - [ ]	kvupdate key "value" days passphrase
 - [ ]	minerids needs height

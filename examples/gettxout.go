@@ -14,6 +14,7 @@ func main() {
 
 	txid := `c2abe4ae3b4965ba4d55048f355d9ddc803bf1b6123a10902ae4114260f516fb`
 
+	// Integer value is `vout` position in the txid
 	txout, err := appName.GetTxOut(txid, 1)
 	if err != nil {
 		fmt.Printf("Code: %v\n", txout.Error.Code)
