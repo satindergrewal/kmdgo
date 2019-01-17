@@ -1,0 +1,4 @@
+The following third party projects are incorporated into KMDGO and their respective licenses are adopted for each of these projects. Please see the files for each project for the exact details of their licensing. Most of them are in the public domain, MIT license or GPL.
+
+
+btcutil: Copyright (c) 2013-2017 The btcsuite developers, https://github.com/btcsuite/btcutil

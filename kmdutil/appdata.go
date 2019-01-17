@@ -1,6 +1,7 @@
-// Copyright (c) 2013-2017 The btcsuite developers
-// Use of this source code is governed by an ISC
-// license that can be found in the LICENSE file.
+// Copyright (c) 2018-2019 Satinder Grewal
+// Use of this source code is governed by an GPLv2
+// license that can be found in the LICENSE file
+// and LEGAL directory
 
 package kmdutil
 
