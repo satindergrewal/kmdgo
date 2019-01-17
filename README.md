@@ -88,7 +88,7 @@ RPC Port: 27486
 - [ ]	kvupdate key "value" days passphrase -- Todo
 - [x]	minerids needs height
 - [x]	notaries height timestamp
-- [ ]	verifychain ( checklevel numblocks )
+- [x]	verifychain ( checklevel numblocks )
 - [ ]	verifytxoutproof "proof"
 
 #### Channels

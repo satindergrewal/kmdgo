@@ -1,3 +1,10 @@
+/*
+The `minerids` method returns information about the notary nodes and 
+external miners at a specific block height. The response will 
+calculate results according to the 2000 blocks proceeding the 
+indicated "height" block.
+*/
+
 package kmdgo
 
 import (
@@ -6,11 +13,6 @@ import (
 	"errors"
 )
 
-
-// The `minerids` method returns information about the notary nodes and 
-// external miners at a specific block height. The response will 
-// calculate results according to the 2000 blocks proceeding the 
-// indicated "height" block.
 type MinerIDs struct {
 	Result	struct {
 		Mined []struct {
