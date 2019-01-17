@@ -266,9 +266,9 @@ RPC Port: 27486
 
 #### Wallet
 - [x]	addmultisigaddress nrequired ["key",...] ( "account" )
-- [ ]	backupwallet "destination"
-- [ ]	dumpprivkey "t-addr"
-- [ ]	dumpwallet "filename"
+- [x]	backupwallet "destination"
+- [x]	dumpprivkey "t-addr"
+- [x]	dumpwallet "filename"
 - [ ]	encryptwallet "passphrase"
 - [ ]	getaccount "KMD_address"
 - [ ]	getaccountaddress "account"
