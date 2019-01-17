@@ -84,8 +84,8 @@ RPC Port: 27486
 - [x]	gettxout "txid" n ( includemempool )
 - [x]	gettxoutproof ["txid",...] ( blockhash )
 - [x]	gettxoutsetinfo
-- [ ]	kvsearch key
-- [ ]	kvupdate key "value" days passphrase
+- [ ]	kvsearch key -- Todo
+- [ ]	kvupdate key "value" days passphrase -- Todo
 - [x]	minerids needs height
 - [ ]	notaries height timestamp
 - [ ]	verifychain ( checklevel numblocks )
