@@ -265,7 +265,7 @@ RPC Port: 27486
 - [ ]	z_validateaddress "zaddr"
 
 #### Wallet
-- [ ]	addmultisigaddress nrequired ["key",...] ( "account" )
+- [x]	addmultisigaddress nrequired ["key",...] ( "account" )
 - [ ]	backupwallet "destination"
 - [ ]	dumpprivkey "t-addr"
 - [ ]	dumpwallet "filename"
