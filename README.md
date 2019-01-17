@@ -89,7 +89,7 @@ RPC Port: 27486
 - [x]	minerids needs height
 - [x]	notaries height timestamp
 - [x]	verifychain ( checklevel numblocks )
-- [ ]	verifytxoutproof "proof"
+- [x]	verifytxoutproof "proof"
 
 #### Channels
 - [ ]	channelsaddress destpubkey
