@@ -260,7 +260,7 @@ RPC Port: 27486
 - [ ]	jumblr_secret "secretaddress"
 - [ ]	reconsiderblock "hash"
 - [ ]	txnotarizedconfirmed txid
-- [ ]	validateaddress "komodoaddress"
+- [x]	validateaddress "komodoaddress"
 - [x]	verifymessage "komodoaddress" "signature" "message"
 - [ ]	z_validateaddress "zaddr"
 
