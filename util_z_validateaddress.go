@@ -21,47 +21,43 @@ import (
 	//"strconv"
 )
 
-type ValidateAddress struct {
+type ZValidateAddress struct {
 	Result	struct {
-		Isvalid      bool   `json:"isvalid"`
-		Address      string `json:"address"`
-		ScriptPubKey string `json:"scriptPubKey"`
-		Segid        int    `json:"segid"`
-		Ismine       bool   `json:"ismine"`
-		Iswatchonly  bool   `json:"iswatchonly"`
-		Isscript     bool   `json:"isscript"`
-		Pubkey       string `json:"pubkey"`
-		Iscompressed bool   `json:"iscompressed"`
-		Account      string `json:"account"`
+		Isvalid                    bool   `json:"isvalid"`
+		Address                    string `json:"address"`
+		Type                       string `json:"type"`
+		Diversifier                string `json:"diversifier"`
+		Diversifiedtransmissionkey string `json:"diversifiedtransmissionkey"`
+		Ismine                     bool   `json:"ismine"`
 		}	`json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
 	
 }
 
-func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
+func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) {
 	query := APIQuery {
-		Method:	`validateaddress`,
-		Params:	`["`+taddr+`"]`,
+		Method:	`z_validateaddress`,
+		Params:	`["`+zaddr+`"]`,
 	}
 	//fmt.Println(query)
 
-	var validateaddress ValidateAddress
+	var zvalidateaddress ZValidateAddress
 
-	validateaddressJson := appName.APICall(query)
+	zvalidateaddressJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(validateaddressJson), &result)
+	json.Unmarshal([]byte(zvalidateaddressJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(validateaddressJson), &validateaddress)
-		return validateaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(zvalidateaddressJson), &zvalidateaddress)
+		return zvalidateaddress, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(validateaddressJson), &validateaddress)
-	return validateaddress, nil
+	json.Unmarshal([]byte(zvalidateaddressJson), &zvalidateaddress)
+	return zvalidateaddress, nil
 }

@@ -18,50 +18,38 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	//"strconv"
 )
 
-type ValidateAddress struct {
-	Result	struct {
-		Isvalid      bool   `json:"isvalid"`
-		Address      string `json:"address"`
-		ScriptPubKey string `json:"scriptPubKey"`
-		Segid        int    `json:"segid"`
-		Ismine       bool   `json:"ismine"`
-		Iswatchonly  bool   `json:"iswatchonly"`
-		Isscript     bool   `json:"isscript"`
-		Pubkey       string `json:"pubkey"`
-		Iscompressed bool   `json:"iscompressed"`
-		Account      string `json:"account"`
-		}	`json:"result"`
+type ZGetNewAddress struct {
+	Result	string	`json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
 	
 }
 
-func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
+func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
 	query := APIQuery {
-		Method:	`validateaddress`,
-		Params:	`["`+taddr+`"]`,
+		Method:	`z_getnewaddress`,
+		Params:	`["`+tp+`"]`,
 	}
 	//fmt.Println(query)
 
-	var validateaddress ValidateAddress
+	var zgetnewaddress ZGetNewAddress
 
-	validateaddressJson := appName.APICall(query)
+	zgetnewaddressJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(validateaddressJson), &result)
+	json.Unmarshal([]byte(zgetnewaddressJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(validateaddressJson), &validateaddress)
-		return validateaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(zgetnewaddressJson), &zgetnewaddress)
+		return zgetnewaddress, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(validateaddressJson), &validateaddress)
-	return validateaddress, nil
+	json.Unmarshal([]byte(zgetnewaddressJson), &zgetnewaddress)
+	return zgetnewaddress, nil
 }

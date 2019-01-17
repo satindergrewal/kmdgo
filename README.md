@@ -262,7 +262,7 @@ RPC Port: 27486
 - [ ]	txnotarizedconfirmed txid
 - [x]	validateaddress "komodoaddress"
 - [x]	verifymessage "komodoaddress" "signature" "message"
-- [ ]	z_validateaddress "zaddr"
+- [x]	z_validateaddress "zaddr"
 
 #### Wallet
 - [x]	addmultisigaddress nrequired ["key",...] ( "account" )
@@ -309,7 +309,7 @@ RPC Port: 27486
 - [ ]	z_exportviewingkey "zaddr"
 - [ ]	z_exportwallet "filename"
 - [ ]	z_getbalance "address" ( minconf )
-- [ ]	z_getnewaddress ( type )
+- [x]	z_getnewaddress ( type )
 - [ ]	z_getoperationresult (["operationid", ... ]) 
 - [ ]	z_getoperationstatus (["operationid", ... ]) 
 - [ ]	z_gettotalbalance ( minconf includeWatchonly )
