@@ -261,7 +261,7 @@ RPC Port: 27486
 - [ ]	reconsiderblock "hash"
 - [ ]	txnotarizedconfirmed txid
 - [ ]	validateaddress "komodoaddress"
-- [ ]	verifymessage "komodoaddress" "signature" "message"
+- [x]	verifymessage "komodoaddress" "signature" "message"
 - [ ]	z_validateaddress "zaddr"
 
 #### Wallet
@@ -269,7 +269,7 @@ RPC Port: 27486
 - [x]	backupwallet "destination"
 - [x]	dumpprivkey "t-addr"
 - [x]	dumpwallet "filename"
-- [ ]	encryptwallet "passphrase"
+- [x]	encryptwallet "passphrase"
 - [ ]	getaccount "KMD_address"
 - [ ]	getaccountaddress "account"
 - [ ]	getaddressesbyaccount "account"
@@ -302,7 +302,8 @@ RPC Port: 27486
 - [ ]	setaccount "KMD_address" "account"
 - [ ]	setpubkey
 - [ ]	settxfee amount
-- [ ]	signmessage "t-addr" "message"
+- [x]	signmessage "t-addr" "message"
+- [x]	walletpassphrase "passphrase" seconds
 - [ ]	z_exportkey "zaddr"
 - [ ]	z_exportviewingkey "zaddr"
 - [ ]	z_exportwallet "filename"
