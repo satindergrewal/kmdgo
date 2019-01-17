@@ -12,37 +12,44 @@
  * Removal or modification of this copyright notice is prohibited.            *
  *                                                                            *
  ******************************************************************************/
-package main
+package kmdgo
 
 import (
-	"fmt"
-	"log"
-	"github.com/satindergrewal/kmdgo"
+	//"fmt"
+	"encoding/json"
+	"errors"
 )
 
-func main() {
-	var appName kmdgo.AppType
-	appName = `komodo`
-
-	var vfymg kmdgo.VerifyMessage
-
-	taddress := `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //The address from which the signed message is from. Check SignMessage example.
-	signature := `ICDer79Dlio7/F18nkTefxIU7zh9oeplpY/IHnA4TxolcTDrtD4s5VuXDnCrUERk9AMbWCrHwWJzDyVGwNi23AU=`
-	msg := `hello kmd world!`
-
-	vfymg, err := appName.VerifyMessage(taddress, signature, msg)
-	if err != nil {
-		fmt.Printf("Code: %v\n", vfymg.Error.Code)
-		fmt.Printf("Message: %v\n\n", vfymg.Error.Message)
-		log.Fatalln("Err happened", err)
-	}
-
-	fmt.Println("vfymg value", vfymg)
-	fmt.Println("-------")
-	fmt.Println(vfymg.Result)
+type WalletLock struct {
+	Result	string	`json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+	
 }
 
-/*
-Expected Output:
-true or false
-*/
+func (appName AppType) WalletLock() (WalletLock, error) {
+	query := APIQuery {
+		Method:	`walletlock`,
+		Params:	`[]`,
+	}
+	//fmt.Println(query)
+
+	var walletlock WalletLock
+
+	walletlockJson := appName.APICall(query)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(walletlockJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(walletlockJson), &walletlock)
+		return walletlock, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(walletlockJson), &walletlock)
+	return walletlock, nil
+}

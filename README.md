@@ -303,6 +303,7 @@ RPC Port: 27486
 - [ ]	setpubkey
 - [ ]	settxfee amount
 - [x]	signmessage "t-addr" "message"
+- [x]	walletlock
 - [x]	walletpassphrase "passphrase" seconds
 - [ ]	z_exportkey "zaddr"
 - [ ]	z_exportviewingkey "zaddr"

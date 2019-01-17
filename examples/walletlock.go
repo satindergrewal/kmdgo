@@ -24,25 +24,16 @@ func main() {
 	var appName kmdgo.AppType
 	appName = `komodo`
 
-	var vfymg kmdgo.VerifyMessage
+	var wltlk kmdgo.WalletLock
 
-	taddress := `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //The address from which the signed message is from. Check SignMessage example.
-	signature := `ICDer79Dlio7/F18nkTefxIU7zh9oeplpY/IHnA4TxolcTDrtD4s5VuXDnCrUERk9AMbWCrHwWJzDyVGwNi23AU=`
-	msg := `hello kmd world!`
-
-	vfymg, err := appName.VerifyMessage(taddress, signature, msg)
+	wltlk, err := appName.WalletLock()
 	if err != nil {
-		fmt.Printf("Code: %v\n", vfymg.Error.Code)
-		fmt.Printf("Message: %v\n\n", vfymg.Error.Message)
+		fmt.Printf("Code: %v\n", wltlk.Error.Code)
+		fmt.Printf("Message: %v\n\n", wltlk.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
 
-	fmt.Println("vfymg value", vfymg)
+	fmt.Println("wltlk value", wltlk)
 	fmt.Println("-------")
-	fmt.Println(vfymg.Result)
+	fmt.Println(wltlk.Result)
 }
-
-/*
-Expected Output:
-true or false
-*/
