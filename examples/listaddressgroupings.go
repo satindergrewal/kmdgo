@@ -37,12 +37,12 @@ func main() {
 	fmt.Println("-------")
 	fmt.Println(lstgrp.Result)
 
-	for i, v := range lstgrp.Result {
+	for i, v := range lstgrp.Result[0] {
 		fmt.Printf("\n-------\n")
 		fmt.Println(i)
-		fmt.Printf("Address: %s\n",v[0][0])
-		fmt.Printf("Amount: %0.8f\n",v[0][1])
-		fmt.Printf("Account Name: %s\n",v[0][2])
+		fmt.Printf("Address: %s\n",v[0])
+		fmt.Printf("Amount: %0.8f\n",v[1])
+		fmt.Printf("Account Name: %s\n",v[2])
 
 	}
 
