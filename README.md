@@ -283,7 +283,7 @@ RPC Port: 27486
 - [x]	getwalletinfo
 - [x]	importaddress "address" ( "label" rescan )
 - [x]	importprivkey "komodoprivkey" ( "label" rescan )
-- [ ]	importwallet "filename"
+- [x]	importwallet "filename"
 - [ ]	keypoolrefill ( newsize )
 - [ ]	listaccounts ( minconf includeWatchonly)
 - [ ]	listaddressgroupings
