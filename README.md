@@ -299,8 +299,8 @@ RPC Port: 27486
 - [x]	sendfrom "fromaccount" "toKMDaddress" amount ( minconf "comment" "comment-to" )
 - [x]	sendmany "fromaccount" {"address":amount,...} ( minconf "comment" ["address",...] )
 - [x]	sendtoaddress "KMD_address" amount ( "comment" "comment-to" subtractfeefromamount )
-- [ ]	setaccount "KMD_address" "account"
-- [ ]	setpubkey
+- [ ]	setaccount "KMD_address" "account" -- DEPRECATED
+- [x]	setpubkey
 - [ ]	settxfee amount
 - [x]	signmessage "t-addr" "message"
 - [x]	walletlock
