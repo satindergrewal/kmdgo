@@ -284,8 +284,8 @@ RPC Port: 27486
 - [x]	importaddress "address" ( "label" rescan )
 - [x]	importprivkey "komodoprivkey" ( "label" rescan )
 - [x]	importwallet "filename"
-- [ ]	keypoolrefill ( newsize )
-- [ ]	listaccounts ( minconf includeWatchonly)
+- [x]	keypoolrefill ( newsize )
+- [x]	listaccounts ( minconf includeWatchonly)
 - [ ]	listaddressgroupings
 - [ ]	listlockunspent
 - [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly)
