@@ -289,8 +289,8 @@ RPC Port: 27486
 - [x]	listaddressgroupings
 - [x]	listlockunspent
 - [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly) -- Depricated
-- [ ]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
-- [ ]	listsinceblock ( "blockhash" target-confirmations includeWatchonly)
+- [x]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
+- [x]	listsinceblock ( "blockhash" target-confirmations includeWatchonly)
 - [x]	listtransactions ( "account" count from includeWatchonly)
 - [ ]	listunspent ( minconf maxconf  ["address",...] )
 - [ ]	lockunspent unlock [{"txid":"txid","vout":n},...]
