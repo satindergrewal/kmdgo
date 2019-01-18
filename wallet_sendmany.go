@@ -12,35 +12,45 @@
  * Removal or modification of this copyright notice is prohibited.            *
  *                                                                            *
  ******************************************************************************/
-package main
+package kmdgo
 
 import (
-	"fmt"
-	"log"
-	"github.com/satindergrewal/kmdgo"
+	//"fmt"
+	"encoding/json"
+	"errors"
+	"strconv"
 )
 
-func main() {
-	var appName kmdgo.AppType
-	appName = `komodo`
+type SendMany struct {
+	Result string `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
 
-	var sfrm kmdgo.SendFrom
+func (appName AppType) SendMany(frmact string, amounts string, minconf int, comment string, subtractfeefromamount string) (SendMany, error) {
+	query := APIQuery {
+		Method:	`sendmany`,
+		Params:	`["`+frmact+`", `+amounts+`, `+strconv.Itoa(minconf)+`, "`+comment+`", `+subtractfeefromamount+`]`,
+	}
+	//fmt.Println(query)
 
-	from_account := `*` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
-	to_address := `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
-	amount := 0.01
-	minconf := 0
-	comment := `donation`
-	commentto := `Non Profit Org`
+	var sendmany SendMany
 
-	sfrm, err := appName.SendFrom(from_account, to_address, amount, minconf, comment, commentto)
-	if err != nil {
-		fmt.Printf("Code: %v\n", sfrm.Error.Code)
-		fmt.Printf("Message: %v\n\n", sfrm.Error.Message)
-		log.Fatalln("Err happened", err)
+	sendmanyJson := appName.APICall(query)
+	//fmt.Println(sendmanyJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(sendmanyJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(sendmanyJson), &sendmany)
+		return sendmany, errors.New(string(answer_error))
 	}
 
-	fmt.Println("sfrm value", sfrm)
-	fmt.Println("-------")
-	fmt.Println(sfrm.Result)
+	json.Unmarshal([]byte(sendmanyJson), &sendmany)
+	return sendmany, nil
 }

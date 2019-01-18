@@ -24,23 +24,22 @@ func main() {
 	var appName kmdgo.AppType
 	appName = `komodo`
 
-	var sfrm kmdgo.SendFrom
+	var smny kmdgo.SendMany
 
-	from_account := `*` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
-	to_address := `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
-	amount := 0.01
-	minconf := 0
+	from_account := `` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
+	amounts := `{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr":0.01,"RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s":0.02}`
+	minconf := 1
 	comment := `donation`
-	commentto := `Non Profit Org`
+	subtract_fee_from_amount := `["RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"]`
 
-	sfrm, err := appName.SendFrom(from_account, to_address, amount, minconf, comment, commentto)
+	smny, err := appName.SendMany(from_account, amounts, minconf, comment, subtract_fee_from_amount)
 	if err != nil {
-		fmt.Printf("Code: %v\n", sfrm.Error.Code)
-		fmt.Printf("Message: %v\n\n", sfrm.Error.Message)
+		fmt.Printf("Code: %v\n", smny.Error.Code)
+		fmt.Printf("Message: %v\n\n", smny.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
 
-	fmt.Println("sfrm value", sfrm)
+	fmt.Println("smny value", smny)
 	fmt.Println("-------")
-	fmt.Println(sfrm.Result)
+	fmt.Println(smny.Result)
 }

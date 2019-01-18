@@ -15,7 +15,7 @@
 package kmdgo
 
 import (
-	"fmt"
+	//"fmt"
 	"encoding/json"
 	"errors"
 	"strconv"
@@ -32,7 +32,7 @@ func (appName AppType) SendFrom(frmact string, toaddr string, amount float64, mi
 		Method:	`sendfrom`,
 		Params:	`["`+frmact+`", "`+toaddr+`", `+strconv.FormatFloat(amount, 'f', 8, 64)+`, `+strconv.Itoa(minconf)+`, "`+comment+`", "`+commentto+`"]`,
 	}
-	fmt.Println(query)
+	//fmt.Println(query)
 
 	var sendfrom SendFrom
 
