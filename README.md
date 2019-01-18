@@ -270,14 +270,14 @@ RPC Port: 27486
 - [x]	dumpprivkey "t-addr"
 - [x]	dumpwallet "filename"
 - [x]	encryptwallet "passphrase"
-- [ ]	getaccount "KMD_address"
-- [ ]	getaccountaddress "account"
-- [ ]	getaddressesbyaccount "account"
+- [x]	getaccount "KMD_address"
+- [x]	getaccountaddress "account"
+- [x]	getaddressesbyaccount "account"
 - [x]	getbalance ( "account" minconf includeWatchonly )
 - [x]	getnewaddress ( "account" )
 - [x]	getrawchangeaddress
 - [x]	getreceivedbyaccount "account" ( minconf )
-- [ ]	getreceivedbyaddress "KMD_address" ( minconf )
+- [x]	getreceivedbyaddress "KMD_address" ( minconf )
 - [ ]	gettransaction "txid" ( includeWatchonly )
 - [ ]	getunconfirmedbalance
 - [ ]	getwalletinfo
