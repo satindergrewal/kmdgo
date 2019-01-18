@@ -279,9 +279,9 @@ RPC Port: 27486
 - [x]	getreceivedbyaccount "account" ( minconf )
 - [x]	getreceivedbyaddress "KMD_address" ( minconf )
 - [x]	gettransaction "txid" ( includeWatchonly )
-- [ ]	getunconfirmedbalance
-- [ ]	getwalletinfo
-- [ ]	importaddress "address" ( "label" rescan )
+- [x]	getunconfirmedbalance
+- [x]	getwalletinfo
+- [x]	importaddress "address" ( "label" rescan )
 - [ ]	importprivkey "komodoprivkey" ( "label" rescan )
 - [ ]	importwallet "filename"
 - [ ]	keypoolrefill ( newsize )
