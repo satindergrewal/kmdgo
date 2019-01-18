@@ -286,7 +286,7 @@ RPC Port: 27486
 - [x]	importwallet "filename"
 - [x]	keypoolrefill ( newsize )
 - [x]	listaccounts ( minconf includeWatchonly)
-- [ ]	listaddressgroupings
+- [x]	listaddressgroupings
 - [ ]	listlockunspent
 - [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly)
 - [ ]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
