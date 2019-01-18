@@ -301,7 +301,7 @@ RPC Port: 27486
 - [x]	sendtoaddress "KMD_address" amount ( "comment" "comment-to" subtractfeefromamount )
 - [ ]	setaccount "KMD_address" "account" -- DEPRECATED
 - [x]	setpubkey
-- [ ]	settxfee amount
+- [x]	settxfee amount
 - [x]	signmessage "t-addr" "message"
 - [x]	walletlock
 - [x]	walletpassphrase "passphrase" seconds
