@@ -278,7 +278,7 @@ RPC Port: 27486
 - [x]	getrawchangeaddress
 - [x]	getreceivedbyaccount "account" ( minconf )
 - [x]	getreceivedbyaddress "KMD_address" ( minconf )
-- [ ]	gettransaction "txid" ( includeWatchonly )
+- [x]	gettransaction "txid" ( includeWatchonly )
 - [ ]	getunconfirmedbalance
 - [ ]	getwalletinfo
 - [ ]	importaddress "address" ( "label" rescan )
@@ -291,7 +291,7 @@ RPC Port: 27486
 - [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly)
 - [ ]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
 - [ ]	listsinceblock ( "blockhash" target-confirmations includeWatchonly)
-- [ ]	listtransactions ( "account" count from includeWatchonly)
+- [x]	listtransactions ( "account" count from includeWatchonly)
 - [ ]	listunspent ( minconf maxconf  ["address",...] )
 - [ ]	lockunspent unlock [{"txid":"txid","vout":n},...]
 - [ ]	move "fromaccount" "toaccount" amount ( minconf "comment" )
