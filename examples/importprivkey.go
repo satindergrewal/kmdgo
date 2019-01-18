@@ -24,21 +24,21 @@ func main() {
 	var appName kmdgo.AppType
 	appName = `komodo`
 
-	var impadr kmdgo.ImportAddress
+	var pvk kmdgo.ImportPrivKey
 
-	taddress := `bWDExTNrQZ4kSRRXwUUgHibyYuzPLS6FgP`
+	privatekey := `Usrn8Z42PDfjwb2hLGZmaXhD9w21DcuiEwnJaBk5EFbyz9Wz3bvT`
 	label := `testing`
 	rescan := false
 
 
-	impadr, err := appName.ImportAddress(taddress, label, rescan)
+	pvk, err := appName.ImportPrivKey(privatekey, label, rescan)
 	if err != nil {
-		fmt.Printf("Code: %v\n", impadr.Error.Code)
-		fmt.Printf("Message: %v\n\n", impadr.Error.Message)
+		fmt.Printf("Code: %v\n", pvk.Error.Code)
+		fmt.Printf("Message: %v\n\n", pvk.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
 
-	fmt.Println("impadr value", impadr)
+	fmt.Println("pvk value", pvk)
 	fmt.Println("-------")
-	fmt.Println(impadr.Result)
+	fmt.Println(pvk.Result)
 }

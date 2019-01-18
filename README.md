@@ -282,7 +282,7 @@ RPC Port: 27486
 - [x]	getunconfirmedbalance
 - [x]	getwalletinfo
 - [x]	importaddress "address" ( "label" rescan )
-- [ ]	importprivkey "komodoprivkey" ( "label" rescan )
+- [x]	importprivkey "komodoprivkey" ( "label" rescan )
 - [ ]	importwallet "filename"
 - [ ]	keypoolrefill ( newsize )
 - [ ]	listaccounts ( minconf includeWatchonly)

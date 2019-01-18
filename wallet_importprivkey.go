@@ -12,33 +12,45 @@
  * Removal or modification of this copyright notice is prohibited.            *
  *                                                                            *
  ******************************************************************************/
-package main
+package kmdgo
 
 import (
-	"fmt"
-	"log"
-	"github.com/satindergrewal/kmdgo"
+	//"fmt"
+	"encoding/json"
+	"errors"
+	"strconv"
 )
 
-func main() {
-	var appName kmdgo.AppType
-	appName = `komodo`
+type ImportPrivKey struct {
+	Result	string	`json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+	
+}
 
-	var impadr kmdgo.ImportAddress
+func (appName AppType) ImportPrivKey(prvky string, lbl string, rscn bool) (ImportPrivKey, error) {
+	query := APIQuery {
+		Method:	`importprivkey`,
+		Params:	`["`+prvky+`", "`+lbl+`", `+strconv.FormatBool(rscn)+`]`,
+	}
+	//fmt.Println(query)
 
-	taddress := `bWDExTNrQZ4kSRRXwUUgHibyYuzPLS6FgP`
-	label := `testing`
-	rescan := false
+	var importprivkey ImportPrivKey
 
+	importprivkeyJson := appName.APICall(query)
 
-	impadr, err := appName.ImportAddress(taddress, label, rescan)
-	if err != nil {
-		fmt.Printf("Code: %v\n", impadr.Error.Code)
-		fmt.Printf("Message: %v\n\n", impadr.Error.Message)
-		log.Fatalln("Err happened", err)
+	var result APIResult
+
+	json.Unmarshal([]byte(importprivkeyJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(importprivkeyJson), &importprivkey)
+		return importprivkey, errors.New(string(answer_error))
 	}
 
-	fmt.Println("impadr value", impadr)
-	fmt.Println("-------")
-	fmt.Println(impadr.Result)
+	json.Unmarshal([]byte(importprivkeyJson), &importprivkey)
+	return importprivkey, nil
 }
