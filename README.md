@@ -273,9 +273,9 @@ RPC Port: 27486
 - [ ]	getaccount "KMD_address"
 - [ ]	getaccountaddress "account"
 - [ ]	getaddressesbyaccount "account"
-- [ ]	getbalance ( "account" minconf includeWatchonly )
-- [ ]	getnewaddress ( "account" )
-- [ ]	getrawchangeaddress
+- [x]	getbalance ( "account" minconf includeWatchonly )
+- [x]	getnewaddress ( "account" )
+- [x]	getrawchangeaddress
 - [ ]	getreceivedbyaccount "account" ( minconf )
 - [ ]	getreceivedbyaddress "KMD_address" ( minconf )
 - [ ]	gettransaction "txid" ( includeWatchonly )
