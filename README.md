@@ -288,15 +288,15 @@ RPC Port: 27486
 - [x]	listaccounts ( minconf includeWatchonly)
 - [x]	listaddressgroupings
 - [x]	listlockunspent
-- [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly) -- Depricated
+- [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly) -- DEPRECATED
 - [x]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
 - [x]	listsinceblock ( "blockhash" target-confirmations includeWatchonly)
 - [x]	listtransactions ( "account" count from includeWatchonly)
-- [ ]	listunspent ( minconf maxconf  ["address",...] )
-- [ ]	lockunspent unlock [{"txid":"txid","vout":n},...]
-- [ ]	move "fromaccount" "toaccount" amount ( minconf "comment" )
-- [ ]	resendwallettransactions
-- [ ]	sendfrom "fromaccount" "toKMDaddress" amount ( minconf "comment" "comment-to" )
+- [x]	listunspent ( minconf maxconf  ["address",...] )
+- [x]	lockunspent unlock [{"txid":"txid","vout":n},...]
+- [ ]	move "fromaccount" "toaccount" amount ( minconf "comment" ) -- DEPRECATED
+- [ ]	resendwallettransactions -- "Intended only for testing;" --- May be Later --- Todo
+- [x]	sendfrom "fromaccount" "toKMDaddress" amount ( minconf "comment" "comment-to" )
 - [ ]	sendmany "fromaccount" {"address":amount,...} ( minconf "comment" ["address",...] )
 - [ ]	sendtoaddress "KMD_address" amount ( "comment" "comment-to" subtractfeefromamount )
 - [ ]	setaccount "KMD_address" "account"
