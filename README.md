@@ -298,7 +298,7 @@ RPC Port: 27486
 - [ ]	resendwallettransactions -- "Intended only for testing;" --- May be Later --- Todo
 - [x]	sendfrom "fromaccount" "toKMDaddress" amount ( minconf "comment" "comment-to" )
 - [x]	sendmany "fromaccount" {"address":amount,...} ( minconf "comment" ["address",...] )
-- [ ]	sendtoaddress "KMD_address" amount ( "comment" "comment-to" subtractfeefromamount )
+- [x]	sendtoaddress "KMD_address" amount ( "comment" "comment-to" subtractfeefromamount )
 - [ ]	setaccount "KMD_address" "account"
 - [ ]	setpubkey
 - [ ]	settxfee amount
