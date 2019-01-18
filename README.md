@@ -287,8 +287,8 @@ RPC Port: 27486
 - [x]	keypoolrefill ( newsize )
 - [x]	listaccounts ( minconf includeWatchonly)
 - [x]	listaddressgroupings
-- [ ]	listlockunspent
-- [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly)
+- [x]	listlockunspent
+- [ ]	listreceivedbyaccount ( minconf includeempty includeWatchonly) -- Depricated
 - [ ]	listreceivedbyaddress ( minconf includeempty includeWatchonly)
 - [ ]	listsinceblock ( "blockhash" target-confirmations includeWatchonly)
 - [x]	listtransactions ( "account" count from includeWatchonly)
