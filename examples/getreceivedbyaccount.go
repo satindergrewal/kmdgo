@@ -12,45 +12,31 @@
  * Removal or modification of this copyright notice is prohibited.            *
  *                                                                            *
  ******************************************************************************/
-package kmdgo
+package main
 
 import (
-	//"fmt"
-	"encoding/json"
-	"errors"
-	"strconv"
+	"fmt"
+	"log"
+	"github.com/satindergrewal/kmdgo"
 )
 
-type GetBalance struct {
-	Result	int64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
-}
+func main() {
+	var appName kmdgo.AppType
+	appName = `komodo`
 
-func (appName AppType) GetBalance(taddr string, mconf int, incwch bool) (GetBalance, error) {
-	query := APIQuery {
-		Method:	`getbalance`,
-		Params:	`["`+taddr+`", `+strconv.Itoa(mconf)+`, `+strconv.FormatBool(incwch)+`]`,
-	}
-	//fmt.Println(query)
+	var grbact kmdgo.GetReceivedByAccount
 
-	var getbalance GetBalance
+	account_name := ``
+	minconfs := 0
 
-	getbalanceJson := appName.APICall(query)
-
-	var result APIResult
-
-	json.Unmarshal([]byte(getbalanceJson), &result)
-
-	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
-		if err != nil {
-		}
-		json.Unmarshal([]byte(getbalanceJson), &getbalance)
-		return getbalance, errors.New(string(answer_error))
+	grbact, err := appName.GetReceivedByAccount(account_name, minconfs)
+	if err != nil {
+		fmt.Printf("Code: %v\n", grbact.Error.Code)
+		fmt.Printf("Message: %v\n\n", grbact.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 
-	json.Unmarshal([]byte(getbalanceJson), &getbalance)
-	return getbalance, nil
+	fmt.Println("grbact value", grbact)
+	fmt.Println("-------")
+	fmt.Println(grbact.Result)
 }

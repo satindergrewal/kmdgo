@@ -21,36 +21,36 @@ import (
 	"strconv"
 )
 
-type GetBalance struct {
+type GetReceivedByAccount struct {
 	Result	int64	`json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
 	
 }
 
-func (appName AppType) GetBalance(taddr string, mconf int, incwch bool) (GetBalance, error) {
+func (appName AppType) GetReceivedByAccount(act string, mconf int) (GetReceivedByAccount, error) {
 	query := APIQuery {
-		Method:	`getbalance`,
-		Params:	`["`+taddr+`", `+strconv.Itoa(mconf)+`, `+strconv.FormatBool(incwch)+`]`,
+		Method:	`getreceivedbyaccount`,
+		Params:	`["`+act+`", `+strconv.Itoa(mconf)+`]`,
 	}
 	//fmt.Println(query)
 
-	var getbalance GetBalance
+	var getreceivedbyaccount GetReceivedByAccount
 
-	getbalanceJson := appName.APICall(query)
+	getreceivedbyaccountJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getbalanceJson), &result)
+	json.Unmarshal([]byte(getreceivedbyaccountJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getbalanceJson), &getbalance)
-		return getbalance, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getreceivedbyaccountJson), &getreceivedbyaccount)
+		return getreceivedbyaccount, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(getbalanceJson), &getbalance)
-	return getbalance, nil
+	json.Unmarshal([]byte(getreceivedbyaccountJson), &getreceivedbyaccount)
+	return getreceivedbyaccount, nil
 }
