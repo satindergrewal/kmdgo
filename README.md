@@ -311,8 +311,8 @@ RPC Port: 27486
 - [x]	z_getbalance "address" ( minconf )
 - [x]	z_getnewaddress ( type )
 - [x]	z_getoperationresult (["operationid", ... ]) 
-- [ ]	z_getoperationstatus (["operationid", ... ]) 
-- [ ]	z_gettotalbalance ( minconf includeWatchonly )
+- [x]	z_getoperationstatus (["operationid", ... ]) 
+- [x]	z_gettotalbalance ( minconf includeWatchonly )
 - [ ]	z_importkey "zkey" ( rescan startHeight )
 - [ ]	z_importviewingkey "vkey" ( rescan startHeight )
 - [x]	z_importwallet "filename"
