@@ -317,8 +317,8 @@ RPC Port: 27486
 - [x]	z_importviewingkey "vkey" ( rescan startHeight )
 - [x]	z_importwallet "filename"
 - [x]	z_listaddresses ( includeWatchonly )
-- [ ]	z_listoperationids
-- [ ]	z_listreceivedbyaddress "address" ( minconf )
+- [x]	z_listoperationids
+- [x]	z_listreceivedbyaddress "address" ( minconf )
 - [ ]	z_listunspent ( minconf maxconf includeWatchonly ["zaddr",...] )
 - [ ]	z_mergetoaddress ["fromaddress", ... ] "toaddress" ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 - [ ]	z_sendmany "fromaddress" [{"address":... ,"amount":...},...] ( minconf ) ( fee )
