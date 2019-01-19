@@ -322,7 +322,7 @@ RPC Port: 27486
 - [x]	z_listunspent ( minconf maxconf includeWatchonly ["zaddr",...] )
 - [x]	z_mergetoaddress ["fromaddress", ... ] "toaddress" ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 - [x]	z_sendmany "fromaddress" [{"address":... ,"amount":...},...] ( minconf ) ( fee )
-- [ ]	z_shieldcoinbase "fromaddress" "tozaddress" ( fee ) ( limit )
+- [x]	z_shieldcoinbase "fromaddress" "tozaddress" ( fee ) ( limit )
 - [ ]	zcbenchmark benchmarktype samplecount
 - [ ]	zcrawjoinsplit rawtx inputs outputs vpub_old vpub_new
 - [ ]	zcrawkeygen
