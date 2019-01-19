@@ -316,7 +316,7 @@ RPC Port: 27486
 - [ ]	z_importkey "zkey" ( rescan startHeight )
 - [ ]	z_importviewingkey "vkey" ( rescan startHeight )
 - [ ]	z_importwallet "filename"
-- [ ]	z_listaddresses ( includeWatchonly )
+- [x]	z_listaddresses ( includeWatchonly )
 - [ ]	z_listoperationids
 - [ ]	z_listreceivedbyaddress "address" ( minconf )
 - [ ]	z_listunspent ( minconf maxconf includeWatchonly ["zaddr",...] )
