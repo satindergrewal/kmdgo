@@ -319,7 +319,7 @@ RPC Port: 27486
 - [x]	z_listaddresses ( includeWatchonly )
 - [x]	z_listoperationids
 - [x]	z_listreceivedbyaddress "address" ( minconf )
-- [ ]	z_listunspent ( minconf maxconf includeWatchonly ["zaddr",...] )
+- [x]	z_listunspent ( minconf maxconf includeWatchonly ["zaddr",...] )
 - [ ]	z_mergetoaddress ["fromaddress", ... ] "toaddress" ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 - [ ]	z_sendmany "fromaddress" [{"address":... ,"amount":...},...] ( minconf ) ( fee )
 - [ ]	z_shieldcoinbase "fromaddress" "tozaddress" ( fee ) ( limit )
