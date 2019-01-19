@@ -308,7 +308,7 @@ RPC Port: 27486
 - [x]	z_exportkey "zaddr"
 - [x]	z_exportviewingkey "zaddr"
 - [x]	z_exportwallet "filename"
-- [ ]	z_getbalance "address" ( minconf )
+- [x]	z_getbalance "address" ( minconf )
 - [x]	z_getnewaddress ( type )
 - [ ]	z_getoperationresult (["operationid", ... ]) 
 - [ ]	z_getoperationstatus (["operationid", ... ]) 
