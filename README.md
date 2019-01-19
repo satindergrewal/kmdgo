@@ -173,13 +173,13 @@ RPC Port: 27486
 - [ ]	submitblock "hexdata" ( "jsonparametersobject" )
 
 #### Network
-- [ ]	addnode "node" "add|remove|onetry"
-- [ ]	clearbanned
-- [ ]	disconnectnode "node" 
-- [ ]	getaddednodeinfo dns ( "node" )
-- [ ]	getconnectioncount
-- [ ]	getdeprecationinfo
-- [ ]	getnettotals
+- [x]	addnode "node" "add|remove|onetry"
+- [x]	clearbanned
+- [x]	disconnectnode "node" 
+- [x]	getaddednodeinfo dns ( "node" )
+- [x]	getconnectioncount
+- [x]	getdeprecationinfo
+- [x]	getnettotals
 - [ ]	getnetworkinfo
 - [ ]	getpeerinfo
 - [ ]	listbanned
