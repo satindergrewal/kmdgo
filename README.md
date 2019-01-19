@@ -184,7 +184,7 @@ RPC Port: 27486
 - [x]	getpeerinfo
 - [x]	listbanned
 - [x]	ping
-- [ ]	setban "ip(/netmask)" "add|remove" (bantime) (absolute)
+- [x]	setban "ip(/netmask)" "add|remove" (bantime) (absolute)
 
 #### Oracles
 - [ ]	oraclesaddress [pubkey]
