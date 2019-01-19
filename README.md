@@ -310,7 +310,7 @@ RPC Port: 27486
 - [x]	z_exportwallet "filename"
 - [x]	z_getbalance "address" ( minconf )
 - [x]	z_getnewaddress ( type )
-- [ ]	z_getoperationresult (["operationid", ... ]) 
+- [x]	z_getoperationresult (["operationid", ... ]) 
 - [ ]	z_getoperationstatus (["operationid", ... ]) 
 - [ ]	z_gettotalbalance ( minconf includeWatchonly )
 - [ ]	z_importkey "zkey" ( rescan startHeight )
