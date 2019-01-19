@@ -307,7 +307,7 @@ RPC Port: 27486
 - [x]	walletpassphrase "passphrase" seconds
 - [x]	z_exportkey "zaddr"
 - [x]	z_exportviewingkey "zaddr"
-- [ ]	z_exportwallet "filename"
+- [x]	z_exportwallet "filename"
 - [ ]	z_getbalance "address" ( minconf )
 - [x]	z_getnewaddress ( type )
 - [ ]	z_getoperationresult (["operationid", ... ]) 
@@ -315,7 +315,7 @@ RPC Port: 27486
 - [ ]	z_gettotalbalance ( minconf includeWatchonly )
 - [ ]	z_importkey "zkey" ( rescan startHeight )
 - [ ]	z_importviewingkey "vkey" ( rescan startHeight )
-- [ ]	z_importwallet "filename"
+- [x]	z_importwallet "filename"
 - [x]	z_listaddresses ( includeWatchonly )
 - [ ]	z_listoperationids
 - [ ]	z_listreceivedbyaddress "address" ( minconf )
