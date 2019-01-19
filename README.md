@@ -180,10 +180,10 @@ RPC Port: 27486
 - [x]	getconnectioncount
 - [x]	getdeprecationinfo
 - [x]	getnettotals
-- [ ]	getnetworkinfo
-- [ ]	getpeerinfo
-- [ ]	listbanned
-- [ ]	ping
+- [x]	getnetworkinfo
+- [x]	getpeerinfo
+- [x]	listbanned
+- [x]	ping
 - [ ]	setban "ip(/netmask)" "add|remove" (bantime) (absolute)
 
 #### Oracles
