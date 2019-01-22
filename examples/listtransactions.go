@@ -26,12 +26,13 @@ func main() {
 
 	var lstx kmdgo.ListTransactions
 
-	account_name := `*` //Either use * or the "account name".
-	numoftx := 10
-	skiptx := 100
-	watchonly := true
+	args := make(kmdgo.APIParams, 4)
+	args[1] = 10
+	args[2] = 100
+	args[3] = true
+	fmt.Println(args)
 
-	lstx, err := appName.ListTransactions(account_name, numoftx, skiptx, watchonly)
+	lstx, err := appName.ListTransactions(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lstx.Error.Code)
 		fmt.Printf("Message: %v\n\n", lstx.Error.Message)

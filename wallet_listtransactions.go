@@ -18,7 +18,7 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
+	//"strconv"
 )
 
 type ListTransactions struct {
@@ -48,10 +48,28 @@ type ListTransactions struct {
 	
 }
 
-func (appName AppType) ListTransactions(actname string, count int, frm int, incwch bool) (ListTransactions, error) {
+//func (appName AppType) ListTransactions(actname string, count int, frm int, incwch bool) (ListTransactions, error) {
+func (appName AppType) ListTransactions(params APIParams) (ListTransactions, error) {
+	if params[0] == nil {
+		params[0] = "*"
+	}
+	if params[1] == nil {
+		params[1] = 10
+	}
+
+	if params[2] == nil {
+		params[2] = 0
+	}
+	if params[3] == nil {
+		params[3] = false
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`listtransactions`,
-		Params:	`["`+actname+`", `+strconv.Itoa(count)+`, `+strconv.Itoa(frm)+`, `+strconv.FormatBool(incwch)+`]`,
+		//Params:	`["`+actname+`", `+strconv.Itoa(count)+`, `+strconv.Itoa(frm)+`, `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

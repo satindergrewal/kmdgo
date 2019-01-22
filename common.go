@@ -26,6 +26,8 @@ import (
 
 type AppType string
 
+type APIParams []interface{}
+
 type APIResult struct {
     Result interface{}  `json:"result"`
     Error interface{}   `json:"error"`
