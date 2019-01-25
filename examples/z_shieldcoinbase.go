@@ -26,12 +26,14 @@ func main() {
 
 	var zmrgtadr kmdgo.ZShieldCoinbase
 
-	from_address := `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
-	to_address := `zs1krtqdjxt6f40t2d8f6jgeg4l702dg2v73s9e9znez856a7k7y6snu5qh4vp6mhtx0n9x5nx6wjk`
-	fee := 0.0001
-	limit := 45
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
+	args[1] = `zs1krtqdjxt6f40t2d8f6jgeg4l702dg2v73s9e9znez856a7k7y6snu5qh4vp6mhtx0n9x5nx6wjk`
+	//args[2] = 0.0003
+	//args[3] = 45
+	fmt.Println(args)
 
-	zmrgtadr, err := appName.ZShieldCoinbase(from_address, to_address, fee, limit)
+	zmrgtadr, err := appName.ZShieldCoinbase(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", zmrgtadr.Error.Code)
 		fmt.Printf("Message: %v\n\n", zmrgtadr.Error.Message)

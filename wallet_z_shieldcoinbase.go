@@ -15,10 +15,9 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZShieldCoinbase struct {
@@ -33,12 +32,27 @@ type ZShieldCoinbase struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZShieldCoinbase(frmaddr string, toaddr string, fee float64, limit int) (ZShieldCoinbase, error) {
+func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error) {
+	if len(params) >= 3 {
+		if params[2] == nil {
+			params[2] = 0.0001
+		}
+	}
+
+	if len(params) >= 4 {
+		if params[3] == nil {
+			params[3] = 50
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_shieldcoinbase`,
-		Params:	`["`+frmaddr+`", "`+toaddr+`", `+strconv.FormatFloat(fee, 'f', 8, 64)+`, `+strconv.Itoa(limit)+`]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var z_shieldcoinbase ZShieldCoinbase
 
