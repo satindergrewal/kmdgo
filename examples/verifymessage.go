@@ -26,11 +26,13 @@ func main() {
 
 	var vfymg kmdgo.VerifyMessage
 
-	taddress := `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //The address from which the signed message is from. Check SignMessage example.
-	signature := `ICDer79Dlio7/F18nkTefxIU7zh9oeplpY/IHnA4TxolcTDrtD4s5VuXDnCrUERk9AMbWCrHwWJzDyVGwNi23AU=`
-	msg := `hello kmd world!`
+	args := make(kmdgo.APIParams, 3)
+	args[0] = `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //The address from which the signed message is from. Check SignMessage example.
+	args[1] = `ICDer79Dlio7/F18nkTefxIU7zh9oeplpY/IHnA4TxolcTDrtD4s5VuXDnCrUERk9AMbWCrHwWJzDyVGwNi23AU=`
+	args[2] = `hello kmd world!`
+	fmt.Println(args)
 
-	vfymg, err := appName.VerifyMessage(taddress, signature, msg)
+	vfymg, err := appName.VerifyMessage(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", vfymg.Error.Code)
 		fmt.Printf("Message: %v\n\n", vfymg.Error.Message)

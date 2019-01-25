@@ -25,13 +25,15 @@ func main() {
 	appName = `komodo`
 
 	var gbl kmdgo.GetBalance
+	
+	args := make(kmdgo.APIParams, 3)
+	//args[0] = `RUCovPsciwTyrokUN4nJ4GUw393wdnJnPw`
+	//args[0] = "*"
+	//args[1] = 0
+	//args[2] = false
+	fmt.Println(args)
 
-	//taddress := `RUCovPsciwTyrokUN4nJ4GUw393wdnJnPw`
-	taddress := `*`
-	minconf := 0
-	watchonly := false
-
-	gbl, err := appName.GetBalance(taddress, minconf, watchonly)
+	gbl, err := appName.GetBalance(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", gbl.Error.Code)
 		fmt.Printf("Message: %v\n\n", gbl.Error.Message)

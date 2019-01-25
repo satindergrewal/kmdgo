@@ -26,10 +26,12 @@ func main() {
 
 	var grbact kmdgo.GetReceivedByAddress
 
-	account_name := `RA1vrNf9Aej4Rt6gu4xNG66Zcy2KgjnPia`
-	minconfs := 0
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `RA1vrNf9Aej4Rt6gu4xNG66Zcy2KgjnPia`
+	args[1] = 0
+	fmt.Println(args)
 
-	grbact, err := appName.GetReceivedByAddress(account_name, minconfs)
+	grbact, err := appName.GetReceivedByAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", grbact.Error.Code)
 		fmt.Printf("Message: %v\n\n", grbact.Error.Message)

@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetReceivedByAccount struct {
@@ -28,10 +27,24 @@ type GetReceivedByAccount struct {
 	
 }
 
-func (appName AppType) GetReceivedByAccount(act string, mconf int) (GetReceivedByAccount, error) {
+func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAccount, error) {
+	
+	// In call cases set account to blank. ACCOUNTS feature is DEPRICATED. It Should not be used anymore.
+	if params[0] == nil {
+		params[0] = ``
+	} else {
+		params[0] = ``
+	}
+
+	if params[1] == nil {
+		params[1] = 1
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getreceivedbyaccount`,
-		Params:	`["`+act+`", `+strconv.Itoa(mconf)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

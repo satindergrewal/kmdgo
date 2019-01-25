@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetReceivedByAddress struct {
@@ -28,10 +27,16 @@ type GetReceivedByAddress struct {
 	
 }
 
-func (appName AppType) GetReceivedByAddress(taddr string, mconf int) (GetReceivedByAddress, error) {
+func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddress, error) {
+	if params[1] == nil {
+		params[1] = 1
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getreceivedbyaddress`,
-		Params:	`["`+taddr+`", `+strconv.Itoa(mconf)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

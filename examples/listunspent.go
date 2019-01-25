@@ -26,11 +26,13 @@ func main() {
 
 	var lunspt kmdgo.ListUnspent
 
-	min_confs := 0
-	max_confs := 99999999
-	addresses := `["RUdERUdW8aeEtRehZseDco9GTWN494LWW3", "RAfyD4vUX4iUVvVEoxQ3hipHFNAvSw8Gnp"]`
+	args := make(kmdgo.APIParams, 3)
+	args[0] = 0
+	args[1] = 99999999
+	args[2] = []string{"RUdERUdW8aeEtRehZseDco9GTWN494LWW3","RAfyD4vUX4iUVvVEoxQ3hipHFNAvSw8Gnp"}
+	fmt.Println(args)
 
-	lunspt, err := appName.ListUnspent(min_confs, max_confs, addresses)
+	lunspt, err := appName.ListUnspent(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lunspt.Error.Code)
 		fmt.Printf("Message: %v\n\n", lunspt.Error.Message)

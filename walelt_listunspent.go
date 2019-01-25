@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ListUnspent struct {
@@ -37,10 +36,20 @@ type ListUnspent struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ListUnspent(minconf int, maxconf int, addrs string) (ListUnspent, error) {
+func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
+	if params[0] == nil {
+		params[0] = 1
+	}
+	if params[1] == nil {
+		params[1] = 9999999
+	}
+
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`listunspent`,
-		Params:	`[`+strconv.Itoa(minconf)+`, `+strconv.Itoa(maxconf)+`, `+addrs+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

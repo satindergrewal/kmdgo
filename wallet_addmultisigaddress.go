@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type AddMultiSigAddress struct {
@@ -28,10 +27,13 @@ type AddMultiSigAddress struct {
 	
 }
 
-func (appName AppType) AddMultiSigAddress(nr int, addr string) (AddMultiSigAddress, error) {
+func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`addmultisigaddress`,
-		Params:	`[`+strconv.Itoa(nr)+`, `+addr+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

@@ -35,12 +35,12 @@ func main() {
 
 	var mtsig kmdgo.AddMultiSigAddress
 
-	// This example says requires 2 of 2 signatures to create tx from the multisig address
-	nreq := 2
-	// Get the address from command `getnewaddress` to test
-	addrs := `["RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"]`
+	args := make(kmdgo.APIParams, 2)
+	args[0] = 2 // This example says requires 2 of 2 signatures to create tx from the multisig address
+	args[1] = []string{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"} // Get the address from command `getnewaddress` to test
+	fmt.Println(args)
 
-	mtsig, err := appName.AddMultiSigAddress(nreq, addrs)
+	mtsig, err := appName.AddMultiSigAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", mtsig.Error.Code)
 		fmt.Printf("Message: %v\n\n", mtsig.Error.Message)

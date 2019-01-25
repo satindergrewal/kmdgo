@@ -27,10 +27,13 @@ type VerifyMessage struct {
 	
 }
 
-func (appName AppType) VerifyMessage(taddr string, sig string, msg string) (VerifyMessage, error) {
+func (appName AppType) VerifyMessage(params APIParams) (VerifyMessage, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`verifymessage`,
-		Params:	`["`+taddr+`", "`+sig+`" , "`+msg+`"]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

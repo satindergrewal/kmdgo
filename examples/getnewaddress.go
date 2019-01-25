@@ -26,9 +26,7 @@ func main() {
 
 	var gbl kmdgo.GetNewAddress
 
-	account_name := ``
-
-	gbl, err := appName.GetNewAddress(account_name)
+	gbl, err := appName.GetNewAddress()
 	if err != nil {
 		fmt.Printf("Code: %v\n", gbl.Error.Code)
 		fmt.Printf("Message: %v\n\n", gbl.Error.Message)

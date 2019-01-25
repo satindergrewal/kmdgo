@@ -26,10 +26,11 @@ func main() {
 
 	var grbact kmdgo.GetReceivedByAccount
 
-	account_name := ``
-	minconfs := 0
+	args := make(kmdgo.APIParams, 2)
+	args[1] = 0
+	fmt.Println(args)
 
-	grbact, err := appName.GetReceivedByAccount(account_name, minconfs)
+	grbact, err := appName.GetReceivedByAccount(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", grbact.Error.Code)
 		fmt.Printf("Message: %v\n\n", grbact.Error.Message)

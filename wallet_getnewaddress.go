@@ -27,10 +27,10 @@ type GetNewAddress struct {
 	
 }
 
-func (appName AppType) GetNewAddress(act string) (GetNewAddress, error) {
+func (appName AppType) GetNewAddress() (GetNewAddress, error) {
 	query := APIQuery {
 		Method:	`getnewaddress`,
-		Params:	`["`+act+`"]`,
+		Params:	`[]`,
 	}
 	//fmt.Println(query)
 

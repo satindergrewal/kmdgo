@@ -15,10 +15,9 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetBalance struct {
@@ -28,12 +27,26 @@ type GetBalance struct {
 	
 }
 
-func (appName AppType) GetBalance(taddr string, mconf int, incwch bool) (GetBalance, error) {
+func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
+	if params[0] == nil {
+		params[0] = "*"
+	}
+	if params[1] == nil {
+		params[1] = 1
+	}
+
+	if params[2] == nil {
+		params[2] = false
+	}
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getbalance`,
-		Params:	`["`+taddr+`", `+strconv.Itoa(mconf)+`, `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var getbalance GetBalance
 
