@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type SetBan struct {
@@ -27,10 +26,13 @@ type SetBan struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) SetBan(ipnet string, cmd string, bantime int, absolute bool) (SetBan, error) {
+func (appName AppType) SetBan(params APIParams) (SetBan, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`setban`,
-		Params:	`["`+ipnet+`", "`+cmd+`", `+strconv.Itoa(bantime)+`, `+strconv.FormatBool(absolute)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

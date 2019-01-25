@@ -26,13 +26,15 @@ func main() {
 
 	var stbn kmdgo.SetBan
 
-	ip_network := `192.168.0.0/24`
-	command := `remove`
-	//command := `add`
-	ban_time := 86400
-	absolute := false
+	args := make(kmdgo.APIParams, 4) // Change length size from 4 to 2 if args 2 and 3 is disabled or adjust the length accordingly.
+	args[0] = `192.168.0.0/24` //"ip(/netmask)" (string, required)
+	args[1] = `remove` // "command" (string, required) 'add' to add a IP/Subnet to the list, 'remove' to remove a IP/Subnet from the list
+	//args[1] = `add`
+	args[2] = 86400 // (numeric, optional) time in seconds
+	args[3] = false // (boolean, optional) If set, the bantime must be a absolute timestamp in seconds since epoch (Jan 1 1970 GMT)
+	fmt.Println(args)
 
-	stbn, err := appName.SetBan(ip_network, command, ban_time, absolute)
+	stbn, err := appName.SetBan(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", stbn.Error.Code)
 		fmt.Printf("Message: %v\n\n", stbn.Error.Message)
