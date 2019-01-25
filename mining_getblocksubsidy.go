@@ -15,7 +15,7 @@
 package kmdgo
 
 import (
-	"fmt"
+	//"fmt"
 	"encoding/json"
 	"errors"
 )
@@ -33,18 +33,18 @@ func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error
 
 	if params[0] == "" || params[0] == nil {
 		params_json = `[]`
-		fmt.Println(params_json)
+		//fmt.Println(params_json)
 	} else {
 		params_bytes, _ := json.Marshal(params)
 		params_json = string(params_bytes)
-		fmt.Println(params_json)
+		//fmt.Println(params_json)
 	}
 
 	query := APIQuery {
 		Method:	`getblocksubsidy`,
 		Params:	params_json,
 	}
-	fmt.Println(query)
+	//fmt.Println(query)
 
 	var getblocksubsidy GetBlockSubsidy
 
