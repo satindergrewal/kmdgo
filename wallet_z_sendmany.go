@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZSendMany struct {
@@ -27,10 +26,25 @@ type ZSendMany struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZSendMany(frmaddr string, amounts string, minconf int, fee float64) (ZSendMany, error) {
+func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
+	if len(params) >= 3 {
+		if params[2] == nil {
+			params[2] = 1
+		}
+	}
+
+	if len(params) >= 4 {
+		if params[3] == nil {
+			params[3] = 0.0001
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_sendmany`,
-		Params:	`["`+frmaddr+`", `+amounts+`, `+strconv.Itoa(minconf)+`, `+strconv.FormatFloat(fee, 'f', 8, 64)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
