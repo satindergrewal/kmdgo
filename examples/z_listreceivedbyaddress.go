@@ -26,10 +26,12 @@ func main() {
 
 	var zlrbadr kmdgo.ZListReceivedByAddress
 
-	zaddress := `zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg`
-	min_confs := 1
+	args := make(kmdgo.APIParams, 1)
+	args[0] = `zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg`
+	//args[1] = 1
+	fmt.Println(args)
 
-	zlrbadr, err := appName.ZListReceivedByAddress(zaddress, min_confs)
+	zlrbadr, err := appName.ZListReceivedByAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", zlrbadr.Error.Code)
 		fmt.Printf("Message: %v\n\n", zlrbadr.Error.Message)

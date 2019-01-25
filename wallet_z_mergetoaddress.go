@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZMergeToAddress struct {
@@ -37,10 +36,32 @@ type ZMergeToAddress struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZMergeToAddress(frmaddr string, toaddr string, fee float64, transparent_limit int, shielded_limit int, memo string) (ZMergeToAddress, error) {
+func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error) {
+
+	if len(params) >= 3 {
+		if params[2] == nil {
+			params[2] = 0.0001
+		}
+	}
+
+	if len(params) >= 4 {
+		if params[3] == nil {
+			params[3] = 50
+		}
+	}
+
+	if len(params) >= 5 {
+		if params[4] == nil {
+			params[4] = 10
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_mergetoaddress`,
-		Params:	`[`+frmaddr+`, "`+toaddr+`", `+strconv.FormatFloat(fee, 'f', 8, 64)+`, `+strconv.Itoa(transparent_limit)+`, `+strconv.Itoa(shielded_limit)+`, "`+memo+`"]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

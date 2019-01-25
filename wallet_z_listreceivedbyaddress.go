@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZListReceivedByAddress struct {
@@ -31,10 +30,18 @@ type ZListReceivedByAddress struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZListReceivedByAddress(zaddr string, minconf int) (ZListReceivedByAddress, error) {
+func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedByAddress, error) {
+	if len(params) == 2 {
+		if params[1] == nil {
+			params[1] = 1
+		}
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_listreceivedbyaddress`,
-		Params:	`["`+zaddr+`", `+strconv.Itoa(minconf)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

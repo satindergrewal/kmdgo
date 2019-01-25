@@ -26,12 +26,14 @@ func main() {
 
 	var zlunspt kmdgo.ZListUnspent
 
-	min_confs := 6
-	max_confs := 9999999
-	include_watch_only := false
-	addresses := `["zs1xhnpvrggh3n5a0pt5hwgdcvmuhn9wqjg6kn25jddduvq5qyy3nhusfjufljp0ul55d66vkxajt3","zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg"]`
+	args := make(kmdgo.APIParams, 4)
+	//args[0] = 12
+	//args[1] = 200
+	//args[2] = true
+	args[3] = []string{"zs1xhnpvrggh3n5a0pt5hwgdcvmuhn9wqjg6kn25jddduvq5qyy3nhusfjufljp0ul55d66vkxajt3","zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg"}
+	fmt.Println(args)
 
-	zlunspt, err := appName.ZListUnspent(min_confs, max_confs, include_watch_only, addresses)
+	zlunspt, err := appName.ZListUnspent(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", zlunspt.Error.Code)
 		fmt.Printf("Message: %v\n\n", zlunspt.Error.Message)
