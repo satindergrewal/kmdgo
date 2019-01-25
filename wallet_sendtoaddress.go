@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type SendToAddress struct {
@@ -27,10 +26,18 @@ type SendToAddress struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) SendToAddress(taddr string, amount float64, comment string, commentto string, subtractfeefromamount bool) (SendToAddress, error) {
+func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
+	if len(params) == 5 {
+		if params[4] == nil {
+			params[4] = false
+		}
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`sendtoaddress`,
-		Params:	`["`+taddr+`", `+strconv.FormatFloat(amount, 'f', 8, 64)+`, "`+comment+`", "`+commentto+`", `+strconv.FormatBool(subtractfeefromamount)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

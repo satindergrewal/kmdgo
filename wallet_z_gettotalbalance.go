@@ -15,10 +15,9 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZGetTotalBalance struct {
@@ -32,12 +31,21 @@ type ZGetTotalBalance struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZGetTotalBalance(minconf int, incwch bool) (ZGetTotalBalance, error) {
+func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, error) {
+	if params[0] == nil {
+		params[0] = 1
+	}
+	if params[1] == nil {
+		params[1] = false
+	}
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_gettotalbalance`,
-		Params:	`[`+strconv.Itoa(minconf)+`, `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var z_gettotalbalance ZGetTotalBalance
 

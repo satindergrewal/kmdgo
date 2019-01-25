@@ -27,10 +27,13 @@ type SignMessage struct {
 	
 }
 
-func (appName AppType) SignMessage(taddr string, msg string) (SignMessage, error) {
+func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`signmessage`,
-		Params:	`["`+taddr+`", "`+msg+`"]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

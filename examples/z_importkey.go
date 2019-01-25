@@ -26,11 +26,13 @@ func main() {
 
 	var ziky kmdgo.ZImportKey
 
-	zckey := `SKxuTXwjHtZyFEFoc6oPtTzQFrqrwnNU4MpLh15vs1VToGmTPa2G`
-	rescan := `whenkeyisnew` // Rescan the wallet for transactions - Expected values are "yes", "no" or "whenkeyisnew"
-	start_height := 0
+	args := make(kmdgo.APIParams, 1)
+	args[0] = `SKxuTXwjHtZyFEFoc6oPtTzQFrqrwnNU4MpLh15vs1VToGmTPa2G`
+	//args[1] = `whenkeyisnew` // Rescan the wallet for transactions - Expected values are "yes", "no" or "whenkeyisnew"
+	//args[2] = 0
+	fmt.Println(args)
 
-	ziky, err := appName.ZImportKey(zckey, rescan, start_height)
+	ziky, err := appName.ZImportKey(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", ziky.Error.Code)
 		fmt.Printf("Message: %v\n\n", ziky.Error.Message)

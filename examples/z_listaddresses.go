@@ -26,9 +26,11 @@ func main() {
 
 	var zladdr kmdgo.ZListAddresses
 
-	include_watch_only := true
+	args := make(kmdgo.APIParams, 1)
+	//args[0] = true
+	fmt.Println(args)
 
-	zladdr, err := appName.ZListAddresses(include_watch_only)
+	zladdr, err := appName.ZListAddresses(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", zladdr.Error.Code)
 		fmt.Printf("Message: %v\n\n", zladdr.Error.Message)

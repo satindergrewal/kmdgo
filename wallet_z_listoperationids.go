@@ -26,10 +26,21 @@ type ZListOperationIDs struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZListOperationIDs(status string) (ZListOperationIDs, error) {
+func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, error) {
+	var params_json string
+
+	if params[0] == "" || params[0] == nil {
+		params_json = `[]`
+		//fmt.Println(params_json)
+	} else {
+		params_bytes, _ := json.Marshal(params)
+		params_json = string(params_bytes)
+		//fmt.Println(params_json)
+	}
+
 	query := APIQuery {
 		Method:	`z_listoperationids`,
-		Params:	`["`+status+`"]`,
+		Params:	params_json,
 	}
 	//fmt.Println(query)
 

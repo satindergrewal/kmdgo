@@ -26,10 +26,12 @@ func main() {
 
 	var opst kmdgo.ZListOperationIDs
 
-	opid_status := ``
-	//opid_status := `success`
+	args := make(kmdgo.APIParams, 1)
+	//args[0] = ``
+	//args[0] = `success`
+	fmt.Println(args)
 
-	opst, err := appName.ZListOperationIDs(opid_status)
+	opst, err := appName.ZListOperationIDs(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", opst.Error.Code)
 		fmt.Printf("Message: %v\n\n", opst.Error.Message)

@@ -26,10 +26,12 @@ func main() {
 
 	var sngmg kmdgo.SignMessage
 
-	taddress := `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //This address must be ismine:true in your wallet. Must have it's privkey imported.
-	msg := `hello kmd world!`
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `REAAchKmsc3aUFAwWhMh1eSKTAyGyTCxXb` //This address must be ismine:true in your wallet. Must have it's privkey imported.
+	args[1] = `hello kmd world!`
+	fmt.Println(args)
 
-	sngmg, err := appName.SignMessage(taddress, msg)
+	sngmg, err := appName.SignMessage(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", sngmg.Error.Code)
 		fmt.Printf("Message: %v\n\n", sngmg.Error.Message)

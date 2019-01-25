@@ -26,10 +26,12 @@ func main() {
 
 	var zblc kmdgo.ZGetBalance
 
-	zaddress := `zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg`
-	min_confs := 1
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg`
+	//args[1] = 1
+	fmt.Println(args)
 
-	zblc, err := appName.ZGetBalance(zaddress, min_confs)
+	zblc, err := appName.ZGetBalance(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", zblc.Error.Code)
 		fmt.Printf("Message: %v\n\n", zblc.Error.Message)

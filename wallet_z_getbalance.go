@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZGetBalance struct {
@@ -27,10 +26,16 @@ type ZGetBalance struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZGetBalance(zaddr string, minconf int) (ZGetBalance, error) {
+func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
+	if params[1] == nil {
+		params[1] = 1
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_getbalance`,
-		Params:	`["`+zaddr+`", `+strconv.Itoa(minconf)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

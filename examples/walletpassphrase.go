@@ -26,10 +26,12 @@ func main() {
 
 	var wltopn kmdgo.WalletPassPhrase
 
-	passphrase := `test123`
-	seconds := 3600 // 60 seconds x 60 minutes = 3600
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `test123`
+	args[1] = 3600 // 60 seconds x 60 minutes = 3600
+	fmt.Println(args)
 
-	wltopn, err := appName.WalletPassPhrase(passphrase, seconds)
+	wltopn, err := appName.WalletPassPhrase(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", wltopn.Error.Code)
 		fmt.Printf("Message: %v\n\n", wltopn.Error.Message)

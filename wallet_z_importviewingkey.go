@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZImportViewingKey struct {
@@ -27,10 +26,25 @@ type ZImportViewingKey struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZImportViewingKey(zkey string, rescan string, startHeight int) (ZImportViewingKey, error) {
+func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, error) {
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = "whenkeyisnew"
+		}
+	}
+
+	if len(params) == 3 {
+		if params[2] == nil {
+			params[2] = 0
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_importviewingkey`,
-		Params:	`["`+zkey+`", "`+rescan+`", `+strconv.Itoa(startHeight)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

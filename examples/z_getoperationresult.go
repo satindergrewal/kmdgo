@@ -26,9 +26,11 @@ func main() {
 
 	var oprst kmdgo.ZGetOperationResult
 
-	opid := `["opid-6e581ee5-4e90-4e70-8961-f95d8d28748c", "opid-6e581ee5-3e17-2e84-8961-j9fd8d28748r"]`
+	args := make(kmdgo.APIParams, 1)
+	args[0] = []string{"opid-6e581ee5-4e90-4e70-8961-f95d8d28748c", "opid-6e581ee5-3e17-2e84-8961-j9fd8d28748r"}
+	fmt.Println(args)
 
-	oprst, err := appName.ZGetOperationResult(opid)
+	oprst, err := appName.ZGetOperationResult(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", oprst.Error.Code)
 		fmt.Printf("Message: %v\n\n", oprst.Error.Message)

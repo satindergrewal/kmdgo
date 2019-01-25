@@ -26,13 +26,15 @@ func main() {
 
 	var smny kmdgo.SendToAddress
 
-	taddress := `RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s`
-	amount := 0.01
-	comment := `donation`
-	commentto := `Non Profit Org`
-	subtract_fee_from_amount := true
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s`
+	args[1] = 0.01
+	//args[2] = `donation`
+	//args[3] = `Non Profit Org`
+	//args[4] = true
+	fmt.Println(args)
 
-	smny, err := appName.SendToAddress(taddress, amount, comment, commentto, subtract_fee_from_amount)
+	smny, err := appName.SendToAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", smny.Error.Code)
 		fmt.Printf("Message: %v\n\n", smny.Error.Message)

@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZImportKey struct {
@@ -27,10 +26,25 @@ type ZImportKey struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZImportKey(zkey string, rescan string, startHeight int) (ZImportKey, error) {
+func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = "whenkeyisnew"
+		}
+	}
+
+	if len(params) == 3 {
+		if params[2] == nil {
+			params[2] = 0
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_importkey`,
-		Params:	`["`+zkey+`", "`+rescan+`", `+strconv.Itoa(startHeight)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

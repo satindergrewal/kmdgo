@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ZListAddresses struct {
@@ -27,10 +26,16 @@ type ZListAddresses struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZListAddresses(incwch bool) (ZListAddresses, error) {
+func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) {
+	if params[0] == nil {
+		params[0] = false
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`z_listaddresses`,
-		Params:	`[`+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

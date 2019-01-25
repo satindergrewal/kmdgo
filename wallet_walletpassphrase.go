@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type WalletPassPhrase struct {
@@ -28,10 +27,13 @@ type WalletPassPhrase struct {
 	
 }
 
-func (appName AppType) WalletPassPhrase(phrase string, seconds int) (WalletPassPhrase, error) {
+func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`walletpassphrase`,
-		Params:	`["`+phrase+`", `+strconv.Itoa(seconds)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

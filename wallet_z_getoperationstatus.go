@@ -44,10 +44,13 @@ type ZGetOperationStatus struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ZGetOperationStatus(opid string) (ZGetOperationStatus, error) {
+func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatus, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+	
 	query := APIQuery {
 		Method:	`z_getoperationstatus`,
-		Params:	`[`+opid+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

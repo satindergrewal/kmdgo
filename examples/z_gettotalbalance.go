@@ -26,10 +26,12 @@ func main() {
 
 	var ztlblc kmdgo.ZGetTotalBalance
 
-	min_confs := 1
-	include_watch_only := false
+	args := make(kmdgo.APIParams, 2)
+	//args[0] = 1
+	//args[1] = false
+	fmt.Println(args)
 
-	ztlblc, err := appName.ZGetTotalBalance(min_confs, include_watch_only)
+	ztlblc, err := appName.ZGetTotalBalance(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", ztlblc.Error.Code)
 		fmt.Printf("Message: %v\n\n", ztlblc.Error.Message)
