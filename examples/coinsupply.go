@@ -31,8 +31,12 @@ func main() {
 	// define the variable with CoinSupply struct from pacakge kmdgo
 	var cs kmdgo.CoinSupply
 
+	args := make(kmdgo.APIParams, 1)
+	args[0] = "10"
+	fmt.Println(args)
+
 	// Get output of the CoinSupply() method and store it to CoinSupply struct type variable
-	cs, err := appName.CoinSupply(100)
+	cs, err := appName.CoinSupply(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", cs.Error.Code)
 		fmt.Printf("Message: %v\n\n", cs.Error.Message)

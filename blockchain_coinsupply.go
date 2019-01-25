@@ -16,7 +16,6 @@ package kmdgo
 
 import (
 	//"fmt"
-	"strconv"
 	"errors"
 	"encoding/json"
 )
@@ -35,10 +34,16 @@ type CoinSupply struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) CoinSupply(n int) (CoinSupply, error) {
+func (appName AppType) CoinSupply(params APIParams) (CoinSupply, error) {
+    if params[0] == nil {
+        params[0] = 100
+    }
+    params_json, _ := json.Marshal(params)
+    //fmt.Println(string(params_json))
+
     query := APIQuery {
         Method:     `coinsupply`,
-        Params:   `["`+strconv.Itoa(n)+`"]`,
+        Params:     string(params_json),
     }
     //fmt.Println(query)
 
