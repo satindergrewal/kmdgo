@@ -17,7 +17,6 @@ package kmdgo
 import (
 	//"fmt"
 	"encoding/json"
-	"strconv"
 	"errors"
 )
 
@@ -43,10 +42,16 @@ type GetBlockHeader struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) GetBlockHeader(h string, b bool) (GetBlockHeader, error) {
+func (appName AppType) GetBlockHeader(params APIParams) (GetBlockHeader, error) {
+	if params[1] == nil {
+		params[1] = true
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getblockheader`,
-		Params:	`["`+h+`",`+strconv.FormatBool(b)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

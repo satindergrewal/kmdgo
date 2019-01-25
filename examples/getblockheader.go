@@ -25,7 +25,13 @@ func main() {
 	appName = `komodo`
 
 	var bh kmdgo.GetBlockHeader
-	bh, err := appName.GetBlockHeader("0a203fce865faa53e1414b26c3020341a17d4e2136565d9b747f83169c938ac5",true)
+
+	args := make(kmdgo.APIParams, 2)
+	args[0] = "0a203fce865faa53e1414b26c3020341a17d4e2136565d9b747f83169c938ac5"
+	//args[1] = false
+	fmt.Println(args)
+
+	bh, err := appName.GetBlockHeader(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", bh.Error.Code)
 		fmt.Printf("Message: %v\n\n", bh.Error.Message)
