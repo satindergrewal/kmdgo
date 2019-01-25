@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ImportPrivKey struct {
@@ -28,10 +27,23 @@ type ImportPrivKey struct {
 	
 }
 
-func (appName AppType) ImportPrivKey(prvky string, lbl string, rscn bool) (ImportPrivKey, error) {
+func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
+	if params[0] == nil {
+		params[0] = "*"
+	}
+	if params[1] == nil {
+		params[1] = ``
+	}
+
+	if params[2] == nil {
+		params[2] = true
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`importprivkey`,
-		Params:	`["`+prvky+`", "`+lbl+`", `+strconv.FormatBool(rscn)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

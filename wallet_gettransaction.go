@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetTransaction struct {
@@ -53,10 +52,16 @@ type GetTransaction struct {
 	
 }
 
-func (appName AppType) GetTransaction(txid string, incwch bool) (GetTransaction, error) {
+func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) {
+	if params[1] == nil {
+		params[1] = false
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`gettransaction`,
-		Params:	`["`+txid+`", `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

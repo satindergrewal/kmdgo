@@ -26,10 +26,12 @@ func main() {
 
 	var txdtl kmdgo.GetTransaction
 
-	txid := `8d0790c3dcce42187a0e0ab710c9fcf376566e0e64fa800980b2b553a72da0c4`
-	watchonly := true
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `8d0790c3dcce42187a0e0ab710c9fcf376566e0e64fa800980b2b553a72da0c4`
+	args[1] = true
+	fmt.Println(args)
 
-	txdtl, err := appName.GetTransaction(txid, watchonly)
+	txdtl, err := appName.GetTransaction(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", txdtl.Error.Code)
 		fmt.Printf("Message: %v\n\n", txdtl.Error.Message)

@@ -26,12 +26,13 @@ func main() {
 
 	var impadr kmdgo.ImportAddress
 
-	taddress := `bWDExTNrQZ4kSRRXwUUgHibyYuzPLS6FgP`
-	label := `testing`
-	rescan := false
+	args := make(kmdgo.APIParams, 3)
+	args[0] = `bWDExTNrQZ4kSRRXwUUgHibyYuzPLS6FgP`
+	//args[1] = `testing`
+	//args[2] = false
+	fmt.Println(args)
 
-
-	impadr, err := appName.ImportAddress(taddress, label, rescan)
+	impadr, err := appName.ImportAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", impadr.Error.Code)
 		fmt.Printf("Message: %v\n\n", impadr.Error.Message)

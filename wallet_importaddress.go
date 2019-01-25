@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ImportAddress struct {
@@ -28,10 +27,23 @@ type ImportAddress struct {
 	
 }
 
-func (appName AppType) ImportAddress(taddr string, lbl string, rscn bool) (ImportAddress, error) {
+func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
+	if params[0] == nil {
+		params[0] = "*"
+	}
+	if params[1] == nil {
+		params[1] = ``
+	}
+
+	if params[2] == nil {
+		params[2] = true
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`importaddress`,
-		Params:	`["`+taddr+`", "`+lbl+`", `+strconv.FormatBool(rscn)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
