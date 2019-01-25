@@ -163,7 +163,7 @@ RPC Port: 27486
 - [ ]	lottoaddress [pubkey]
 
 #### Mining
-- [ ]	getblocksubsidy height
+- [x]	getblocksubsidy height
 - [ ]	getblocktemplate ( "jsonrequestobject" )
 - [ ]	getlocalsolps
 - [ ]	getmininginfo
@@ -305,6 +305,7 @@ RPC Port: 27486
 - [x]	signmessage "t-addr" "message"
 - [x]	walletlock
 - [x]	walletpassphrase "passphrase" seconds
+- [x]	walletpassphrasechange "oldpassphrase" "newpassphrase"
 - [x]	z_exportkey "zaddr"
 - [x]	z_exportviewingkey "zaddr"
 - [x]	z_exportwallet "filename"
