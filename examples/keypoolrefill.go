@@ -26,10 +26,11 @@ func main() {
 
 	var pvk kmdgo.KeyPoolRefill
 
-	newsize := 100
+	args := make(kmdgo.APIParams, 1)
+	//args[0] = 101
+	fmt.Println(args)
 
-
-	pvk, err := appName.KeyPoolRefill(newsize)
+	pvk, err := appName.KeyPoolRefill(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", pvk.Error.Code)
 		fmt.Printf("Message: %v\n\n", pvk.Error.Message)

@@ -15,10 +15,9 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ListSinceBlock struct {
@@ -48,12 +47,30 @@ type ListSinceBlock struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ListSinceBlock(bhash string, tconf int, incwch bool) (ListSinceBlock, error) {
+func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) {
+	
+	fmt.Println(len(params))
+
+	if len(params) == 1 {
+		if params[0] == nil {
+			params[0] = "false"
+		}
+	}
+
+	if len(params) == 3 {
+		if params[2] == nil {
+			params[2] = false
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`listsinceblock`,
-		Params:	`["`+bhash+`", `+strconv.Itoa(tconf)+`, `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var listsinceblock ListSinceBlock
 

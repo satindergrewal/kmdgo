@@ -15,10 +15,9 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type LockUnspent struct {
@@ -27,12 +26,15 @@ type LockUnspent struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) LockUnspent(unlock bool, transactions string) (LockUnspent, error) {
+func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`lockunspent`,
-		Params:	`[`+strconv.FormatBool(unlock)+`, `+transactions+`]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var lockunspent LockUnspent
 

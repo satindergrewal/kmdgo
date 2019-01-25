@@ -26,11 +26,12 @@ func main() {
 
 	var lstact kmdgo.ListAccounts
 
-	minimum_confirmations := 0
-	include_watchonly := true
+	args := make(kmdgo.APIParams, 2)
+	//args[0] = 0
+	//args[1] = true
+	fmt.Println(args)
 
-
-	lstact, err := appName.ListAccounts(minimum_confirmations, include_watchonly)
+	lstact, err := appName.ListAccounts(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lstact.Error.Code)
 		fmt.Printf("Message: %v\n\n", lstact.Error.Message)

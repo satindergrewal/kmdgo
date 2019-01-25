@@ -26,11 +26,13 @@ func main() {
 
 	var lrbaddr kmdgo.ListReceivedByAddress
 
-	min_confs := 0
-	include_empty := true
-	include_watch_only := true
+	args := make(kmdgo.APIParams, 3)
+	//args[0] = 0
+	//args[1] = true
+	//args[2] = true
+	fmt.Println(args)
 
-	lrbaddr, err := appName.ListReceivedByAddress(min_confs, include_empty, include_watch_only)
+	lrbaddr, err := appName.ListReceivedByAddress(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lrbaddr.Error.Code)
 		fmt.Printf("Message: %v\n\n", lrbaddr.Error.Message)

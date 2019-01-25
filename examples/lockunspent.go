@@ -26,10 +26,17 @@ func main() {
 
 	var lkunspt kmdgo.LockUnspent
 
-	unlock := true
-	transactions := `[{"txid":"d7ba45296c66e16eb61f27a4eef8848c7f5579fe801f277c1b0e074a4f47d6fd","vout":0}]`
+	type Txes []struct {
+		Txid string `json:"txid"`
+		Vout int    `json:"vout"`
+	}
 
-	lkunspt, err := appName.LockUnspent(unlock, transactions)
+	args := make(kmdgo.APIParams, 2)
+	args[0] = true
+	args[1] = Txes{{"d7ba45296c66e16eb61f27a4eef8848c7f5579fe801f277c1b0e074a4f47d6fd", 0}}
+	fmt.Println(args)
+
+	lkunspt, err := appName.LockUnspent(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lkunspt.Error.Code)
 		fmt.Printf("Message: %v\n\n", lkunspt.Error.Message)

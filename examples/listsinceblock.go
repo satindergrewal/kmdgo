@@ -26,11 +26,13 @@ func main() {
 
 	var lrbaddr kmdgo.ListSinceBlock
 
-	blockhash := `02a06c8a9535c3f7fb0db832b177c8fa3e8a4eb5034aeb698c37d2e66a570648`
-	target_confs := 6
-	include_watch_only := true
+	args := make(kmdgo.APIParams, 3)
+	args[0] = `02a06c8a9535c3f7fb0db832b177c8fa3e8a4eb5034aeb698c37d2e66a570648`
+	args[1] = 6
+	//args[2] = true
+	fmt.Println(args)
 
-	lrbaddr, err := appName.ListSinceBlock(blockhash, target_confs, include_watch_only)
+	lrbaddr, err := appName.ListSinceBlock(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", lrbaddr.Error.Code)
 		fmt.Printf("Message: %v\n\n", lrbaddr.Error.Message)

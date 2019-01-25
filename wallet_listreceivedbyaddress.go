@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type ListReceivedByAddress struct {
@@ -34,10 +33,23 @@ type ListReceivedByAddress struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) ListReceivedByAddress(minconf int, incempty bool, incwch bool) (ListReceivedByAddress, error) {
+func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAddress, error) {
+	if params[0] == nil {
+		params[0] = 1
+	}
+	if params[1] == nil {
+		params[1] = false
+	}
+
+	if params[2] == nil {
+		params[2] = false
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`listreceivedbyaddress`,
-		Params:	`[`+strconv.Itoa(minconf)+`, `+strconv.FormatBool(incempty)+`, `+strconv.FormatBool(incwch)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
