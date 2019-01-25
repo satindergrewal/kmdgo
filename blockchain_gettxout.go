@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetTxOut struct {
@@ -42,10 +41,16 @@ type GetTxOut struct {
 	
 }
 
-func (appName AppType) GetTxOut(txid string, n int) (GetTxOut, error) {
+func (appName AppType) GetTxOut(params APIParams) (GetTxOut, error) {
+	if params[2] == nil {
+		params[2] = false
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`gettxout`,
-		Params:	`["`+txid+`", `+strconv.Itoa(n)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

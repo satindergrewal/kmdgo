@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type GetAddedNodeInfo struct {
@@ -34,10 +33,13 @@ type GetAddedNodeInfo struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) GetAddedNodeInfo(dns bool, node string) (GetAddedNodeInfo, error) {
+func (appName AppType) GetAddedNodeInfo(params APIParams) (GetAddedNodeInfo, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getaddednodeinfo`,
-		Params:	`[`+strconv.FormatBool(dns)+`, "`+node+`"]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

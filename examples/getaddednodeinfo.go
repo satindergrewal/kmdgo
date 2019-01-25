@@ -26,10 +26,12 @@ func main() {
 
 	var gninf kmdgo.GetAddedNodeInfo
 
-	dns := true
-	node_address := `207.148.4.183`
+	args := make(kmdgo.APIParams, 1)
+	args[0] = true
+	//args[1] = `207.148.4.183`
+	fmt.Println(args)
 
-	gninf, err := appName.GetAddedNodeInfo(dns, node_address)
+	gninf, err := appName.GetAddedNodeInfo(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", gninf.Error.Code)
 		fmt.Printf("Message: %v\n\n", gninf.Error.Message)
@@ -39,4 +41,16 @@ func main() {
 	fmt.Println("gninf value", gninf)
 	fmt.Println("-------")
 	fmt.Println(gninf.Result)
+
+	for i, v := range gninf.Result {
+		fmt.Println(i)
+		fmt.Println(v)
+		fmt.Println("Addednode: ", v.Addednode)
+		fmt.Println("Connected: ", v.Connected)
+		for iv, vv := range v.Addresses {
+			fmt.Println("-->", iv)
+			fmt.Println("-->Address: ",vv.Address)
+			fmt.Println("-->Connected: ",vv.Connected)
+		}
+	}
 }

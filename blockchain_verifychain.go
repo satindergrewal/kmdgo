@@ -22,7 +22,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type VerifyChain struct {
@@ -32,10 +31,19 @@ type VerifyChain struct {
 	
 }
 
-func (appName AppType) VerifyChain(cl int, num int) (VerifyChain, error) {
+func (appName AppType) VerifyChain(params APIParams) (VerifyChain, error) {
+	if params[0] == nil {
+		params[0] = 3
+	}
+	if params[1] == nil {
+		params[1] = 288
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`verifychain`,
-		Params:	`[`+strconv.Itoa(cl)+`, `+strconv.Itoa(num)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

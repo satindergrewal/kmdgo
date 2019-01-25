@@ -26,10 +26,12 @@ func main() {
 
 	var adnd kmdgo.AddNode
 
-	node_address := `192.169.7.252:7770`
-	command := `onetry` // possible values are: "add" or "remove" or "onetry"
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `192.169.7.252:7770`
+	args[1] = `onetry` // possible values are: "add" or "remove" or "onetry"
+	fmt.Println(args)
 
-	adnd, err := appName.AddNode(node_address, command)
+	adnd, err := appName.AddNode(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", adnd.Error.Code)
 		fmt.Printf("Message: %v\n\n", adnd.Error.Message)

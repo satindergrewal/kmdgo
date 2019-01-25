@@ -25,11 +25,15 @@ func main() {
 	appName = `komodo`
 
 	var txout kmdgo.GetTxOut
-
-	txid := `c2abe4ae3b4965ba4d55048f355d9ddc803bf1b6123a10902ae4114260f516fb`
+	
+	args := make(kmdgo.APIParams, 3)
+	args[0] = `c2abe4ae3b4965ba4d55048f355d9ddc803bf1b6123a10902ae4114260f516fb`
+	args[1] = 1
+	//args[2] = false
+	fmt.Println(args)
 
 	// Integer value is `vout` position in the txid
-	txout, err := appName.GetTxOut(txid, 1)
+	txout, err := appName.GetTxOut(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", txout.Error.Code)
 		fmt.Printf("Message: %v\n\n", txout.Error.Message)

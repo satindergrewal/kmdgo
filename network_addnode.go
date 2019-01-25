@@ -15,7 +15,7 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
 )
@@ -26,12 +26,15 @@ type AddNode struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) AddNode(node string, cmd string) (AddNode, error) {
+func (appName AppType) AddNode(params APIParams) (AddNode, error) {
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`addnode`,
-		Params:	`["`+node+`", "`+cmd+`"]`,
+		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
 	var addnode AddNode
 

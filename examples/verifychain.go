@@ -26,10 +26,12 @@ func main() {
 
 	var vfy kmdgo.VerifyChain
 
-	checklevel := 1187540 // (numeric, optional, 0-4, default=3)
-	numblocks := 288 // (numeric, optional, default=288, 0=all)
+	args := make(kmdgo.APIParams, 2)
+	args[0] = 1187540 // (numeric, optional, 0-4, default=3)
+	args[1] = 288 // (numeric, optional, default=288, 0=all)
+	fmt.Println(args)
 
-	vfy, err := appName.VerifyChain(checklevel, numblocks)
+	vfy, err := appName.VerifyChain(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", vfy.Error.Code)
 		fmt.Printf("Message: %v\n\n", vfy.Error.Message)
