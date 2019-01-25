@@ -15,9 +15,9 @@
 package kmdgo
 
 import (
+ 	//"fmt"
 	"errors"
 	"encoding/json"
-	"strconv"
 )
 
 type GetBlock struct {
@@ -78,10 +78,16 @@ type GetBlock struct {
 }
 
 
-func (appName AppType) GetBlock(h string, v int) (GetBlock, error) {
+func (appName AppType) GetBlock(params APIParams) (GetBlock, error) {
+	if params[1] == nil {
+		params[1] = 1
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`getblock`,
-		Params:	`["`+h+`",`+strconv.Itoa(v)+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 

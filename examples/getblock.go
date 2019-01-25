@@ -31,8 +31,13 @@ func main() {
 	// define the variable with GetBlock struct from pacakge kmdgo
 	var gb kmdgo.GetBlock
 
+	args := make(kmdgo.APIParams, 2)
+	args[0] = "08cddc39c6a04e0a7c9bb57477b1f4fa2ad218aa8c67f7ed406bfb470c4e0acd"
+	//args[1] = 2
+	fmt.Println(args)
+
 	// Get output of the GetBlock() method and store it to GetBlock struct type variable
-	gb, err := appName.GetBlock("08cddc39c6a04e0a7c9bb57477b1f4fa2ad218aa8c67f7ed406bfb470c4e0acd",2)
+	gb, err := appName.GetBlock(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", gb.Error.Code)
 		fmt.Printf("Message: %v\n\n", gb.Error.Message)
