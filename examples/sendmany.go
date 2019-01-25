@@ -26,13 +26,15 @@ func main() {
 
 	var smny kmdgo.SendMany
 
-	from_account := `` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
-	amounts := `{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr":0.01,"RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s":0.02}`
-	minconf := 1
-	comment := `donation`
-	subtract_fee_from_amount := `["RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"]`
+	args := make(kmdgo.APIParams, 2)
+	args[0] = `` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
+	args[1] = map[string]float64{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr":0.01,"RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s":0.02}
+	//args[2] = 1
+	//args[3] = `donation`
+	//args[4] = []string{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"}
+	fmt.Println(args)
 
-	smny, err := appName.SendMany(from_account, amounts, minconf, comment, subtract_fee_from_amount)
+	smny, err := appName.SendMany(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", smny.Error.Code)
 		fmt.Printf("Message: %v\n\n", smny.Error.Message)

@@ -26,14 +26,16 @@ func main() {
 
 	var sfrm kmdgo.SendFrom
 
-	from_account := `*` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
-	to_address := `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
-	amount := 0.01
-	minconf := 0
-	comment := `donation`
-	commentto := `Non Profit Org`
+	args := make(kmdgo.APIParams, 4)
+	args[0] = `*` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
+	args[1] = `RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr`
+	args[2] = 0.01
+	//args[3] = 0
+	//args[4] = `donation`
+	//args[5] = `Non Profit Org`
+	fmt.Println(args)
 
-	sfrm, err := appName.SendFrom(from_account, to_address, amount, minconf, comment, commentto)
+	sfrm, err := appName.SendFrom(args)
 	if err != nil {
 		fmt.Printf("Code: %v\n", sfrm.Error.Code)
 		fmt.Printf("Message: %v\n\n", sfrm.Error.Message)

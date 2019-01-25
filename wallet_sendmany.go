@@ -18,7 +18,6 @@ import (
 	//"fmt"
 	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 type SendMany struct {
@@ -27,10 +26,18 @@ type SendMany struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) SendMany(frmact string, amounts string, minconf int, comment string, subtractfeefromamount string) (SendMany, error) {
+func (appName AppType) SendMany(params APIParams) (SendMany, error) {
+	if len(params) > 2 {
+		if params[2] == nil {
+			params[2] = 1
+		}
+	}
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	query := APIQuery {
 		Method:	`sendmany`,
-		Params:	`["`+frmact+`", `+amounts+`, `+strconv.Itoa(minconf)+`, "`+comment+`", `+subtractfeefromamount+`]`,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
