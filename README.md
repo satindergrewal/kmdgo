@@ -213,8 +213,8 @@ RPC Port: 27486
 - [ ]	pricesstatus fundingtxid bettoken bettxid
 
 #### Rawtransactions
-- [ ]	createrawtransaction [{"txid":"id","vout":n},...] {"address":amount,...} ( locktime ) ( expiryheight )
-- [ ]	decoderawtransaction "hexstring"
+- [x]	createrawtransaction [{"txid":"id","vout":n},...] {"address":amount,...} ( locktime ) ( expiryheight )
+- [x]	decoderawtransaction "hexstring"
 - [ ]	decodescript "hex"
 - [ ]	fundrawtransaction "hexstring"
 - [ ]	getrawtransaction "txid" ( verbose )
