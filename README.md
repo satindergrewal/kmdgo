@@ -1,5 +1,9 @@
 # kmdgo
 
+I created this Go package as part of my learning process of Go language. This as of this stage is working to for the basic things required, like just using the "methods" with "parameters" and it will give you the expected result in Go's native data set, structs, which you can use further to code your application. Would really appreciate if any other experienced Go language developers may push any improvements of fixes required for this package.
+
+As of this stage, this package is compatible with **Komodo and all of it's Assetchains**.
+
 
 To use this package do
 
