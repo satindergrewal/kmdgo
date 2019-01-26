@@ -24,6 +24,8 @@ import (
     "github.com/satindergrewal/kmdgo/kmdutil"
 )
 
+const KMDGO_VERSION = `0.1.0`
+
 type AppType string
 
 type APIParams []interface{}
