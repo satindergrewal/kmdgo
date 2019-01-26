@@ -20,50 +20,35 @@ import (
 	"errors"
 )
 
-type ZGetTotalBalance struct {
-	Result struct {
-		Transparent float64 `json:"transparent"`
-		Interest    float64 `json:"interest"`
-		Private     float64 `json:"private"`
-		Total       float64 `json:"total"`
-	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+type GetLocalSolps struct {
+	Result int `json:"result"`
+	Error Error `json:"error"`
+	ID    string      `json:"id"`
 }
 
-func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, error) {
-	if params[0] == nil {
-		params[0] = 1
-	}
-	if params[1] == nil {
-		params[1] = false
-	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
-
+func (appName AppType) GetLocalSolps() (GetLocalSolps, error) {
 	query := APIQuery {
-		Method:	`z_gettotalbalance`,
-		Params:	string(params_json),
+		Method:	`getlocalsolps`,
+		Params:	`[]`,
 	}
 	//fmt.Println(query)
 
-	var z_gettotalbalance ZGetTotalBalance
+	var getlocalsolps GetLocalSolps
 
-	z_gettotalbalanceJson := appName.APICall(query)
-	//fmt.Println(z_gettotalbalanceJson)
+	getlocalsolpsJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &result)
+	json.Unmarshal([]byte(getlocalsolpsJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-		return z_gettotalbalance, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getlocalsolpsJson), &getlocalsolps)
+		return getlocalsolps, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-	return z_gettotalbalance, nil
+	json.Unmarshal([]byte(getlocalsolpsJson), &getlocalsolps)
+	return getlocalsolps, nil
 }

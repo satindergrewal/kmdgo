@@ -165,9 +165,9 @@ RPC Port: 27486
 #### Mining
 - [x]	getblocksubsidy height
 - [x]	getblocktemplate ( "jsonrequestobject" )
-- [ ]	getlocalsolps
-- [ ]	getmininginfo
-- [ ]	getnetworkhashps ( blocks height )
+- [x]	getlocalsolps
+- [x]	getmininginfo
+- [x]	getnetworkhashps ( blocks height )
 - [ ]	getnetworksolps ( blocks height )
 - [ ]	prioritisetransaction <txid> <priority delta> <fee delta>
 - [ ]	submitblock "hexdata" ( "jsonparametersobject" )

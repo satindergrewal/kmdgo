@@ -20,50 +20,50 @@ import (
 	"errors"
 )
 
-type ZGetTotalBalance struct {
+type GetMiningInfo struct {
 	Result struct {
-		Transparent float64 `json:"transparent"`
-		Interest    float64 `json:"interest"`
-		Private     float64 `json:"private"`
-		Total       float64 `json:"total"`
+		Blocks           int     `json:"blocks"`
+		Currentblocksize int     `json:"currentblocksize"`
+		Currentblocktx   int     `json:"currentblocktx"`
+		Difficulty       float64 `json:"difficulty"`
+		Errors           string  `json:"errors"`
+		Genproclimit     int     `json:"genproclimit"`
+		Localsolps       int     `json:"localsolps"`
+		Networksolps     int     `json:"networksolps"`
+		Networkhashps    int     `json:"networkhashps"`
+		Pooledtx         int     `json:"pooledtx"`
+		Testnet          bool    `json:"testnet"`
+		Chain            string  `json:"chain"`
+		Generate         bool    `json:"generate"`
+		Numthreads       int     `json:"numthreads"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error `json:"error"`
+	ID    string      `json:"id"`
 }
 
-func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, error) {
-	if params[0] == nil {
-		params[0] = 1
-	}
-	if params[1] == nil {
-		params[1] = false
-	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
-
+func (appName AppType) GetMiningInfo() (GetMiningInfo, error) {
 	query := APIQuery {
-		Method:	`z_gettotalbalance`,
-		Params:	string(params_json),
+		Method:	`getmininginfo`,
+		Params:	`[]`,
 	}
 	//fmt.Println(query)
 
-	var z_gettotalbalance ZGetTotalBalance
+	var getmininginfo GetMiningInfo
 
-	z_gettotalbalanceJson := appName.APICall(query)
-	//fmt.Println(z_gettotalbalanceJson)
+	getmininginfoJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &result)
+	json.Unmarshal([]byte(getmininginfoJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-		return z_gettotalbalance, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getmininginfoJson), &getmininginfo)
+		return getmininginfo, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-	return z_gettotalbalance, nil
+	json.Unmarshal([]byte(getmininginfoJson), &getmininginfo)
+	return getmininginfo, nil
 }

@@ -15,55 +15,55 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
 )
 
-type ZGetTotalBalance struct {
-	Result struct {
-		Transparent float64 `json:"transparent"`
-		Interest    float64 `json:"interest"`
-		Private     float64 `json:"private"`
-		Total       float64 `json:"total"`
-	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+type GetNetworkHashps struct {
+	Result int `json:"result"`
+	Error Error `json:"error"`
+	ID    string      `json:"id"`
 }
 
-func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, error) {
-	if params[0] == nil {
-		params[0] = 1
+func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, error) {
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = 120
+		}
 	}
-	if params[1] == nil {
-		params[1] = false
+	
+	if len(params) == 2 {
+		if params[1] == nil {
+			params[1] = -1
+		}
 	}
+	
 	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	fmt.Println(string(params_json))
 
 	query := APIQuery {
-		Method:	`z_gettotalbalance`,
+		Method:	`getnetworkhashps`,
 		Params:	string(params_json),
 	}
-	//fmt.Println(query)
+	fmt.Println(query)
 
-	var z_gettotalbalance ZGetTotalBalance
+	var getnetworkhashps GetNetworkHashps
 
-	z_gettotalbalanceJson := appName.APICall(query)
-	//fmt.Println(z_gettotalbalanceJson)
+	getnetworkhashpsJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &result)
+	json.Unmarshal([]byte(getnetworkhashpsJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-		return z_gettotalbalance, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
+		return getnetworkhashps, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(z_gettotalbalanceJson), &z_gettotalbalance)
-	return z_gettotalbalance, nil
+	json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
+	return getnetworkhashps, nil
 }
