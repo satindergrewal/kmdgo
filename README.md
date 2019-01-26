@@ -5,8 +5,8 @@ I created this Go package as part of my learning process of Go language. This as
 As of this stage, this package is compatible with **Komodo and all of it's Assetchains**.
 
 # Documentation and Examples
-Godoc link: https://godoc.org/github.com/satindergrewal/kmdgo/
-Examples: Each API call has it's own example file created under [examples](/examples) directory.
+ - Godoc link: https://godoc.org/github.com/satindergrewal/kmdgo/
+ - Examples: Each API call has it's own example file created under [examples](/examples) directory.
 
 
 To use this package do
