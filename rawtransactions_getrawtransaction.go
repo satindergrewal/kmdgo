@@ -15,7 +15,7 @@
 package kmdgo
 
 import (
-	"fmt"
+	//"fmt"
 	"encoding/json"
 	"errors"
 )
@@ -85,7 +85,7 @@ func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, e
 		Method:	`getrawtransaction`,
 		Params:	string(params_json),
 	}
-	fmt.Println(query)
+	//fmt.Println(query)
 
 	var getrawtransaction GetRawTransaction
 
@@ -123,7 +123,7 @@ func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransa
 		Method:	`getrawtransaction`,
 		Params:	string(params_json),
 	}
-	fmt.Println(query)
+	//fmt.Println(query)
 
 	var getrawtransaction GetRawTransactionDetailed
 

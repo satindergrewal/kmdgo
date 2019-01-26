@@ -218,8 +218,8 @@ RPC Port: 27486
 - [x]	decodescript "hex"
 - [x]	fundrawtransaction "hexstring"
 - [x]	getrawtransaction "txid" ( verbose )
-- [ ]	sendrawtransaction "hexstring" ( allowhighfees )
-- [ ]	signrawtransaction "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
+- [x]	sendrawtransaction "hexstring" ( allowhighfees )
+- [x]	signrawtransaction "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
 
 #### Rewards
 - [ ]	rewardsaddfunding name fundingtxid amount
