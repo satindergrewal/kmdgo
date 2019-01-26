@@ -20,13 +20,13 @@ import (
 	"errors"
 )
 
-type GetNetworkHashps struct {
+type GetNetworkSolps struct {
 	Result int `json:"result"`
 	Error Error `json:"error"`
 	ID    string      `json:"id"`
 }
 
-func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, error) {
+func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
 			params[0] = 120
@@ -43,27 +43,27 @@ func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, err
 	//fmt.Println(string(params_json))
 
 	query := APIQuery {
-		Method:	`getnetworkhashps`,
+		Method:	`getnetworksolps`,
 		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
-	var getnetworkhashps GetNetworkHashps
+	var getnetworksolps GetNetworkSolps
 
-	getnetworkhashpsJson := appName.APICall(query)
+	getnetworksolpsJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &result)
+	json.Unmarshal([]byte(getnetworksolpsJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
-		return getnetworkhashps, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnetworksolpsJson), &getnetworksolps)
+		return getnetworksolps, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
-	return getnetworkhashps, nil
+	json.Unmarshal([]byte(getnetworksolpsJson), &getnetworksolps)
+	return getnetworksolps, nil
 }

@@ -168,9 +168,9 @@ RPC Port: 27486
 - [x]	getlocalsolps
 - [x]	getmininginfo
 - [x]	getnetworkhashps ( blocks height )
-- [ ]	getnetworksolps ( blocks height )
-- [ ]	prioritisetransaction <txid> <priority delta> <fee delta>
-- [ ]	submitblock "hexdata" ( "jsonparametersobject" )
+- [x]	getnetworksolps ( blocks height )
+- [x]	prioritisetransaction <txid> <priority delta> <fee delta>
+- [x]	submitblock "hexdata" ( "jsonparametersobject" )
 
 #### Network
 - [x]	addnode "node" "add|remove|onetry"

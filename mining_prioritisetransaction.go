@@ -20,50 +20,38 @@ import (
 	"errors"
 )
 
-type GetNetworkHashps struct {
-	Result int `json:"result"`
+type PrioritiseTransaction struct {
+	Result bool `json:"result"`
 	Error Error `json:"error"`
 	ID    string      `json:"id"`
 }
 
-func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, error) {
-	if len(params) >= 1 {
-		if params[0] == nil {
-			params[0] = 120
-		}
-	}
-	
-	if len(params) == 2 {
-		if params[1] == nil {
-			params[1] = -1
-		}
-	}
-	
+func (appName AppType) PrioritiseTransaction(params APIParams) (PrioritiseTransaction, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
 	query := APIQuery {
-		Method:	`getnetworkhashps`,
+		Method:	`prioritisetransaction`,
 		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
-	var getnetworkhashps GetNetworkHashps
+	var prioritisetransaction PrioritiseTransaction
 
-	getnetworkhashpsJson := appName.APICall(query)
+	prioritisetransactionJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &result)
+	json.Unmarshal([]byte(prioritisetransactionJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
-		return getnetworkhashps, errors.New(string(answer_error))
+		json.Unmarshal([]byte(prioritisetransactionJson), &prioritisetransaction)
+		return prioritisetransaction, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
-	return getnetworkhashps, nil
+	json.Unmarshal([]byte(prioritisetransactionJson), &prioritisetransaction)
+	return prioritisetransaction, nil
 }
