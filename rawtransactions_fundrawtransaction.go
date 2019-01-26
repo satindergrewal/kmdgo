@@ -20,42 +20,42 @@ import (
 	"errors"
 )
 
-type DecodeScript struct {
+type FundRawTransaction struct {
 	Result struct {
-		Asm  string `json:"asm"`
-		Type string `json:"type"`
-		P2Sh string `json:"p2sh"`
+		Hex       string  `json:"hex"`
+		Changepos int     `json:"changepos"`
+		Fee       float64 `json:"fee"`
 	} `json:"result"`
 	Error Error `json:"error"`
 	ID    string      `json:"id"`
 }
 
-func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
+func (appName AppType) FundRawTransaction(params APIParams) (FundRawTransaction, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
 	query := APIQuery {
-		Method:	`decodescript`,
+		Method:	`fundrawtransaction`,
 		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
-	var decodescript DecodeScript
+	var fundrawtransaction FundRawTransaction
 
-	decodescriptJson := appName.APICall(query)
+	fundrawtransactionJson := appName.APICall(query)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(decodescriptJson), &result)
+	json.Unmarshal([]byte(fundrawtransactionJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(decodescriptJson), &decodescript)
-		return decodescript, errors.New(string(answer_error))
+		json.Unmarshal([]byte(fundrawtransactionJson), &fundrawtransaction)
+		return fundrawtransaction, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(decodescriptJson), &decodescript)
-	return decodescript, nil
+	json.Unmarshal([]byte(fundrawtransactionJson), &fundrawtransaction)
+	return fundrawtransaction, nil
 }

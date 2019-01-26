@@ -12,50 +12,39 @@
  * Removal or modification of this copyright notice is prohibited.            *
  *                                                                            *
  ******************************************************************************/
-package kmdgo
+package main
 
 import (
-	//"fmt"
-	"encoding/json"
-	"errors"
+	"fmt"
+	"log"
+	"github.com/satindergrewal/kmdgo"
 )
 
-type DecodeScript struct {
-	Result struct {
-		Asm  string `json:"asm"`
-		Type string `json:"type"`
-		P2Sh string `json:"p2sh"`
-	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
-}
+func main() {
+	var appName kmdgo.AppType
+	appName = `komodo`
 
-func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	var fdtx kmdgo.FundRawTransaction
 
-	query := APIQuery {
-		Method:	`decodescript`,
-		Params:	string(params_json),
-	}
-	//fmt.Println(query)
+	args := make(kmdgo.APIParams, 1)
+	args[0] = `0400008085202f8901fdd6474f4a070e1b7c271f80fe79557f8c84f8eea4271fb66ee1666c2945bad70000000000ffffffff0240420f00000000001976a91478d98c7ad3345e56fbacc49710723b47dc119e8a88ac80841e00000000001976a914b87ba7e8e320fa7eb60f154909e94df1d22af40888ac000000001e0000000000000000000000000000`
+	fmt.Println(args)
 
-	var decodescript DecodeScript
 
-	decodescriptJson := appName.APICall(query)
-
-	var result APIResult
-
-	json.Unmarshal([]byte(decodescriptJson), &result)
-
-	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
-		if err != nil {
-		}
-		json.Unmarshal([]byte(decodescriptJson), &decodescript)
-		return decodescript, errors.New(string(answer_error))
+	fdtx, err := appName.FundRawTransaction(args)
+	if err != nil {
+		fmt.Printf("Code: %v\n", fdtx.Error.Code)
+		fmt.Printf("Message: %v\n\n", fdtx.Error.Message)
+		log.Fatalln("Err happened", err)
 	}
 
-	json.Unmarshal([]byte(decodescriptJson), &decodescript)
-	return decodescript, nil
+	fmt.Println("fdtx value", fdtx)
+	fmt.Println("-------")
+	fmt.Println(fdtx.Result)
+
+	fmt.Println("-------")
+
+	fmt.Println("Hex: ", fdtx.Result.Hex)
+	fmt.Println("Changepos: ", fdtx.Result.Changepos)
+	fmt.Println("Fee: ", fdtx.Result.Fee)
 }
