@@ -9,7 +9,7 @@ As of this stage, this package is compatible with **Komodo and all of it's Asset
  - Examples: Each API call has it's own example file created under [examples](/examples) directory.
 
 
-#### Quick Example
+### Quick Example
 To use this package do
 
 ```shell
