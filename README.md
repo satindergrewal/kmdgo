@@ -215,7 +215,7 @@ RPC Port: 27486
 #### Rawtransactions
 - [x]	createrawtransaction [{"txid":"id","vout":n},...] {"address":amount,...} ( locktime ) ( expiryheight )
 - [x]	decoderawtransaction "hexstring"
-- [ ]	decodescript "hex"
+- [x]	decodescript "hex"
 - [ ]	fundrawtransaction "hexstring"
 - [ ]	getrawtransaction "txid" ( verbose )
 - [ ]	sendrawtransaction "hexstring" ( allowhighfees )
