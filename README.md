@@ -140,10 +140,10 @@ RPC Port: 27486
 - [ ]	z_validatepaymentdisclosure "paymentdisclosure"
 
 #### Faucet
-- [ ]	faucetaddress [pubkey]
-- [ ]	faucetfund amount
-- [ ]	faucetget
-- [ ]	faucetinfo
+- [x]	faucetaddress [pubkey]
+- [x]	faucetfund amount
+- [x]	faucetget
+- [x]	faucetinfo
 
 #### Gateways
 - [ ]	gatewaysaddress [pubkey]
