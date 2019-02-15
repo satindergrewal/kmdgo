@@ -117,22 +117,27 @@ type RGGameInfo struct {
 }
 
 func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
-	var params_json string
-
-	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
-	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		fmt.Println(params_json)
+		if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `gameinfo`
+		}
 	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = `17`
+		}
+	}
+	
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
 
 	query := APIQuery {
 		Method:	`cclib`,
-		Params:	params_json,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
+
 
 	var gameinfo RGGameInfo
 
@@ -175,22 +180,27 @@ type RGRegister struct {
 }
 
 func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
-	var params_json string
-
-	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
-	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		fmt.Println(params_json)
+		if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `register`
+		}
 	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = `17`
+		}
+	}
+	
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
 
 	query := APIQuery {
 		Method:	`cclib`,
-		Params:	params_json,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
+
 
 	var reg RGRegister
 
