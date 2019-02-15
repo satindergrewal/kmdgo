@@ -28,7 +28,7 @@ func main() {
 	args := make(kmdgo.APIParams, 3)
 	args[0] = `gameinfo`
 	args[1] = `17`
-	args[2] = `[%22`+`2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812`+`%22]`
+	args[2] = `["2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812"]`
 	fmt.Println(args)
 
 	rgifo, err := appName.RGGameInfo(args)
