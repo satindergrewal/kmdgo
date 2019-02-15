@@ -161,7 +161,7 @@ RPC Port: 27486
 - [ ]	cclib highlander [evalcode] "[gametxid]"
 - [x]	cclib playerinfo [evalcode] "[playertxid]"
 - [x]	cclib players [evalcode]
-- [ ]	cclib games [evalcode]
+- [x]	cclib games [evalcode]
 - [x]	cclib setname [evalcode] "[pname]"
 
 #### Gateways

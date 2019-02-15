@@ -549,7 +549,9 @@ type RGGames struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) RGGames(params APIParams) (RGGames, error) {
+func (appName AppType) RGGames() (RGGames, error) {
+	params := make(APIParams, 2)
+	
 	if len(params) >= 1 {
 		if params[0] == nil {
 			params[0] = `games`
