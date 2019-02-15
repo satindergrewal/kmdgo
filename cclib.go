@@ -66,3 +66,55 @@ func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 	json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
 	return cclibinfo, nil
 }
+
+
+
+type CCLibAddress struct {
+	Result struct {
+		Result               string  `json:"result"`
+		CClibCCAddress       string  `json:"CClibCCAddress"`
+		CCbalance            float64 `json:"CCbalance"`
+		CClibNormalAddress   string  `json:"CClibNormalAddress"`
+		CClibCCTokensAddress string  `json:"CClibCCTokensAddress"`
+		MyAddress            string  `json:"myAddress"`
+		MyCCAddressCClib     string  `json:"myCCAddress(CClib)"`
+		MyCCaddress          string  `json:"myCCaddress"`
+		MyCCbalance          float64 `json:"myCCbalance"`
+		Myaddress            string  `json:"myaddress"`
+		Mybalance            float64 `json:"mybalance"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
+	
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	`cclibaddress`,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+	var cclibinfo CCLibAddress
+
+	cclibinfoJson := appName.APICall(query)
+	//fmt.Println(cclibinfoJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(cclibinfoJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
+		return cclibinfo, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
+	return cclibinfo, nil
+}

@@ -62,7 +62,7 @@ RPC Port: 27486
 #### CClib
 - [ ]	cclib method [evalcode] [JSON params]
 - [ ]	cclibaddress [evalcode] [pubkey]
-- [ ]	cclibinfo
+- [x]	cclibinfo
 
 #### FSM
 - [ ]	FSMaddress [pubkey]

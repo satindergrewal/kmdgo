@@ -196,7 +196,7 @@ type RGRegister struct {
 }
 
 func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
-		if len(params) >= 1 {
+	if len(params) >= 1 {
 		if params[0] == nil {
 			params[0] = `register`
 		}
