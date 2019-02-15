@@ -59,6 +59,11 @@ RPC Port: 27486
 - [x]	AppRPCInfo - Provides RPC username, password and it's port by reading it's config file from data directory.
 
 
+#### CClib
+- [ ]	cclib method [evalcode] [JSON params]
+- [ ]	cclibaddress [evalcode] [pubkey]
+- [ ]	cclibinfo
+
 #### FSM
 - [ ]	FSMaddress [pubkey]
 - [ ]	FSMcreate name states
