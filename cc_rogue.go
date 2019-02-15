@@ -300,6 +300,58 @@ func (appName AppType) RGPending() (RGPending, error) {
 
 
 
+type RGBailout struct {
+	Result struct {
+		Name        string `json:"name"`
+		Method      string `json:"method"`
+		Myrogueaddr string `json:"myrogueaddr"`
+		Gametxid    string `json:"gametxid"`
+		Hex         string `json:"hex"`
+		Txid        string `json:"txid"`
+		Result      string `json:"result"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGBailout() (RGBailout, error) {
+	params := make(APIParams, 2)
+	params[0] = `bailout`
+	params[1] = ROGUE_EVALCODE
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	CCLIB_METHOD,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+
+	var bail RGBailout
+
+	bailJson := appName.APICall(query)
+	//fmt.Println(bailJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(bailJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(bailJson), &bail)
+		return bail, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(bailJson), &bail)
+	return bail, nil
+}
+
+
+
 type RGPlayers struct {
 	Result struct {
 		Name          string   `json:"name"`

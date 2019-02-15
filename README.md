@@ -157,7 +157,7 @@ RPC Port: 27486
 - [x]	cclib pending [evalcode]
 - [x]	cclib register [evalcode] "[gametxid, [playertxid]]"
 - [ ]	cclib keystrokes [evalcode] "[gametxid, keystrokes]"
-- [ ]	cclib bailout [evalcode] "[gametxid]"
+- [x]	cclib bailout [evalcode] "[gametxid]"
 - [ ]	cclib highlander [evalcode] "[gametxid]"
 - [ ]	cclib playerinfo [evalcode] "[playertxid]"
 - [x]	cclib players [evalcode]
