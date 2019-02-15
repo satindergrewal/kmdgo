@@ -515,7 +515,7 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 
 	var pinfo RGPlayerInfo
 
-	pinfoJson := appinfo.APICall(query)
+	pinfoJson := appName.APICall(query)
 	//fmt.Println(pinfoJson)
 
 	var result APIResult
@@ -573,7 +573,7 @@ func (appName AppType) RGGames(params APIParams) (RGGames, error) {
 
 	var gms RGGames
 
-	gmsJson := apgms.APICall(query)
+	gmsJson := appName.APICall(query)
 	//fmt.Println(gmsJson)
 
 	var result APIResult
