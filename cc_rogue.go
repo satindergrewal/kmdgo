@@ -66,17 +66,6 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	var params_json string
-
-	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
-	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		fmt.Println(params_json)
-	}
-
 	query := APIQuery {
 		Method:	`cclib`,
 		Params:	params_json,
