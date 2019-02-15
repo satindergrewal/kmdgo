@@ -52,9 +52,13 @@ type RGNewGame struct {
 // newgame: Crypto-Conditions (CC) specific method. You can see all available methods via cclib with following command
 //		./komodo-cli -ac_name=ROGUE cclibinfo
 // 17: Evalcode for this CC method
+//
 // Array value 3: value of `maxplayers`. The maximum players that can participate in this game.
+//
 // Array value 10: value of `buyin`. Each new player participating in this game need to put 10 ROGUE coins to participate.
+//
 // The winner will be the player who will be last standing, i.e. not killed, while others are killed.
+//
 // And this winner takes all the buyin total of 3 players, which is equals to 30 ROGUE, also the GOLD converted to ROGUE from all these players.
 func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 
