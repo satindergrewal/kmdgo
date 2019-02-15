@@ -101,6 +101,11 @@ type RGGameInfo struct {
 		Gametxid   string  `json:"gametxid"`
 		Result     string  `json:"result"`
 		Gameheight int     `json:"gameheight"`
+		Height     int     `json:"height"`
+		Start      int     `json:"start"`
+		Starthash  string  `json:"starthash"`
+		Seed       int64   `json:"seed"`
+		Run        string  `json:"run"`
 		Alive      int     `json:"alive"`
 		Numplayers int     `json:"numplayers"`
 		Maxplayers int     `json:"maxplayers"`

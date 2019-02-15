@@ -56,7 +56,6 @@ func main() {
 	fmt.Println("Numplayers: ", rgifo.Result.Numplayers)
 	fmt.Println("Maxplayers: ", rgifo.Result.Maxplayers)
 	fmt.Println("Buyin: ", rgifo.Result.Buyin)
-	fmt.Println("Players: ", rgifo.Result.Players)
 
 	for i, v := range rgifo.Result.Players {
 		fmt.Println(i)
