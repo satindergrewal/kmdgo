@@ -45,22 +45,22 @@ func main() {
 	fmt.Println("Name: ", rgpfo.Result.Name)
 	fmt.Println("Method: ", rgpfo.Result.Method)
 	fmt.Println("Result: ", rgpfo.Result.Result)
-	fmt.Println("Player->Playertxid: ", rgpfo.Result.Playertxid)
-	fmt.Println("Player->Tokenid: ", rgpfo.Result.Tokenid)
-	fmt.Println("Player->Data: ", rgpfo.Result.Data)
+	fmt.Println("Player->Playertxid: ", rgpfo.Result.Player.Playertxid)
+	fmt.Println("Player->Tokenid: ", rgpfo.Result.Player.Tokenid)
+	fmt.Println("Player->Data: ", rgpfo.Result.Player.Data)
 
-	for pi, pv := range v.Pack {
+	for pi, pv := range rgpfo.Result.Player.Pack {
 		fmt.Println("=> Player -> Pack: ", pv)
 	}
 	
-	fmt.Println("Player -> Packsize: ", rgpfo.Result.Packsize)
-	fmt.Println("Player -> Hitpoints: ", rgpfo.Result.Hitpoints)
-	fmt.Println("Player -> Strength: ", rgpfo.Result.Strength)
-	fmt.Println("Player -> Level: ", rgpfo.Result.Level)
-	fmt.Println("Player -> Experience: ", rgpfo.Result.Experience)
-	fmt.Println("Player -> Dungeonlevel: ", rgpfo.Result.Dungeonlevel)
-	fmt.Println("Player -> Chain: ", rgpfo.Result.Chain)
-	fmt.Println("Player -> Pname: ", rgpfo.Result.Pname)
+	fmt.Println("Player -> Packsize: ", rgpfo.Result.Player.Packsize)
+	fmt.Println("Player -> Hitpoints: ", rgpfo.Result.Player.Hitpoints)
+	fmt.Println("Player -> Strength: ", rgpfo.Result.Player.Strength)
+	fmt.Println("Player -> Level: ", rgpfo.Result.Player.Level)
+	fmt.Println("Player -> Experience: ", rgpfo.Result.Player.Experience)
+	fmt.Println("Player -> Dungeonlevel: ", rgpfo.Result.Player.Dungeonlevel)
+	fmt.Println("Player -> Chain: ", rgpfo.Result.Player.Chain)
+	fmt.Println("Player -> Pname: ", rgpfo.Result.Player.Pname)
 
 	
 }
