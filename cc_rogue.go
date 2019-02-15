@@ -49,7 +49,6 @@ type RGNewGame struct {
 //		Command Sub-Method: newgame
 //		evalcode used by the Crypto-Condition: 17
 //		JSON Parameters passed for this crypto-conditions as string value: "[1]"
-
 func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 	var params_json string
 
