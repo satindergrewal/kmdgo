@@ -159,7 +159,7 @@ RPC Port: 27486
 - [ ]	cclib keystrokes [evalcode] "[gametxid, keystrokes]"
 - [x]	cclib bailout [evalcode] "[gametxid]"
 - [ ]	cclib highlander [evalcode] "[gametxid]"
-- [ ]	cclib playerinfo [evalcode] "[playertxid]"
+- [x]	cclib playerinfo [evalcode] "[playertxid]"
 - [x]	cclib players [evalcode]
 - [ ]	cclib games [evalcode]
 - [x]	cclib setname [evalcode] "[pname]"

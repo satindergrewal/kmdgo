@@ -462,3 +462,131 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 	json.Unmarshal([]byte(pnameJson), &pname)
 	return pname, nil
 }
+
+
+
+
+
+type RGPlayerInfo struct {
+	Result struct {
+		Result string `json:"result"`
+		Name   string `json:"name"`
+		Method string `json:"method"`
+		Player struct {
+			Playertxid   string   `json:"playertxid"`
+			Tokenid      string   `json:"tokenid"`
+			Data         string   `json:"data"`
+			Pack         []string `json:"pack"`
+			Packsize     int      `json:"packsize"`
+			Hitpoints    int      `json:"hitpoints"`
+			Strength     int      `json:"strength"`
+			Level        int      `json:"level"`
+			Experience   int      `json:"experience"`
+			Dungeonlevel int      `json:"dungeonlevel"`
+			Chain        string   `json:"chain"`
+			Pname        string   `json:"pname"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `playerinfo`
+		}
+	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = ROGUE_EVALCODE
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	CCLIB_METHOD,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+	var pinfo RGPlayerInfo
+
+	pinfoJson := appinfo.APICall(query)
+	//fmt.Println(pinfoJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(pinfoJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(pinfoJson), &pinfo)
+		return pinfo, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(pinfoJson), &pinfo)
+	return pinfo, nil
+}
+
+
+
+
+type RGGames struct {
+	Result struct {
+		Name      string   `json:"name"`
+		Method    string   `json:"method"`
+		Pastgames []string `json:"pastgames"`
+		Games     []string `json:"games"`
+		Numgames  int      `json:"numgames"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGGames(params APIParams) (RGGames, error) {
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `games`
+		}
+	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = ROGUE_EVALCODE
+		}
+	}
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	CCLIB_METHOD,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+	var gms RGGames
+
+	gmsJson := apgms.APICall(query)
+	//fmt.Println(gmsJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(gmsJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(gmsJson), &gms)
+		return gms, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(gmsJson), &gms)
+	return gms, nil
+}
