@@ -28,7 +28,7 @@ func main() {
 	args := make(kmdgo.APIParams, 3)
 	//args[0] = `newgame`
 	//args[1] = `17`
-	args[0] = `[1]`
+	args[3] = `[1]`
 	fmt.Println(args)
 
 	rgng, err := appName.RGNewGame(args)
