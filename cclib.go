@@ -15,7 +15,7 @@
 package kmdgo
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"errors"
 )
@@ -88,7 +88,7 @@ type CCLibAddress struct {
 }
 
 func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
-	
+
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
