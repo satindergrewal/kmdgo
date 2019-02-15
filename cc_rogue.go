@@ -47,6 +47,21 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 		fmt.Println(params_json)
 	}
 
+
+	// cclib method has these command line options:
+	// 		$ komodo-cli -ac_name=ROGUE help cclib 
+	// 		cclib method [evalcode] [JSON params]
+	// # Example command
+	// komodo-cli -ac_name=ROGUE cclib newgame 17 "[1]"
+	//
+	// # Explantion
+	// Command line Utility: komodo-cli
+	// Assetchain name parameter: -ac_name=ROGUE
+	// Command Method: cclib
+	// Command Sub-Method: newgame
+	// evalcode used by the Crypto-Condition: 17
+	// JSON Parameters passed for this crypto-conditions as string value: "[1]"
+
 	query := APIQuery {
 		Method:	`cclib`,
 		Params:	params_json,
@@ -146,8 +161,10 @@ type RGRegister struct {
 		Buyin      float64 `json:"buyin"`
 		Type       string  `json:"type"`
 		Hex        string  `json:"hex"`
-		Txid       string  `json:"txid"`
-		Result     string  `json:"result"`
+		Txid       string  `json:"txid,omitempty"`
+		Result     string  `json:"result,omitempty"`
+		Status     string  `json:"status,omitempty"`
+		Error      string  `json:"error,omitempty"`
 	} `json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
