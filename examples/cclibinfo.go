@@ -33,5 +33,23 @@ func main() {
     }
 
     fmt.Println(info)
-    fmt.Println(info.Result)   
+    fmt.Println(info.Result)
+
+    fmt.Println("Result: ", info.Result.Result)
+    fmt.Println("CClib: ", info.Result.CClib)
+
+    for i, v := range info.Result.Methods {
+        fmt.Println(i)
+        fmt.Println(v)
+
+        fmt.Println("\n")
+
+        fmt.Println("Evalcode: ", v.Evalcode)
+        fmt.Println("Funcid: ", v.Funcid)
+        fmt.Println("Name: ", v.Name)
+        fmt.Println("Method: ", v.Method)
+        fmt.Println("Help: ", v.Help)
+        fmt.Println("ParamsRequired: ", v.ParamsRequired)
+        fmt.Println("ParamsMax: ", v.ParamsMax)
+    }
 }
