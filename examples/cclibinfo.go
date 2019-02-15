@@ -39,11 +39,9 @@ func main() {
     fmt.Println("CClib: ", info.Result.CClib)
 
     for i, v := range info.Result.Methods {
+        fmt.Println("\n")
         fmt.Println(i)
         fmt.Println(v)
-
-        fmt.Println("\n")
-
         fmt.Println("Evalcode: ", v.Evalcode)
         fmt.Println("Funcid: ", v.Funcid)
         fmt.Println("Name: ", v.Name)
