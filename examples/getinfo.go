@@ -21,12 +21,20 @@ import (
 )
 
 func main() {
+    // ## METHOD 1 to define AppType
     // Define appName type from kmdgo package
-    var appName kmdgo.AppType
+    //var appName kmdgo.AppType
 
     // Define appname variable. The name value must be the matching value of it's data directory name.
     // Example Komodo's data directory is `komodo`, VerusCoin's data directory is `VRSC` and so on.
-    appName = `komodo`
+    //appName = `ROGUE`
+
+    
+    // ## METHOD 2 to define AppType
+    // Define variable of type kmdgo.AppType. You can use function NewAppType which will return the required type.
+    // The name value must be the matching value of it's data directory name.
+    // Example Komodo's data directory is `komodo`, VerusCoin's data directory is `VRSC` and so on.
+    appName := kmdgo.NewAppType(`ROGUE`)
 
     // define the variable with GetInfo struct from pacakge kmdgo
 	var info kmdgo.GetInfo

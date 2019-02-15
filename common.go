@@ -46,6 +46,10 @@ type Error struct {
     Message string `json:"message"`
 }
 
+func NewAppType(app AppType) *AppType {
+    return &app
+}
+
 func (appName AppType) APICall(q APIQuery) string {
     rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(string(appName))
 

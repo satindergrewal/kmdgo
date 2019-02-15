@@ -86,3 +86,39 @@ func (appName AppType) GetInfo() (GetInfo, error) {
     json.Unmarshal([]byte(getinfoJson), &getinfo)
     return getinfo, nil
 }
+
+
+
+type Stop struct {
+    Result string `json:"result"`
+    Error Error `json:"error"`
+    ID    string      `json:"id"`
+}
+
+
+func (appName AppType) Stop() (Stop, error) {
+    query := APIQuery {
+        Method:     "stop",
+        Params:   "[]",
+    }
+
+    var stop Stop
+
+    stopJson := appName.APICall(query)
+    
+    
+    var result APIResult
+
+    json.Unmarshal([]byte(stopJson), &result)
+    
+    if result.Result == nil {
+        answer_error, err := json.Marshal(result.Error)
+        if err != nil {
+        }
+        json.Unmarshal([]byte(stopJson), &stop)
+        return stop, errors.New(string(answer_error))
+    }
+
+    json.Unmarshal([]byte(stopJson), &stop)
+    return stop, nil
+}
