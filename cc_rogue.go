@@ -485,6 +485,7 @@ type RGPlayerInfo struct {
 			Dungeonlevel int      `json:"dungeonlevel"`
 			Chain        string   `json:"chain"`
 			Pname        string   `json:"pname"`
+		} `json:"player"`
 	} `json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
