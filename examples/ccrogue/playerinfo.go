@@ -23,49 +23,44 @@ import (
 func main() {
 	appName := kmdgo.NewAppType(`ROGUE`)
 
-	var rgblt kmdgo.RGPlayerInfo
+	var rgpfo kmdgo.RGPlayerInfo
 
 	args := make(kmdgo.APIParams, 3)
 	args[2] = `["09035cd939b1c5f38cd08ddf04c908f918eb855875cad975196988c527a439e6"]`
 	fmt.Println(args)
 
-	rgblt, err := appName.RGPlayerInfo(args)
+	rgpfo, err := appName.RGPlayerInfo(args)
 	if err != nil {
-		fmt.Printf("Code: %v\n", rgblt.Error.Code)
-		fmt.Printf("Message: %v\n\n", rgblt.Error.Message)
+		fmt.Printf("Code: %v\n", rgpfo.Error.Code)
+		fmt.Printf("Message: %v\n\n", rgpfo.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
 
-	fmt.Println("rgblt value", rgblt)
+	fmt.Println("rgpfo value", rgpfo)
 	fmt.Println("-------")
-	fmt.Println(rgblt.Result)
+	fmt.Println(rgpfo.Result)
 
 	fmt.Println("\n")
 	
-	fmt.Println("Name: ", rgblt.Result.Name)
-	fmt.Println("Method: ", rgblt.Result.Method)
-	fmt.Println("Result: ", rgblt.Result.Result)
+	fmt.Println("Name: ", rgpfo.Result.Name)
+	fmt.Println("Method: ", rgpfo.Result.Method)
+	fmt.Println("Result: ", rgpfo.Result.Result)
+	fmt.Println("Player->Playertxid: ", rgpfo.Result.Playertxid)
+	fmt.Println("Player->Tokenid: ", rgpfo.Result.Tokenid)
+	fmt.Println("Player->Data: ", rgpfo.Result.Data)
 
-	for i, v := range rgblt.Result.Player {
-		fmt.Println(i)
-		fmt.Println(v)
-
-		fmt.Println("\n")
-
-		fmt.Println("Playertxid: ", v.Playertxid)
-		fmt.Println("Tokenid: ", v.Tokenid)
-		fmt.Println("Data: ", v.Data)
-		fmt.Println("Packsize: ", v.Packsize)
-		fmt.Println("Hitpoints: ", v.Hitpoints)
-		fmt.Println("Strength: ", v.Strength)
-		fmt.Println("Level: ", v.Level)
-		fmt.Println("Experience: ", v.Experience)
-		fmt.Println("Dungeonlevel: ", v.Dungeonlevel)
-		fmt.Println("Chain: ", v.Chain)
-		fmt.Println("Pname: ", v.Pname)
-
-		for pi, pv := range v.Pack {
-			fmt.Println("Player -> Pack: ", pv)
-		}
+	for pi, pv := range v.Pack {
+		fmt.Println("=> Player -> Pack: ", pv)
 	}
+	
+	fmt.Println("Player -> Packsize: ", rgpfo.Result.Packsize)
+	fmt.Println("Player -> Hitpoints: ", rgpfo.Result.Hitpoints)
+	fmt.Println("Player -> Strength: ", rgpfo.Result.Strength)
+	fmt.Println("Player -> Level: ", rgpfo.Result.Level)
+	fmt.Println("Player -> Experience: ", rgpfo.Result.Experience)
+	fmt.Println("Player -> Dungeonlevel: ", rgpfo.Result.Dungeonlevel)
+	fmt.Println("Player -> Chain: ", rgpfo.Result.Chain)
+	fmt.Println("Player -> Pname: ", rgpfo.Result.Pname)
+
+	
 }
