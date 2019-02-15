@@ -156,7 +156,7 @@ RPC Port: 27486
 - [x]	cclib gameinfo [evalcode] "[gametxid]"
 - [x]	cclib pending [evalcode]
 - [x]	cclib register [evalcode] "[gametxid, [playertxid]]"
-- [ ]	cclib keystrokes [evalcode] "[gametxid, keystrokes]"
+- [ ]	cclib keystrokes [evalcode] "[gametxid, keystrokes]" -- This is only executed by the ROGUE dApp. Not need to run manully
 - [x]	cclib bailout [evalcode] "[gametxid]"
 - [x]	cclib highlander [evalcode] "[gametxid]"
 - [x]	cclib playerinfo [evalcode] "[playertxid]"
