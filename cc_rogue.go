@@ -68,7 +68,7 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 
 	query := APIQuery {
 		Method:	`cclib`,
-		Params:	params_json,
+		Params:	string(params_json),
 	}
 	//fmt.Println(query)
 
