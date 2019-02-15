@@ -152,17 +152,17 @@ RPC Port: 27486
 
 
 #### Rogue Game
-- [x]	cclib newgame maxplayers buyin
-- [x]	cclib gameinfo gametxid
-- [x]	cclib pending
-- [x]	cclib register gametxid [playertxid]
-- [ ]	cclib keystrokes gametxid keystrokes
-- [ ]	cclib bailout gametxid
-- [ ]	cclib highlander gametxid
-- [ ]	cclib playerinfo playertxid
-- [ ]	cclib players
-- [ ]	cclib games
-- [ ]	cclib setname pname
+- [x]	cclib newgame [evalcode] "[maxplayers, buyin]"
+- [x]	cclib gameinfo [evalcode] "[gametxid]"
+- [x]	cclib pending [evalcode]
+- [x]	cclib register [evalcode] "[gametxid, [playertxid]]"
+- [ ]	cclib keystrokes [evalcode] "[gametxid, keystrokes]"
+- [ ]	cclib bailout [evalcode] "[gametxid]"
+- [ ]	cclib highlander [evalcode] "[gametxid]"
+- [ ]	cclib playerinfo [evalcode] "[playertxid]"
+- [ ]	cclib players [evalcode]
+- [ ]	cclib games [evalcode]
+- [ ]	cclib setname [evalcode] "[pname]"
 
 #### Gateways
 - [ ]	gatewaysaddress [pubkey]
