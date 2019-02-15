@@ -160,7 +160,7 @@ RPC Port: 27486
 - [ ]	cclib bailout [evalcode] "[gametxid]"
 - [ ]	cclib highlander [evalcode] "[gametxid]"
 - [ ]	cclib playerinfo [evalcode] "[playertxid]"
-- [ ]	cclib players [evalcode]
+- [x]	cclib players [evalcode]
 - [ ]	cclib games [evalcode]
 - [ ]	cclib setname [evalcode] "[pname]"
 

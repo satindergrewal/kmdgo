@@ -50,6 +50,7 @@ type RGNewGame struct {
 // 		 ./komodo-cli -ac_name=ROGUE cclib newgame 17 \"[3,10]\" 
 // 
 // Explanation
+//
 // cclib: API call method.
 // 
 // newgame: Crypto-Conditions (CC) specific method. You can see all available methods via cclib with following command
@@ -295,4 +296,53 @@ func (appName AppType) RGPending() (RGPending, error) {
 
 	json.Unmarshal([]byte(pendingJson), &pending)
 	return pending, nil
+}
+
+
+
+type RGPlayers struct {
+	Result struct {
+		Name          string   `json:"name"`
+		Method        string   `json:"method"`
+		Playerdata    []string `json:"playerdata"`
+		Numplayerdata int      `json:"numplayerdata"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGPlayers() (RGPlayers, error) {
+	params := make(APIParams, 2)
+	params[0] = `players`
+	params[1] = ROGUE_EVALCODE
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	CCLIB_METHOD,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+
+	var players RGPlayers
+
+	playersJson := appName.APICall(query)
+	//fmt.Println(playersJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(playersJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(playersJson), &players)
+		return players, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(playersJson), &players)
+	return players, nil
 }
