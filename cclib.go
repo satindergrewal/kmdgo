@@ -98,23 +98,70 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 	}
 	//fmt.Println(query)
 
-	var cclibinfo CCLibAddress
+	var cclibaddr CCLibAddress
 
-	cclibinfoJson := appName.APICall(query)
-	//fmt.Println(cclibinfoJson)
+	cclibaddrJson := appName.APICall(query)
+	//fmt.Println(cclibaddrJson)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(cclibinfoJson), &result)
+	json.Unmarshal([]byte(cclibaddrJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
-		return cclibinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(cclibaddrJson), &cclibaddr)
+		return cclibaddr, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
+	json.Unmarshal([]byte(cclibaddrJson), &cclibaddr)
+	return cclibinfo, nil
+}
+
+
+// cclib method has these command line options:
+// 		$ komodo-cli -ac_name=ROGUE help cclib 
+// 		cclib method [evalcode] [JSON params]
+// 
+// Example command
+//		komodo-cli -ac_name=ROGUE cclib newgame 17 "[1]"
+//
+// Explantion
+//		Command line Utility: komodo-cli
+//		Assetchain name parameter: -ac_name=ROGUE
+//		Command Method: cclib
+//		Command Sub-Method: newgame
+//		evalcode used by the Crypto-Condition: 17
+//		JSON Parameters passed for this crypto-conditions as string value: "[1]"
+func (appName AppType) CCLib(params APIParams) (interface{}, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	`cclib`,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+	var cclb CCLib
+
+	cclbJson := appName.APICall(query)
+	//fmt.Println(cclbJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(cclbJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(cclbJson), &cclb)
+		return cclb, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(cclbJson), &cclb)
 	return cclibinfo, nil
 }
