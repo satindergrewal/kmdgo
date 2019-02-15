@@ -116,7 +116,7 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 	}
 
 	json.Unmarshal([]byte(cclibaddrJson), &cclibaddr)
-	return cclibinfo, nil
+	return cclibaddr, nil
 }
 
 
@@ -145,7 +145,7 @@ func (appName AppType) CCLib(params APIParams) (interface{}, error) {
 	}
 	//fmt.Println(query)
 
-	var cclb CCLib
+	//var cclb CCLib
 
 	cclbJson := appName.APICall(query)
 	//fmt.Println(cclbJson)
@@ -163,5 +163,5 @@ func (appName AppType) CCLib(params APIParams) (interface{}, error) {
 	}
 
 	json.Unmarshal([]byte(cclbJson), &cclb)
-	return cclibinfo, nil
+	return cclb, nil
 }
