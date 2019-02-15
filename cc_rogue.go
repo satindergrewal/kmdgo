@@ -193,7 +193,7 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 	}
 	
 	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	fmt.Println(string(params_json))
 
 	query := APIQuery {
 		Method:	`cclib`,
