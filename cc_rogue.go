@@ -96,21 +96,26 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 
 type RGGameInfo struct {
 	Result struct {
-		Name       string        `json:"name"`
-		Method     string        `json:"method"`
-		Gametxid   string        `json:"gametxid"`
-		Result     string        `json:"result"`
-		Gameheight int           `json:"gameheight"`
-		Height     int           `json:"height"`
-		Start      int           `json:"start"`
-		Starthash  string        `json:"starthash"`
-		Seed       int64         `json:"seed"`
-		Run        string        `json:"run"`
-		Alive      int           `json:"alive"`
-		Numplayers int           `json:"numplayers"`
-		Maxplayers int           `json:"maxplayers"`
-		Buyin      float64       `json:"buyin"`
-		Players    []interface{} `json:"players"`
+		Name       string  `json:"name"`
+		Method     string  `json:"method"`
+		Gametxid   string  `json:"gametxid"`
+		Result     string  `json:"result"`
+		Gameheight int     `json:"gameheight"`
+		Alive      int     `json:"alive"`
+		Numplayers int     `json:"numplayers"`
+		Maxplayers int     `json:"maxplayers"`
+		Buyin      float64 `json:"buyin"`
+		Players    []struct {
+			Slot       int     `json:"slot"`
+			Status     string  `json:"status"`
+			Baton      string  `json:"baton"`
+			Tokenid    string  `json:"tokenid"`
+			Batonaddr  string  `json:"batonaddr"`
+			Ismine     bool    `json:"ismine"`
+			Batonvout  int     `json:"batonvout"`
+			Batonvalue float64 `json:"batonvalue"`
+			Batonht    int     `json:"batonht"`
+		} `json:"players"`
 	} `json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`

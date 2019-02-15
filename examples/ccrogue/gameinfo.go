@@ -57,4 +57,21 @@ func main() {
 	fmt.Println("Maxplayers: ", rgifo.Result.Maxplayers)
 	fmt.Println("Buyin: ", rgifo.Result.Buyin)
 	fmt.Println("Players: ", rgifo.Result.Players)
+
+	for i, v := range rgifo.Result.Players {
+		fmt.Println(i)
+		fmt.Println(v)
+
+		fmt.Println("\n")
+
+		fmt.Println("Slot: ". v.Slot)
+		fmt.Println("Status: ". v.Status)
+		fmt.Println("Baton: ". v.Baton)
+		fmt.Println("Tokenid: ". v.Tokenid)
+		fmt.Println("Batonaddr: ". v.Batonaddr)
+		fmt.Println("Ismine: ". v.Ismine)
+		fmt.Println("Batonvout: ". v.Batonvout)
+		fmt.Println("Batonvalue: ". v.Batonvalue)
+		fmt.Println("Batonht: ". v.Batonht)
+	}
 }
