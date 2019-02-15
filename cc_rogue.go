@@ -253,7 +253,7 @@ type RGPending struct {
 }
 
 func (appName AppType) RGPending() (RGPending, error) {
-	var params APIParams
+	params := make(APIParams, 2)
 	params[0] = `pending`
 	params[1] = ROGUE_EVALCODE
 
