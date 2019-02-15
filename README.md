@@ -112,7 +112,7 @@ RPC Port: 27486
 #### Control
 - [x]	getinfo
 - [ ]	help ( "command" )
-- [ ]	stop
+- [x]	stop
 
 #### Crosschain
 - [ ]	MoMoMdata symbol kmdheight ccid
