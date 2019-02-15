@@ -50,6 +50,22 @@ type RGNewGame struct {
 //		evalcode used by the Crypto-Condition: 17
 //		JSON Parameters passed for this crypto-conditions as string value: "[1]"
 func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
+
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `newgame`
+		}
+	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = `17`
+		}
+	}
+	
+	params_json, _ := json.Marshal(params)
+	//fmt.Println(string(params_json))
+
 	var params_json string
 
 	if params[0] == "" || params[0] == nil {
