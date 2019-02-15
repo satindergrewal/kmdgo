@@ -314,10 +314,18 @@ type RGBailout struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) RGBailout() (RGBailout, error) {
-	params := make(APIParams, 2)
-	params[0] = `bailout`
-	params[1] = ROGUE_EVALCODE
+func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `bailout`
+		}
+	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = ROGUE_EVALCODE
+		}
+	}
 
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
@@ -412,10 +420,18 @@ type RGSetName struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) RGSetName() (RGSetName, error) {
-	params := make(APIParams, 2)
-	params[0] = `setname`
-	params[1] = ROGUE_EVALCODE
+func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
+	if len(params) >= 1 {
+		if params[0] == nil {
+			params[0] = `setname`
+		}
+	}
+	
+	if len(params) >= 2 {
+		if params[1] == nil {
+			params[1] = ROGUE_EVALCODE
+		}
+	}
 
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
