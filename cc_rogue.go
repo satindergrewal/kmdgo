@@ -398,3 +398,51 @@ func (appName AppType) RGPlayers() (RGPlayers, error) {
 	json.Unmarshal([]byte(playersJson), &players)
 	return players, nil
 }
+
+
+
+
+type RGSetName struct {
+	Result struct {
+		Name        string `json:"name"`
+		Method      string `json:"method"`
+		Result      string `json:"result"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGSetName() (RGSetName, error) {
+	params := make(APIParams, 2)
+	params[0] = `setname`
+	params[1] = ROGUE_EVALCODE
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery {
+		Method:	CCLIB_METHOD,
+		Params:	string(params_json),
+	}
+	//fmt.Println(query)
+
+	var pname RGSetName
+
+	pnameJson := appName.APICall(query)
+	//fmt.Println(pnameJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(pnameJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(pnameJson), &pname)
+		return pname, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(pnameJson), &pname)
+	return pname, nil
+}

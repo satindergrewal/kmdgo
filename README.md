@@ -162,7 +162,7 @@ RPC Port: 27486
 - [ ]	cclib playerinfo [evalcode] "[playertxid]"
 - [x]	cclib players [evalcode]
 - [ ]	cclib games [evalcode]
-- [ ]	cclib setname [evalcode] "[pname]"
+- [x]	cclib setname [evalcode] "[pname]"
 
 #### Gateways
 - [ ]	gatewaysaddress [pubkey]
