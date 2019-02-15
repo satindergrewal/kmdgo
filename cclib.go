@@ -39,13 +39,10 @@ type CCLibInfo struct {
 	ID		string	`json:"id"`
 }
 
-func (appName AppType) CCLibInfo(params APIParams) (CCLibInfo, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
-
+func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 	query := APIQuery {
 		Method:	`cclibinfo`,
-		Params:	string(params_json),
+		Params:	`[]`,
 	}
 	//fmt.Println(query)
 
