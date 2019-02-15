@@ -134,7 +134,7 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 //		Command Sub-Method: newgame
 //		evalcode used by the Crypto-Condition: 17
 //		JSON Parameters passed for this crypto-conditions as string value: "[1]"
-func (appName AppType) CCLib(params APIParams) (interface{}, error) {
+/*func (appName AppType) CCLib(params APIParams) (interface{}, error) {
 
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
@@ -164,4 +164,4 @@ func (appName AppType) CCLib(params APIParams) (interface{}, error) {
 
 	json.Unmarshal([]byte(cclbJson), &cclb)
 	return cclb, nil
-}
+}*/

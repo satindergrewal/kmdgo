@@ -11,7 +11,7 @@
 // Removal or modification of this copyright notice is prohibited.
 
 
-
+/*
 package main
 
 import (
@@ -23,7 +23,7 @@ import (
 func main() {
 	appName := kmdgo.NewAppType(`ROGUE`)
 
-	var ccladdr kmdgo.RGGameInfo
+	var clb kmdgo.RGGameInfo
 
 	args := make(kmdgo.APIParams, 3)
 	args[0] = `gameinfo`
@@ -31,14 +31,14 @@ func main() {
 	args[2] = `["2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812"]`
 	fmt.Println(args)
 
-	ccladdr, err := appName.CCLib(args)
+	clb, err := appName.CCLib(args, )
 	if err != nil {
-		fmt.Printf("Code: %v\n", ccladdr.Error.Code)
-		fmt.Printf("Message: %v\n\n", ccladdr.Error.Message)
+		fmt.Printf("Code: %v\n", clb.Error.Code)
+		fmt.Printf("Message: %v\n\n", clb.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
 
-	fmt.Println("ccladdr value", ccladdr)
+	fmt.Println("clb value", clb)
 	fmt.Println("-------")
-	fmt.Println(ccladdr.Result)
-}
+	fmt.Println(clb.Result)
+}*/
