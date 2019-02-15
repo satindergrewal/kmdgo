@@ -242,16 +242,11 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 
 type RGPending struct {
 	Result struct {
-		Name       string  `json:"name"`
-		Method     string  `json:"method"`
-		Maxplayers int     `json:"maxplayers"`
-		Buyin      float64 `json:"buyin"`
-		Type       string  `json:"type"`
-		Hex        string  `json:"hex"`
-		Txid       string  `json:"txid,omitempty"`
-		Result     string  `json:"result,omitempty"`
-		Status     string  `json:"status,omitempty"`
-		Error      string  `json:"error,omitempty"`
+		Result     string   `json:"result"`
+		Name       string   `json:"name"`
+		Method     string   `json:"method"`
+		Pending    []string `json:"pending"`
+		Numpending int      `json:"numpending"`
 	} `json:"result"`
 	Error	Error	`json:"error"`
 	ID		string	`json:"id"`
