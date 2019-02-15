@@ -150,6 +150,20 @@ RPC Port: 27486
 - [x]	faucetget
 - [x]	faucetinfo
 
+
+#### Rogue Game
+- [x]	cclib newgame maxplayers buyin
+- [x]	cclib gameinfo gametxid
+- [x]	cclib pending
+- [x]	cclib register gametxid [playertxid]
+- [ ]	cclib keystrokes gametxid keystrokes
+- [ ]	cclib bailout gametxid
+- [ ]	cclib highlander gametxid
+- [ ]	cclib playerinfo playertxid
+- [ ]	cclib players
+- [ ]	cclib games
+- [ ]	cclib setname pname
+
 #### Gateways
 - [ ]	gatewaysaddress [pubkey]
 - [ ]	gatewaysbind tokenid oracletxid coin tokensupply M N pubkey(s)
