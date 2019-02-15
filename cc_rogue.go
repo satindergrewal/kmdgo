@@ -53,23 +53,85 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 	}
 	//fmt.Println(query)
 
-	var faucetaddress RGNewGame
+	var newgame RGNewGame
 
-	faucetaddressJson := appName.APICall(query)
-	//fmt.Println(faucetaddressJson)
+	newgameJson := appName.APICall(query)
+	//fmt.Println(newgameJson)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(faucetaddressJson), &result)
+	json.Unmarshal([]byte(newgameJson), &result)
 
 	if result.Error != nil {
 		answer_error, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(faucetaddressJson), &faucetaddress)
-		return faucetaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(newgameJson), &newgame)
+		return newgame, errors.New(string(answer_error))
 	}
 
-	json.Unmarshal([]byte(faucetaddressJson), &faucetaddress)
-	return faucetaddress, nil
+	json.Unmarshal([]byte(newgameJson), &newgame)
+	return newgame, nil
+}
+
+
+type RGGameInfo struct {
+	Result struct {
+		Name       string        `json:"name"`
+		Method     string        `json:"method"`
+		Gametxid   string        `json:"gametxid"`
+		Result     string        `json:"result"`
+		Gameheight int           `json:"gameheight"`
+		Height     int           `json:"height"`
+		Start      int           `json:"start"`
+		Starthash  string        `json:"starthash"`
+		Seed       int64         `json:"seed"`
+		Run        string        `json:"run"`
+		Alive      int           `json:"alive"`
+		Numplayers int           `json:"numplayers"`
+		Maxplayers int           `json:"maxplayers"`
+		Buyin      float64       `json:"buyin"`
+		Players    []interface{} `json:"players"`
+	} `json:"result"`
+	Error	Error	`json:"error"`
+	ID		string	`json:"id"`
+}
+
+func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
+	var params_json string
+
+	if params[0] == "" || params[0] == nil {
+		params_json = `[]`
+		//fmt.Println(params_json)
+	} else {
+		params_bytes, _ := json.Marshal(params)
+		params_json = string(params_bytes)
+		fmt.Println(params_json)
+	}
+
+	query := APIQuery {
+		Method:	`cclib`,
+		Params:	params_json,
+	}
+	//fmt.Println(query)
+
+	var gameinfo RGGameInfo
+
+	gameinfoJson := appName.APICall(query)
+	//fmt.Println(gameinfoJson)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(gameinfoJson), &result)
+
+	if result.Error != nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(gameinfoJson), &gameinfo)
+		return gameinfo, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(gameinfoJson), &gameinfo)
+	return gameinfo, nil
 }
