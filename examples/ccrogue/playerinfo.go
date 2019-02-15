@@ -50,7 +50,7 @@ func main() {
 	fmt.Println("Player->Data: ", rgpfo.Result.Player.Data)
 
 	for pi, pv := range rgpfo.Result.Player.Pack {
-		fmt.Println("=> Player -> Pack: ", pv)
+		fmt.Printf("%v=> Player -> Pack: %s", pi, pv)
 	}
 	
 	fmt.Println("Player -> Packsize: ", rgpfo.Result.Player.Packsize)
