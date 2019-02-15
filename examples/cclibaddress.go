@@ -45,13 +45,13 @@ func main() {
 
 	fmt.Println("Result: ", ccladdr.Result.Result)
 	fmt.Println("CClibCCAddress: ", ccladdr.Result.CClibCCAddress)
-	fmt.Println("CCbalance: ", ccladdr.Result.CCbalance)
+	fmt.Printf("CCbalance: %0.8f\n", ccladdr.Result.CCbalance)
 	fmt.Println("CClibNormalAddress: ", ccladdr.Result.CClibNormalAddress)
 	fmt.Println("CClibCCTokensAddress: ", ccladdr.Result.CClibCCTokensAddress)
 	fmt.Println("MyAddress: ", ccladdr.Result.MyAddress)
 	fmt.Println("MyCCAddressCClib: ", ccladdr.Result.MyCCAddressCClib)
 	fmt.Println("MyCCaddress: ", ccladdr.Result.MyCCaddress)
-	fmt.Println("MyCCbalance: ", ccladdr.Result.MyCCbalance)
+	fmt.Printf("MyCCbalance: %0.8f\n", ccladdr.Result.MyCCbalance)
 	fmt.Println("Myaddress: ", ccladdr.Result.Myaddress)
-	fmt.Println("Mybalance: ", ccladdr.Result.Mybalance)
+	fmt.Printf("Mybalance: %0.8f\n", ccladdr.Result.Mybalance)
 }
