@@ -50,4 +50,6 @@ func main() {
 	fmt.Println("Hex: ", rgrg.Result.Hex)
 	fmt.Println("Txid: ", rgrg.Result.Txid)
 	fmt.Println("Result: ", rgrg.Result.Result)
+	fmt.Println("Status: ", rgrg.Result.Status)
+	fmt.Println("Error: ", rgrg.Result.Error)
 }
