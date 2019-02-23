@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
@@ -21,11 +19,11 @@ import (
 )
 
 type GetBlockSubsidy struct {
-	Result	struct {
+	Result struct {
 		Miner float64 `json:"miner"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error) {
@@ -40,9 +38,9 @@ func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error
 		//fmt.Println(params_json)
 	}
 
-	query := APIQuery {
-		Method:	`getblocksubsidy`,
-		Params:	params_json,
+	query := APIQuery{
+		Method: `getblocksubsidy`,
+		Params: params_json,
 	}
 	//fmt.Println(query)
 
@@ -65,9 +63,6 @@ func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error
 	json.Unmarshal([]byte(getblocksubsidyJson), &getblocksubsidy)
 	return getblocksubsidy, nil
 }
-
-
-
 
 type GetBlockTemplate struct {
 	Result struct {
@@ -101,8 +96,8 @@ type GetBlockTemplate struct {
 		Bits       string   `json:"bits"`
 		Height     int      `json:"height"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetBlockTemplate(params APIParams) (GetBlockTemplate, error) {
@@ -117,9 +112,9 @@ func (appName AppType) GetBlockTemplate(params APIParams) (GetBlockTemplate, err
 		//fmt.Println(params_json)
 	}
 
-	query := APIQuery {
-		Method:	`getblocktemplate`,
-		Params:	params_json,
+	query := APIQuery{
+		Method: `getblocktemplate`,
+		Params: params_json,
 	}
 	//fmt.Println(query)
 
@@ -143,19 +138,16 @@ func (appName AppType) GetBlockTemplate(params APIParams) (GetBlockTemplate, err
 	return getblocktemplate, nil
 }
 
-
-
-
 type GetLocalSolps struct {
-	Result int `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Result int    `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetLocalSolps() (GetLocalSolps, error) {
-	query := APIQuery {
-		Method:	`getlocalsolps`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getlocalsolps`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -179,9 +171,6 @@ func (appName AppType) GetLocalSolps() (GetLocalSolps, error) {
 	return getlocalsolps, nil
 }
 
-
-
-
 type GetMiningInfo struct {
 	Result struct {
 		Blocks           int     `json:"blocks"`
@@ -199,14 +188,14 @@ type GetMiningInfo struct {
 		Generate         bool    `json:"generate"`
 		Numthreads       int     `json:"numthreads"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetMiningInfo() (GetMiningInfo, error) {
-	query := APIQuery {
-		Method:	`getmininginfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getmininginfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -230,12 +219,10 @@ func (appName AppType) GetMiningInfo() (GetMiningInfo, error) {
 	return getmininginfo, nil
 }
 
-
-
 type GetNetworkHashps struct {
-	Result int `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Result int    `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, error) {
@@ -244,19 +231,19 @@ func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, err
 			params[0] = 120
 		}
 	}
-	
+
 	if len(params) == 2 {
 		if params[1] == nil {
 			params[1] = -1
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getnetworkhashps`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getnetworkhashps`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -280,12 +267,10 @@ func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, err
 	return getnetworkhashps, nil
 }
 
-
-
 type GetNetworkSolps struct {
-	Result int `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Result int    `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error) {
@@ -294,19 +279,19 @@ func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error
 			params[0] = 120
 		}
 	}
-	
+
 	if len(params) == 2 {
 		if params[1] == nil {
 			params[1] = -1
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getnetworksolps`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getnetworksolps`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -330,21 +315,19 @@ func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error
 	return getnetworksolps, nil
 }
 
-
-
 type PrioritiseTransaction struct {
-	Result bool `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Result bool   `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) PrioritiseTransaction(params APIParams) (PrioritiseTransaction, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`prioritisetransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `prioritisetransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -368,22 +351,20 @@ func (appName AppType) PrioritiseTransaction(params APIParams) (PrioritiseTransa
 	return prioritisetransaction, nil
 }
 
-
-
 type SubmitBlock struct {
-	Result bool `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Result bool   `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SubmitBlock(params APIParams) (SubmitBlock, error) {
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`submitblock`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `submitblock`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -406,5 +387,3 @@ func (appName AppType) SubmitBlock(params APIParams) (SubmitBlock, error) {
 	json.Unmarshal([]byte(submitblockJson), &submitblock)
 	return submitblock, nil
 }
-
-

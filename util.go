@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
@@ -22,7 +20,7 @@ import (
 )
 
 type ValidateAddress struct {
-	Result	struct {
+	Result struct {
 		Isvalid      bool   `json:"isvalid"`
 		Address      string `json:"address"`
 		ScriptPubKey string `json:"scriptPubKey"`
@@ -33,16 +31,15 @@ type ValidateAddress struct {
 		Pubkey       string `json:"pubkey"`
 		Iscompressed bool   `json:"iscompressed"`
 		Account      string `json:"account"`
-		}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
-	query := APIQuery {
-		Method:	`validateaddress`,
-		Params:	`["`+taddr+`"]`,
+	query := APIQuery{
+		Method: `validateaddress`,
+		Params: `["` + taddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -66,23 +63,19 @@ func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
 	return validateaddress, nil
 }
 
-
-
-
 type VerifyMessage struct {
-	Result	bool	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result bool   `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) VerifyMessage(params APIParams) (VerifyMessage, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`verifymessage`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `verifymessage`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -106,27 +99,23 @@ func (appName AppType) VerifyMessage(params APIParams) (VerifyMessage, error) {
 	return verifymessage, nil
 }
 
-
-
-
 type ZValidateAddress struct {
-	Result	struct {
+	Result struct {
 		Isvalid                    bool   `json:"isvalid"`
 		Address                    string `json:"address"`
 		Type                       string `json:"type"`
 		Diversifier                string `json:"diversifier"`
 		Diversifiedtransmissionkey string `json:"diversifiedtransmissionkey"`
 		Ismine                     bool   `json:"ismine"`
-		}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) {
-	query := APIQuery {
-		Method:	`z_validateaddress`,
-		Params:	`["`+zaddr+`"]`,
+	query := APIQuery{
+		Method: `z_validateaddress`,
+		Params: `["` + zaddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -149,6 +138,3 @@ func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) 
 	json.Unmarshal([]byte(zvalidateaddressJson), &zvalidateaddress)
 	return zvalidateaddress, nil
 }
-
-
-

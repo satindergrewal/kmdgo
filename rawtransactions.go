@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
@@ -22,8 +20,8 @@ import (
 
 type CreateRawTransaction struct {
 	Result string `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) CreateRawTransaction(params APIParams) (CreateRawTransaction, error) {
@@ -32,19 +30,19 @@ func (appName AppType) CreateRawTransaction(params APIParams) (CreateRawTransact
 			params[2] = 0
 		}
 	}
-	
+
 	if len(params) == 4 {
 		if params[3] == nil {
 			params[3] = 20
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`createrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `createrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -67,8 +65,6 @@ func (appName AppType) CreateRawTransaction(params APIParams) (CreateRawTransact
 	json.Unmarshal([]byte(createrawtransactionJson), &createrawtransaction)
 	return createrawtransaction, nil
 }
-
-
 
 type DecodeRawTransaction struct {
 	Result struct {
@@ -99,17 +95,17 @@ type DecodeRawTransaction struct {
 		} `json:"vout"`
 		Vjoinsplit []interface{} `json:"vjoinsplit"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) DecodeRawTransaction(params APIParams) (DecodeRawTransaction, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`decoderawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `decoderawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -133,26 +129,23 @@ func (appName AppType) DecodeRawTransaction(params APIParams) (DecodeRawTransact
 	return decoderawtransaction, nil
 }
 
-
-
-
 type DecodeScript struct {
 	Result struct {
 		Asm  string `json:"asm"`
 		Type string `json:"type"`
 		P2Sh string `json:"p2sh"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`decodescript`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `decodescript`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -176,25 +169,23 @@ func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
 	return decodescript, nil
 }
 
-
-
 type FundRawTransaction struct {
 	Result struct {
 		Hex       string  `json:"hex"`
 		Changepos int     `json:"changepos"`
 		Fee       float64 `json:"fee"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) FundRawTransaction(params APIParams) (FundRawTransaction, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`fundrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `fundrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -218,19 +209,16 @@ func (appName AppType) FundRawTransaction(params APIParams) (FundRawTransaction,
 	return fundrawtransaction, nil
 }
 
-
-
-
 type GetRawTransaction struct {
 	Result string `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 type GetRawTransactionDetailed struct {
 	Result GetRawTransactionFull `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error  Error                 `json:"error"`
+	ID     string                `json:"id"`
 }
 
 type GetRawTransactionFull struct {
@@ -272,7 +260,7 @@ type GetRawTransactionFull struct {
 }
 
 func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, error) {
-	
+
 	if len(params) == 2 {
 		if params[1] == nil {
 			params[1] = 0
@@ -282,9 +270,9 @@ func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, e
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -310,7 +298,7 @@ func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, e
 }
 
 func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransactionDetailed, error) {
-	
+
 	if len(params) == 2 {
 		if params[1] == nil {
 			params[1] = 0
@@ -320,9 +308,9 @@ func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransa
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -347,16 +335,14 @@ func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransa
 	return getrawtransaction, nil
 }
 
-
-
 type SendRawTransaction struct {
 	Result string `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SendRawTransaction(params APIParams) (SendRawTransaction, error) {
-	
+
 	if len(params) == 2 {
 		if params[1] == nil {
 			params[1] = false
@@ -366,9 +352,9 @@ func (appName AppType) SendRawTransaction(params APIParams) (SendRawTransaction,
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`sendrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `sendrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -393,9 +379,6 @@ func (appName AppType) SendRawTransaction(params APIParams) (SendRawTransaction,
 	return sendrawtransaction, nil
 }
 
-
-
-
 type SignRawTransaction struct {
 	Result struct {
 		Hex      string `json:"hex"`
@@ -408,8 +391,8 @@ type SignRawTransaction struct {
 			Error     string `json:"error"`
 		} `json:"errors"`
 	} `json:"result"`
-	Error Error `json:"error"`
-	ID    string      `json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) SignRawTransaction(params APIParams) (SignRawTransaction, error) {
@@ -417,9 +400,9 @@ func (appName AppType) SignRawTransaction(params APIParams) (SignRawTransaction,
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`signrawtransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `signrawtransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -443,5 +426,3 @@ func (appName AppType) SignRawTransaction(params APIParams) (SignRawTransaction,
 	json.Unmarshal([]byte(signrawtransactionJson), &signrawtransaction)
 	return signrawtransaction, nil
 }
-
-

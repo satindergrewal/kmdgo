@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
@@ -22,17 +20,17 @@ import (
 
 type AddNode struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) AddNode(params APIParams) (AddNode, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`addnode`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `addnode`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -57,17 +55,16 @@ func (appName AppType) AddNode(params APIParams) (AddNode, error) {
 	return addnode, nil
 }
 
-
 type ClearBanned struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ClearBanned() (ClearBanned, error) {
-	query := APIQuery {
-		Method:	`clearbanned`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `clearbanned`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -92,17 +89,16 @@ func (appName AppType) ClearBanned() (ClearBanned, error) {
 	return clearbanned, nil
 }
 
-
 type DisconnectNode struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) DisconnectNode(node string) (DisconnectNode, error) {
-	query := APIQuery {
-		Method:	`disconnectnode`,
-		Params:	`["`+node+`"]`,
+	query := APIQuery{
+		Method: `disconnectnode`,
+		Params: `["` + node + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -127,8 +123,6 @@ func (appName AppType) DisconnectNode(node string) (DisconnectNode, error) {
 	return disconnectnode, nil
 }
 
-
-
 type GetAddedNodeInfo struct {
 	Result []struct {
 		Addednode string `json:"addednode"`
@@ -138,17 +132,17 @@ type GetAddedNodeInfo struct {
 			Connected string `json:"connected"`
 		} `json:"addresses"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetAddedNodeInfo(params APIParams) (GetAddedNodeInfo, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getaddednodeinfo`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getaddednodeinfo`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -173,18 +167,16 @@ func (appName AppType) GetAddedNodeInfo(params APIParams) (GetAddedNodeInfo, err
 	return getaddednodeinfo, nil
 }
 
-
-
 type GetConnectionCount struct {
-	Result int `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Result int    `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetConnectionCount() (GetConnectionCount, error) {
-	query := APIQuery {
-		Method:	`getconnectioncount`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getconnectioncount`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -209,22 +201,20 @@ func (appName AppType) GetConnectionCount() (GetConnectionCount, error) {
 	return getconnectioncount, nil
 }
 
-
-
 type GetDeprecationInfo struct {
 	Result struct {
 		Version           int    `json:"version"`
 		Subversion        string `json:"subversion"`
 		Deprecationheight int    `json:"deprecationheight"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetDeprecationInfo() (GetDeprecationInfo, error) {
-	query := APIQuery {
-		Method:	`getdeprecationinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getdeprecationinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -249,22 +239,20 @@ func (appName AppType) GetDeprecationInfo() (GetDeprecationInfo, error) {
 	return getdeprecationinfo, nil
 }
 
-
-
 type GetNetTotals struct {
 	Result struct {
 		Totalbytesrecv int   `json:"totalbytesrecv"`
 		Totalbytessent int   `json:"totalbytessent"`
 		Timemillis     int64 `json:"timemillis"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetNetTotals() (GetNetTotals, error) {
-	query := APIQuery {
-		Method:	`getnettotals`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getnettotals`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -289,8 +277,6 @@ func (appName AppType) GetNetTotals() (GetNetTotals, error) {
 	return getnettotals, nil
 }
 
-
-
 type GetNetworkInfo struct {
 	Result struct {
 		Version         int    `json:"version"`
@@ -310,14 +296,14 @@ type GetNetworkInfo struct {
 		Localaddresses []interface{} `json:"localaddresses"`
 		Warnings       string        `json:"warnings"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetNetworkInfo() (GetNetworkInfo, error) {
-	query := APIQuery {
-		Method:	`getnetworkinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getnetworkinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -342,8 +328,6 @@ func (appName AppType) GetNetworkInfo() (GetNetworkInfo, error) {
 	return getnetworkinfo, nil
 }
 
-
-
 type GetPeerInfo struct {
 	Result []struct {
 		ID             int           `json:"id"`
@@ -367,14 +351,14 @@ type GetPeerInfo struct {
 		Inflight       []interface{} `json:"inflight"`
 		Whitelisted    bool          `json:"whitelisted"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetPeerInfo() (GetPeerInfo, error) {
-	query := APIQuery {
-		Method:	`getpeerinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getpeerinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -399,21 +383,19 @@ func (appName AppType) GetPeerInfo() (GetPeerInfo, error) {
 	return getpeerinfo, nil
 }
 
-
-
 type ListBanned struct {
 	Result []struct {
 		Address     string `json:"address"`
 		BannedUntil int    `json:"banned_until"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListBanned() (ListBanned, error) {
-	query := APIQuery {
-		Method:	`listbanned`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `listbanned`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -438,18 +420,16 @@ func (appName AppType) ListBanned() (ListBanned, error) {
 	return listbanned, nil
 }
 
-
-
 type Ping struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) Ping() (Ping, error) {
-	query := APIQuery {
-		Method:	`ping`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `ping`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -474,21 +454,19 @@ func (appName AppType) Ping() (Ping, error) {
 	return ping, nil
 }
 
-
-
 type SetBan struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SetBan(params APIParams) (SetBan, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`setban`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `setban`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -512,5 +490,3 @@ func (appName AppType) SetBan(params APIParams) (SetBan, error) {
 	json.Unmarshal([]byte(setbanJson), &setban)
 	return setban, nil
 }
-
-

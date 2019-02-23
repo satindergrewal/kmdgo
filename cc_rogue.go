@@ -10,21 +10,18 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
-	"fmt"
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 const (
-	CCLIB_METHOD = `cclib`
+	CCLIB_METHOD   = `cclib`
 	ROGUE_EVALCODE = `17`
 )
-
 
 type RGNewGame struct {
 	Result struct {
@@ -37,25 +34,25 @@ type RGNewGame struct {
 		Txid       string  `json:"txid"`
 		Result     string  `json:"result"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 // Method: newgame
 // Params: maxplayers buyin
 // Params Required: 0
 // Max Parameters 2
-// 
+//
 // Example command
-// 		 ./komodo-cli -ac_name=ROGUE cclib newgame 17 \"[3,10]\" 
-// 
+// 		 ./komodo-cli -ac_name=ROGUE cclib newgame 17 \"[3,10]\"
+//
 // Explanation
 //
 // cclib: API call method.
-// 
+//
 // newgame: Crypto-Conditions (CC) specific method. You can see all available methods via cclib with following command
 //		./komodo-cli -ac_name=ROGUE cclibinfo
-// 
+//
 // 17: Evalcode for this CC method
 //
 // Array value 3: value of `maxplayers`. The maximum players that can participate in this game.
@@ -72,19 +69,19 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 			params[0] = `newgame`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -108,7 +105,6 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 	json.Unmarshal([]byte(newgameJson), &newgame)
 	return newgame, nil
 }
-
 
 type RGGameInfo struct {
 	Result struct {
@@ -138,32 +134,31 @@ type RGGameInfo struct {
 			Batonht    int     `json:"batonht"`
 		} `json:"players"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
-		if len(params) >= 1 {
+	if len(params) >= 1 {
 		if params[0] == nil {
 			params[0] = `gameinfo`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var gameinfo RGGameInfo
 
@@ -186,8 +181,6 @@ func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
 	return gameinfo, nil
 }
 
-
-
 type RGRegister struct {
 	Result struct {
 		Name       string  `json:"name"`
@@ -201,8 +194,8 @@ type RGRegister struct {
 		Status     string  `json:"status,omitempty"`
 		Error      string  `json:"error,omitempty"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
@@ -211,22 +204,21 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 			params[0] = `register`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var reg RGRegister
 
@@ -249,7 +241,6 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 	return reg, nil
 }
 
-
 type RGPending struct {
 	Result struct {
 		Result     string   `json:"result"`
@@ -258,8 +249,8 @@ type RGPending struct {
 		Pending    []string `json:"pending"`
 		Numpending int      `json:"numpending"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGPending() (RGPending, error) {
@@ -270,12 +261,11 @@ func (appName AppType) RGPending() (RGPending, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var pending RGPending
 
@@ -298,8 +288,6 @@ func (appName AppType) RGPending() (RGPending, error) {
 	return pending, nil
 }
 
-
-
 type RGBailout struct {
 	Result struct {
 		Name        string `json:"name"`
@@ -310,8 +298,8 @@ type RGBailout struct {
 		Txid        string `json:"txid"`
 		Result      string `json:"result"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
@@ -320,7 +308,7 @@ func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 			params[0] = `bailout`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
@@ -330,12 +318,11 @@ func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var bail RGBailout
 
@@ -358,8 +345,6 @@ func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 	return bail, nil
 }
 
-
-
 type RGHighLander struct {
 	Result struct {
 		Name        string `json:"name"`
@@ -370,8 +355,8 @@ type RGHighLander struct {
 		Txid        string `json:"txid"`
 		Result      string `json:"result"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
@@ -380,7 +365,7 @@ func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 			params[0] = `highlander`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
@@ -390,12 +375,11 @@ func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var hland RGHighLander
 
@@ -418,8 +402,6 @@ func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 	return hland, nil
 }
 
-
-
 type RGPlayers struct {
 	Result struct {
 		Name          string   `json:"name"`
@@ -427,8 +409,8 @@ type RGPlayers struct {
 		Playerdata    []string `json:"playerdata"`
 		Numplayerdata int      `json:"numplayerdata"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGPlayers() (RGPlayers, error) {
@@ -439,12 +421,11 @@ func (appName AppType) RGPlayers() (RGPlayers, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
-
 
 	var players RGPlayers
 
@@ -467,17 +448,14 @@ func (appName AppType) RGPlayers() (RGPlayers, error) {
 	return players, nil
 }
 
-
-
-
 type RGSetName struct {
 	Result struct {
-		Name        string `json:"name"`
-		Method      string `json:"method"`
-		Result      string `json:"result"`
+		Name   string `json:"name"`
+		Method string `json:"method"`
+		Result string `json:"result"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
@@ -486,7 +464,7 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 			params[0] = `setname`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
@@ -496,9 +474,9 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -523,10 +501,6 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 	return pname, nil
 }
 
-
-
-
-
 type RGPlayerInfo struct {
 	Result struct {
 		Result string `json:"result"`
@@ -547,8 +521,8 @@ type RGPlayerInfo struct {
 			Pname        string   `json:"pname"`
 		} `json:"player"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
@@ -557,7 +531,7 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 			params[0] = `playerinfo`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
@@ -567,9 +541,9 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -594,9 +568,6 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 	return pinfo, nil
 }
 
-
-
-
 type RGGames struct {
 	Result struct {
 		Name      string   `json:"name"`
@@ -605,8 +576,8 @@ type RGGames struct {
 		Games     []string `json:"games"`
 		Numgames  int      `json:"numgames"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) RGGames() (RGGames, error) {
@@ -617,7 +588,7 @@ func (appName AppType) RGGames() (RGGames, error) {
 			params[0] = `games`
 		}
 	}
-	
+
 	if len(params) >= 2 {
 		if params[1] == nil {
 			params[1] = ROGUE_EVALCODE
@@ -627,9 +598,9 @@ func (appName AppType) RGGames() (RGGames, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	CCLIB_METHOD,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: CCLIB_METHOD,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 

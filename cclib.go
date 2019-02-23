@@ -10,16 +10,13 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
-	"fmt"
 	"encoding/json"
 	"errors"
+	"fmt"
 )
-
 
 type CCLibInfo struct {
 	Result struct {
@@ -35,14 +32,14 @@ type CCLibInfo struct {
 			ParamsMax      int    `json:"params_max"`
 		} `json:"methods"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) CCLibInfo() (CCLibInfo, error) {
-	query := APIQuery {
-		Method:	`cclibinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `cclibinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -67,8 +64,6 @@ func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 	return cclibinfo, nil
 }
 
-
-
 type CCLibAddress struct {
 	Result struct {
 		Result               string  `json:"result"`
@@ -83,8 +78,8 @@ type CCLibAddress struct {
 		Myaddress            string  `json:"myaddress"`
 		Mybalance            float64 `json:"mybalance"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
@@ -92,9 +87,9 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`cclibaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `cclibaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -119,11 +114,10 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 	return cclibaddr, nil
 }
 
-
 // cclib method has these command line options:
-// 		$ komodo-cli -ac_name=ROGUE help cclib 
+// 		$ komodo-cli -ac_name=ROGUE help cclib
 // 		cclib method [evalcode] [JSON params]
-// 
+//
 // Example command
 //		komodo-cli -ac_name=ROGUE cclib newgame 17 "[1]"
 //

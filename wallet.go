@@ -30,9 +30,9 @@ type ListUnspent struct {
 		Interest      float64 `json:"interest"`
 		Confirmations int     `json:"confirmations"`
 		Spendable     bool    `json:"spendable"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
@@ -46,9 +46,9 @@ func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`listunspent`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `listunspent`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -73,23 +73,19 @@ func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
 	return listunspent, nil
 }
 
-
-
-
 type AddMultiSigAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`addmultisigaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `addmultisigaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -113,20 +109,16 @@ func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress,
 	return addmultisigaddress, nil
 }
 
-
-
-
 type BackupWallet struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) BackupWallet(bkpwlt string) (BackupWallet, error) {
-	query := APIQuery {
-		Method:	`backupwallet`,
-		Params:	`["`+bkpwlt+`"]`,
+	query := APIQuery{
+		Method: `backupwallet`,
+		Params: `["` + bkpwlt + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -150,20 +142,16 @@ func (appName AppType) BackupWallet(bkpwlt string) (BackupWallet, error) {
 	return backupwallet, nil
 }
 
-
-
-
 type DumpPrivKey struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) DumpPrivKey(taddr string) (DumpPrivKey, error) {
-	query := APIQuery {
-		Method:	`dumpprivkey`,
-		Params:	`["`+taddr+`"]`,
+	query := APIQuery{
+		Method: `dumpprivkey`,
+		Params: `["` + taddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -187,20 +175,16 @@ func (appName AppType) DumpPrivKey(taddr string) (DumpPrivKey, error) {
 	return dumpprivkey, nil
 }
 
-
-
-
 type DumpWallet struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) DumpWallet(dmpwlt string) (DumpWallet, error) {
-	query := APIQuery {
-		Method:	`dumpwallet`,
-		Params:	`["`+dmpwlt+`"]`,
+	query := APIQuery{
+		Method: `dumpwallet`,
+		Params: `["` + dmpwlt + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -224,20 +208,16 @@ func (appName AppType) DumpWallet(dmpwlt string) (DumpWallet, error) {
 	return dumpwallet, nil
 }
 
-
-
-
 type EncryptWallet struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) EncryptWallet(phrase string) (EncryptWallet, error) {
-	query := APIQuery {
-		Method:	`encryptwallet`,
-		Params:	`["`+phrase+`"]`,
+	query := APIQuery{
+		Method: `encryptwallet`,
+		Params: `["` + phrase + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -261,20 +241,16 @@ func (appName AppType) EncryptWallet(phrase string) (EncryptWallet, error) {
 	return encryptwallet, nil
 }
 
-
-
-
 type GetAccount struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetAccount(taddr string) (GetAccount, error) {
-	query := APIQuery {
-		Method:	`getaccount`,
-		Params:	`["`+taddr+`"]`,
+	query := APIQuery{
+		Method: `getaccount`,
+		Params: `["` + taddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -298,20 +274,16 @@ func (appName AppType) GetAccount(taddr string) (GetAccount, error) {
 	return getaccount, nil
 }
 
-
-
-
 type GetAccountAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetAccountAddress(actname string) (GetAccountAddress, error) {
-	query := APIQuery {
-		Method:	`getaccountaddress`,
-		Params:	`["`+actname+`"]`,
+	query := APIQuery{
+		Method: `getaccountaddress`,
+		Params: `["` + actname + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -335,20 +307,16 @@ func (appName AppType) GetAccountAddress(actname string) (GetAccountAddress, err
 	return getaccountaddress, nil
 }
 
-
-
-
 type GetAddressesByAccount struct {
-	Result	[]string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result []string `json:"result"`
+	Error  Error    `json:"error"`
+	ID     string   `json:"id"`
 }
 
 func (appName AppType) GetAddressesByAccount(actname string) (GetAddressesByAccount, error) {
-	query := APIQuery {
-		Method:	`getaddressesbyaccount`,
-		Params:	`["`+actname+`"]`,
+	query := APIQuery{
+		Method: `getaddressesbyaccount`,
+		Params: `["` + actname + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -372,14 +340,10 @@ func (appName AppType) GetAddressesByAccount(actname string) (GetAddressesByAcco
 	return getaddressesbyaccount, nil
 }
 
-
-
-
 type GetBalance struct {
-	Result	int64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result int64  `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
@@ -397,9 +361,9 @@ func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getbalance`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getbalance`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -423,19 +387,16 @@ func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
 	return getbalance, nil
 }
 
-
-
 type GetNewAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetNewAddress() (GetNewAddress, error) {
-	query := APIQuery {
-		Method:	`getnewaddress`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getnewaddress`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -459,19 +420,16 @@ func (appName AppType) GetNewAddress() (GetNewAddress, error) {
 	return getnewaddress, nil
 }
 
-
-
 type GetRawChangeAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetRawChangeAddress() (GetRawChangeAddress, error) {
-	query := APIQuery {
-		Method:	`getrawchangeaddress`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getrawchangeaddress`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -495,18 +453,14 @@ func (appName AppType) GetRawChangeAddress() (GetRawChangeAddress, error) {
 	return getrawchangeaddress, nil
 }
 
-
-
-
 type GetReceivedByAccount struct {
-	Result	int64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result int64  `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAccount, error) {
-	
+
 	// In call cases set account to blank. ACCOUNTS feature is DEPRICATED. It Should not be used anymore.
 	if params[0] == nil {
 		params[0] = ``
@@ -520,9 +474,9 @@ func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAcco
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getreceivedbyaccount`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getreceivedbyaccount`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -546,14 +500,10 @@ func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAcco
 	return getreceivedbyaccount, nil
 }
 
-
-
-
 type GetReceivedByAddress struct {
-	Result	int64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result int64  `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddress, error) {
@@ -563,9 +513,9 @@ func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddr
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`getreceivedbyaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `getreceivedbyaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -589,11 +539,8 @@ func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddr
 	return getreceivedbyaddress, nil
 }
 
-
-
-
 type GetTransaction struct {
-	Result	struct {
+	Result struct {
 		Amount           float64       `json:"amount"`
 		Fee              float64       `json:"fee"`
 		Rawconfirmations int           `json:"rawconfirmations"`
@@ -618,10 +565,9 @@ type GetTransaction struct {
 			Size              int     `json:"size"`
 		} `json:"details"`
 		Hex string `json:"hex"`
-		}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) {
@@ -631,9 +577,9 @@ func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`gettransaction`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `gettransaction`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -657,20 +603,16 @@ func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) 
 	return gettransaction, nil
 }
 
-
-
-
 type GetUnconfirmedBalance struct {
-	Result	float64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result float64 `json:"result"`
+	Error  Error   `json:"error"`
+	ID     string  `json:"id"`
 }
 
 func (appName AppType) GetUnconfirmedBalance() (GetUnconfirmedBalance, error) {
-	query := APIQuery {
-		Method:	`getunconfirmedbalance`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getunconfirmedbalance`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -694,11 +636,8 @@ func (appName AppType) GetUnconfirmedBalance() (GetUnconfirmedBalance, error) {
 	return getunconfirmedbalance, nil
 }
 
-
-
-
 type GetWalletInfo struct {
-	Result	struct {
+	Result struct {
 		Walletversion      int     `json:"walletversion"`
 		Balance            float64 `json:"balance"`
 		UnconfirmedBalance float64 `json:"unconfirmed_balance"`
@@ -709,16 +648,15 @@ type GetWalletInfo struct {
 		UnlockedUntil      int     `json:"unlocked_until"`
 		Paytxfee           float64 `json:"paytxfee"`
 		Seedfp             string  `json:"seedfp"`
-		}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) GetWalletInfo() (GetWalletInfo, error) {
-	query := APIQuery {
-		Method:	`getwalletinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `getwalletinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -742,13 +680,10 @@ func (appName AppType) GetWalletInfo() (GetWalletInfo, error) {
 	return getwalletinfo, nil
 }
 
-
-
 type ImportAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
@@ -765,9 +700,9 @@ func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`importaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `importaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -791,14 +726,10 @@ func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
 	return importaddress, nil
 }
 
-
-
-
 type ImportPrivKey struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
@@ -815,9 +746,9 @@ func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`importprivkey`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `importprivkey`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -841,19 +772,16 @@ func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
 	return importprivkey, nil
 }
 
-
-
-
 type ImportWallet struct {
 	Result interface{} `json:"result"`
-	Error	Error	`json:"error"`
-	ID string `json:"id"`
+	Error  Error       `json:"error"`
+	ID     string      `json:"id"`
 }
 
 func (appName AppType) ImportWallet(wltpth string) (ImportWallet, error) {
-	query := APIQuery {
-		Method:	`importwallet`,
-		Params:	`["`+wltpth+`"]`,
+	query := APIQuery{
+		Method: `importwallet`,
+		Params: `["` + wltpth + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -877,13 +805,10 @@ func (appName AppType) ImportWallet(wltpth string) (ImportWallet, error) {
 	return importwallet, nil
 }
 
-
-
 type KeyPoolRefill struct {
-	Result	interface{}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result interface{} `json:"result"`
+	Error  Error       `json:"error"`
+	ID     string      `json:"id"`
 }
 
 func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
@@ -893,9 +818,9 @@ func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`keypoolrefill`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `keypoolrefill`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -919,13 +844,10 @@ func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
 	return keypoolrefill, nil
 }
 
-
-
-
 type ListAccounts struct {
-	Result map[string]float64	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Result map[string]float64 `json:"result"`
+	Error  Error              `json:"error"`
+	ID     string             `json:"id"`
 }
 
 func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
@@ -938,9 +860,9 @@ func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`listaccounts`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `listaccounts`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -965,19 +887,16 @@ func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
 	return listaccounts, nil
 }
 
-
-
-
 type ListAddressGroupings struct {
 	Result [][][]interface{} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error             `json:"error"`
+	ID     string            `json:"id"`
 }
 
 func (appName AppType) ListAddressGroupings() (ListAddressGroupings, error) {
-	query := APIQuery {
-		Method:	`listaddressgroupings`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `listaddressgroupings`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -1002,22 +921,19 @@ func (appName AppType) ListAddressGroupings() (ListAddressGroupings, error) {
 	return listaddressgroupings, nil
 }
 
-
-
-
 type ListLockUnspent struct {
 	Result []struct {
 		Txid string `json:"txid"`
 		Vout int    `json:"vout"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListLockUnspent() (ListLockUnspent, error) {
-	query := APIQuery {
-		Method:	`listlockunspent`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `listlockunspent`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -1042,8 +958,6 @@ func (appName AppType) ListLockUnspent() (ListLockUnspent, error) {
 	return listlockunspent, nil
 }
 
-
-
 type ListReceivedByAddress struct {
 	Result []struct {
 		Address          string        `json:"address"`
@@ -1052,9 +966,9 @@ type ListReceivedByAddress struct {
 		Rawconfirmations int           `json:"rawconfirmations"`
 		Confirmations    int           `json:"confirmations"`
 		Txids            []interface{} `json:"txids"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAddress, error) {
@@ -1071,9 +985,9 @@ func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAd
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`listreceivedbyaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `listreceivedbyaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1098,8 +1012,6 @@ func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAd
 	return listreceivedbyaddress, nil
 }
 
-
-
 type ListSinceBlock struct {
 	Result struct {
 		Transactions []struct {
@@ -1122,13 +1034,13 @@ type ListSinceBlock struct {
 			Size            int           `json:"size"`
 		} `json:"transactions"`
 		Lastblock string `json:"lastblock"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) {
-	
+
 	//fmt.Println(len(params))
 
 	if len(params) == 1 {
@@ -1146,9 +1058,9 @@ func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`listsinceblock`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `listsinceblock`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1173,11 +1085,8 @@ func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) 
 	return listsinceblock, nil
 }
 
-
-
-
 type ListTransactions struct {
-	Result	[]struct {
+	Result []struct {
 		InvolvesWatchonly bool          `json:"involvesWatchonly"`
 		Account           string        `json:"account"`
 		Address           string        `json:"address"`
@@ -1197,10 +1106,9 @@ type ListTransactions struct {
 		Timereceived      int           `json:"timereceived"`
 		Vjoinsplit        []interface{} `json:"vjoinsplit"`
 		Size              int           `json:"size"`
-		}	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ListTransactions(params APIParams) (ListTransactions, error) {
@@ -1220,9 +1128,9 @@ func (appName AppType) ListTransactions(params APIParams) (ListTransactions, err
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`listtransactions`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `listtransactions`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1246,22 +1154,19 @@ func (appName AppType) ListTransactions(params APIParams) (ListTransactions, err
 	return listtransactions, nil
 }
 
-
-
-
 type LockUnspent struct {
-	Result bool `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Result bool   `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`lockunspent`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `lockunspent`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1286,13 +1191,10 @@ func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
 	return lockunspent, nil
 }
 
-
-
-
 type SendFrom struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
@@ -1303,9 +1205,9 @@ func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`sendfrom`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `sendfrom`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1330,13 +1232,10 @@ func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
 	return sendfrom, nil
 }
 
-
-
-
 type SendMany struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SendMany(params APIParams) (SendMany, error) {
@@ -1348,9 +1247,9 @@ func (appName AppType) SendMany(params APIParams) (SendMany, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`sendmany`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `sendmany`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1375,13 +1274,10 @@ func (appName AppType) SendMany(params APIParams) (SendMany, error) {
 	return sendmany, nil
 }
 
-
-
-
 type SendToAddress struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
@@ -1393,9 +1289,9 @@ func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`sendtoaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `sendtoaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1420,23 +1316,20 @@ func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
 	return sendtoaddress, nil
 }
 
-
-
-
 type SetPubKey struct {
 	Result struct {
 		Pubkey   string `json:"pubkey"`
 		Ismine   bool   `json:"ismine"`
 		RAddress string `json:"R-address"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) SetPubKey(pubkey string) (SetPubKey, error) {
-	query := APIQuery {
-		Method:	`setpubkey`,
-		Params:	`["`+pubkey+`"]`,
+	query := APIQuery{
+		Method: `setpubkey`,
+		Params: `["` + pubkey + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -1461,18 +1354,16 @@ func (appName AppType) SetPubKey(pubkey string) (SetPubKey, error) {
 	return setpubkey, nil
 }
 
-
-
 type SetTxFee struct {
-	Result bool `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Result bool   `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SetTxFee(amount float64) (SetTxFee, error) {
-	query := APIQuery {
-		Method:	`settxfee`,
-		Params:	`[`+strconv.FormatFloat(amount, 'f', 8, 64)+`]`,
+	query := APIQuery{
+		Method: `settxfee`,
+		Params: `[` + strconv.FormatFloat(amount, 'f', 8, 64) + `]`,
 	}
 	//fmt.Println(query)
 
@@ -1497,22 +1388,19 @@ func (appName AppType) SetTxFee(amount float64) (SetTxFee, error) {
 	return settxfee, nil
 }
 
-
-
 type SignMessage struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`signmessage`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `signmessage`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1536,20 +1424,16 @@ func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
 	return signmessage, nil
 }
 
-
-
-
 type WalletLock struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) WalletLock() (WalletLock, error) {
-	query := APIQuery {
-		Method:	`walletlock`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `walletlock`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -1573,23 +1457,19 @@ func (appName AppType) WalletLock() (WalletLock, error) {
 	return walletlock, nil
 }
 
-
-
-
 type WalletPassPhrase struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`walletpassphrase`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `walletpassphrase`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1613,22 +1493,19 @@ func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, err
 	return walletpassphrase, nil
 }
 
-
-
 type WalletPassPhrasechangeChange struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPassPhrasechangeChange, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`walletpassphrasechange`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `walletpassphrasechange`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1652,19 +1529,16 @@ func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPas
 	return walletpassphrasechange, nil
 }
 
-
-
 type ZExportKey struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZExportKey(zaddr string) (ZExportKey, error) {
-	query := APIQuery {
-		Method:	`z_exportkey`,
-		Params:	`["`+zaddr+`"]`,
+	query := APIQuery{
+		Method: `z_exportkey`,
+		Params: `["` + zaddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -1688,20 +1562,16 @@ func (appName AppType) ZExportKey(zaddr string) (ZExportKey, error) {
 	return zexportkey, nil
 }
 
-
-
-
 type ZExportViewingKey struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZExportViewingKey(zaddr string) (ZExportViewingKey, error) {
-	query := APIQuery {
-		Method:	`z_exportviewingkey`,
-		Params:	`["`+zaddr+`"]`,
+	query := APIQuery{
+		Method: `z_exportviewingkey`,
+		Params: `["` + zaddr + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -1725,19 +1595,16 @@ func (appName AppType) ZExportViewingKey(zaddr string) (ZExportViewingKey, error
 	return zexportviewingkey, nil
 }
 
-
-
-
 type ZExportWallet struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZExportWallet(wltfile string) (ZExportWallet, error) {
-	query := APIQuery {
-		Method:	`z_exportwallet`,
-		Params:	`["`+wltfile+`"]`,
+	query := APIQuery{
+		Method: `z_exportwallet`,
+		Params: `["` + wltfile + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -1762,13 +1629,10 @@ func (appName AppType) ZExportWallet(wltfile string) (ZExportWallet, error) {
 	return z_exportwallet, nil
 }
 
-
-
-
 type ZGetBalance struct {
 	Result float64 `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error   `json:"error"`
+	ID     string  `json:"id"`
 }
 
 func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
@@ -1778,9 +1642,9 @@ func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_getbalance`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_getbalance`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1805,20 +1669,16 @@ func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
 	return z_getbalance, nil
 }
 
-
-
-
 type ZGetNewAddress struct {
-	Result	string	`json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
-	
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
-	query := APIQuery {
-		Method:	`z_getnewaddress`,
-		Params:	`["`+tp+`"]`,
+	query := APIQuery{
+		Method: `z_getnewaddress`,
+		Params: `["` + tp + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -1842,9 +1702,6 @@ func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
 	return zgetnewaddress, nil
 }
 
-
-
-
 type ZGetOperationResult struct {
 	Result []struct {
 		ID           string `json:"id"`
@@ -1865,17 +1722,17 @@ type ZGetOperationResult struct {
 			Fee     float64 `json:"fee"`
 		} `json:"params"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZGetOperationResult(params APIParams) (ZGetOperationResult, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_getoperationresult`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_getoperationresult`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1900,9 +1757,6 @@ func (appName AppType) ZGetOperationResult(params APIParams) (ZGetOperationResul
 	return z_getoperationresult, nil
 }
 
-
-
-
 type ZGetOperationStatus struct {
 	Result []struct {
 		ID           string `json:"id"`
@@ -1923,17 +1777,17 @@ type ZGetOperationStatus struct {
 			Fee     float64 `json:"fee"`
 		} `json:"params"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatus, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
-	
-	query := APIQuery {
-		Method:	`z_getoperationstatus`,
-		Params:	string(params_json),
+
+	query := APIQuery{
+		Method: `z_getoperationstatus`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -1958,9 +1812,6 @@ func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatu
 	return z_getoperationstatus, nil
 }
 
-
-
-
 type ZGetTotalBalance struct {
 	Result struct {
 		Transparent float64 `json:"transparent"`
@@ -1968,8 +1819,8 @@ type ZGetTotalBalance struct {
 		Private     float64 `json:"private"`
 		Total       float64 `json:"total"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, error) {
@@ -1982,9 +1833,9 @@ func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, err
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_gettotalbalance`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_gettotalbalance`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2009,13 +1860,10 @@ func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, err
 	return z_gettotalbalance, nil
 }
 
-
-
-
 type ZImportKey struct {
 	Result interface{} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error       `json:"error"`
+	ID     string      `json:"id"`
 }
 
 func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
@@ -2034,9 +1882,9 @@ func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_importkey`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_importkey`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2061,12 +1909,10 @@ func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
 	return z_importkey, nil
 }
 
-
-
 type ZImportViewingKey struct {
 	Result interface{} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error       `json:"error"`
+	ID     string      `json:"id"`
 }
 
 func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, error) {
@@ -2085,9 +1931,9 @@ func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, e
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_importviewingkey`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_importviewingkey`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2112,18 +1958,16 @@ func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, e
 	return z_importviewingkey, nil
 }
 
-
-
 type ZImportWallet struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZImportWallet(wltfile string) (ZImportWallet, error) {
-	query := APIQuery {
-		Method:	`z_importwallet`,
-		Params:	`["`+wltfile+`"]`,
+	query := APIQuery{
+		Method: `z_importwallet`,
+		Params: `["` + wltfile + `"]`,
 	}
 	//fmt.Println(query)
 
@@ -2148,13 +1992,10 @@ func (appName AppType) ZImportWallet(wltfile string) (ZImportWallet, error) {
 	return z_importwallet, nil
 }
 
-
-
-
 type ZListAddresses struct {
 	Result []string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error    `json:"error"`
+	ID     string   `json:"id"`
 }
 
 func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) {
@@ -2164,9 +2005,9 @@ func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_listaddresses`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_listaddresses`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2191,13 +2032,10 @@ func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) 
 	return z_listaddresses, nil
 }
 
-
-
-
 type ZListOperationIDs struct {
 	Result []string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error    `json:"error"`
+	ID     string   `json:"id"`
 }
 
 func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, error) {
@@ -2212,9 +2050,9 @@ func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, e
 		//fmt.Println(params_json)
 	}
 
-	query := APIQuery {
-		Method:	`z_listoperationids`,
-		Params:	params_json,
+	query := APIQuery{
+		Method: `z_listoperationids`,
+		Params: params_json,
 	}
 	//fmt.Println(query)
 
@@ -2239,17 +2077,14 @@ func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, e
 	return z_listoperationids, nil
 }
 
-
-
-
 type ZListReceivedByAddress struct {
 	Result []struct {
 		Txid   string  `json:"txid"`
 		Amount float64 `json:"amount"`
 		Memo   string  `json:"memo"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedByAddress, error) {
@@ -2261,9 +2096,9 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_listreceivedbyaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_listreceivedbyaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2288,9 +2123,6 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 	return z_listreceivedbyaddress, nil
 }
 
-
-
-
 type ZListUnspent struct {
 	Result []struct {
 		Txid          string  `json:"txid"`
@@ -2304,8 +2136,8 @@ type ZListUnspent struct {
 		Memo          string  `json:"memo"`
 		Change        bool    `json:"change"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
@@ -2326,13 +2158,13 @@ func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
 			params[2] = false
 		}
 	}
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_listunspent`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_listunspent`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2357,9 +2189,6 @@ func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
 	return z_listunspent, nil
 }
 
-
-
-
 type ZMergeToAddress struct {
 	Result struct {
 		RemainingUTXOs            int     `json:"remainingUTXOs"`
@@ -2372,8 +2201,8 @@ type ZMergeToAddress struct {
 		MergingShieldedValue      float64 `json:"mergingShieldedValue"`
 		Opid                      string  `json:"opid"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error) {
@@ -2399,9 +2228,9 @@ func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_mergetoaddress`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_mergetoaddress`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2426,13 +2255,10 @@ func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error
 	return z_mergetoaddress, nil
 }
 
-
-
-
 type ZSendMany struct {
 	Result string `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
 }
 
 func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
@@ -2451,9 +2277,9 @@ func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_sendmany`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_sendmany`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2478,9 +2304,6 @@ func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
 	return z_sendmany, nil
 }
 
-
-
-
 type ZShieldCoinbase struct {
 	Result struct {
 		RemainingUTXOs int     `json:"remainingUTXOs"`
@@ -2488,9 +2311,9 @@ type ZShieldCoinbase struct {
 		ShieldingUTXOs int     `json:"shieldingUTXOs"`
 		ShieldingValue float64 `json:"shieldingValue"`
 		Opid           string  `json:"opid"`
-		} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error) {
@@ -2509,9 +2332,9 @@ func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`z_shieldcoinbase`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `z_shieldcoinbase`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -2535,5 +2358,3 @@ func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error
 	json.Unmarshal([]byte(z_shieldcoinbaseJson), &z_shieldcoinbase)
 	return z_shieldcoinbase, nil
 }
-
-

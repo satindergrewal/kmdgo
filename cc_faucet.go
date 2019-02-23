@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package kmdgo
 
 import (
@@ -30,8 +28,8 @@ type FaucetAddress struct {
 		MyCCaddress     string `json:"myCCaddress"`
 		Myaddress       string `json:"myaddress"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) FaucetAddress(params APIParams) (FaucetAddress, error) {
@@ -46,9 +44,9 @@ func (appName AppType) FaucetAddress(params APIParams) (FaucetAddress, error) {
 		//fmt.Println(params_json)
 	}
 
-	query := APIQuery {
-		Method:	`faucetaddress`,
-		Params:	params_json,
+	query := APIQuery{
+		Method: `faucetaddress`,
+		Params: params_json,
 	}
 	//fmt.Println(query)
 
@@ -77,21 +75,21 @@ func (appName AppType) FaucetAddress(params APIParams) (FaucetAddress, error) {
 // But since the API only accepts string, for now this is input as string.
 type FaucetFund struct {
 	Result struct {
-		Result			string `json:"result"`
-		Hex				string `json:"hex"`
+		Result string `json:"result"`
+		Hex    string `json:"hex"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) FaucetFund(params APIParams) (FaucetFund, error) {
-	
+
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery {
-		Method:	`faucetfund`,
-		Params:	string(params_json),
+	query := APIQuery{
+		Method: `faucetfund`,
+		Params: string(params_json),
 	}
 	//fmt.Println(query)
 
@@ -116,22 +114,19 @@ func (appName AppType) FaucetFund(params APIParams) (FaucetFund, error) {
 	return faucetfund, nil
 }
 
-
-
-
 type FaucetGet struct {
 	Result struct {
-		Result			string `json:"result"`
-		Hex				string `json:"hex"`
+		Result string `json:"result"`
+		Hex    string `json:"hex"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) FaucetGet() (FaucetGet, error) {
-	query := APIQuery {
-		Method:	`faucetget`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `faucetget`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
@@ -156,8 +151,6 @@ func (appName AppType) FaucetGet() (FaucetGet, error) {
 	return faucetget, nil
 }
 
-
-
 // This should have been a `int` value or `float64` value.
 // But since the API only accepts string, for now this is input as string.
 type FaucetInfo struct {
@@ -166,14 +159,14 @@ type FaucetInfo struct {
 		Name    string `json:"name"`
 		Funding string `json:"funding"`
 	} `json:"result"`
-	Error	Error	`json:"error"`
-	ID		string	`json:"id"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
 }
 
 func (appName AppType) FaucetInfo() (FaucetInfo, error) {
-	query := APIQuery {
-		Method:	`faucetinfo`,
-		Params:	`[]`,
+	query := APIQuery{
+		Method: `faucetinfo`,
+		Params: `[]`,
 	}
 	//fmt.Println(query)
 
