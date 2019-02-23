@@ -10,9 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
-
 package kmdutil
 
 import (
@@ -35,7 +32,7 @@ func appDataDir(goos, appName string, roaming bool) string {
 	}
 
 	if strings.ToLower(appName) != "komodo" || strings.ToLower(appName) != strings.TrimPrefix(strings.ToLower(appName), ".") {
-		appName = ".komodo/"+strings.ToUpper(appName)
+		appName = ".komodo/" + strings.ToUpper(appName)
 	}
 
 	// The caller really shouldn't prepend the appName with a period, but

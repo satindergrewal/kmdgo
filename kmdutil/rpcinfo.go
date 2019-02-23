@@ -10,22 +10,19 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
-
 package kmdutil
 
 import (
-	"path/filepath"
-	"runtime"
-	"log"
-	"strings"
-	"regexp"
 	"io/ioutil"
+	"log"
+	"path/filepath"
+	"regexp"
+	"runtime"
+	"strings"
 )
 
 func BytesToString(data []byte) string {
-    return string(data[:])
+	return string(data[:])
 }
 
 func AppRPCInfo(appName string) (string, string, string) {
@@ -35,17 +32,17 @@ func AppRPCInfo(appName string) (string, string, string) {
 
 	if strings.ToLower(appName) == "komodo" || strings.ToLower(appName) == ".komodo" {
 		if runtime.GOOS == "darwin" {
-				appConf = filepath.Join(appDir, strings.Title(appName)+`.conf`)
-			} else {
-				appConf = filepath.Join(appDir, strings.ToLower(appName)+`.conf`)
-			}
+			appConf = filepath.Join(appDir, strings.Title(appName)+`.conf`)
+		} else {
+			appConf = filepath.Join(appDir, strings.ToLower(appName)+`.conf`)
+		}
 	} else {
 		appConf = filepath.Join(appDir, strings.ToUpper(appName)+`.conf`)
 	}
 
 	confdata, err := ioutil.ReadFile(appConf)
 	if err != nil {
-		log.Fatal( err )
+		log.Fatal(err)
 	}
 
 	var rpcu = regexp.MustCompile("(?m)^rpcuser=.+$")
@@ -60,11 +57,11 @@ func AppRPCInfo(appName string) (string, string, string) {
 
 	//AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuser_line,`rpcuser`),`=`)
 	//AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpass_line,`rpcpassword`),`=`)
-	AppRPCport := strings.TrimLeft(strings.TrimLeft(rpcpport_line,`rpcport`),`=`)
+	AppRPCport := strings.TrimLeft(strings.TrimLeft(rpcpport_line, `rpcport`), `=`)
 
 	//AppRPCuser := rpcuser_line[8:]
-	AppRPCuser := strings.TrimLeft(rpcuser_line,`rpcuser`)[1:]
-	AppRPCpass := strings.TrimLeft(rpcpass_line,`rpcpassword`)[1:]
+	AppRPCuser := strings.TrimLeft(rpcuser_line, `rpcuser`)[1:]
+	AppRPCpass := strings.TrimLeft(rpcpass_line, `rpcpassword`)[1:]
 	//AppRPCport := strings.TrimLeft(rpcpport_line,`rpcport`)[1:]
 
 	if AppRPCport == "" && appName == "komodo" {
