@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -29,7 +27,7 @@ func main() {
 	args := make(kmdgo.APIParams, 3)
 	args[0] = 0
 	args[1] = 99999999
-	args[2] = []string{"RUdERUdW8aeEtRehZseDco9GTWN494LWW3","RAfyD4vUX4iUVvVEoxQ3hipHFNAvSw8Gnp"}
+	args[2] = []string{"RUdERUdW8aeEtRehZseDco9GTWN494LWW3", "RAfyD4vUX4iUVvVEoxQ3hipHFNAvSw8Gnp"}
 	fmt.Println(args)
 
 	lunspt, err := appName.ListUnspent(args)
@@ -43,7 +41,7 @@ func main() {
 	fmt.Println("-------")
 	fmt.Println(lunspt.Result)
 	fmt.Println("-------")
-	
+
 	for i, v := range lunspt.Result {
 		fmt.Printf("\n-------\n")
 		fmt.Println(i)

@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -28,7 +26,7 @@ func main() {
 
 	args := make(kmdgo.APIParams, 2)
 	args[0] = `` // DO NOT USE account names (accounts are depricated). Can use "*" instead which will just select all accounts from wallet.
-	args[1] = map[string]float64{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr":0.01,"RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s":0.02}
+	args[1] = map[string]float64{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr": 0.01, "RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s": 0.02}
 	//args[2] = 1
 	//args[3] = `donation`
 	//args[4] = []string{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"}

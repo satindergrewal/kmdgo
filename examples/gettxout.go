@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -25,7 +23,7 @@ func main() {
 	appName = `komodo`
 
 	var txout kmdgo.GetTxOut
-	
+
 	args := make(kmdgo.APIParams, 3)
 	args[0] = `c2abe4ae3b4965ba4d55048f355d9ddc803bf1b6123a10902ae4114260f516fb`
 	args[1] = 1

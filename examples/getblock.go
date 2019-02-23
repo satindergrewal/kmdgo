@@ -10,24 +10,22 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
 	// Define appName type from kmdgo package
 	var appName kmdgo.AppType
-		
+
 	// Define appname variable. The name value must be the matching value of it's data directory name.
 	// Example Komodo's data directory is `komodo`, VerusCoin's data directory is `VRSC` and so on.
 	appName = `komodo`
-	
+
 	// define the variable with GetBlock struct from pacakge kmdgo
 	var gb kmdgo.GetBlock
 
@@ -43,11 +41,11 @@ func main() {
 		fmt.Printf("Message: %v\n\n", gb.Error.Message)
 		log.Fatalln("Err happened", err)
 	}
-	
+
 	// Can print and use the struct variable outputs in further code logic. Check GetBlock struct in package file.
 	//fmt.Println(gb)
 	//fmt.Println(gb.Result)
-	
+
 	fmt.Println("Hash", gb.Result.Hash)
 	fmt.Println("Confirmations", gb.Result.Confirmations)
 	fmt.Println("Rawconfirmations", gb.Result.Rawconfirmations)

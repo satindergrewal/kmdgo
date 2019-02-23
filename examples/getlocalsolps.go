@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -35,5 +33,5 @@ func main() {
 
 	fmt.Println("lclsol value", lclsol)
 	fmt.Println("-------")
-	fmt.Printf("%d\n",lclsol.Result)
+	fmt.Printf("%d\n", lclsol.Result)
 }

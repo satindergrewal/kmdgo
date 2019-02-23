@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -47,7 +45,7 @@ func main() {
 
 	fmt.Println("blksb value", blksb)
 	fmt.Println("-------")
-	fmt.Printf("%0.8f\n",blksb.Result)
+	fmt.Printf("%0.8f\n", blksb.Result)
 
 	fmt.Println("Capabilities: ", blksb.Result.Capabilities)
 
@@ -63,7 +61,7 @@ func main() {
 		fmt.Println("Transactions --> Fee: ", v.Fee)
 		fmt.Println("Transactions --> Sigops: ", v.Sigops)
 	}
-	
+
 	fmt.Println("Coinbasetxn --> Data: ", blksb.Result.Coinbasetxn.Data)
 	fmt.Println("Coinbasetxn --> Hash: ", blksb.Result.Coinbasetxn.Hash)
 	fmt.Println("Coinbasetxn --> Depends: ", blksb.Result.Coinbasetxn.Depends)
@@ -80,7 +78,7 @@ func main() {
 		fmt.Println("Mutable -->", mi)
 		fmt.Println("Mutable -->", mv)
 	}
-	
+
 	fmt.Println("Noncerange: ", blksb.Result.Noncerange)
 	fmt.Println("Sigoplimit: ", blksb.Result.Sigoplimit)
 	fmt.Println("Sizelimit: ", blksb.Result.Sizelimit)

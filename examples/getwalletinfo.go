@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -37,7 +35,7 @@ func main() {
 	fmt.Println("-------")
 	fmt.Println(wltnf.Result)
 	fmt.Println("-------")
-	
+
 	fmt.Println("Walletversion: ", wltnf.Result.Walletversion)
 	fmt.Println("Balance: ", wltnf.Result.Balance)
 	fmt.Println("UnconfirmedBalance: ", wltnf.Result.UnconfirmedBalance)

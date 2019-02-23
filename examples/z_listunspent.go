@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -30,7 +28,7 @@ func main() {
 	//args[0] = 12
 	//args[1] = 200
 	//args[2] = true
-	args[3] = []string{"zs1xhnpvrggh3n5a0pt5hwgdcvmuhn9wqjg6kn25jddduvq5qyy3nhusfjufljp0ul55d66vkxajt3","zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg"}
+	args[3] = []string{"zs1xhnpvrggh3n5a0pt5hwgdcvmuhn9wqjg6kn25jddduvq5qyy3nhusfjufljp0ul55d66vkxajt3", "zs1tyaqq9nstpk2ezvj5ayxg6nfkhlrc80dcset6v6jmpk9gft384v6rpgmxhu00u3aalygqgk77eg"}
 	fmt.Println(args)
 
 	zlunspt, err := appName.ZListUnspent(args)
@@ -44,7 +42,7 @@ func main() {
 	fmt.Println("-------")
 	fmt.Println(zlunspt.Result)
 	fmt.Println("-------")
-	
+
 	for i, v := range zlunspt.Result {
 		fmt.Println(i)
 		fmt.Println("Txid: ", v.Txid)

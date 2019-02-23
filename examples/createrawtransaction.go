@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -27,18 +25,17 @@ func main() {
 	var crwtx kmdgo.CreateRawTransaction
 
 	type txes []struct {
-		Txid     string `json:"txid"`
-		Vout     int    `json:"vout"`
+		Txid string `json:"txid"`
+		Vout int    `json:"vout"`
 		//Sequence int    `json:"sequence,omitempty"`
 	}
 
 	args := make(kmdgo.APIParams, 2)
 	args[0] = txes{{"d7ba45296c66e16eb61f27a4eef8848c7f5579fe801f277c1b0e074a4f47d6fd", 0}}
-	args[1] = map[string]float64{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr":0.01,"RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s":0.02}
+	args[1] = map[string]float64{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr": 0.01, "RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s": 0.02}
 	//args[2] = 0
 	//args[3] = 30
 	fmt.Println(args)
-
 
 	crwtx, err := appName.CreateRawTransaction(args)
 	if err != nil {

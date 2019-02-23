@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -28,7 +26,7 @@ func main() {
 
 	args := make(kmdgo.APIParams, 2)
 	args[0] = 1187540 // (numeric, optional, 0-4, default=3)
-	args[1] = 288 // (numeric, optional, default=288, 0=all)
+	args[1] = 288     // (numeric, optional, default=288, 0=all)
 	fmt.Println(args)
 
 	vfy, err := appName.VerifyChain(args)

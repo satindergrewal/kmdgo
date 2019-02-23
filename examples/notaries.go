@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -29,7 +27,6 @@ func main() {
 	param := `1187601` // Block Height
 	//param := `1536365515` // Block Height Timestamp
 
-	
 	// Either use Block Height or Block Height Timestamp as input string value
 	ninfo, err := appName.Notaries(param)
 	if err != nil {

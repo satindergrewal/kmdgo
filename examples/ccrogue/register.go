@@ -26,7 +26,7 @@ func main() {
 	var rgrg kmdgo.RGRegister
 
 	args := make(kmdgo.APIParams, 3)
-	args[2] = `["2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812"]`
+	args[2] = `["a469b0660b852692cbbe18083f9b9ab0ffada2ff05d5c29bce1b22a0550b715e"]`
 	fmt.Println(args)
 
 	rgrg, err := appName.RGRegister(args)

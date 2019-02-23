@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
@@ -67,8 +65,8 @@ func main() {
 			fmt.Println("Vin --> Txid: ", vn.Txid)
 			fmt.Println("Vin --> Vout: ", vn.Vout)
 			fmt.Println("Vin --> Address: ", vn.Address)
-				fmt.Println("Vin --> ScriptSig --> Asm: ", vn.ScriptSig.Asm)
-				fmt.Println("Vin --> ScriptSig --> Hex: ", vn.ScriptSig.Hex)
+			fmt.Println("Vin --> ScriptSig --> Asm: ", vn.ScriptSig.Asm)
+			fmt.Println("Vin --> ScriptSig --> Hex: ", vn.ScriptSig.Hex)
 			fmt.Println("Vin --> Sequence: ", vn.Sequence)
 		}
 
@@ -81,11 +79,11 @@ func main() {
 			fmt.Println("Vout --> Interest: ", vt.Interest)
 			fmt.Println("Vout --> ValueSat: ", vt.ValueSat)
 			fmt.Println("Vout --> N: ", vt.N)
-				fmt.Println("Vout --> ScriptPubKey --> Asm: ", vt.ScriptPubKey.Asm)
-				fmt.Println("Vout --> ScriptPubKey --> Hex: ", vt.ScriptPubKey.Hex)
-				fmt.Println("Vout --> ScriptPubKey --> ReqSigs: ", vt.ScriptPubKey.ReqSigs)
-				fmt.Println("Vout --> ScriptPubKey --> Type: ", vt.ScriptPubKey.Type)
-				fmt.Println("Vout --> ScriptPubKey --> Addresses: ", vt.ScriptPubKey.Addresses)
+			fmt.Println("Vout --> ScriptPubKey --> Asm: ", vt.ScriptPubKey.Asm)
+			fmt.Println("Vout --> ScriptPubKey --> Hex: ", vt.ScriptPubKey.Hex)
+			fmt.Println("Vout --> ScriptPubKey --> ReqSigs: ", vt.ScriptPubKey.ReqSigs)
+			fmt.Println("Vout --> ScriptPubKey --> Type: ", vt.ScriptPubKey.Type)
+			fmt.Println("Vout --> ScriptPubKey --> Addresses: ", vt.ScriptPubKey.Addresses)
 		}
 
 		fmt.Println("Vjoinsplit: ", grwtx.Result.Vjoinsplit)

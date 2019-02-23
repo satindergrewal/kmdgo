@@ -10,31 +10,29 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-    "log"
-    "github.com/satindergrewal/kmdgo"
+	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
-    appName := kmdgo.NewAppType(`ROGUE`)
+	appName := kmdgo.NewAppType(`ROGUE`)
 
 	var info kmdgo.Stop
 
-    info, err := appName.Stop()
-    if err != nil {
-        fmt.Printf("Code: %v\n", info.Error.Code)
-        fmt.Printf("Message: %v\n\n", info.Error.Message)
-        log.Fatalln("Err happened", err)
-    }
+	info, err := appName.Stop()
+	if err != nil {
+		fmt.Printf("Code: %v\n", info.Error.Code)
+		fmt.Printf("Message: %v\n\n", info.Error.Message)
+		log.Fatalln("Err happened", err)
+	}
 
-    fmt.Println(info)
-    fmt.Println(info.Result)
-    
-    fmt.Println(info.Error)
-    fmt.Println(info.ID)
+	fmt.Println(info)
+	fmt.Println(info.Result)
+
+	fmt.Println(info.Error)
+	fmt.Println(info.ID)
 }

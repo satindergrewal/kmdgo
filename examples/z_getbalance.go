@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -40,5 +38,5 @@ func main() {
 
 	fmt.Println("zblc value", zblc)
 	fmt.Println("-------")
-	fmt.Printf("\n%0.8f\n",zblc.Result)
+	fmt.Printf("\n%0.8f\n", zblc.Result)
 }

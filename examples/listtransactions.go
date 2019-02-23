@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -43,7 +41,7 @@ func main() {
 	//fmt.Println("-------")
 	//fmt.Println(lstx.Result)
 	fmt.Println("-------")
-	
+
 	//fmt.Printf("\n\n\n-------")
 
 	for i, v := range lstx.Result {

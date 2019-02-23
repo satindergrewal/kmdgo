@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -49,8 +47,8 @@ func main() {
 		fmt.Println("Connected: ", v.Connected)
 		for iv, vv := range v.Addresses {
 			fmt.Println("-->", iv)
-			fmt.Println("-->Address: ",vv.Address)
-			fmt.Println("-->Connected: ",vv.Connected)
+			fmt.Println("-->Address: ", vv.Address)
+			fmt.Println("-->Connected: ", vv.Connected)
 		}
 	}
 }

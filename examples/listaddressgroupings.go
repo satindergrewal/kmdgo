@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -40,8 +38,8 @@ func main() {
 	for i, v := range lstgrp.Result[0] {
 		fmt.Printf("\n-------\n")
 		fmt.Println(i)
-		fmt.Printf("Address: %s\n",v[0])
-		fmt.Printf("Amount: %0.8f\n",v[1])
+		fmt.Printf("Address: %s\n", v[0])
+		fmt.Printf("Amount: %0.8f\n", v[1])
 		//fmt.Printf("Account Name: %s\n",v[2])
 
 	}

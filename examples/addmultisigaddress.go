@@ -10,8 +10,6 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 /*
 $ komodo-cli getnewaddress
 RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr
@@ -25,8 +23,8 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -36,8 +34,8 @@ func main() {
 	var mtsig kmdgo.AddMultiSigAddress
 
 	args := make(kmdgo.APIParams, 2)
-	args[0] = 2 // This example says requires 2 of 2 signatures to create tx from the multisig address
-	args[1] = []string{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr","RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"} // Get the address from command `getnewaddress` to test
+	args[0] = 2                                                                                    // This example says requires 2 of 2 signatures to create tx from the multisig address
+	args[1] = []string{"RLJBn63c4Fkc4csnybinhZRWhtpy8ZYnsr", "RS6eYaKKqGCVysYj9BFZT4fczM4s9oo59s"} // Get the address from command `getnewaddress` to test
 	fmt.Println(args)
 
 	mtsig, err := appName.AddMultiSigAddress(args)

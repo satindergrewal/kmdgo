@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -29,7 +27,6 @@ func main() {
 	args := make(kmdgo.APIParams, 1)
 	args[0] = `0400008085202f8901fdd6474f4a070e1b7c271f80fe79557f8c84f8eea4271fb66ee1666c2945bad70000000000ffffffff0240420f00000000001976a91478d98c7ad3345e56fbacc49710723b47dc119e8a88ac80841e00000000001976a914b87ba7e8e320fa7eb60f154909e94df1d22af40888ac000000001e0000000000000000000000000000`
 	fmt.Println(args)
-
 
 	dctx, err := appName.DecodeRawTransaction(args)
 	if err != nil {
@@ -56,8 +53,8 @@ func main() {
 
 		fmt.Println("Vin --> Txid: ", vn.Txid)
 		fmt.Println("Vin --> Vout: ", vn.Vout)
-			fmt.Println("Vin --> ScriptSig --> Asm: ", vn.ScriptSig.Asm)
-			fmt.Println("Vin --> ScriptSig --> Hex: ", vn.ScriptSig.Hex)
+		fmt.Println("Vin --> ScriptSig --> Asm: ", vn.ScriptSig.Asm)
+		fmt.Println("Vin --> ScriptSig --> Hex: ", vn.ScriptSig.Hex)
 		fmt.Println("Vin --> Sequence: ", vn.Sequence)
 	}
 
@@ -69,13 +66,12 @@ func main() {
 		fmt.Println("Vout --> Value: ", vt.Value)
 		fmt.Println("Vout --> ValueSat: ", vt.ValueSat)
 		fmt.Println("Vout --> N: ", vt.N)
-			fmt.Println("Vout --> ScriptPubKey --> Asm: ", vt.ScriptPubKey.Asm)
-			fmt.Println("Vout --> ScriptPubKey --> Hex: ", vt.ScriptPubKey.Hex)
-			fmt.Println("Vout --> ScriptPubKey --> ReqSigs: ", vt.ScriptPubKey.ReqSigs)
-			fmt.Println("Vout --> ScriptPubKey --> Type: ", vt.ScriptPubKey.Type)
-			fmt.Println("Vout --> ScriptPubKey --> Addresses: ", vt.ScriptPubKey.Addresses)
+		fmt.Println("Vout --> ScriptPubKey --> Asm: ", vt.ScriptPubKey.Asm)
+		fmt.Println("Vout --> ScriptPubKey --> Hex: ", vt.ScriptPubKey.Hex)
+		fmt.Println("Vout --> ScriptPubKey --> ReqSigs: ", vt.ScriptPubKey.ReqSigs)
+		fmt.Println("Vout --> ScriptPubKey --> Type: ", vt.ScriptPubKey.Type)
+		fmt.Println("Vout --> ScriptPubKey --> Addresses: ", vt.ScriptPubKey.Addresses)
 	}
 
-	
-		fmt.Println("Vjoinsplit: ", dctx.Result.Vjoinsplit)
+	fmt.Println("Vjoinsplit: ", dctx.Result.Vjoinsplit)
 }

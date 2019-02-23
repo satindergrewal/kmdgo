@@ -10,14 +10,12 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-
 package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/satindergrewal/kmdgo"
+	"log"
 )
 
 func main() {
@@ -27,7 +25,7 @@ func main() {
 	var bw kmdgo.ZImportWallet
 
 	export_path := `/Users/satinder/Downloads/`
-	bkpfilename := export_path+`testzexportwalle`
+	bkpfilename := export_path + `testzexportwalle`
 
 	bw, err := appName.ZImportWallet(bkpfilename)
 	if err != nil {
