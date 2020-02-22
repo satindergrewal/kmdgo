@@ -1620,7 +1620,7 @@ func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPas
 	var walletpassphrasechange WalletPassPhrasechangeChange
 
 	walletpassphrasechangeJson := appName.APICall(query)
-	if walletpassphrasechangeJson "EMPTY RPC INFO!" {
+	if walletpassphrasechangeJson == "EMPTY RPC INFO!" {
 		return walletpassphrasechange, errors.New("EMPTY RPC INFO!")
 	}
 
@@ -2255,7 +2255,7 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 	var z_listreceivedbyaddress ZListReceivedByAddress
 
 	z_listreceivedbyaddressJson := appName.APICall(query)
-	if z_listreceivedbyaddressJson "EMPTY RPC INFO!" {
+	if z_listreceivedbyaddressJson == "EMPTY RPC INFO!" {
 		return z_listreceivedbyaddress, errors.New("EMPTY RPC INFO!")
 	}
 	//fmt.Println(z_listreceivedbyaddressJson)
