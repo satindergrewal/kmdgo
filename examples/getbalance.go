@@ -14,13 +14,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/satindergrewal/kmdgo"
 	"log"
+
+	"github.com/satindergrewal/kmdgo"
 )
 
 func main() {
 	var appName kmdgo.AppType
-	appName = `komodo`
+	appName = `PIRATE`
 
 	var gbl kmdgo.GetBalance
 
@@ -29,7 +30,7 @@ func main() {
 	//args[0] = "*"
 	//args[1] = 0
 	//args[2] = false
-	fmt.Println(args)
+	// fmt.Println(args)
 
 	gbl, err := appName.GetBalance(args)
 	if err != nil {

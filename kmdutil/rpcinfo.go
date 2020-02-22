@@ -14,7 +14,7 @@ package kmdutil
 
 import (
 	"io/ioutil"
-	"log"
+	"os"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -42,7 +42,18 @@ func AppRPCInfo(appName string) (string, string, string) {
 
 	confdata, err := ioutil.ReadFile(appConf)
 	if err != nil {
-		log.Fatal(err)
+		switch err {
+		case os.ErrInvalid:
+			//Do stuff
+		case os.ErrPermission:
+			//Do stuff
+		case os.ErrNotExist:
+			// fmt.Println("File Does not exists")
+			// log.Println(err)
+		default:
+			// fmt.Println(err)
+		}
+		return "", "", ""
 	}
 
 	var rpcu = regexp.MustCompile("(?m)^rpcuser=.+$")

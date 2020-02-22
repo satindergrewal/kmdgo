@@ -88,6 +88,9 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 	var newgame RGNewGame
 
 	newgameJson := appName.APICall(query)
+	if newgameJson == "EMPTY RPC INFO!" {
+		newgame faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(newgameJson)
 
 	var result APIResult
@@ -163,6 +166,9 @@ func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
 	var gameinfo RGGameInfo
 
 	gameinfoJson := appName.APICall(query)
+	if gameinfoJson == "EMPTY RPC INFO!" {
+		return gameinfo, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(gameinfoJson)
 
 	var result APIResult
@@ -223,6 +229,9 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 	var reg RGRegister
 
 	regJson := appName.APICall(query)
+	if regJson == "EMPTY RPC INFO!" {
+		reg faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(regJson)
 
 	var result APIResult
@@ -270,6 +279,9 @@ func (appName AppType) RGPending() (RGPending, error) {
 	var pending RGPending
 
 	pendingJson := appName.APICall(query)
+	if pendingJson == "EMPTY RPC INFO!" {
+		pending faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(pendingJson)
 
 	var result APIResult
@@ -327,6 +339,9 @@ func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 	var bail RGBailout
 
 	bailJson := appName.APICall(query)
+	if bailJson == "EMPTY RPC INFO!" {
+		bail faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(bailJson)
 
 	var result APIResult
@@ -384,6 +399,9 @@ func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 	var hland RGHighLander
 
 	hlandJson := appName.APICall(query)
+	if hlandJson == "EMPTY RPC INFO!" {
+		hland faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(hlandJson)
 
 	var result APIResult
@@ -430,6 +448,9 @@ func (appName AppType) RGPlayers() (RGPlayers, error) {
 	var players RGPlayers
 
 	playersJson := appName.APICall(query)
+	if playersJson == "EMPTY RPC INFO!" {
+		players faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(playersJson)
 
 	var result APIResult
@@ -483,6 +504,9 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 	var pname RGSetName
 
 	pnameJson := appName.APICall(query)
+	if pnameJson == "EMPTY RPC INFO!" {
+		pname faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(pnameJson)
 
 	var result APIResult
@@ -550,6 +574,9 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 	var pinfo RGPlayerInfo
 
 	pinfoJson := appName.APICall(query)
+	if pinfoJson == "EMPTY RPC INFO!" {
+		pinfo faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(pinfoJson)
 
 	var result APIResult
@@ -607,6 +634,9 @@ func (appName AppType) RGGames() (RGGames, error) {
 	var gms RGGames
 
 	gmsJson := appName.APICall(query)
+	if gmsJson == "EMPTY RPC INFO!" {
+		gms faucetaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(gmsJson)
 
 	var result APIResult

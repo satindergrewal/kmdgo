@@ -16,10 +16,11 @@ import (
 	//"fmt"
 	"bytes"
 	"encoding/json"
-	"github.com/satindergrewal/kmdgo/kmdutil"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/satindergrewal/kmdgo/kmdutil"
 )
 
 const KMDGO_VERSION = `0.1.0`
@@ -50,6 +51,10 @@ func NewAppType(app AppType) *AppType {
 
 func (appName AppType) APICall(q APIQuery) string {
 	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(string(appName))
+	if rpcuser == "" && rpcpass == "" && rpcport == "" {
+		// fmt.Println("EMPTY RPC INFO!")
+		return "EMPTY RPC INFO!"
+	}
 
 	client := &http.Client{}
 	url := `http://127.0.0.1:` + rpcport

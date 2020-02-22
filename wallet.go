@@ -55,6 +55,9 @@ func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
 	var listunspent ListUnspent
 
 	listunspentJson := appName.APICall(query)
+	if listunspentJson == "EMPTY RPC INFO!" {
+		return listunspent, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listunspentJson)
 
 	var result APIResult
@@ -92,6 +95,9 @@ func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress,
 	var addmultisigaddress AddMultiSigAddress
 
 	addmultisigaddressJson := appName.APICall(query)
+	if addmultisigaddressJson == "EMPTY RPC INFO!" {
+		return addmultisigaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -125,6 +131,9 @@ func (appName AppType) BackupWallet(bkpwlt string) (BackupWallet, error) {
 	var backupwallet BackupWallet
 
 	backupwalletJson := appName.APICall(query)
+	if backupwalletJson == "EMPTY RPC INFO!" {
+		return backupwallet, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -158,6 +167,9 @@ func (appName AppType) DumpPrivKey(taddr string) (DumpPrivKey, error) {
 	var dumpprivkey DumpPrivKey
 
 	dumpprivkeyJson := appName.APICall(query)
+	if dumpprivkeyJson == "EMPTY RPC INFO!" {
+		return dumpprivkey, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -191,6 +203,9 @@ func (appName AppType) DumpWallet(dmpwlt string) (DumpWallet, error) {
 	var dumpwallet DumpWallet
 
 	dumpwalletJson := appName.APICall(query)
+	if dumpwalletJson == "EMPTY RPC INFO!" {
+		return dumpwallet, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -224,6 +239,9 @@ func (appName AppType) EncryptWallet(phrase string) (EncryptWallet, error) {
 	var encryptwallet EncryptWallet
 
 	encryptwalletJson := appName.APICall(query)
+	if encryptwalletJson == "EMPTY RPC INFO!" {
+		return encryptwallet, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -257,6 +275,9 @@ func (appName AppType) GetAccount(taddr string) (GetAccount, error) {
 	var getaccount GetAccount
 
 	getaccountJson := appName.APICall(query)
+	if getaccountJson == "EMPTY RPC INFO!" {
+		return getaccount, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -290,6 +311,9 @@ func (appName AppType) GetAccountAddress(actname string) (GetAccountAddress, err
 	var getaccountaddress GetAccountAddress
 
 	getaccountaddressJson := appName.APICall(query)
+	if getaccountaddressJson == "EMPTY RPC INFO!" {
+		return getaccountaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -323,6 +347,9 @@ func (appName AppType) GetAddressesByAccount(actname string) (GetAddressesByAcco
 	var getaddressesbyaccount GetAddressesByAccount
 
 	getaddressesbyaccountJson := appName.APICall(query)
+	if getaddressesbyaccountJson == "EMPTY RPC INFO!" {
+		return getaddressesbyaccount, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -370,6 +397,9 @@ func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
 	var getbalance GetBalance
 
 	getbalanceJson := appName.APICall(query)
+	if getbalanceJson == "EMPTY RPC INFO!" {
+		return getbalance, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -403,6 +433,9 @@ func (appName AppType) GetNewAddress() (GetNewAddress, error) {
 	var getnewaddress GetNewAddress
 
 	getnewaddressJson := appName.APICall(query)
+	if getnewaddressJson == "EMPTY RPC INFO!" {
+		return getnewaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -436,6 +469,9 @@ func (appName AppType) GetRawChangeAddress() (GetRawChangeAddress, error) {
 	var getrawchangeaddress GetRawChangeAddress
 
 	getrawchangeaddressJson := appName.APICall(query)
+	if getrawchangeaddressJson == "EMPTY RPC INFO!" {
+		return getrawchangeaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -483,6 +519,9 @@ func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAcco
 	var getreceivedbyaccount GetReceivedByAccount
 
 	getreceivedbyaccountJson := appName.APICall(query)
+	if getreceivedbyaccountJson == "EMPTY RPC INFO!" {
+		return getreceivedbyaccount, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -522,6 +561,9 @@ func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddr
 	var getreceivedbyaddress GetReceivedByAddress
 
 	getreceivedbyaddressJson := appName.APICall(query)
+	if getreceivedbyaddressJson == "EMPTY RPC INFO!" {
+		return getreceivedbyaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -586,6 +628,9 @@ func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) 
 	var gettransaction GetTransaction
 
 	gettransactionJson := appName.APICall(query)
+	if gettransactionJson == "EMPTY RPC INFO!" {
+		return gettransaction, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -619,6 +664,9 @@ func (appName AppType) GetUnconfirmedBalance() (GetUnconfirmedBalance, error) {
 	var getunconfirmedbalance GetUnconfirmedBalance
 
 	getunconfirmedbalanceJson := appName.APICall(query)
+	if getunconfirmedbalanceJson == "EMPTY RPC INFO!" {
+		return getunconfirmedbalance, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -663,6 +711,9 @@ func (appName AppType) GetWalletInfo() (GetWalletInfo, error) {
 	var getwalletinfo GetWalletInfo
 
 	getwalletinfoJson := appName.APICall(query)
+	if getwalletinfoJson == "EMPTY RPC INFO!" {
+		return getwalletinfo, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -709,6 +760,9 @@ func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
 	var importaddress ImportAddress
 
 	importaddressJson := appName.APICall(query)
+	if importaddressJson == "EMPTY RPC INFO!" {
+		return importaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -755,6 +809,9 @@ func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
 	var importprivkey ImportPrivKey
 
 	importprivkeyJson := appName.APICall(query)
+	if importprivkeyJson == "EMPTY RPC INFO!" {
+		return importprivkey, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -788,6 +845,9 @@ func (appName AppType) ImportWallet(wltpth string) (ImportWallet, error) {
 	var importwallet ImportWallet
 
 	importwalletJson := appName.APICall(query)
+	if importwalletJson == "EMPTY RPC INFO!" {
+		return importwallet, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -827,6 +887,9 @@ func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
 	var keypoolrefill KeyPoolRefill
 
 	keypoolrefillJson := appName.APICall(query)
+	if keypoolrefillJson == "EMPTY RPC INFO!" {
+		return keypoolrefill, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -869,6 +932,9 @@ func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
 	var listaccounts ListAccounts
 
 	listaccountsJson := appName.APICall(query)
+	if listaccountsJson == "EMPTY RPC INFO!" {
+		return listaccounts, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listaccountsJson)
 
 	var result APIResult
@@ -903,6 +969,9 @@ func (appName AppType) ListAddressGroupings() (ListAddressGroupings, error) {
 	var listaddressgroupings ListAddressGroupings
 
 	listaddressgroupingsJson := appName.APICall(query)
+	if listaddressgroupingsJson == "EMPTY RPC INFO!" {
+		return listaddressgroupings, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listaddressgroupingsJson)
 
 	var result APIResult
@@ -940,6 +1009,9 @@ func (appName AppType) ListLockUnspent() (ListLockUnspent, error) {
 	var listlockunspent ListLockUnspent
 
 	listlockunspentJson := appName.APICall(query)
+	if listlockunspentJson == "EMPTY RPC INFO!" {
+		return listlockunspent, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listlockunspentJson)
 
 	var result APIResult
@@ -994,6 +1066,9 @@ func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAd
 	var listreceivedbyaddress ListReceivedByAddress
 
 	listreceivedbyaddressJson := appName.APICall(query)
+	if listreceivedbyaddressJson == "EMPTY RPC INFO!" {
+		return listreceivedbyaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listreceivedbyaddressJson)
 
 	var result APIResult
@@ -1067,6 +1142,9 @@ func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) 
 	var listsinceblock ListSinceBlock
 
 	listsinceblockJson := appName.APICall(query)
+	if listsinceblockJson == "EMPTY RPC INFO!" {
+		return listsinceblock, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(listsinceblockJson)
 
 	var result APIResult
@@ -1137,6 +1215,9 @@ func (appName AppType) ListTransactions(params APIParams) (ListTransactions, err
 	var listtransactions ListTransactions
 
 	listtransactionsJson := appName.APICall(query)
+	if listtransactionsJson == "EMPTY RPC INFO!" {
+		return listtransactions, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1173,6 +1254,9 @@ func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
 	var lockunspent LockUnspent
 
 	lockunspentJson := appName.APICall(query)
+	if lockunspentJson == "EMPTY RPC INFO!" {
+		return lockunspent, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(lockunspentJson)
 
 	var result APIResult
@@ -1214,6 +1298,9 @@ func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
 	var sendfrom SendFrom
 
 	sendfromJson := appName.APICall(query)
+	if sendfromJson == "EMPTY RPC INFO!" {
+		return sendfrom, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(sendfromJson)
 
 	var result APIResult
@@ -1256,6 +1343,9 @@ func (appName AppType) SendMany(params APIParams) (SendMany, error) {
 	var sendmany SendMany
 
 	sendmanyJson := appName.APICall(query)
+	if sendmanyJson == "EMPTY RPC INFO!" {
+		return sendmany, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(sendmanyJson)
 
 	var result APIResult
@@ -1298,6 +1388,9 @@ func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
 	var sendtoaddress SendToAddress
 
 	sendtoaddressJson := appName.APICall(query)
+	if sendtoaddressJson == "EMPTY RPC INFO!" {
+		return sendtoaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(sendtoaddressJson)
 
 	var result APIResult
@@ -1336,6 +1429,9 @@ func (appName AppType) SetPubKey(pubkey string) (SetPubKey, error) {
 	var setpubkey SetPubKey
 
 	setpubkeyJson := appName.APICall(query)
+	if setpubkeyJson == "EMPTY RPC INFO!" {
+		return setpubkey, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(setpubkeyJson)
 
 	var result APIResult
@@ -1370,6 +1466,9 @@ func (appName AppType) SetTxFee(amount float64) (SetTxFee, error) {
 	var settxfee SetTxFee
 
 	settxfeeJson := appName.APICall(query)
+	if settxfeeJson == "EMPTY RPC INFO!" {
+		return settxfee, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(settxfeeJson)
 
 	var result APIResult
@@ -1407,6 +1506,9 @@ func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
 	var signmessage SignMessage
 
 	signmessageJson := appName.APICall(query)
+	if signmessageJson == "EMPTY RPC INFO!" {
+		return signmessage, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1440,6 +1542,9 @@ func (appName AppType) WalletLock() (WalletLock, error) {
 	var walletlock WalletLock
 
 	walletlockJson := appName.APICall(query)
+	if walletlockJson == "EMPTY RPC INFO!" {
+		return walletlock, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1476,6 +1581,9 @@ func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, err
 	var walletpassphrase WalletPassPhrase
 
 	walletpassphraseJson := appName.APICall(query)
+	if walletpassphraseJson == "EMPTY RPC INFO!" {
+		return walletpassphrase, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1512,6 +1620,9 @@ func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPas
 	var walletpassphrasechange WalletPassPhrasechangeChange
 
 	walletpassphrasechangeJson := appName.APICall(query)
+	if listtransactionsJson walletpassphrasechangeJson "EMPTY RPC INFO!" {
+		return walletpassphrasechange, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1545,6 +1656,9 @@ func (appName AppType) ZExportKey(zaddr string) (ZExportKey, error) {
 	var zexportkey ZExportKey
 
 	zexportkeyJson := appName.APICall(query)
+	if zexportkeyJson == "EMPTY RPC INFO!" {
+		return zexportkey, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1578,6 +1692,9 @@ func (appName AppType) ZExportViewingKey(zaddr string) (ZExportViewingKey, error
 	var zexportviewingkey ZExportViewingKey
 
 	zexportviewingkeyJson := appName.APICall(query)
+	if zexportviewingkeyJson == "EMPTY RPC INFO!" {
+		return zexportviewingkey, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1611,6 +1728,9 @@ func (appName AppType) ZExportWallet(wltfile string) (ZExportWallet, error) {
 	var z_exportwallet ZExportWallet
 
 	z_exportwalletJson := appName.APICall(query)
+	if z_exportwalletJson == "EMPTY RPC INFO!" {
+		return z_exportwallet, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_exportwalletJson)
 
 	var result APIResult
@@ -1651,6 +1771,9 @@ func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
 	var z_getbalance ZGetBalance
 
 	z_getbalanceJson := appName.APICall(query)
+	if z_getbalanceJson == "EMPTY RPC INFO!" {
+		return z_getbalance, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_getbalanceJson)
 
 	var result APIResult
@@ -1685,6 +1808,9 @@ func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
 	var zgetnewaddress ZGetNewAddress
 
 	zgetnewaddressJson := appName.APICall(query)
+	if zgetnewaddressJson == "EMPTY RPC INFO!" {
+		return zgetnewaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -1739,6 +1865,9 @@ func (appName AppType) ZGetOperationResult(params APIParams) (ZGetOperationResul
 	var z_getoperationresult ZGetOperationResult
 
 	z_getoperationresultJson := appName.APICall(query)
+	if z_getoperationresultJson == "EMPTY RPC INFO!" {
+		return z_getoperationresult, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_getoperationresultJson)
 
 	var result APIResult
@@ -1794,6 +1923,9 @@ func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatu
 	var z_getoperationstatus ZGetOperationStatus
 
 	z_getoperationstatusJson := appName.APICall(query)
+	if z_getoperationstatusJson == "EMPTY RPC INFO!" {
+		return z_getoperationstatus, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_getoperationstatusJson)
 
 	var result APIResult
@@ -1842,6 +1974,9 @@ func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, err
 	var z_gettotalbalance ZGetTotalBalance
 
 	z_gettotalbalanceJson := appName.APICall(query)
+	if z_gettotalbalanceJson == "EMPTY RPC INFO!" {
+		return z_gettotalbalance, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_gettotalbalanceJson)
 
 	var result APIResult
@@ -1891,6 +2026,9 @@ func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
 	var z_importkey ZImportKey
 
 	z_importkeyJson := appName.APICall(query)
+	if z_importkeyJson == "EMPTY RPC INFO!" {
+		return z_importkey, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_importkeyJson)
 
 	var result APIResult
@@ -1940,6 +2078,9 @@ func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, e
 	var z_importviewingkey ZImportViewingKey
 
 	z_importviewingkeyJson := appName.APICall(query)
+	if z_importviewingkeyJson == "EMPTY RPC INFO!" {
+		return z_importviewingkey, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_importviewingkeyJson)
 
 	var result APIResult
@@ -1974,6 +2115,9 @@ func (appName AppType) ZImportWallet(wltfile string) (ZImportWallet, error) {
 	var z_importwallet ZImportWallet
 
 	z_importwalletJson := appName.APICall(query)
+	if z_importwalletJson == "EMPTY RPC INFO!" {
+		return z_importwallet, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_importwalletJson)
 
 	var result APIResult
@@ -2014,6 +2158,9 @@ func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) 
 	var z_listaddresses ZListAddresses
 
 	z_listaddressesJson := appName.APICall(query)
+	if z_listaddressesJson == "EMPTY RPC INFO!" {
+		return z_listaddresses, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_listaddressesJson)
 
 	var result APIResult
@@ -2059,6 +2206,9 @@ func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, e
 	var z_listoperationids ZListOperationIDs
 
 	z_listoperationidsJson := appName.APICall(query)
+	if z_listoperationidsJson == "EMPTY RPC INFO!" {
+		return z_listoperationids, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_listoperationidsJson)
 
 	var result APIResult
@@ -2105,6 +2255,9 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 	var z_listreceivedbyaddress ZListReceivedByAddress
 
 	z_listreceivedbyaddressJson := appName.APICall(query)
+	if listtransactionsJson z_listreceivedbyaddressJson "EMPTY RPC INFO!" {
+		return z_listreceivedbyaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_listreceivedbyaddressJson)
 
 	var result APIResult
@@ -2171,6 +2324,9 @@ func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
 	var z_listunspent ZListUnspent
 
 	z_listunspentJson := appName.APICall(query)
+	if z_listunspentJson == "EMPTY RPC INFO!" {
+		return z_listunspent, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_listunspentJson)
 
 	var result APIResult
@@ -2237,6 +2393,9 @@ func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error
 	var z_mergetoaddress ZMergeToAddress
 
 	z_mergetoaddressJson := appName.APICall(query)
+	if z_mergetoaddressJson == "EMPTY RPC INFO!" {
+		return z_mergetoaddress, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_mergetoaddressJson)
 
 	var result APIResult
@@ -2286,6 +2445,9 @@ func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
 	var z_sendmany ZSendMany
 
 	z_sendmanyJson := appName.APICall(query)
+	if z_sendmanyJson == "EMPTY RPC INFO!" {
+		return z_sendmany, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_sendmanyJson)
 
 	var result APIResult
@@ -2341,6 +2503,9 @@ func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error
 	var z_shieldcoinbase ZShieldCoinbase
 
 	z_shieldcoinbaseJson := appName.APICall(query)
+	if z_shieldcoinbaseJson == "EMPTY RPC INFO!" {
+		return z_shieldcoinbase, errors.New("EMPTY RPC INFO!")
+	}
 	//fmt.Println(z_shieldcoinbaseJson)
 
 	var result APIResult

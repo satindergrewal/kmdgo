@@ -46,6 +46,9 @@ func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
 	var validateaddress ValidateAddress
 
 	validateaddressJson := appName.APICall(query)
+	if validateaddressJson == "EMPTY RPC INFO!" {
+		return validateaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -82,6 +85,9 @@ func (appName AppType) VerifyMessage(params APIParams) (VerifyMessage, error) {
 	var verifymessage VerifyMessage
 
 	verifymessageJson := appName.APICall(query)
+	if verifymessageJson == "EMPTY RPC INFO!" {
+		return verifymessage, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
@@ -122,6 +128,9 @@ func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) 
 	var zvalidateaddress ZValidateAddress
 
 	zvalidateaddressJson := appName.APICall(query)
+	if zvalidateaddressJson == "EMPTY RPC INFO!" {
+		return zvalidateaddress, errors.New("EMPTY RPC INFO!")
+	}
 
 	var result APIResult
 
