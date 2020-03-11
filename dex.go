@@ -187,3 +187,60 @@ func (appName AppType) DEXCancel(params APIParams) (DEXCancel, error) {
 	json.Unmarshal([]byte(dexCancelJson), &dexCancel)
 	return dexCancel, nil
 }
+
+type DEXGet struct {
+	Result struct {
+		Timestamp    int    `json:"timestamp"`
+		ID           int    `json:"id"`
+		Hash         string `json:"hash"`
+		TagA         string `json:"tagA"`
+		TagB         string `json:"tagB"`
+		Pubkey       string `json:"pubkey"`
+		Payload      string `json:"payload"`
+		Hex          int    `json:"hex"`
+		Decrypted    string `json:"decrypted"`
+		Decryptedhex int    `json:"decryptedhex"`
+		Senderpub    string `json:"senderpub"`
+		AmountA      string `json:"amountA"`
+		AmountB      string `json:"amountB"`
+		Priority     int    `json:"priority"`
+		Recvtime     int    `json:"recvtime"`
+		Cancelled    int    `json:"cancelled"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_cancel`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexGet DEXGet
+
+	dexGetJson := appName.APICall(query)
+	if dexGetJson == "EMPTY RPC INFO!" {
+		return dexGet, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexGetJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexGetJson), &dexGet)
+		return dexGet, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexGetJson), &dexGet)
+	return dexGet, nil
+}
