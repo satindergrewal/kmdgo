@@ -280,7 +280,7 @@ func (appName AppType) DEXList(params APIParams) (DEXList, error) {
 	fmt.Println(string(params_json))
 
 	query := APIQuery{
-		Method: `DEX_get`,
+		Method: `DEX_list`,
 		Params: string(params_json),
 	}
 	fmt.Println(query)
