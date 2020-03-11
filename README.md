@@ -64,6 +64,21 @@ RPC Port: 27486
 - [x]	cclibaddress [evalcode] [pubkey]
 - [x]	cclibinfo
 
+#### DEX
+- [ ]	DEX_anonsend message priority destpub33
+- [ ]	DEX_broadcast hex [priority [tagA [tagB [pubkey33 [volA [volB]]]]]]
+- [ ]	DEX_cancel id [pubkey33 [tagA tagB]]
+- [ ]	DEX_get id
+- [ ]	DEX_list stopat minpriority tagA tagB pubkey33 [minA maxA minB maxB [stophash]]
+- [ ]	DEX_notarize coin height
+- [ ]	DEX_orderbook maxentries minpriority tagA tagB pubkey33 [minA maxA minB maxB]
+- [ ]	DEX_publish filename priority sliceid
+- [ ]	DEX_setpubkey pubkey33
+- [ ]	DEX_stats
+- [ ]	DEX_stream filename priority
+- [ ]	DEX_streamsub filename priority pubkey
+- [ ]	DEX_subscribe filename priority id [publisher33]
+
 #### FSM
 - [ ]	FSMaddress [pubkey]
 - [ ]	FSMcreate name states
