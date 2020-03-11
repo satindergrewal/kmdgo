@@ -370,3 +370,53 @@ func (appName AppType) DEXOrderbook(params APIParams) (DEXOrderbook, error) {
 	json.Unmarshal([]byte(dexOrderbookJson), &dexOrderbook)
 	return dexOrderbook, nil
 }
+
+type DEXPublish struct {
+	Result struct {
+		Fname       string `json:"fname"`
+		ID          int    `json:"id"`
+		Senderpub   string `json:"senderpub"`
+		Filesize    int    `json:"filesize"`
+		Fragments   int    `json:"fragments"`
+		Numlocators int    `json:"numlocators"`
+		Filehash    string `json:"filehash"`
+		Checkhash   string `json:"checkhash"`
+		Result      string `json:"result"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_Publish`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexPublish DEXPublish
+
+	dexPublishJson := appName.APICall(query)
+	if dexPublishJson == "EMPTY RPC INFO!" {
+		return dexPublish, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexPublishJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexPublishJson), &dexPublish)
+		return dexPublish, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexPublishJson), &dexPublish)
+	return dexPublish, nil
+}
