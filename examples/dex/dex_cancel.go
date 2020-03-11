@@ -25,11 +25,11 @@ func main() {
 
 	var cancel kmdgo.DEXCancel
 
-	args := make(kmdgo.APIParams, 4)
+	args := make(kmdgo.APIParams, 1)
 	args[0] = "38289120"
-	args[1] = "0138d849d6bc81ff1c5389aae9a60ba3ee9cfd7858d93a3864679c25937e70951f"
-	args[2] = "BTC"
-	args[3] = "KMD"
+	// args[1] = "0138d849d6bc81ff1c5389aae9a60ba3ee9cfd7858d93a3864679c25937e70951f"
+	// args[2] = "BTC"
+	// args[3] = "KMD"
 	fmt.Println(args)
 
 	cancel, err := appName.DEXCancel(args)
