@@ -506,7 +506,7 @@ func (appName AppType) DEXStats(params APIParams) (DEXStats, error) {
 
 	query := APIQuery{
 		Method: `DEX_stats`,
-		Params: string(params_json),
+		Params: `[]`,
 	}
 	fmt.Println(query)
 

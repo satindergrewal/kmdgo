@@ -25,12 +25,7 @@ func main() {
 
 	var stats kmdgo.DEXStats
 
-	args := make(kmdgo.APIParams, 1)
-	// pubkey33
-	args[0] = "03732f8ef851ff234c74d0df575c2c5b159e2bab3faca4ec52b3f217d5cda5361d"
-	fmt.Println(args)
-
-	stats, err := appName.DEXStats(args)
+	stats, err := appName.DEXStats()
 	if err != nil {
 		fmt.Printf("Code: %v\n", stats.Error.Code)
 		fmt.Printf("Message: %v\n\n", stats.Error.Message)
