@@ -14,6 +14,7 @@ package kmdgo
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
@@ -51,25 +52,25 @@ func (appName AppType) DEXAnonsend(params APIParams) (DEXAnonsend, error) {
 	}
 	fmt.Println(query)
 
-	// var dexAnonsend DEXAnonsend
+	var dexAnonsend DEXAnonsend
 
-	// dexAnonsendJson := appName.APICall(query)
-	// if dexAnonsendJson == "EMPTY RPC INFO!" {
-	// 	return dexAnonsend, errors.New("EMPTY RPC INFO!")
-	// }
+	dexAnonsendJson := appName.APICall(query)
+	if dexAnonsendJson == "EMPTY RPC INFO!" {
+		return dexAnonsend, errors.New("EMPTY RPC INFO!")
+	}
 
-	// var result APIResult
+	var result APIResult
 
-	// json.Unmarshal([]byte(dexAnonsendJson), &result)
+	json.Unmarshal([]byte(dexAnonsendJson), &result)
 
-	// if result.Result == nil {
-	// 	answer_error, err := json.Marshal(result.Error)
-	// 	if err != nil {
-	// 	}
-	// 	json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
-	// 	return dexAnonsend, errors.New(string(answer_error))
-	// }
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
+		return dexAnonsend, errors.New(string(answer_error))
+	}
 
-	// json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
-	// return dexAnonsend, nil
+	json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
+	return dexAnonsend, nil
 }
