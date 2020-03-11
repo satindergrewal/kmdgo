@@ -74,3 +74,60 @@ func (appName AppType) DEXAnonsend(params APIParams) (DEXAnonsend, error) {
 	json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
 	return dexAnonsend, nil
 }
+
+type DEXBroadcast struct {
+	Result struct {
+		Timestamp    int    `json:"timestamp"`
+		ID           int    `json:"id"`
+		Hash         string `json:"hash"`
+		TagA         string `json:"tagA"`
+		TagB         string `json:"tagB"`
+		Pubkey       string `json:"pubkey"`
+		Payload      string `json:"payload"`
+		Hex          int    `json:"hex"`
+		Decrypted    string `json:"decrypted"`
+		Decryptedhex int    `json:"decryptedhex"`
+		Senderpub    string `json:"senderpub"`
+		AmountA      string `json:"amountA"`
+		AmountB      string `json:"amountB"`
+		Priority     int    `json:"priority"`
+		Recvtime     int    `json:"recvtime"`
+		Cancelled    int    `json:"cancelled"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+func (appName AppType) DEXBroadcast(params APIParams) (DEXBroadcast, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_anonsend`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexBroadcast DEXBroadcast
+
+	dexBroadcastJson := appName.APICall(query)
+	if dexBroadcastJson == "EMPTY RPC INFO!" {
+		return dexBroadcast, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexBroadcastJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexBroadcastJson), &dexBroadcast)
+		return dexBroadcast, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexBroadcastJson), &dexBroadcast)
+	return dexBroadcast, nil
+}
