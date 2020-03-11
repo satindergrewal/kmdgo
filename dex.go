@@ -104,7 +104,7 @@ func (appName AppType) DEXBroadcast(params APIParams) (DEXBroadcast, error) {
 	fmt.Println(string(params_json))
 
 	query := APIQuery{
-		Method: `DEX_anonsend`,
+		Method: `DEX_broadcast`,
 		Params: string(params_json),
 	}
 	fmt.Println(query)
