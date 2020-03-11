@@ -27,7 +27,7 @@ func main() {
 
 	args := make(kmdgo.APIParams, 3)
 	args[0] = "hello"
-	args[1] = 6
+	args[1] = "6"
 	args[2] = "0138d849d6bc81ff1c5389aae9a60ba3ee9cfd7858d93a3864679c25937e70951f"
 	fmt.Println(args)
 
