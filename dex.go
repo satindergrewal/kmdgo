@@ -425,3 +425,57 @@ func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 	json.Unmarshal([]byte(dexPublishJson), &dexPublish)
 	return dexPublish, nil
 }
+
+type DEXSetPubKey struct {
+	Result struct {
+		Result            string `json:"result"`
+		PublishablePubkey string `json:"publishable_pubkey"`
+		Secpkey           string `json:"secpkey"`
+		Recvaddr          string `json:"recvaddr"`
+		RecvZaddr         string `json:"recvZaddr"`
+		Handle            string `json:"handle"`
+		Txpowbits         int    `json:"txpowbits"`
+		Vip               int    `json:"vip"`
+		Cmdpriority       int    `json:"cmdpriority"`
+		Perfstats         string `json:"perfstats"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// DEXSetPubKey sets the public key for blockchain in case it is not started with already a pubkey with paramater `-pubkey=` at it's daemon start.
+// This method will only set the public key once. Once set, and in case this pubkey needs to be changed, the daemon must be restarted.
+// It is a pubkey value which is also displayed in output to method "validateaddress".
+func (appName AppType) DEXSetPubKey(params APIParams) (DEXSetPubKey, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_setpubkey`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexSetPubKey DEXSetPubKey
+
+	dexSetPubKeyJson := appName.APICall(query)
+	if dexSetPubKeyJson == "EMPTY RPC INFO!" {
+		return dexSetPubKey, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexSetPubKeyJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexSetPubKeyJson), &dexSetPubKey)
+		return dexSetPubKey, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexSetPubKeyJson), &dexSetPubKey)
+	return dexSetPubKey, nil
+}
