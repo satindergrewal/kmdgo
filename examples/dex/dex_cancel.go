@@ -54,7 +54,6 @@ func main() {
 	fmt.Println("Hex", cancel.Result.Hex)
 	fmt.Println("Decrypted", cancel.Result.Decrypted)
 	fmt.Println("Decryptedhex", cancel.Result.Decryptedhex)
-	fmt.Println("Senderpub", cancel.Result.Senderpub)
 	fmt.Println("AmountA", cancel.Result.AmountA)
 	fmt.Println("AmountB", cancel.Result.AmountB)
 	fmt.Println("Priority", cancel.Result.Priority)
