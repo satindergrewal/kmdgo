@@ -479,3 +479,56 @@ func (appName AppType) DEXSetPubKey(params APIParams) (DEXSetPubKey, error) {
 	json.Unmarshal([]byte(dexSetPubKeyJson), &dexSetPubKey)
 	return dexSetPubKey, nil
 }
+
+type DEXStats struct {
+	Result struct {
+		Result            string `json:"result"`
+		PublishablePubkey string `json:"publishable_pubkey"`
+		Secpkey           string `json:"secpkey"`
+		Recvaddr          string `json:"recvaddr"`
+		RecvZaddr         string `json:"recvZaddr"`
+		Handle            string `json:"handle"`
+		Txpowbits         int    `json:"txpowbits"`
+		Vip               int    `json:"vip"`
+		Cmdpriority       int    `json:"cmdpriority"`
+		Progress          int    `json:"progress"`
+		Perfstats         string `json:"perfstats"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// DEXStats method gives info and stats related to the p2p data layer.
+func (appName AppType) DEXStats(params APIParams) (DEXStats, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_stats`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexStats DEXStats
+
+	dexStatsJson := appName.APICall(query)
+	if dexStatsJson == "EMPTY RPC INFO!" {
+		return dexStats, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexStatsJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexStatsJson), &dexStats)
+		return dexStats, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexStatsJson), &dexStats)
+	return dexStats, nil
+}

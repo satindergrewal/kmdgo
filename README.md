@@ -73,8 +73,8 @@ RPC Port: 27486
 - [ ]	DEX_notarize coin height
 - [x]	DEX_orderbook maxentries minpriority tagA tagB pubkey33 [minA maxA minB maxB]
 - [x]	DEX_publish filename priority sliceid
-- [ ]	DEX_setpubkey pubkey33
-- [ ]	DEX_stats
+- [x]	DEX_setpubkey pubkey33
+- [x]	DEX_stats
 - [ ]	DEX_stream filename priority
 - [ ]	DEX_streamsub filename priority pubkey
 - [ ]	DEX_subscribe filename priority id [publisher33]
