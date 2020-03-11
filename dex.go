@@ -217,7 +217,7 @@ func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
 	fmt.Println(string(params_json))
 
 	query := APIQuery{
-		Method: `DEX_cancel`,
+		Method: `DEX_get`,
 		Params: string(params_json),
 	}
 	fmt.Println(query)
