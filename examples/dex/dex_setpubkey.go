@@ -43,7 +43,7 @@ func main() {
 	// fmt.Println("-------")
 
 	fmt.Println("Result", dspkey.Result.Result)
-	fmt.Println("dspkeyishablePubkey", dspkey.Result.dspkeyishablePubkey)
+	fmt.Println("PublishablePubkey", dspkey.Result.PublishablePubkey)
 	fmt.Println("Secpkey", dspkey.Result.Secpkey)
 	fmt.Println("Recvaddr", dspkey.Result.Recvaddr)
 	fmt.Println("RecvZaddr", dspkey.Result.RecvZaddr)
