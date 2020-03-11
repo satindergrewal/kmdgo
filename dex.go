@@ -244,3 +244,66 @@ func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
 	json.Unmarshal([]byte(dexGetJson), &dexGet)
 	return dexGet, nil
 }
+
+type DEXList struct {
+	Result struct {
+		Result  string `json:"result"`
+		Matches []struct {
+			Timestamp int    `json:"timestamp"`
+			ID        int64  `json:"id"`
+			Hash      string `json:"hash"`
+			TagA      string `json:"tagA"`
+			TagB      string `json:"tagB"`
+			Pubkey    string `json:"pubkey"`
+			Payload   string `json:"payload"`
+			Hex       int    `json:"hex"`
+			Senderpub string `json:"senderpub"`
+			Error     string `json:"error"`
+			AmountA   string `json:"amountA"`
+			AmountB   string `json:"amountB"`
+			Priority  int    `json:"priority"`
+			Recvtime  int    `json:"recvtime"`
+			Cancelled int    `json:"cancelled"`
+		} `json:"matches"`
+		TagA   string `json:"tagA"`
+		TagB   string `json:"tagB"`
+		Pubkey string `json:"pubkey"`
+		N      int    `json:"n"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+func (appName AppType) DEXList(params APIParams) (DEXList, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_get`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexList DEXList
+
+	dexListJson := appName.APICall(query)
+	if dexListJson == "EMPTY RPC INFO!" {
+		return dexList, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexListJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexListJson), &dexList)
+		return dexList, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexListJson), &dexList)
+	return dexList, nil
+}
