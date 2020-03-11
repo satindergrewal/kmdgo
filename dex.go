@@ -387,6 +387,11 @@ type DEXPublish struct {
 	ID    string `json:"id"`
 }
 
+// DEXPublish method allows user to publish file to p2p network.
+// By default it looks for the file in followin directories based on different OS:
+// Linux: $HOME directory path = $HOME/dexp2p = example: /home/satinder
+// Mac: $HOME directory path = $HOME/dexp2p = example: /Users/satinder
+// Windows: %AppData% directory path = %AppData%\dexp2p = example: C:\Users\satinder\AppData\dexp2p
 func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 
 	params_json, _ := json.Marshal(params)
