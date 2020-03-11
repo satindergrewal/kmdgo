@@ -25,7 +25,7 @@ func main() {
 
 	var broadcast kmdgo.DEXBroadcast
 
-	args := make(kmdgo.APIParams, 3)
+	args := make(kmdgo.APIParams, 6)
 	args[0] = "hello"
 	args[1] = "5"
 	args[2] = "BTC"
