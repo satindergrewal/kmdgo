@@ -393,7 +393,7 @@ func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 	fmt.Println(string(params_json))
 
 	query := APIQuery{
-		Method: `DEX_Publish`,
+		Method: `DEX_publish`,
 		Params: string(params_json),
 	}
 	fmt.Println(query)
