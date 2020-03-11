@@ -307,3 +307,65 @@ func (appName AppType) DEXList(params APIParams) (DEXList, error) {
 	json.Unmarshal([]byte(dexListJson), &dexList)
 	return dexList, nil
 }
+
+type DEXOrderbook struct {
+	Result struct {
+		Asks []struct {
+			Price      string `json:"price"`
+			Baseamount string `json:"baseamount"`
+			Relamount  string `json:"relamount"`
+			Priority   int    `json:"priority"`
+			Pubkey     string `json:"pubkey"`
+			Timestamp  int    `json:"timestamp"`
+			Hash       string `json:"hash"`
+			ID         int64  `json:"id"`
+		} `json:"asks"`
+		Bids []struct {
+			Price      string `json:"price"`
+			Baseamount string `json:"baseamount"`
+			Relamount  string `json:"relamount"`
+			Priority   int    `json:"priority"`
+			Pubkey     string `json:"pubkey"`
+			Timestamp  int    `json:"timestamp"`
+			Hash       string `json:"hash"`
+			ID         int64  `json:"id"`
+		} `json:"bids"`
+		Base string `json:"base"`
+		Rel  string `json:"rel"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+func (appName AppType) DEXOrderbook(params APIParams) (DEXOrderbook, error) {
+
+	params_json, _ := json.Marshal(params)
+	fmt.Println(string(params_json))
+
+	query := APIQuery{
+		Method: `DEX_orderbook`,
+		Params: string(params_json),
+	}
+	fmt.Println(query)
+
+	var dexOrderbook DEXOrderbook
+
+	dexOrderbookJson := appName.APICall(query)
+	if dexOrderbookJson == "EMPTY RPC INFO!" {
+		return dexOrderbook, errors.New("EMPTY RPC INFO!")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(dexOrderbookJson), &result)
+
+	if result.Result == nil {
+		answer_error, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(dexOrderbookJson), &dexOrderbook)
+		return dexOrderbook, errors.New(string(answer_error))
+	}
+
+	json.Unmarshal([]byte(dexOrderbookJson), &dexOrderbook)
+	return dexOrderbook, nil
+}
