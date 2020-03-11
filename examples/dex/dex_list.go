@@ -81,8 +81,8 @@ func main() {
 	}
 
 	fmt.Println("-------")
-	fmt.Println("TagA", TagA)
-	fmt.Println("TagB", TagB)
-	fmt.Println("Pubkey", Pubkey)
-	fmt.Println("N", N)
+	fmt.Println("TagA", list.Result.TagA)
+	fmt.Println("TagB", list.Result.TagB)
+	fmt.Println("Pubkey", list.Result.Pubkey)
+	fmt.Println("N", list.Result.N)
 }
