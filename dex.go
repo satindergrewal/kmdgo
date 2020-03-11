@@ -332,6 +332,7 @@ type DEXOrderbook struct {
 		} `json:"bids"`
 		Base string `json:"base"`
 		Rel  string `json:"rel"`
+	} `json:"result"`
 	Error Error  `json:"error"`
 	ID    string `json:"id"`
 }
