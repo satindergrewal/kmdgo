@@ -59,4 +59,30 @@ func main() {
 	fmt.Println("-------")
 	fmt.Println(list.Result.Matches)
 	fmt.Println("-------")
+
+	for i, v := range list.Result.Matches {
+		fmt.Printf("\n-------\n")
+		fmt.Println(i)
+		fmt.Println("Timestamp", v.Timestamp)
+		fmt.Println("ID", v.ID)
+		fmt.Println("Hash", v.Hash)
+		fmt.Println("TagA", v.TagA)
+		fmt.Println("TagB", v.TagB)
+		fmt.Println("Pubkey", v.Pubkey)
+		fmt.Println("Payload", v.Payload)
+		fmt.Println("Hex", v.Hex)
+		fmt.Println("Senderpub", v.Senderpub)
+		fmt.Println("Error", v.Error)
+		fmt.Println("AmountA", v.AmountA)
+		fmt.Println("AmountB", v.AmountB)
+		fmt.Println("Priority", v.Priority)
+		fmt.Println("Recvtime", v.Recvtime)
+		fmt.Println("Cancelled", v.Cancelled)
+	}
+
+	fmt.Println("-------")
+	fmt.Println("TagA", TagA)
+	fmt.Println("TagB", TagB)
+	fmt.Println("Pubkey", Pubkey)
+	fmt.Println("N", N)
 }
