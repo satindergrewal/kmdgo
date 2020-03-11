@@ -73,7 +73,7 @@ func main() {
 	}
 
 	fmt.Println("--- Bids ---")
-	for i, v = range obook.Result.Bids {
+	for i, v := range obook.Result.Bids {
 		fmt.Printf("\n-------\n")
 		fmt.Println(i)
 		fmt.Println("Price", v.Price)
