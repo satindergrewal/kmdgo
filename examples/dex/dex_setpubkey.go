@@ -25,7 +25,7 @@ func main() {
 
 	var dspkey kmdgo.DEXSetPubKey
 
-	args := make(kmdgo.APIParams, 2)
+	args := make(kmdgo.APIParams, 1)
 	// pubkey33
 	args[0] = "03732f8ef851ff234c74d0df575c2c5b159e2bab3faca4ec52b3f217d5cda5361d"
 	fmt.Println(args)
