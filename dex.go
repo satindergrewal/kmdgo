@@ -499,7 +499,7 @@ type DEXStats struct {
 }
 
 // DEXStats method gives info and stats related to the p2p data layer.
-func (appName AppType) DEXStats(params APIParams) (DEXStats, error) {
+func (appName AppType) DEXStats() (DEXStats, error) {
 
 	params_json, _ := json.Marshal(params)
 	fmt.Println(string(params_json))
