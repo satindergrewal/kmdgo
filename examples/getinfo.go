@@ -14,8 +14,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/satindergrewal/kmdgo"
 	"log"
+
+	"github.com/satindergrewal/kmdgo"
+	// "os"
 )
 
 func main() {
@@ -31,7 +33,11 @@ func main() {
 	// Define variable of type kmdgo.AppType. You can use function NewAppType which will return the required type.
 	// The name value must be the matching value of it's data directory name.
 	// Example Komodo's data directory is `komodo`, VerusCoin's data directory is `VRSC` and so on.
-	appName := kmdgo.NewAppType(`ROGUE`)
+	appName := kmdgo.NewAppType(`komodo`)
+	// os.Setenv("komodo" + "_RPCURL", `http://127.0.0.1:`)
+	// os.Setenv("komodo" + "_RPCUSER", `user2a66b68210b05bee`)
+	// os.Setenv("komodo" + "_RPCPASS", `84fd254fbc577286c0b139472c1cf72b`)
+	// os.Setenv("komodo" + "_RPCPORT", `7771`)
 
 	// define the variable with GetInfo struct from pacakge kmdgo
 	var info kmdgo.GetInfo

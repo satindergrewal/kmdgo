@@ -20,6 +20,9 @@ import (
 	"log"
 	"net/http"
 
+	// "fmt"
+	"os"
+
 	"github.com/satindergrewal/kmdgo/kmdutil"
 )
 
@@ -49,15 +52,52 @@ func NewAppType(app AppType) *AppType {
 	return &app
 }
 
+// APICall executes the blockchain RPC Calls and returns the data in JSON output.
+// By default this API call tries to get the RPC information from the .conf file from the set blockchain's default directory on the system based on OS which is being executed on.
+// If the local system doesn't has the blockchain running, you can also set this RPC settings in environment variables. The environment variable has to use the the combination of the appName + _RPCURL.
+// Shell example:
+// export komodo_RPCURL="http://192.168.1.1:"
+// export komodo_RPCUSER="username"
+// export komodo_RPCPASS="password"
+// export komodo_RPCPORT="7771"
+//
+// These environment variables can also be set within Go code. Example:
+// os.Setenv("komodo" + "_RPCURL", `http://127.0.0.1:`)
+// os.Setenv("komodo" + "_RPCUSER", `username`)
+// os.Setenv("komodo" + "_RPCPASS", `password`)
+// os.Setenv("komodo" + "_RPCPORT", `7771`)
+//
+// As per this example, if for example using different SmartChain like "DEX", and the appName is set to example "DEX", just replace it word `komodo` with `DEX`.
 func (appName AppType) APICall(q APIQuery) string {
-	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(string(appName))
+	var rpcurl, rpcuser, rpcpass, rpcport string
+
+	key := string(appName) + "_RPCURL"
+	// fmt.Println(key)
+	_, ok := os.LookupEnv(key)
+	if !ok {
+		// fmt.Printf("%s not set\n", key)
+		// Try to get RPC info from local default directory for set blockchain
+		rpcuser, rpcpass, rpcport = kmdutil.AppRPCInfo(string(appName))
+		rpcurl = `http://127.0.0.1:`
+	} else {
+		// fmt.Printf("%s=%s\n", key, val)
+		rpcurl = os.Getenv(string(appName) + "_RPCURL")
+		rpcuser = os.Getenv(string(appName) + "_RPCUSER")
+		rpcpass = os.Getenv(string(appName) + "_RPCPASS")
+		rpcport = os.Getenv(string(appName) + "_RPCPORT")
+	}
+
+	// fmt.Printf(" %s\n %s\n %s\n %s\n", rpcurl, rpcuser, rpcpass, rpcport)
+	// fmt.Printf(" %T\n %T\n %T\n %T\n", rpcurl, rpcuser, rpcpass, rpcport)
+
 	if rpcuser == "" && rpcpass == "" && rpcport == "" {
 		// fmt.Println("EMPTY RPC INFO!")
 		return "EMPTY RPC INFO!"
 	}
 
 	client := &http.Client{}
-	url := `http://127.0.0.1:` + rpcport
+	url := rpcurl + rpcport
+	// fmt.Println(url)
 
 	var query_str string
 	query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
@@ -76,12 +116,12 @@ func (appName AppType) APICall(q APIQuery) string {
 	}
 	bodyText, err := ioutil.ReadAll(resp.Body)
 
+	// fmt.Println(string(bodyText))
+
 	var query_result map[string]interface{}
 	if err := json.Unmarshal(bodyText, &query_result); err != nil {
 		panic(err)
 	}
-
-	//fmt.Println(string(bodyText))
 
 	s := string(bodyText)
 	return s
