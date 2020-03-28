@@ -16,8 +16,8 @@ import (
 	"fmt"
 	"log"
 
-	// "github.com/satindergrewal/kmdgo"
-	"kmdgo"
+	"github.com/satindergrewal/kmdgo"
+	// "kmdgo"
 )
 
 func main() {

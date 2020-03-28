@@ -18,8 +18,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
+	"regexp"
 
 	// "fmt"
 	"os"
@@ -108,21 +108,24 @@ func (appName AppType) APICall(q *APIQuery) string {
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(query_byte))
 	req.Header.Set("Content-Type", "application/json")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
 
 	//req, err := http.NewRequest("POST", , nil)
 	req.SetBasicAuth(rpcuser, rpcpass)
 	resp, err := client.Do(req)
+
 	if err != nil {
-		// log.Fatalf("An error occured while trying connecting to blockchain RPC:")
-		fmt.Println("An error occured while trying connecting to blockchain RPC:")
-		log.Fatal(err)
+		// Check if the error is "connection refused", means if the daemon is running or not running or inaccessible due to any X reason.
+		matched, _ := regexp.Match(`connection refused`, []byte(err.Error()))
+		// fmt.Println(matched, err)
+		if matched == true {
+			s := string(`{"result": {}, "error": {"code":0,"message":"connection refused"}, "id":"kmdgo"}`)
+			fmt.Println(s)
+			return s
+		}
 	}
 	bodyText, err := ioutil.ReadAll(resp.Body)
 
-	// fmt.Println(string(bodyText))
+	fmt.Println(string(bodyText))
 
 	var query_result map[string]interface{}
 	if err := json.Unmarshal(bodyText, &query_result); err != nil {
