@@ -48,7 +48,7 @@ func (appName AppType) CoinSupply(params APIParams) (CoinSupply, error) {
 
 	var coinsupply CoinSupply
 
-	coinsupplyJson := appName.APICall(query)
+	coinsupplyJson := appName.APICall(&query)
 	if coinsupplyJson == "EMPTY RPC INFO!" {
 		return coinsupply, errors.New("EMPTY RPC INFO!")
 	}
@@ -83,7 +83,7 @@ func (appName AppType) GetBestBlockhash() (GetBestBlockhash, error) {
 
 	var getbestblockhash GetBestBlockhash
 
-	getbestblockhashJson := appName.APICall(query)
+	getbestblockhashJson := appName.APICall(&query)
 	if getbestblockhashJson == "EMPTY RPC INFO!" {
 		return getbestblockhash, errors.New("EMPTY RPC INFO!")
 	}
@@ -176,7 +176,7 @@ func (appName AppType) GetBlock(params APIParams) (GetBlock, error) {
 
 	var getblock GetBlock
 
-	getblockJson := appName.APICall(query)
+	getblockJson := appName.APICall(&query)
 	if getblockJson == "EMPTY RPC INFO!" {
 		return getblock, errors.New("EMPTY RPC INFO!")
 	}
@@ -262,7 +262,7 @@ func (appName AppType) GetBlockchainInfo() (GetBlockchainInfo, error) {
 
 	var getblockchaininfo GetBlockchainInfo
 
-	getblockchaininfoJson := appName.APICall(query)
+	getblockchaininfoJson := appName.APICall(&query)
 	if getblockchaininfoJson == "EMPTY RPC INFO!" {
 		return getblockchaininfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -297,7 +297,7 @@ func (appName AppType) GetBlockCount() (GetBlockCount, error) {
 
 	var getblockcount GetBlockCount
 
-	getbestblockhashJson := appName.APICall(query)
+	getbestblockhashJson := appName.APICall(&query)
 	if getbestblockhashJson == "EMPTY RPC INFO!" {
 		return getblockcount, errors.New("EMPTY RPC INFO!")
 	}
@@ -333,7 +333,7 @@ func (appName AppType) GetBlockHash(h int) (GetBlockHash, error) {
 
 	var getblockhash GetBlockHash
 
-	getblockhashJson := appName.APICall(query)
+	getblockhashJson := appName.APICall(&query)
 	if getblockhashJson == "EMPTY RPC INFO!" {
 		return getblockhash, errors.New("EMPTY RPC INFO!")
 	}
@@ -391,7 +391,7 @@ func (appName AppType) GetBlockHeader(params APIParams) (GetBlockHeader, error) 
 
 	var getblockheader GetBlockHeader
 
-	getblockheaderJson := appName.APICall(query)
+	getblockheaderJson := appName.APICall(&query)
 	if getblockheaderJson == "EMPTY RPC INFO!" {
 		return getblockheader, errors.New("EMPTY RPC INFO!")
 	}
@@ -432,7 +432,7 @@ func (appName AppType) GetChainTips() (GetChainTips, error) {
 
 	var getchaintips GetChainTips
 
-	getchaintipsJson := appName.APICall(query)
+	getchaintipsJson := appName.APICall(&query)
 	if getchaintipsJson == "EMPTY RPC INFO!" {
 		return getchaintips, errors.New("EMPTY RPC INFO!")
 	}
@@ -468,7 +468,7 @@ func (appName AppType) GetDifficulty() (GetDifficulty, error) {
 
 	var getdifficulty GetDifficulty
 
-	getdifficultyJson := appName.APICall(query)
+	getdifficultyJson := appName.APICall(&query)
 	if getdifficultyJson == "EMPTY RPC INFO!" {
 		return getdifficulty, errors.New("EMPTY RPC INFO!")
 	}
@@ -508,7 +508,7 @@ func (appName AppType) GetMempoolInfo() (GetMempoolInfo, error) {
 
 	var getmempoolinfo GetMempoolInfo
 
-	getmempoolinfoJson := appName.APICall(query)
+	getmempoolinfoJson := appName.APICall(&query)
 	if getmempoolinfoJson == "EMPTY RPC INFO!" {
 		return getmempoolinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -560,7 +560,7 @@ func (appName AppType) GetRawMempoolTrue(b bool) (GetRawMempoolTrue, error) {
 
 	var getrawmempool GetRawMempoolTrue
 
-	getrawmempoolJson := appName.APICall(query)
+	getrawmempoolJson := appName.APICall(&query)
 	if getrawmempoolJson == "EMPTY RPC INFO!" {
 		return getrawmempool, errors.New("EMPTY RPC INFO!")
 	}
@@ -591,7 +591,7 @@ func (appName AppType) GetRawMempoolFalse(b bool) (GetRawMempoolFalse, error) {
 
 	var getrawmempool GetRawMempoolFalse
 
-	getrawmempoolJson := appName.APICall(query)
+	getrawmempoolJson := appName.APICall(&query)
 	if getrawmempoolJson == "EMPTY RPC INFO!" {
 		return getrawmempool, errors.New("EMPTY RPC INFO!")
 	}
@@ -648,7 +648,7 @@ func (appName AppType) GetTxOut(params APIParams) (GetTxOut, error) {
 
 	var gettxout GetTxOut
 
-	gettxoutJson := appName.APICall(query)
+	gettxoutJson := appName.APICall(&query)
 	if gettxoutJson == "EMPTY RPC INFO!" {
 		return gettxout, errors.New("EMPTY RPC INFO!")
 	}
@@ -684,7 +684,7 @@ func (appName AppType) GetTxOutProof(txids string) (GetTxOutProof, error) {
 
 	var gettxoutproof GetTxOutProof
 
-	gettxoutproofJson := appName.APICall(query)
+	gettxoutproofJson := appName.APICall(&query)
 	if gettxoutproofJson == "EMPTY RPC INFO!" {
 		return gettxoutproof, errors.New("EMPTY RPC INFO!")
 	}
@@ -728,7 +728,7 @@ func (appName AppType) GetTxOutSetInfo() (GetTxOutSetInfo, error) {
 
 	var gettxoutsetinfo GetTxOutSetInfo
 
-	gettxoutsetinfoJson := appName.APICall(query)
+	gettxoutsetinfoJson := appName.APICall(&query)
 	if gettxoutsetinfoJson == "EMPTY RPC INFO!" {
 		return gettxoutsetinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -772,7 +772,7 @@ func (appName AppType) MinerIDs(ht string) (MinerIDs, error) {
 
 	var minerids MinerIDs
 
-	mineridsJson := appName.APICall(query)
+	mineridsJson := appName.APICall(&query)
 	if mineridsJson == "EMPTY RPC INFO!" {
 		return minerids, errors.New("EMPTY RPC INFO!")
 	}
@@ -817,7 +817,7 @@ func (appName AppType) Notaries(ht string) (Notaries, error) {
 
 	var notaries Notaries
 
-	notariesJson := appName.APICall(query)
+	notariesJson := appName.APICall(&query)
 	if notariesJson == "EMPTY RPC INFO!" {
 		return notaries, errors.New("EMPTY RPC INFO!")
 	}
@@ -862,7 +862,7 @@ func (appName AppType) VerifyChain(params APIParams) (VerifyChain, error) {
 
 	var verifychain VerifyChain
 
-	verifychainJson := appName.APICall(query)
+	verifychainJson := appName.APICall(&query)
 	if verifychainJson == "EMPTY RPC INFO!" {
 		return verifychain, errors.New("EMPTY RPC INFO!")
 	}
@@ -898,7 +898,7 @@ func (appName AppType) VerifyTxOutProof(pf string) (VerifyTxOutProof, error) {
 
 	var verifytxoutproof VerifyTxOutProof
 
-	verifytxoutproofJson := appName.APICall(query)
+	verifytxoutproofJson := appName.APICall(&query)
 	if verifytxoutproofJson == "EMPTY RPC INFO!" {
 		return verifytxoutproof, errors.New("EMPTY RPC INFO!")
 	}

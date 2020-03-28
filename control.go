@@ -66,7 +66,7 @@ func (appName AppType) GetInfo() (GetInfo, error) {
 
 	var getinfo GetInfo
 
-	getinfoJson := appName.APICall(query)
+	getinfoJson := appName.APICall(&query)
 	if getinfoJson == "EMPTY RPC INFO!" {
 		return getinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -101,7 +101,7 @@ func (appName AppType) Stop() (Stop, error) {
 
 	var stop Stop
 
-	stopJson := appName.APICall(query)
+	stopJson := appName.APICall(&query)
 	if stopJson == "EMPTY RPC INFO!" {
 		return stop, errors.New("EMPTY RPC INFO!")
 	}

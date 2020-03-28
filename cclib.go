@@ -45,7 +45,7 @@ func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 
 	var cclibinfo CCLibInfo
 
-	cclibinfoJson := appName.APICall(query)
+	cclibinfoJson := appName.APICall(&query)
 	if cclibinfoJson == "EMPTY RPC INFO!" {
 		return cclibinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -98,7 +98,7 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 
 	var cclibaddr CCLibAddress
 
-	cclibaddrJson := appName.APICall(query)
+	cclibaddrJson := appName.APICall(&query)
 	if cclibaddrJson == "EMPTY RPC INFO!" {
 		return cclibaddr, errors.New("EMPTY RPC INFO!")
 	}
@@ -147,7 +147,7 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 
 	//var cclb CCLib
 
-	cclbJson := appName.APICall(query)
+	cclbJson := appName.APICall(&query)
 	//fmt.Println(cclbJson)
 
 	var result APIResult

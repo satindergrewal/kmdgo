@@ -36,7 +36,7 @@ func (appName AppType) AddNode(params APIParams) (AddNode, error) {
 
 	var addnode AddNode
 
-	addnodeJson := appName.APICall(query)
+	addnodeJson := appName.APICall(&query)
 	if addnodeJson == "EMPTY RPC INFO!" {
 		return addnode, errors.New("EMPTY RPC INFO!")
 	}
@@ -73,7 +73,7 @@ func (appName AppType) ClearBanned() (ClearBanned, error) {
 
 	var clearbanned ClearBanned
 
-	clearbannedJson := appName.APICall(query)
+	clearbannedJson := appName.APICall(&query)
 	if clearbannedJson == "EMPTY RPC INFO!" {
 		return clearbanned, errors.New("EMPTY RPC INFO!")
 	}
@@ -110,7 +110,7 @@ func (appName AppType) DisconnectNode(node string) (DisconnectNode, error) {
 
 	var disconnectnode DisconnectNode
 
-	disconnectnodeJson := appName.APICall(query)
+	disconnectnodeJson := appName.APICall(&query)
 	if disconnectnodeJson == "EMPTY RPC INFO!" {
 		return disconnectnode, errors.New("EMPTY RPC INFO!")
 	}
@@ -157,7 +157,7 @@ func (appName AppType) GetAddedNodeInfo(params APIParams) (GetAddedNodeInfo, err
 
 	var getaddednodeinfo GetAddedNodeInfo
 
-	getaddednodeinfoJson := appName.APICall(query)
+	getaddednodeinfoJson := appName.APICall(&query)
 	if getaddednodeinfoJson == "EMPTY RPC INFO!" {
 		return getaddednodeinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -194,7 +194,7 @@ func (appName AppType) GetConnectionCount() (GetConnectionCount, error) {
 
 	var getconnectioncount GetConnectionCount
 
-	getconnectioncountJson := appName.APICall(query)
+	getconnectioncountJson := appName.APICall(&query)
 	if getconnectioncountJson == "EMPTY RPC INFO!" {
 		return getconnectioncount, errors.New("EMPTY RPC INFO!")
 	}
@@ -235,7 +235,7 @@ func (appName AppType) GetDeprecationInfo() (GetDeprecationInfo, error) {
 
 	var getdeprecationinfo GetDeprecationInfo
 
-	getdeprecationinfoJson := appName.APICall(query)
+	getdeprecationinfoJson := appName.APICall(&query)
 	if getdeprecationinfoJson == "EMPTY RPC INFO!" {
 		return getdeprecationinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -276,7 +276,7 @@ func (appName AppType) GetNetTotals() (GetNetTotals, error) {
 
 	var getnettotals GetNetTotals
 
-	getnettotalsJson := appName.APICall(query)
+	getnettotalsJson := appName.APICall(&query)
 	if getnettotalsJson == "EMPTY RPC INFO!" {
 		return getnettotals, errors.New("EMPTY RPC INFO!")
 	}
@@ -330,7 +330,7 @@ func (appName AppType) GetNetworkInfo() (GetNetworkInfo, error) {
 
 	var getnetworkinfo GetNetworkInfo
 
-	getnetworkinfoJson := appName.APICall(query)
+	getnetworkinfoJson := appName.APICall(&query)
 	if getnetworkinfoJson == "EMPTY RPC INFO!" {
 		return getnetworkinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -388,7 +388,7 @@ func (appName AppType) GetPeerInfo() (GetPeerInfo, error) {
 
 	var getpeerinfo GetPeerInfo
 
-	getpeerinfoJson := appName.APICall(query)
+	getpeerinfoJson := appName.APICall(&query)
 	if getpeerinfoJson == "EMPTY RPC INFO!" {
 		return getpeerinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -428,7 +428,7 @@ func (appName AppType) ListBanned() (ListBanned, error) {
 
 	var listbanned ListBanned
 
-	listbannedJson := appName.APICall(query)
+	listbannedJson := appName.APICall(&query)
 	if listbannedJson == "EMPTY RPC INFO!" {
 		return listbanned, errors.New("EMPTY RPC INFO!")
 	}
@@ -465,7 +465,7 @@ func (appName AppType) Ping() (Ping, error) {
 
 	var ping Ping
 
-	pingJson := appName.APICall(query)
+	pingJson := appName.APICall(&query)
 	if pingJson == "EMPTY RPC INFO!" {
 		return ping, errors.New("EMPTY RPC INFO!")
 	}
@@ -505,7 +505,7 @@ func (appName AppType) SetBan(params APIParams) (SetBan, error) {
 
 	var setban SetBan
 
-	setbanJson := appName.APICall(query)
+	setbanJson := appName.APICall(&query)
 	if setbanJson == "EMPTY RPC INFO!" {
 		return setban, errors.New("EMPTY RPC INFO!")
 	}

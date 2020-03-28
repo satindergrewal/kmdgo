@@ -52,7 +52,7 @@ func (appName AppType) FaucetAddress(params APIParams) (FaucetAddress, error) {
 
 	var faucetaddress FaucetAddress
 
-	faucetaddressJson := appName.APICall(query)
+	faucetaddressJson := appName.APICall(&query)
 	if faucetaddressJson == "EMPTY RPC INFO!" {
 		return faucetaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -98,7 +98,7 @@ func (appName AppType) FaucetFund(params APIParams) (FaucetFund, error) {
 
 	var faucetfund FaucetFund
 
-	faucetfundJson := appName.APICall(query)
+	faucetfundJson := appName.APICall(&query)
 	if faucetfundJson == "EMPTY RPC INFO!" {
 		return faucetfund, errors.New("EMPTY RPC INFO!")
 	}
@@ -138,7 +138,7 @@ func (appName AppType) FaucetGet() (FaucetGet, error) {
 
 	var faucetget FaucetGet
 
-	faucetgetJson := appName.APICall(query)
+	faucetgetJson := appName.APICall(&query)
 	if faucetgetJson == "EMPTY RPC INFO!" {
 		return faucetget, errors.New("EMPTY RPC INFO!")
 	}
@@ -181,7 +181,7 @@ func (appName AppType) FaucetInfo() (FaucetInfo, error) {
 
 	var faucetinfo FaucetInfo
 
-	faucetinfoJson := appName.APICall(query)
+	faucetinfoJson := appName.APICall(&query)
 	if faucetinfoJson == "EMPTY RPC INFO!" {
 		return faucetinfo, errors.New("EMPTY RPC INFO!")
 	}

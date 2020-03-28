@@ -46,7 +46,7 @@ func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error
 
 	var getblocksubsidy GetBlockSubsidy
 
-	getblocksubsidyJson := appName.APICall(query)
+	getblocksubsidyJson := appName.APICall(&query)
 	if getblocksubsidyJson == "EMPTY RPC INFO!" {
 		return getblocksubsidy, errors.New("EMPTY RPC INFO!")
 	}
@@ -123,7 +123,7 @@ func (appName AppType) GetBlockTemplate(params APIParams) (GetBlockTemplate, err
 
 	var getblocktemplate GetBlockTemplate
 
-	getblocktemplateJson := appName.APICall(query)
+	getblocktemplateJson := appName.APICall(&query)
 	if getblocktemplateJson == "EMPTY RPC INFO!" {
 		return getblocktemplate, errors.New("EMPTY RPC INFO!")
 	}
@@ -159,7 +159,7 @@ func (appName AppType) GetLocalSolps() (GetLocalSolps, error) {
 
 	var getlocalsolps GetLocalSolps
 
-	getlocalsolpsJson := appName.APICall(query)
+	getlocalsolpsJson := appName.APICall(&query)
 	if getlocalsolpsJson == "EMPTY RPC INFO!" {
 		return getlocalsolps, errors.New("EMPTY RPC INFO!")
 	}
@@ -210,7 +210,7 @@ func (appName AppType) GetMiningInfo() (GetMiningInfo, error) {
 
 	var getmininginfo GetMiningInfo
 
-	getmininginfoJson := appName.APICall(query)
+	getmininginfoJson := appName.APICall(&query)
 	if getmininginfoJson == "EMPTY RPC INFO!" {
 		return getmininginfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -261,7 +261,7 @@ func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, err
 
 	var getnetworkhashps GetNetworkHashps
 
-	getnetworkhashpsJson := appName.APICall(query)
+	getnetworkhashpsJson := appName.APICall(&query)
 	if getnetworkhashpsJson == "EMPTY RPC INFO!" {
 		return getnetworkhashps, errors.New("EMPTY RPC INFO!")
 	}
@@ -312,7 +312,7 @@ func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error
 
 	var getnetworksolps GetNetworkSolps
 
-	getnetworksolpsJson := appName.APICall(query)
+	getnetworksolpsJson := appName.APICall(&query)
 	if getnetworksolpsJson == "EMPTY RPC INFO!" {
 		return getnetworksolps, errors.New("EMPTY RPC INFO!")
 	}
@@ -351,7 +351,7 @@ func (appName AppType) PrioritiseTransaction(params APIParams) (PrioritiseTransa
 
 	var prioritisetransaction PrioritiseTransaction
 
-	prioritisetransactionJson := appName.APICall(query)
+	prioritisetransactionJson := appName.APICall(&query)
 	if prioritisetransactionJson == "EMPTY RPC INFO!" {
 		return prioritisetransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -391,7 +391,7 @@ func (appName AppType) SubmitBlock(params APIParams) (SubmitBlock, error) {
 
 	var submitblock SubmitBlock
 
-	submitblockJson := appName.APICall(query)
+	submitblockJson := appName.APICall(&query)
 	if submitblockJson == "EMPTY RPC INFO!" {
 		return submitblock, errors.New("EMPTY RPC INFO!")
 	}

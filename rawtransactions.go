@@ -48,7 +48,7 @@ func (appName AppType) CreateRawTransaction(params APIParams) (CreateRawTransact
 
 	var createrawtransaction CreateRawTransaction
 
-	createrawtransactionJson := appName.APICall(query)
+	createrawtransactionJson := appName.APICall(&query)
 	if createrawtransactionJson == "EMPTY RPC INFO!" {
 		return createrawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -114,7 +114,7 @@ func (appName AppType) DecodeRawTransaction(params APIParams) (DecodeRawTransact
 
 	var decoderawtransaction DecodeRawTransaction
 
-	decoderawtransactionJson := appName.APICall(query)
+	decoderawtransactionJson := appName.APICall(&query)
 	if decoderawtransactionJson == "EMPTY RPC INFO!" {
 		return decoderawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -157,7 +157,7 @@ func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
 
 	var decodescript DecodeScript
 
-	decodescriptJson := appName.APICall(query)
+	decodescriptJson := appName.APICall(&query)
 	if decodescriptJson == "EMPTY RPC INFO!" {
 		return decodescript, errors.New("EMPTY RPC INFO!")
 	}
@@ -200,7 +200,7 @@ func (appName AppType) FundRawTransaction(params APIParams) (FundRawTransaction,
 
 	var fundrawtransaction FundRawTransaction
 
-	fundrawtransactionJson := appName.APICall(query)
+	fundrawtransactionJson := appName.APICall(&query)
 	if fundrawtransactionJson == "EMPTY RPC INFO!" {
 		return fundrawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -290,7 +290,7 @@ func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, e
 
 	var getrawtransaction GetRawTransaction
 
-	getrawtransactionJson := appName.APICall(query)
+	getrawtransactionJson := appName.APICall(&query)
 	if getrawtransactionJson == "EMPTY RPC INFO!" {
 		return getrawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -331,7 +331,7 @@ func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransa
 
 	var getrawtransaction GetRawTransactionDetailed
 
-	getrawtransactionJson := appName.APICall(query)
+	getrawtransactionJson := appName.APICall(&query)
 	if getrawtransactionJson == "EMPTY RPC INFO!" {
 		return getrawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -378,7 +378,7 @@ func (appName AppType) SendRawTransaction(params APIParams) (SendRawTransaction,
 
 	var sendrawtransaction SendRawTransaction
 
-	sendrawtransactionJson := appName.APICall(query)
+	sendrawtransactionJson := appName.APICall(&query)
 	if sendrawtransactionJson == "EMPTY RPC INFO!" {
 		return sendrawtransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -429,7 +429,7 @@ func (appName AppType) SignRawTransaction(params APIParams) (SignRawTransaction,
 
 	var signrawtransaction SignRawTransaction
 
-	signrawtransactionJson := appName.APICall(query)
+	signrawtransactionJson := appName.APICall(&query)
 	if signrawtransactionJson == "EMPTY RPC INFO!" {
 		return signrawtransaction, errors.New("EMPTY RPC INFO!")
 	}

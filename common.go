@@ -16,6 +16,7 @@ import (
 	//"fmt"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -68,7 +69,7 @@ func NewAppType(app AppType) *AppType {
 // os.Setenv("komodo" + "_RPCPORT", `7771`)
 //
 // As per this example, if for example using different SmartChain like "DEX", and the appName is set to example "DEX", just replace it word `komodo` with `DEX`.
-func (appName AppType) APICall(q APIQuery) string {
+func (appName AppType) APICall(q *APIQuery) string {
 	var rpcurl, rpcuser, rpcpass, rpcport string
 
 	key := string(appName) + "_RPCURL"
@@ -107,11 +108,16 @@ func (appName AppType) APICall(q APIQuery) string {
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(query_byte))
 	req.Header.Set("Content-Type", "application/json")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	//req, err := http.NewRequest("POST", , nil)
 	req.SetBasicAuth(rpcuser, rpcpass)
 	resp, err := client.Do(req)
 	if err != nil {
+		// log.Fatalf("An error occured while trying connecting to blockchain RPC:")
+		fmt.Println("An error occured while trying connecting to blockchain RPC:")
 		log.Fatal(err)
 	}
 	bodyText, err := ioutil.ReadAll(resp.Body)

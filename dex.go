@@ -54,7 +54,7 @@ func (appName AppType) DEXAnonsend(params APIParams) (DEXAnonsend, error) {
 
 	var dexAnonsend DEXAnonsend
 
-	dexAnonsendJson := appName.APICall(query)
+	dexAnonsendJson := appName.APICall(&query)
 	if dexAnonsendJson == "EMPTY RPC INFO!" {
 		return dexAnonsend, errors.New("EMPTY RPC INFO!")
 	}
@@ -111,7 +111,7 @@ func (appName AppType) DEXBroadcast(params APIParams) (DEXBroadcast, error) {
 
 	var dexBroadcast DEXBroadcast
 
-	dexBroadcastJson := appName.APICall(query)
+	dexBroadcastJson := appName.APICall(&query)
 	if dexBroadcastJson == "EMPTY RPC INFO!" {
 		return dexBroadcast, errors.New("EMPTY RPC INFO!")
 	}
@@ -167,7 +167,7 @@ func (appName AppType) DEXCancel(params APIParams) (DEXCancel, error) {
 
 	var dexCancel DEXCancel
 
-	dexCancelJson := appName.APICall(query)
+	dexCancelJson := appName.APICall(&query)
 	if dexCancelJson == "EMPTY RPC INFO!" {
 		return dexCancel, errors.New("EMPTY RPC INFO!")
 	}
@@ -224,7 +224,7 @@ func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
 
 	var dexGet DEXGet
 
-	dexGetJson := appName.APICall(query)
+	dexGetJson := appName.APICall(&query)
 	if dexGetJson == "EMPTY RPC INFO!" {
 		return dexGet, errors.New("EMPTY RPC INFO!")
 	}
@@ -287,7 +287,7 @@ func (appName AppType) DEXList(params APIParams) (DEXList, error) {
 
 	var dexList DEXList
 
-	dexListJson := appName.APICall(query)
+	dexListJson := appName.APICall(&query)
 	if dexListJson == "EMPTY RPC INFO!" {
 		return dexList, errors.New("EMPTY RPC INFO!")
 	}
@@ -350,7 +350,7 @@ func (appName AppType) DEXOrderbook(params APIParams) (DEXOrderbook, error) {
 
 	var dexOrderbook DEXOrderbook
 
-	dexOrderbookJson := appName.APICall(query)
+	dexOrderbookJson := appName.APICall(&query)
 	if dexOrderbookJson == "EMPTY RPC INFO!" {
 		return dexOrderbook, errors.New("EMPTY RPC INFO!")
 	}
@@ -405,7 +405,7 @@ func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 
 	var dexPublish DEXPublish
 
-	dexPublishJson := appName.APICall(query)
+	dexPublishJson := appName.APICall(&query)
 	if dexPublishJson == "EMPTY RPC INFO!" {
 		return dexPublish, errors.New("EMPTY RPC INFO!")
 	}
@@ -459,7 +459,7 @@ func (appName AppType) DEXSetPubKey(params APIParams) (DEXSetPubKey, error) {
 
 	var dexSetPubKey DEXSetPubKey
 
-	dexSetPubKeyJson := appName.APICall(query)
+	dexSetPubKeyJson := appName.APICall(&query)
 	if dexSetPubKeyJson == "EMPTY RPC INFO!" {
 		return dexSetPubKey, errors.New("EMPTY RPC INFO!")
 	}
@@ -512,7 +512,7 @@ func (appName AppType) DEXStats() (DEXStats, error) {
 
 	var dexStats DEXStats
 
-	dexStatsJson := appName.APICall(query)
+	dexStatsJson := appName.APICall(&query)
 	if dexStatsJson == "EMPTY RPC INFO!" {
 		return dexStats, errors.New("EMPTY RPC INFO!")
 	}

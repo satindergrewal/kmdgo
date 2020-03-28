@@ -15,9 +15,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/satindergrewal/kmdgo"
+	// "github.com/satindergrewal/kmdgo"
+	"kmdgo"
 )
 
 func main() {
@@ -33,16 +33,16 @@ func main() {
 	// Define variable of type kmdgo.AppType. You can use function NewAppType which will return the required type.
 	// The name value must be the matching value of it's data directory name.
 	// Example Komodo's data directory is `komodo`, VerusCoin's data directory is `VRSC` and so on.
-	appName := kmdgo.NewAppType(`DEX`)
+	appName := kmdgo.NewAppType(`komodo`)
 
 	// Useing remote server RPC API settings
 	// Example rpc settings in remote .conf file
 	// rpcbind=192.168.1.156
 	// rpcallowip=0.0.0.0/0
-	os.Setenv("DEX"+"_RPCURL", `http://192.168.1.156:`)
-	os.Setenv("DEX"+"_RPCUSER", `user2507017880`)
-	os.Setenv("DEX"+"_RPCPASS", `pass9261c10308cdb1ecc0c6ef4cf853e3dc3301d2d129661ab6382219674724974f9e`)
-	os.Setenv("DEX"+"_RPCPORT", `11890`)
+	// os.Setenv("DEX"+"_RPCURL", `http://192.168.1.156:`)
+	// os.Setenv("DEX"+"_RPCUSER", `user2507017880`)
+	// os.Setenv("DEX"+"_RPCPASS", `pass9261c10308cdb1ecc0c6ef4cf853e3dc3301d2d129661ab6382219674724974f9e`)
+	// os.Setenv("DEX"+"_RPCPORT", `11890`)
 
 	// define the variable with GetInfo struct from pacakge kmdgo
 	var info kmdgo.GetInfo
