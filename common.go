@@ -119,7 +119,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 		// fmt.Println(matched, err)
 		if matched == true {
 			s := string(`{"result": {}, "error": {"code":0,"message":"connection refused"}, "id":"kmdgo"}`)
-			fmt.Println(s)
+			// fmt.Println(s)
 			return s
 		}
 	}
