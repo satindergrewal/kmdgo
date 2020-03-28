@@ -16,7 +16,6 @@ import (
 	//"fmt"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"regexp"
@@ -125,7 +124,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 	}
 	bodyText, err := ioutil.ReadAll(resp.Body)
 
-	fmt.Println(string(bodyText))
+	// fmt.Println(string(bodyText))
 
 	var query_result map[string]interface{}
 	if err := json.Unmarshal(bodyText, &query_result); err != nil {
