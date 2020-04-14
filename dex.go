@@ -249,21 +249,23 @@ type DEXList struct {
 	Result struct {
 		Result  string `json:"result"`
 		Matches []struct {
-			Timestamp int    `json:"timestamp"`
-			ID        int64  `json:"id"`
-			Hash      string `json:"hash"`
-			TagA      string `json:"tagA"`
-			TagB      string `json:"tagB"`
-			Pubkey    string `json:"pubkey"`
-			Payload   string `json:"payload"`
-			Hex       int    `json:"hex"`
-			Senderpub string `json:"senderpub"`
-			Error     string `json:"error"`
-			AmountA   string `json:"amountA"`
-			AmountB   string `json:"amountB"`
-			Priority  int    `json:"priority"`
-			Recvtime  int    `json:"recvtime"`
-			Cancelled int    `json:"cancelled"`
+			Timestamp    int    `json:"timestamp"`
+			ID           int64  `json:"id"`
+			Hash         string `json:"hash"`
+			TagA         string `json:"tagA"`
+			TagB         string `json:"tagB"`
+			Pubkey       string `json:"pubkey"`
+			Payload      string `json:"payload"`
+			Hex          int    `json:"hex"`
+			Decrypted    string `json:"decrypted"`
+			Decryptedhex int    `json:"decryptedhex"`
+			Senderpub    string `json:"senderpub"`
+			Error        string `json:"error"`
+			AmountA      string `json:"amountA"`
+			AmountB      string `json:"amountB"`
+			Priority     int    `json:"priority"`
+			Recvtime     int    `json:"recvtime"`
+			Cancelled    int    `json:"cancelled"`
 		} `json:"matches"`
 		TagA   string `json:"tagA"`
 		TagB   string `json:"tagB"`

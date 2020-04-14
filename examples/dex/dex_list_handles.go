@@ -17,6 +17,7 @@ import (
 	"log"
 
 	"github.com/satindergrewal/kmdgo"
+	// "kmdgo"
 )
 
 func main() {
@@ -71,6 +72,8 @@ func main() {
 		fmt.Println("Pubkey", v.Pubkey)
 		fmt.Println("Payload", v.Payload)
 		fmt.Println("Hex", v.Hex)
+		fmt.Println("Decrypted", v.Decrypted)
+		fmt.Println("Decryptedhex", v.Decryptedhex)
 		fmt.Println("Senderpub", v.Senderpub)
 		fmt.Println("Error", v.Error)
 		fmt.Println("AmountA", v.AmountA)
