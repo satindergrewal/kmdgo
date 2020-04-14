@@ -15,7 +15,6 @@ package kmdgo
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 )
 
 type DEXAnonsend struct {
@@ -44,13 +43,13 @@ type DEXAnonsend struct {
 func (appName AppType) DEXAnonsend(params APIParams) (DEXAnonsend, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_anonsend`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexAnonsend DEXAnonsend
 
@@ -101,13 +100,13 @@ type DEXBroadcast struct {
 func (appName AppType) DEXBroadcast(params APIParams) (DEXBroadcast, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_broadcast`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexBroadcast DEXBroadcast
 
@@ -157,13 +156,13 @@ type DEXCancel struct {
 func (appName AppType) DEXCancel(params APIParams) (DEXCancel, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_cancel`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexCancel DEXCancel
 
@@ -214,13 +213,13 @@ type DEXGet struct {
 func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_get`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexGet DEXGet
 
@@ -279,13 +278,13 @@ type DEXList struct {
 func (appName AppType) DEXList(params APIParams) (DEXList, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_list`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexList DEXList
 
@@ -342,13 +341,13 @@ type DEXOrderbook struct {
 func (appName AppType) DEXOrderbook(params APIParams) (DEXOrderbook, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_orderbook`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexOrderbook DEXOrderbook
 
@@ -397,13 +396,13 @@ type DEXPublish struct {
 func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_publish`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexPublish DEXPublish
 
@@ -451,13 +450,13 @@ type DEXSetPubKey struct {
 func (appName AppType) DEXSetPubKey(params APIParams) (DEXSetPubKey, error) {
 
 	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	// fmt.Println(string(params_json))
 
 	query := APIQuery{
 		Method: `DEX_setpubkey`,
 		Params: string(params_json),
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexSetPubKey DEXSetPubKey
 
@@ -510,7 +509,7 @@ func (appName AppType) DEXStats() (DEXStats, error) {
 		Method: `DEX_stats`,
 		Params: `[]`,
 	}
-	fmt.Println(query)
+	// fmt.Println(query)
 
 	var dexStats DEXStats
 
