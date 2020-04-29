@@ -19,6 +19,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"time"
 
 	// "fmt"
 	"os"
@@ -95,7 +96,9 @@ func (appName AppType) APICall(q *APIQuery) string {
 		return "EMPTY RPC INFO!"
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 60 * time.Second,
+	}
 	url := rpcurl + rpcport
 	// fmt.Println(url)
 
