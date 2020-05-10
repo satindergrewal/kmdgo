@@ -129,12 +129,12 @@ func (appName AppType) APICall(q *APIQuery) string {
 	bodyText, err := ioutil.ReadAll(resp.Body)
 
 	fmt.Println("bodyText: ", string(bodyText))
-	fmt.Println("resp.Body: ", resp.Body)
-	fmt.Println("bodyText Bytes: ", bodyText)
-	rspbody := bodyText
-	err2 := json.NewDecoder(resp.Body).Decode(&rspbody)
-	fmt.Println("err2: ", err2)
-	fmt.Println("rspbody: ", rspbody)
+	// fmt.Println("resp.Body: ", resp.Body)
+	// fmt.Println("bodyText Bytes: ", bodyText)
+	// rspbody := bodyText
+	// err2 := json.NewDecoder(resp.Body).Decode(&rspbody)
+	// fmt.Println("err2: ", err2)
+	// fmt.Println("rspbody: ", rspbody)
 
 	var query_result map[string]interface{}
 	if err := json.Unmarshal(bodyText, &query_result); err != nil {
