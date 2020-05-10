@@ -71,11 +71,11 @@ func NewAppType(app AppType) *AppType {
 //
 // As per this example, if for example using different SmartChain like "DEX", and the appName is set to example "DEX", just replace it word `komodo` with `DEX`.
 func (appName AppType) APICall(q *APIQuery) string {
-	// fmt.Println(appName)
-	if appName == "KMD" || appName == "Komodo" {
-		appName == AppType("komodo")
-	}
 	fmt.Println(appName)
+	if appName == "KMD" || appName == "Komodo" {
+		appName = AppType("komodo")
+		fmt.Println(appName)
+	}
 	var rpcurl, rpcuser, rpcpass, rpcport string
 
 	key := string(appName) + "_RPCURL"
