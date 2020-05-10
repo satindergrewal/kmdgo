@@ -15,6 +15,7 @@ package kmdgo
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 type GetInfo struct {
@@ -72,6 +73,8 @@ func (appName AppType) GetInfo() (GetInfo, error) {
 	}
 
 	var result APIResult
+
+	fmt.Println("returned getinfoJson: ", string(getinfoJson))
 
 	json.Unmarshal([]byte(getinfoJson), &result)
 
