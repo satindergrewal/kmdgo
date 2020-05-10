@@ -128,6 +128,11 @@ func (appName AppType) APICall(q *APIQuery) string {
 	}
 	bodyText, err := ioutil.ReadAll(resp.Body)
 
+	if len(bodyText) == 0 {
+		fmt.Println("SEEMS RETURNED DATA IS EMPTY")
+		return "{}"
+	}
+
 	fmt.Println("bodyText: ", string(bodyText))
 	// fmt.Println("resp.Body: ", resp.Body)
 	// fmt.Println("bodyText Bytes: ", bodyText)
