@@ -105,7 +105,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 
 	var query_str string
 	query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
-	//fmt.Println(query_str)
+	fmt.Println("query_str: ", query_str)
 
 	query_byte := []byte(query_str)
 
