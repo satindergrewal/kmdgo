@@ -133,6 +133,8 @@ func (appName AppType) APICall(q *APIQuery) string {
 	var query_result map[string]interface{}
 	if err := json.Unmarshal(bodyText, &query_result); err != nil {
 		fmt.Println("bodyText on json marshel: ", string(bodyText))
+		fmt.Println("resp.Body: ", resp.Body)
+		fmt.Println("bodyText Bytes: ", bodyText)
 		panic(err)
 	}
 
