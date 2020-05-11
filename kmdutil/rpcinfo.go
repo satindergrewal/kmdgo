@@ -13,6 +13,7 @@
 package kmdutil
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -65,6 +66,8 @@ func AppRPCInfo(appName string) (string, string, string) {
 	rpcuser_line := rpcu.FindString(bytestr)
 	rpcpass_line := rpcpass.FindString(bytestr)
 	rpcpport_line := rpcport.FindString(bytestr)
+
+	fmt.Println(bytestr)
 
 	//AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuser_line,`rpcuser`),`=`)
 	//AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpass_line,`rpcpassword`),`=`)
