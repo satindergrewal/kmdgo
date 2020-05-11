@@ -13,7 +13,6 @@
 package kmdutil
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -52,7 +51,7 @@ func AppRPCInfo(appName string) (string, string, string) {
 			// fmt.Println("File Does not exists")
 			// log.Println(err)
 		default:
-			fmt.Println(err)
+			// fmt.Println(err)
 		}
 		return "", "", ""
 	}
