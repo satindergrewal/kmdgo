@@ -52,7 +52,7 @@ func AppRPCInfo(appName string) (string, string, string) {
 			// fmt.Println("File Does not exists")
 			// log.Println(err)
 		default:
-			// fmt.Println(err)
+			fmt.Println(err)
 		}
 		return "", "", ""
 	}
@@ -60,6 +60,8 @@ func AppRPCInfo(appName string) (string, string, string) {
 	var rpcu = regexp.MustCompile("(?m)^rpcuser=.+$")
 	var rpcpass = regexp.MustCompile("(?m)^rpcpassword=.+$")
 	var rpcport = regexp.MustCompile("(?m)^rpcport=.+$")
+
+	// fmt.Println("confdata: ", confdata)
 
 	bytestr := BytesToString(confdata)
 
@@ -82,5 +84,12 @@ func AppRPCInfo(appName string) (string, string, string) {
 		AppRPCport = "7771"
 	}
 
+	// Removing any \n or \r\n from the stripped string from .conf file
+	AppRPCuser = strings.ReplaceAll(AppRPCuser, "\n", "")
+	AppRPCuser = strings.ReplaceAll(AppRPCuser, "\r", "")
+	AppRPCpass = strings.ReplaceAll(AppRPCpass, "\n", "")
+	AppRPCpass = strings.ReplaceAll(AppRPCpass, "\r", "")
+	AppRPCport = strings.ReplaceAll(AppRPCport, "\n", "")
+	AppRPCport = strings.ReplaceAll(AppRPCport, "\r", "")
 	return AppRPCuser, AppRPCpass, AppRPCport
 }
