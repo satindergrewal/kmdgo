@@ -94,7 +94,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 		rpcport = os.Getenv(string(appName) + "_RPCPORT")
 	}
 
-	fmt.Printf(" %s\n %s\n %s\n %s\n", rpcurl, rpcuser, rpcpass, rpcport)
+	// fmt.Printf(" %s\n %s\n %s\n %s\n", rpcurl, rpcuser, rpcpass, rpcport)
 	// fmt.Printf(" %T\n %T\n %T\n %T\n", rpcurl, rpcuser, rpcpass, rpcport)
 
 	if rpcuser == "" && rpcpass == "" && rpcport == "" {
@@ -106,7 +106,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 		Timeout: 60 * time.Second,
 	}
 	url := rpcurl + rpcport
-	fmt.Println(url)
+	// fmt.Println(url)
 
 	var query_str string
 	query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
@@ -135,10 +135,14 @@ func (appName AppType) APICall(q *APIQuery) string {
 
 	if len(bodyText) == 0 {
 		fmt.Println("SEEMS RETURNED DATA IS EMPTY")
-		return "{}"
+		return `{
+			"result": {},
+			"error": "EMPTY DATA",
+			"id": "curltest"
+		  }`
 	}
 
-	fmt.Println("bodyText: ", string(bodyText))
+	// fmt.Println("bodyText: ", string(bodyText))
 	// fmt.Println("resp.Body: ", resp.Body)
 	// fmt.Println("bodyText Bytes: ", bodyText)
 	// rspbody := bodyText

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"kmdgo/kmdutil"
 	"log"
 	"net/http"
 )
@@ -58,15 +59,13 @@ type GetInfo struct {
 }
 
 func basicAuth() string {
-	// appName := "komodo"
+	appName := "komodo"
 
 	//appDir := kmdutil.AppDataDir(appName, false)
 	//fmt.Println(appDir)
 
-	//rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
-	rpcuser := "user2a66b68210b05bee"
-	rpcpass := "84fd254fbc577286c0b139472c1cf72b"
-	rpcport := "7771"
+	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
+	// rpcuser, rpcpass, rpcport := "user2a66b68", "84fd254fbc5", "7771"
 
 	client := &http.Client{}
 
