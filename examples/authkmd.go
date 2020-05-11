@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-
-	"github.com/satindergrewal/kmdgo/kmdutil"
 )
 
 //RPCUsername, RPCPassword string = "user60de7828fd8985d3", "ce3f74430f82aa34b58aeba4b37a3373"
@@ -60,12 +58,15 @@ type GetInfo struct {
 }
 
 func basicAuth() string {
-	appName := "komodo"
+	// appName := "komodo"
 
 	//appDir := kmdutil.AppDataDir(appName, false)
 	//fmt.Println(appDir)
 
-	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
+	//rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
+	rpcuser := "user2a66b68210b05bee"
+	rpcpass := "84fd254fbc577286c0b139472c1cf72b"
+	rpcport := "7771"
 
 	client := &http.Client{}
 
