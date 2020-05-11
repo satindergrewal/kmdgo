@@ -84,6 +84,11 @@ func AppRPCInfo(appName string) (string, string, string) {
 		AppRPCport = "7771"
 	}
 
+	//TODO
+	// Check if server=1 and update/change it
+	// Check if rpcuser and rpcpassword is the known default value from QT wallet,
+	// example "komodo" and "local321", and prompt/update it with random values.
+
 	// Removing any \n or \r\n from the stripped string from .conf file
 	AppRPCuser = strings.ReplaceAll(AppRPCuser, "\n", "")
 	AppRPCuser = strings.ReplaceAll(AppRPCuser, "\r", "")
