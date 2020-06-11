@@ -61,7 +61,7 @@ func appDataDir(goos, appName string, roaming bool) string {
 	case "windows":
 		// Windows XP and before didn't have a LOCALAPPDATA, so fallback
 		// to regular APPDATA when LOCALAPPDATA is not set.
-		appData := os.Getenv("LOCALAPPDATA")
+		appData := os.Getenv("APPDATA")
 		if roaming || appData == "" {
 			appData = os.Getenv("APPDATA")
 		}
