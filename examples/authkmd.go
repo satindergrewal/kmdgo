@@ -66,7 +66,7 @@ func basicAuth() string {
 	fmt.Println(appDir)
 
 	rpcuser, rpcpass, rpcport := kmdutil.AppRPCInfo(appName)
-	rpcuser, rpcpass, rpcport := "user2a66b68", "84fd254fbc5", "7771"
+	rpcuser, rpcpass, rpcport = "user2a66b68", "84fd254fbc5", "7771"
 
 	client := &http.Client{}
 
