@@ -46,7 +46,8 @@ func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listunspent`,
 		Params: string(params_json),
 	}
@@ -54,7 +55,7 @@ func (appName AppType) ListUnspent(params APIParams) (ListUnspent, error) {
 
 	var listunspent ListUnspent
 
-	listunspentJson := appName.APICall(&query)
+	listunspentJson := appName.APICall(query)
 	if listunspentJson == "EMPTY RPC INFO!" {
 		return listunspent, errors.New("EMPTY RPC INFO!")
 	}
@@ -86,7 +87,8 @@ func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress,
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `addmultisigaddress`,
 		Params: string(params_json),
 	}
@@ -94,7 +96,7 @@ func (appName AppType) AddMultiSigAddress(params APIParams) (AddMultiSigAddress,
 
 	var addmultisigaddress AddMultiSigAddress
 
-	addmultisigaddressJson := appName.APICall(&query)
+	addmultisigaddressJson := appName.APICall(query)
 	if addmultisigaddressJson == "EMPTY RPC INFO!" {
 		return addmultisigaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -122,7 +124,8 @@ type BackupWallet struct {
 }
 
 func (appName AppType) BackupWallet(bkpwlt string) (BackupWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `backupwallet`,
 		Params: `["` + bkpwlt + `"]`,
 	}
@@ -130,7 +133,7 @@ func (appName AppType) BackupWallet(bkpwlt string) (BackupWallet, error) {
 
 	var backupwallet BackupWallet
 
-	backupwalletJson := appName.APICall(&query)
+	backupwalletJson := appName.APICall(query)
 	if backupwalletJson == "EMPTY RPC INFO!" {
 		return backupwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -158,7 +161,8 @@ type DumpPrivKey struct {
 }
 
 func (appName AppType) DumpPrivKey(taddr string) (DumpPrivKey, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `dumpprivkey`,
 		Params: `["` + taddr + `"]`,
 	}
@@ -166,7 +170,7 @@ func (appName AppType) DumpPrivKey(taddr string) (DumpPrivKey, error) {
 
 	var dumpprivkey DumpPrivKey
 
-	dumpprivkeyJson := appName.APICall(&query)
+	dumpprivkeyJson := appName.APICall(query)
 	if dumpprivkeyJson == "EMPTY RPC INFO!" {
 		return dumpprivkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -194,7 +198,8 @@ type DumpWallet struct {
 }
 
 func (appName AppType) DumpWallet(dmpwlt string) (DumpWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `dumpwallet`,
 		Params: `["` + dmpwlt + `"]`,
 	}
@@ -202,7 +207,7 @@ func (appName AppType) DumpWallet(dmpwlt string) (DumpWallet, error) {
 
 	var dumpwallet DumpWallet
 
-	dumpwalletJson := appName.APICall(&query)
+	dumpwalletJson := appName.APICall(query)
 	if dumpwalletJson == "EMPTY RPC INFO!" {
 		return dumpwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -230,7 +235,8 @@ type EncryptWallet struct {
 }
 
 func (appName AppType) EncryptWallet(phrase string) (EncryptWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `encryptwallet`,
 		Params: `["` + phrase + `"]`,
 	}
@@ -238,7 +244,7 @@ func (appName AppType) EncryptWallet(phrase string) (EncryptWallet, error) {
 
 	var encryptwallet EncryptWallet
 
-	encryptwalletJson := appName.APICall(&query)
+	encryptwalletJson := appName.APICall(query)
 	if encryptwalletJson == "EMPTY RPC INFO!" {
 		return encryptwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -266,7 +272,8 @@ type GetAccount struct {
 }
 
 func (appName AppType) GetAccount(taddr string) (GetAccount, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getaccount`,
 		Params: `["` + taddr + `"]`,
 	}
@@ -274,7 +281,7 @@ func (appName AppType) GetAccount(taddr string) (GetAccount, error) {
 
 	var getaccount GetAccount
 
-	getaccountJson := appName.APICall(&query)
+	getaccountJson := appName.APICall(query)
 	if getaccountJson == "EMPTY RPC INFO!" {
 		return getaccount, errors.New("EMPTY RPC INFO!")
 	}
@@ -302,7 +309,8 @@ type GetAccountAddress struct {
 }
 
 func (appName AppType) GetAccountAddress(actname string) (GetAccountAddress, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getaccountaddress`,
 		Params: `["` + actname + `"]`,
 	}
@@ -310,7 +318,7 @@ func (appName AppType) GetAccountAddress(actname string) (GetAccountAddress, err
 
 	var getaccountaddress GetAccountAddress
 
-	getaccountaddressJson := appName.APICall(&query)
+	getaccountaddressJson := appName.APICall(query)
 	if getaccountaddressJson == "EMPTY RPC INFO!" {
 		return getaccountaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -338,7 +346,8 @@ type GetAddressesByAccount struct {
 }
 
 func (appName AppType) GetAddressesByAccount(actname string) (GetAddressesByAccount, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getaddressesbyaccount`,
 		Params: `["` + actname + `"]`,
 	}
@@ -346,7 +355,7 @@ func (appName AppType) GetAddressesByAccount(actname string) (GetAddressesByAcco
 
 	var getaddressesbyaccount GetAddressesByAccount
 
-	getaddressesbyaccountJson := appName.APICall(&query)
+	getaddressesbyaccountJson := appName.APICall(query)
 	if getaddressesbyaccountJson == "EMPTY RPC INFO!" {
 		return getaddressesbyaccount, errors.New("EMPTY RPC INFO!")
 	}
@@ -388,7 +397,8 @@ func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getbalance`,
 		Params: string(params_json),
 	}
@@ -396,7 +406,7 @@ func (appName AppType) GetBalance(params APIParams) (GetBalance, error) {
 
 	var getbalance GetBalance
 
-	getbalanceJson := appName.APICall(&query)
+	getbalanceJson := appName.APICall(query)
 	if getbalanceJson == "EMPTY RPC INFO!" {
 		return getbalance, errors.New("EMPTY RPC INFO!")
 	}
@@ -424,7 +434,8 @@ type GetNewAddress struct {
 }
 
 func (appName AppType) GetNewAddress() (GetNewAddress, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getnewaddress`,
 		Params: `[]`,
 	}
@@ -432,7 +443,7 @@ func (appName AppType) GetNewAddress() (GetNewAddress, error) {
 
 	var getnewaddress GetNewAddress
 
-	getnewaddressJson := appName.APICall(&query)
+	getnewaddressJson := appName.APICall(query)
 	if getnewaddressJson == "EMPTY RPC INFO!" {
 		return getnewaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -460,7 +471,8 @@ type GetRawChangeAddress struct {
 }
 
 func (appName AppType) GetRawChangeAddress() (GetRawChangeAddress, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getrawchangeaddress`,
 		Params: `[]`,
 	}
@@ -468,7 +480,7 @@ func (appName AppType) GetRawChangeAddress() (GetRawChangeAddress, error) {
 
 	var getrawchangeaddress GetRawChangeAddress
 
-	getrawchangeaddressJson := appName.APICall(&query)
+	getrawchangeaddressJson := appName.APICall(query)
 	if getrawchangeaddressJson == "EMPTY RPC INFO!" {
 		return getrawchangeaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -510,7 +522,8 @@ func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAcco
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getreceivedbyaccount`,
 		Params: string(params_json),
 	}
@@ -518,7 +531,7 @@ func (appName AppType) GetReceivedByAccount(params APIParams) (GetReceivedByAcco
 
 	var getreceivedbyaccount GetReceivedByAccount
 
-	getreceivedbyaccountJson := appName.APICall(&query)
+	getreceivedbyaccountJson := appName.APICall(query)
 	if getreceivedbyaccountJson == "EMPTY RPC INFO!" {
 		return getreceivedbyaccount, errors.New("EMPTY RPC INFO!")
 	}
@@ -552,7 +565,8 @@ func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddr
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getreceivedbyaddress`,
 		Params: string(params_json),
 	}
@@ -560,7 +574,7 @@ func (appName AppType) GetReceivedByAddress(params APIParams) (GetReceivedByAddr
 
 	var getreceivedbyaddress GetReceivedByAddress
 
-	getreceivedbyaddressJson := appName.APICall(&query)
+	getreceivedbyaddressJson := appName.APICall(query)
 	if getreceivedbyaddressJson == "EMPTY RPC INFO!" {
 		return getreceivedbyaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -619,7 +633,8 @@ func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `gettransaction`,
 		Params: string(params_json),
 	}
@@ -627,7 +642,7 @@ func (appName AppType) GetTransaction(params APIParams) (GetTransaction, error) 
 
 	var gettransaction GetTransaction
 
-	gettransactionJson := appName.APICall(&query)
+	gettransactionJson := appName.APICall(query)
 	if gettransactionJson == "EMPTY RPC INFO!" {
 		return gettransaction, errors.New("EMPTY RPC INFO!")
 	}
@@ -655,7 +670,8 @@ type GetUnconfirmedBalance struct {
 }
 
 func (appName AppType) GetUnconfirmedBalance() (GetUnconfirmedBalance, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getunconfirmedbalance`,
 		Params: `[]`,
 	}
@@ -663,7 +679,7 @@ func (appName AppType) GetUnconfirmedBalance() (GetUnconfirmedBalance, error) {
 
 	var getunconfirmedbalance GetUnconfirmedBalance
 
-	getunconfirmedbalanceJson := appName.APICall(&query)
+	getunconfirmedbalanceJson := appName.APICall(query)
 	if getunconfirmedbalanceJson == "EMPTY RPC INFO!" {
 		return getunconfirmedbalance, errors.New("EMPTY RPC INFO!")
 	}
@@ -702,7 +718,8 @@ type GetWalletInfo struct {
 }
 
 func (appName AppType) GetWalletInfo() (GetWalletInfo, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `getwalletinfo`,
 		Params: `[]`,
 	}
@@ -710,7 +727,7 @@ func (appName AppType) GetWalletInfo() (GetWalletInfo, error) {
 
 	var getwalletinfo GetWalletInfo
 
-	getwalletinfoJson := appName.APICall(&query)
+	getwalletinfoJson := appName.APICall(query)
 	if getwalletinfoJson == "EMPTY RPC INFO!" {
 		return getwalletinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -751,7 +768,8 @@ func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `importaddress`,
 		Params: string(params_json),
 	}
@@ -759,7 +777,7 @@ func (appName AppType) ImportAddress(params APIParams) (ImportAddress, error) {
 
 	var importaddress ImportAddress
 
-	importaddressJson := appName.APICall(&query)
+	importaddressJson := appName.APICall(query)
 	if importaddressJson == "EMPTY RPC INFO!" {
 		return importaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -800,7 +818,8 @@ func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `importprivkey`,
 		Params: string(params_json),
 	}
@@ -808,7 +827,7 @@ func (appName AppType) ImportPrivKey(params APIParams) (ImportPrivKey, error) {
 
 	var importprivkey ImportPrivKey
 
-	importprivkeyJson := appName.APICall(&query)
+	importprivkeyJson := appName.APICall(query)
 	if importprivkeyJson == "EMPTY RPC INFO!" {
 		return importprivkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -836,7 +855,8 @@ type ImportWallet struct {
 }
 
 func (appName AppType) ImportWallet(wltpth string) (ImportWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `importwallet`,
 		Params: `["` + wltpth + `"]`,
 	}
@@ -844,7 +864,7 @@ func (appName AppType) ImportWallet(wltpth string) (ImportWallet, error) {
 
 	var importwallet ImportWallet
 
-	importwalletJson := appName.APICall(&query)
+	importwalletJson := appName.APICall(query)
 	if importwalletJson == "EMPTY RPC INFO!" {
 		return importwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -878,7 +898,8 @@ func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `keypoolrefill`,
 		Params: string(params_json),
 	}
@@ -886,7 +907,7 @@ func (appName AppType) KeyPoolRefill(params APIParams) (KeyPoolRefill, error) {
 
 	var keypoolrefill KeyPoolRefill
 
-	keypoolrefillJson := appName.APICall(&query)
+	keypoolrefillJson := appName.APICall(query)
 	if keypoolrefillJson == "EMPTY RPC INFO!" {
 		return keypoolrefill, errors.New("EMPTY RPC INFO!")
 	}
@@ -923,7 +944,8 @@ func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listaccounts`,
 		Params: string(params_json),
 	}
@@ -931,7 +953,7 @@ func (appName AppType) ListAccounts(params APIParams) (ListAccounts, error) {
 
 	var listaccounts ListAccounts
 
-	listaccountsJson := appName.APICall(&query)
+	listaccountsJson := appName.APICall(query)
 	if listaccountsJson == "EMPTY RPC INFO!" {
 		return listaccounts, errors.New("EMPTY RPC INFO!")
 	}
@@ -960,7 +982,8 @@ type ListAddressGroupings struct {
 }
 
 func (appName AppType) ListAddressGroupings() (ListAddressGroupings, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listaddressgroupings`,
 		Params: `[]`,
 	}
@@ -968,7 +991,7 @@ func (appName AppType) ListAddressGroupings() (ListAddressGroupings, error) {
 
 	var listaddressgroupings ListAddressGroupings
 
-	listaddressgroupingsJson := appName.APICall(&query)
+	listaddressgroupingsJson := appName.APICall(query)
 	if listaddressgroupingsJson == "EMPTY RPC INFO!" {
 		return listaddressgroupings, errors.New("EMPTY RPC INFO!")
 	}
@@ -1000,7 +1023,8 @@ type ListLockUnspent struct {
 }
 
 func (appName AppType) ListLockUnspent() (ListLockUnspent, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listlockunspent`,
 		Params: `[]`,
 	}
@@ -1008,7 +1032,7 @@ func (appName AppType) ListLockUnspent() (ListLockUnspent, error) {
 
 	var listlockunspent ListLockUnspent
 
-	listlockunspentJson := appName.APICall(&query)
+	listlockunspentJson := appName.APICall(query)
 	if listlockunspentJson == "EMPTY RPC INFO!" {
 		return listlockunspent, errors.New("EMPTY RPC INFO!")
 	}
@@ -1057,7 +1081,8 @@ func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAd
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listreceivedbyaddress`,
 		Params: string(params_json),
 	}
@@ -1065,7 +1090,7 @@ func (appName AppType) ListReceivedByAddress(params APIParams) (ListReceivedByAd
 
 	var listreceivedbyaddress ListReceivedByAddress
 
-	listreceivedbyaddressJson := appName.APICall(&query)
+	listreceivedbyaddressJson := appName.APICall(query)
 	if listreceivedbyaddressJson == "EMPTY RPC INFO!" {
 		return listreceivedbyaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -1133,7 +1158,8 @@ func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listsinceblock`,
 		Params: string(params_json),
 	}
@@ -1141,7 +1167,7 @@ func (appName AppType) ListSinceBlock(params APIParams) (ListSinceBlock, error) 
 
 	var listsinceblock ListSinceBlock
 
-	listsinceblockJson := appName.APICall(&query)
+	listsinceblockJson := appName.APICall(query)
 	if listsinceblockJson == "EMPTY RPC INFO!" {
 		return listsinceblock, errors.New("EMPTY RPC INFO!")
 	}
@@ -1206,7 +1232,8 @@ func (appName AppType) ListTransactions(params APIParams) (ListTransactions, err
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `listtransactions`,
 		Params: string(params_json),
 	}
@@ -1214,7 +1241,7 @@ func (appName AppType) ListTransactions(params APIParams) (ListTransactions, err
 
 	var listtransactions ListTransactions
 
-	listtransactionsJson := appName.APICall(&query)
+	listtransactionsJson := appName.APICall(query)
 	if listtransactionsJson == "EMPTY RPC INFO!" {
 		return listtransactions, errors.New("EMPTY RPC INFO!")
 	}
@@ -1245,7 +1272,8 @@ func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `lockunspent`,
 		Params: string(params_json),
 	}
@@ -1253,7 +1281,7 @@ func (appName AppType) LockUnspent(params APIParams) (LockUnspent, error) {
 
 	var lockunspent LockUnspent
 
-	lockunspentJson := appName.APICall(&query)
+	lockunspentJson := appName.APICall(query)
 	if lockunspentJson == "EMPTY RPC INFO!" {
 		return lockunspent, errors.New("EMPTY RPC INFO!")
 	}
@@ -1289,7 +1317,8 @@ func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `sendfrom`,
 		Params: string(params_json),
 	}
@@ -1297,7 +1326,7 @@ func (appName AppType) SendFrom(params APIParams) (SendFrom, error) {
 
 	var sendfrom SendFrom
 
-	sendfromJson := appName.APICall(&query)
+	sendfromJson := appName.APICall(query)
 	if sendfromJson == "EMPTY RPC INFO!" {
 		return sendfrom, errors.New("EMPTY RPC INFO!")
 	}
@@ -1334,7 +1363,8 @@ func (appName AppType) SendMany(params APIParams) (SendMany, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `sendmany`,
 		Params: string(params_json),
 	}
@@ -1342,7 +1372,7 @@ func (appName AppType) SendMany(params APIParams) (SendMany, error) {
 
 	var sendmany SendMany
 
-	sendmanyJson := appName.APICall(&query)
+	sendmanyJson := appName.APICall(query)
 	if sendmanyJson == "EMPTY RPC INFO!" {
 		return sendmany, errors.New("EMPTY RPC INFO!")
 	}
@@ -1379,7 +1409,8 @@ func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `sendtoaddress`,
 		Params: string(params_json),
 	}
@@ -1387,7 +1418,7 @@ func (appName AppType) SendToAddress(params APIParams) (SendToAddress, error) {
 
 	var sendtoaddress SendToAddress
 
-	sendtoaddressJson := appName.APICall(&query)
+	sendtoaddressJson := appName.APICall(query)
 	if sendtoaddressJson == "EMPTY RPC INFO!" {
 		return sendtoaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -1420,7 +1451,8 @@ type SetPubKey struct {
 }
 
 func (appName AppType) SetPubKey(pubkey string) (SetPubKey, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `setpubkey`,
 		Params: `["` + pubkey + `"]`,
 	}
@@ -1428,7 +1460,7 @@ func (appName AppType) SetPubKey(pubkey string) (SetPubKey, error) {
 
 	var setpubkey SetPubKey
 
-	setpubkeyJson := appName.APICall(&query)
+	setpubkeyJson := appName.APICall(query)
 	if setpubkeyJson == "EMPTY RPC INFO!" {
 		return setpubkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -1457,7 +1489,8 @@ type SetTxFee struct {
 }
 
 func (appName AppType) SetTxFee(amount float64) (SetTxFee, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `settxfee`,
 		Params: `[` + strconv.FormatFloat(amount, 'f', 8, 64) + `]`,
 	}
@@ -1465,7 +1498,7 @@ func (appName AppType) SetTxFee(amount float64) (SetTxFee, error) {
 
 	var settxfee SetTxFee
 
-	settxfeeJson := appName.APICall(&query)
+	settxfeeJson := appName.APICall(query)
 	if settxfeeJson == "EMPTY RPC INFO!" {
 		return settxfee, errors.New("EMPTY RPC INFO!")
 	}
@@ -1497,7 +1530,8 @@ func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `signmessage`,
 		Params: string(params_json),
 	}
@@ -1505,7 +1539,7 @@ func (appName AppType) SignMessage(params APIParams) (SignMessage, error) {
 
 	var signmessage SignMessage
 
-	signmessageJson := appName.APICall(&query)
+	signmessageJson := appName.APICall(query)
 	if signmessageJson == "EMPTY RPC INFO!" {
 		return signmessage, errors.New("EMPTY RPC INFO!")
 	}
@@ -1533,7 +1567,8 @@ type WalletLock struct {
 }
 
 func (appName AppType) WalletLock() (WalletLock, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `walletlock`,
 		Params: `[]`,
 	}
@@ -1541,7 +1576,7 @@ func (appName AppType) WalletLock() (WalletLock, error) {
 
 	var walletlock WalletLock
 
-	walletlockJson := appName.APICall(&query)
+	walletlockJson := appName.APICall(query)
 	if walletlockJson == "EMPTY RPC INFO!" {
 		return walletlock, errors.New("EMPTY RPC INFO!")
 	}
@@ -1572,7 +1607,8 @@ func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, err
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `walletpassphrase`,
 		Params: string(params_json),
 	}
@@ -1580,7 +1616,7 @@ func (appName AppType) WalletPassPhrase(params APIParams) (WalletPassPhrase, err
 
 	var walletpassphrase WalletPassPhrase
 
-	walletpassphraseJson := appName.APICall(&query)
+	walletpassphraseJson := appName.APICall(query)
 	if walletpassphraseJson == "EMPTY RPC INFO!" {
 		return walletpassphrase, errors.New("EMPTY RPC INFO!")
 	}
@@ -1611,7 +1647,8 @@ func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPas
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `walletpassphrasechange`,
 		Params: string(params_json),
 	}
@@ -1619,7 +1656,7 @@ func (appName AppType) WalletPassPhrasechangeChange(params APIParams) (WalletPas
 
 	var walletpassphrasechange WalletPassPhrasechangeChange
 
-	walletpassphrasechangeJson := appName.APICall(&query)
+	walletpassphrasechangeJson := appName.APICall(query)
 	if walletpassphrasechangeJson == "EMPTY RPC INFO!" {
 		return walletpassphrasechange, errors.New("EMPTY RPC INFO!")
 	}
@@ -1647,7 +1684,8 @@ type ZExportKey struct {
 }
 
 func (appName AppType) ZExportKey(zaddr string) (ZExportKey, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_exportkey`,
 		Params: `["` + zaddr + `"]`,
 	}
@@ -1655,7 +1693,7 @@ func (appName AppType) ZExportKey(zaddr string) (ZExportKey, error) {
 
 	var zexportkey ZExportKey
 
-	zexportkeyJson := appName.APICall(&query)
+	zexportkeyJson := appName.APICall(query)
 	if zexportkeyJson == "EMPTY RPC INFO!" {
 		return zexportkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -1683,7 +1721,8 @@ type ZExportViewingKey struct {
 }
 
 func (appName AppType) ZExportViewingKey(zaddr string) (ZExportViewingKey, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_exportviewingkey`,
 		Params: `["` + zaddr + `"]`,
 	}
@@ -1691,7 +1730,7 @@ func (appName AppType) ZExportViewingKey(zaddr string) (ZExportViewingKey, error
 
 	var zexportviewingkey ZExportViewingKey
 
-	zexportviewingkeyJson := appName.APICall(&query)
+	zexportviewingkeyJson := appName.APICall(query)
 	if zexportviewingkeyJson == "EMPTY RPC INFO!" {
 		return zexportviewingkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -1719,7 +1758,8 @@ type ZExportWallet struct {
 }
 
 func (appName AppType) ZExportWallet(wltfile string) (ZExportWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_exportwallet`,
 		Params: `["` + wltfile + `"]`,
 	}
@@ -1727,7 +1767,7 @@ func (appName AppType) ZExportWallet(wltfile string) (ZExportWallet, error) {
 
 	var z_exportwallet ZExportWallet
 
-	z_exportwalletJson := appName.APICall(&query)
+	z_exportwalletJson := appName.APICall(query)
 	if z_exportwalletJson == "EMPTY RPC INFO!" {
 		return z_exportwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -1762,7 +1802,8 @@ func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_getbalance`,
 		Params: string(params_json),
 	}
@@ -1770,7 +1811,7 @@ func (appName AppType) ZGetBalance(params APIParams) (ZGetBalance, error) {
 
 	var z_getbalance ZGetBalance
 
-	z_getbalanceJson := appName.APICall(&query)
+	z_getbalanceJson := appName.APICall(query)
 	if z_getbalanceJson == "EMPTY RPC INFO!" {
 		return z_getbalance, errors.New("EMPTY RPC INFO!")
 	}
@@ -1799,7 +1840,8 @@ type ZGetNewAddress struct {
 }
 
 func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_getnewaddress`,
 		Params: `["` + tp + `"]`,
 	}
@@ -1807,7 +1849,7 @@ func (appName AppType) ZGetNewAddress(tp string) (ZGetNewAddress, error) {
 
 	var zgetnewaddress ZGetNewAddress
 
-	zgetnewaddressJson := appName.APICall(&query)
+	zgetnewaddressJson := appName.APICall(query)
 	if zgetnewaddressJson == "EMPTY RPC INFO!" {
 		return zgetnewaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -1856,7 +1898,8 @@ func (appName AppType) ZGetOperationResult(params APIParams) (ZGetOperationResul
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_getoperationresult`,
 		Params: string(params_json),
 	}
@@ -1864,7 +1907,7 @@ func (appName AppType) ZGetOperationResult(params APIParams) (ZGetOperationResul
 
 	var z_getoperationresult ZGetOperationResult
 
-	z_getoperationresultJson := appName.APICall(&query)
+	z_getoperationresultJson := appName.APICall(query)
 	if z_getoperationresultJson == "EMPTY RPC INFO!" {
 		return z_getoperationresult, errors.New("EMPTY RPC INFO!")
 	}
@@ -1914,7 +1957,8 @@ func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatu
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_getoperationstatus`,
 		Params: string(params_json),
 	}
@@ -1922,7 +1966,7 @@ func (appName AppType) ZGetOperationStatus(params APIParams) (ZGetOperationStatu
 
 	var z_getoperationstatus ZGetOperationStatus
 
-	z_getoperationstatusJson := appName.APICall(&query)
+	z_getoperationstatusJson := appName.APICall(query)
 	if z_getoperationstatusJson == "EMPTY RPC INFO!" {
 		return z_getoperationstatus, errors.New("EMPTY RPC INFO!")
 	}
@@ -1965,7 +2009,8 @@ func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, err
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_gettotalbalance`,
 		Params: string(params_json),
 	}
@@ -1973,7 +2018,7 @@ func (appName AppType) ZGetTotalBalance(params APIParams) (ZGetTotalBalance, err
 
 	var z_gettotalbalance ZGetTotalBalance
 
-	z_gettotalbalanceJson := appName.APICall(&query)
+	z_gettotalbalanceJson := appName.APICall(query)
 	if z_gettotalbalanceJson == "EMPTY RPC INFO!" {
 		return z_gettotalbalance, errors.New("EMPTY RPC INFO!")
 	}
@@ -2017,7 +2062,8 @@ func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_importkey`,
 		Params: string(params_json),
 	}
@@ -2025,7 +2071,7 @@ func (appName AppType) ZImportKey(params APIParams) (ZImportKey, error) {
 
 	var z_importkey ZImportKey
 
-	z_importkeyJson := appName.APICall(&query)
+	z_importkeyJson := appName.APICall(query)
 	if z_importkeyJson == "EMPTY RPC INFO!" {
 		return z_importkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -2069,7 +2115,8 @@ func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, e
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_importviewingkey`,
 		Params: string(params_json),
 	}
@@ -2077,7 +2124,7 @@ func (appName AppType) ZImportViewingKey(params APIParams) (ZImportViewingKey, e
 
 	var z_importviewingkey ZImportViewingKey
 
-	z_importviewingkeyJson := appName.APICall(&query)
+	z_importviewingkeyJson := appName.APICall(query)
 	if z_importviewingkeyJson == "EMPTY RPC INFO!" {
 		return z_importviewingkey, errors.New("EMPTY RPC INFO!")
 	}
@@ -2106,7 +2153,8 @@ type ZImportWallet struct {
 }
 
 func (appName AppType) ZImportWallet(wltfile string) (ZImportWallet, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_importwallet`,
 		Params: `["` + wltfile + `"]`,
 	}
@@ -2114,7 +2162,7 @@ func (appName AppType) ZImportWallet(wltfile string) (ZImportWallet, error) {
 
 	var z_importwallet ZImportWallet
 
-	z_importwalletJson := appName.APICall(&query)
+	z_importwalletJson := appName.APICall(query)
 	if z_importwalletJson == "EMPTY RPC INFO!" {
 		return z_importwallet, errors.New("EMPTY RPC INFO!")
 	}
@@ -2149,7 +2197,8 @@ func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) 
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_listaddresses`,
 		Params: string(params_json),
 	}
@@ -2157,7 +2206,7 @@ func (appName AppType) ZListAddresses(params APIParams) (ZListAddresses, error) 
 
 	var z_listaddresses ZListAddresses
 
-	z_listaddressesJson := appName.APICall(&query)
+	z_listaddressesJson := appName.APICall(query)
 	if z_listaddressesJson == "EMPTY RPC INFO!" {
 		return z_listaddresses, errors.New("EMPTY RPC INFO!")
 	}
@@ -2197,7 +2246,8 @@ func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, e
 		//fmt.Println(params_json)
 	}
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_listoperationids`,
 		Params: params_json,
 	}
@@ -2205,7 +2255,7 @@ func (appName AppType) ZListOperationIDs(params APIParams) (ZListOperationIDs, e
 
 	var z_listoperationids ZListOperationIDs
 
-	z_listoperationidsJson := appName.APICall(&query)
+	z_listoperationidsJson := appName.APICall(query)
 	if z_listoperationidsJson == "EMPTY RPC INFO!" {
 		return z_listoperationids, errors.New("EMPTY RPC INFO!")
 	}
@@ -2246,7 +2296,8 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_listreceivedbyaddress`,
 		Params: string(params_json),
 	}
@@ -2254,7 +2305,7 @@ func (appName AppType) ZListReceivedByAddress(params APIParams) (ZListReceivedBy
 
 	var z_listreceivedbyaddress ZListReceivedByAddress
 
-	z_listreceivedbyaddressJson := appName.APICall(&query)
+	z_listreceivedbyaddressJson := appName.APICall(query)
 	if z_listreceivedbyaddressJson == "EMPTY RPC INFO!" {
 		return z_listreceivedbyaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -2315,7 +2366,8 @@ func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_listunspent`,
 		Params: string(params_json),
 	}
@@ -2323,7 +2375,7 @@ func (appName AppType) ZListUnspent(params APIParams) (ZListUnspent, error) {
 
 	var z_listunspent ZListUnspent
 
-	z_listunspentJson := appName.APICall(&query)
+	z_listunspentJson := appName.APICall(query)
 	if z_listunspentJson == "EMPTY RPC INFO!" {
 		return z_listunspent, errors.New("EMPTY RPC INFO!")
 	}
@@ -2384,7 +2436,8 @@ func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_mergetoaddress`,
 		Params: string(params_json),
 	}
@@ -2392,7 +2445,7 @@ func (appName AppType) ZMergeToAddress(params APIParams) (ZMergeToAddress, error
 
 	var z_mergetoaddress ZMergeToAddress
 
-	z_mergetoaddressJson := appName.APICall(&query)
+	z_mergetoaddressJson := appName.APICall(query)
 	if z_mergetoaddressJson == "EMPTY RPC INFO!" {
 		return z_mergetoaddress, errors.New("EMPTY RPC INFO!")
 	}
@@ -2436,7 +2489,8 @@ func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_sendmany`,
 		Params: string(params_json),
 	}
@@ -2444,7 +2498,7 @@ func (appName AppType) ZSendMany(params APIParams) (ZSendMany, error) {
 
 	var z_sendmany ZSendMany
 
-	z_sendmanyJson := appName.APICall(&query)
+	z_sendmanyJson := appName.APICall(query)
 	if z_sendmanyJson == "EMPTY RPC INFO!" {
 		return z_sendmany, errors.New("EMPTY RPC INFO!")
 	}
@@ -2494,7 +2548,8 @@ func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error
 	params_json, _ := json.Marshal(params)
 	//fmt.Println(string(params_json))
 
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: `z_shieldcoinbase`,
 		Params: string(params_json),
 	}
@@ -2502,7 +2557,7 @@ func (appName AppType) ZShieldCoinbase(params APIParams) (ZShieldCoinbase, error
 
 	var z_shieldcoinbase ZShieldCoinbase
 
-	z_shieldcoinbaseJson := appName.APICall(&query)
+	z_shieldcoinbaseJson := appName.APICall(query)
 	if z_shieldcoinbaseJson == "EMPTY RPC INFO!" {
 		return z_shieldcoinbase, errors.New("EMPTY RPC INFO!")
 	}

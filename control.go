@@ -59,14 +59,16 @@ type GetInfo struct {
 }
 
 func (appName AppType) GetInfo() (GetInfo, error) {
-	query := APIQuery{
+
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: "getinfo",
 		Params: "[]",
 	}
 
 	var getinfo GetInfo
 
-	getinfoJson := appName.APICall(&query)
+	getinfoJson := appName.APICall(query)
 	if getinfoJson == "EMPTY RPC INFO!" {
 		return getinfo, errors.New("EMPTY RPC INFO!")
 	}
@@ -96,14 +98,15 @@ type Stop struct {
 }
 
 func (appName AppType) Stop() (Stop, error) {
-	query := APIQuery{
+	query := new(APIQuery)
+	query = &APIQuery{
 		Method: "stop",
 		Params: "[]",
 	}
 
 	var stop Stop
 
-	stopJson := appName.APICall(&query)
+	stopJson := appName.APICall(query)
 	if stopJson == "EMPTY RPC INFO!" {
 		return stop, errors.New("EMPTY RPC INFO!")
 	}
