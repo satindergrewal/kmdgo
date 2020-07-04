@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"regexp"
 	"time"
@@ -71,15 +72,15 @@ func NewAppType(app AppType) *AppType {
 //
 // As per this example, if for example using different SmartChain like "DEX", and the appName is set to example "DEX", just replace it word `komodo` with `DEX`.
 func (appName AppType) APICall(q *APIQuery) string {
-	// fmt.Println(appName)
+	fmt.Println(appName)
 	if appName == "KMD" || appName == "Komodo" {
 		appName = AppType("komodo")
-		// fmt.Println(appName)
+		fmt.Println(appName)
 	}
 	var rpcurl, rpcuser, rpcpass, rpcport string
 
 	key := string(appName) + "_RPCURL"
-	// fmt.Println(key)
+	fmt.Println(key)
 	_, ok := os.LookupEnv(key)
 	if !ok {
 		// fmt.Printf("%s not set\n", key)
@@ -94,7 +95,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 		rpcport = os.Getenv(string(appName) + "_RPCPORT")
 	}
 
-	// fmt.Printf(" %s\n %s\n %s\n %s\n", rpcurl, rpcuser, rpcpass, rpcport)
+	fmt.Printf(" %s\n %s\n %s\n %s\n", rpcurl, rpcuser, rpcpass, rpcport)
 	// fmt.Printf(" %T\n %T\n %T\n %T\n", rpcurl, rpcuser, rpcpass, rpcport)
 
 	if rpcuser == "" && rpcpass == "" && rpcport == "" {
@@ -103,14 +104,14 @@ func (appName AppType) APICall(q *APIQuery) string {
 	}
 
 	client := &http.Client{
-		Timeout: 60 * time.Second,
+		Timeout: 10 * time.Second,
 	}
 	url := rpcurl + rpcport
-	// fmt.Println(url)
+	fmt.Println(url)
 
 	var query_str string
 	query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
-	// fmt.Println("query_str: ", query_str)
+	fmt.Println("query_str: ", query_str)
 
 	query_byte := []byte(query_str)
 
@@ -121,7 +122,15 @@ func (appName AppType) APICall(q *APIQuery) string {
 	req.SetBasicAuth(rpcuser, rpcpass)
 	resp, err := client.Do(req)
 
+	// if err != nil {
+	// 	log.Println(resp)
+	// 	log.Fatalf("==> Error reading API response body for - %v: %v", appName, err)
+	// }
+
 	if err != nil {
+		log.Println(resp)
+		// log.Fatalf("==> Error reading API response body for - %v: %v", appName, err)
+
 		// Check if the error is "connection refused", means if the daemon is running or not running or inaccessible due to any X reason.
 		matched, _ := regexp.Match(`connection refused`, []byte(err.Error()))
 		// fmt.Println(matched, err)
@@ -130,8 +139,22 @@ func (appName AppType) APICall(q *APIQuery) string {
 			// fmt.Println(s)
 			return s
 		}
+
+		matched, _ = regexp.Match(`context deadline exceeded`, []byte(err.Error()))
+		if matched == true {
+			s := string(`{"result": {}, "error": {"code":0,"message":"context deadline exceeded"}, "id":"kmdgo"}`)
+			// fmt.Println(s)
+			return s
+		}
+
+		return string(`{"result": {}, "error": {"code":0,"message":"` + err.Error() + `"}, "id":"kmdgo"}`)
 	}
+
 	bodyText, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(resp)
+		log.Fatalf("==> Error reading API response body for - %v: %v", appName, err)
+	}
 
 	if len(bodyText) == 0 {
 		fmt.Println("SEEMS RETURNED DATA IS EMPTY")
