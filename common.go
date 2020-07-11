@@ -104,7 +104,7 @@ func (appName AppType) APICall(q *APIQuery) string {
 	}
 
 	client := &http.Client{
-		Timeout: 10 * time.Second,
+		Timeout: 30 * time.Second,
 	}
 	url := rpcurl + rpcport
 	fmt.Println(url)
