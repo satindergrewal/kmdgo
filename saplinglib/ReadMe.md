@@ -3,6 +3,14 @@
 
 This library is based on Zcash's [librustzcash](https://github.com/zcash/librustzcash), and parts of this library are taken from the [zecpaperwallet](https://github.com/adityapk00/zecpaperwallet).
 
+#### NOTE: System entropy is disabled for this library
+
+By default generating a zcash sapling address uses system entropy and in addition can also use a user specified entropy to make more randomness and use these bits to generate a HD wallet seed from which further addresses are generated.
+
+Since the idea of using this library is mainly to generate a shielded sappling address using just a user specified passphrase/seed which should always give the same address, the code to use system entropy is disabled, and only user specific entropy is accepted to generate a deterministic address.
+
+### Compiling library
+
 To generate the linkable static library follow these stesp:
 
 #### Step 0:
