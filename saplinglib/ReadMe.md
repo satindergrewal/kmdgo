@@ -39,16 +39,16 @@ Save the following contents in `csapling.c` file:
 
 int main() {
   // rust_generate_wallet function takes four parameters
-  // parameter 1 - nohd:          set it to false, if you don't want HD wallet
-  // parameter 2 - zcount:        the number of sapling addresses you want to generate
-  // parameter 3 - seed:          the user specified passphrase, which gives the same address everytime if given the same passphrase
-  // parameter 4 - iguana_seed:   set this to true if you want the output to always give a deterministic address based on user specified seed phrase
+  // 1) nohd:             set it to false, if you don't want HD wallet
+  // 2) zcount:           the number of sapling addresses you want to generate
+  // 3) seed:             the user specified passphrase, which gives the same address everytime if given the same passphrase
+  // 4) is_iguana_seed:   set this to true if you want the output to always give a deterministic address based on user specified seed phrase
   bool nohd = false;
   int zcount = 1;
   char *seed = "user specified seed phrase";
-  bool iguana_seed = true;
+  bool is_iguana_seed = true;
 
-  char * from_rust = rust_generate_wallet(nohd, zcount, seed, iguana_seed);
+  char * from_rust = rust_generate_wallet(nohd, zcount, seed, is_iguana_seed);
   char *stri = from_rust;
   printf("%s", stri);
   rust_free_string(from_rust);
@@ -110,11 +110,11 @@ func main() {
 	nohd := C.bool(false)
   zcount := C.uint(1)
   seed := C.CString("user specified seed phrase")
-  iguana_seed := C.bool(true)
+  isIguanaSeed := C.bool(true)
 
   fromRust := C.CString("")
   defer C.free(unsafe.Pointer(fromRust))
-  fromRust = C.rust_generate_wallet(nohd, zcount, seed, iguana_seed)
+  fromRust = C.rust_generate_wallet(nohd, zcount, seed, isIguanaSeed)
   fmt.Println(C.GoString(fromRust))
 }
 ```

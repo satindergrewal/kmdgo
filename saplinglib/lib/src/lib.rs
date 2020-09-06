@@ -8,7 +8,7 @@ use blake2_rfc::blake2b::Blake2b;
 /**
  * Generate a series of `zcount` addresses and private keys. 
  */
-pub fn generate_wallet(nohd: bool, zcount: u32, user_entropy: &[u8], iguana_seed: bool) -> String {        
+pub fn generate_wallet(nohd: bool, zcount: u32, user_entropy: &[u8], is_iguana_seed: bool) -> String {        
     // Get 32 bytes of system entropy
     let mut system_entropy:[u8; 32] = [0; 32]; 
     {
@@ -18,9 +18,9 @@ pub fn generate_wallet(nohd: bool, zcount: u32, user_entropy: &[u8], iguana_seed
 
     // Add in user entropy to the system entropy, and produce a 32 byte hash... 
     let mut state = Blake2b::new(32);
-    // if iguana_seed is set to true, ignore using system entropy, so that a deterministic address is generated
-    if !iguana_seed {
-        // iguana_seed is false. use system entropy as usual
+    // if is_iguana_seed is set to true, ignore using system entropy, so that a deterministic address is generated
+    if !is_iguana_seed {
+        // is_iguana_seed is false. use system entropy as usual
         state.update(&system_entropy);
     }
     state.update(&user_entropy);

@@ -19,10 +19,10 @@ func main() {
 	nohd := C.bool(false)
 	zcount := C.uint(1)
 	seed := C.CString("user specified seed phrase")
-	iguana_seed := C.bool(true)
+	isIguanaSeed := C.bool(true)
 
 	fromRust := C.CString("")
 	defer C.free(unsafe.Pointer(fromRust))
-	fromRust = C.rust_generate_wallet(nohd, zcount, seed, iguana_seed)
+	fromRust = C.rust_generate_wallet(nohd, zcount, seed, isIguanaSeed)
 	fmt.Println(C.GoString(fromRust))
 }
