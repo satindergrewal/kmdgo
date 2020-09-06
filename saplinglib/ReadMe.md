@@ -107,7 +107,7 @@ import (
 )
 
 func main() {
-	nohd := C.bool(false)
+  nohd := C.bool(false)
   zcount := C.uint(1)
   seed := C.CString("user specified seed phrase")
   isIguanaSeed := C.bool(true)
