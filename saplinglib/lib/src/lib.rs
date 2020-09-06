@@ -6,9 +6,9 @@ use json::{array, object};
 use blake2_rfc::blake2b::Blake2b;
 
 /**
- * Generate a series of `count` addresses and private keys. 
+ * Generate a series of `zcount` addresses and private keys. 
  */
-pub fn generate_wallet(nohd: bool, count: u32, user_entropy: &[u8]) -> String {        
+pub fn generate_wallet(nohd: bool, zcount: u32, user_entropy: &[u8], iguana_seed: bool) -> String {        
     // Get 32 bytes of system entropy
     let mut system_entropy:[u8; 32] = [0; 32]; 
     {
@@ -18,7 +18,11 @@ pub fn generate_wallet(nohd: bool, count: u32, user_entropy: &[u8]) -> String {
 
     // Add in user entropy to the system entropy, and produce a 32 byte hash... 
     let mut state = Blake2b::new(32);
-    // state.update(&system_entropy);
+    // if iguana_seed is set to true, ignore using system entropy, so that a deterministic address is generated
+    if !iguana_seed {
+        // iguana_seed is false. use system entropy as usual
+        state.update(&system_entropy);
+    }
     state.update(&user_entropy);
     
     let mut final_entropy: [u8; 32] = [0; 32];
@@ -28,14 +32,14 @@ pub fn generate_wallet(nohd: bool, count: u32, user_entropy: &[u8]) -> String {
     let mut rng = ChaChaRng::from_seed(final_entropy);
 
     if !nohd {
-        // Allow HD addresses, so use only 1 seed        
+        // Allow HD addresses, so use only 1 seed
         let mut seed: [u8; 32] = [0; 32];
         rng.fill(&mut seed);
         
-        return gen_addresses_with_seed_as_json(count, |i| (seed.to_vec(), i));
+        return gen_addresses_with_seed_as_json(zcount, |i| (seed.to_vec(), i));
     } else {
         // Not using HD addresses, so derive a new seed every time    
-        return gen_addresses_with_seed_as_json(count, |_| {            
+        return gen_addresses_with_seed_as_json(zcount, |_| {            
             let mut seed:[u8; 32] = [0; 32]; 
             rng.fill(&mut seed);
             
@@ -45,8 +49,8 @@ pub fn generate_wallet(nohd: bool, count: u32, user_entropy: &[u8]) -> String {
 }
 
 /**
- * Generate `count` addresses with the given seed. The addresses are derived from m/32'/cointype'/index' where 
- * index is 0..count
+ * Generate `zcount` addresses with the given seed. The addresses are derived from m/32'/cointype'/index' where 
+ * index is 0..zcount
  * 
  * Note that cointype is 1 for testnet and 133 for mainnet
  * 
@@ -55,12 +59,12 @@ pub fn generate_wallet(nohd: bool, count: u32, user_entropy: &[u8]) -> String {
  *
  * It is useful if we want to reuse (or not) the seed across multiple wallets.
  */
-fn gen_addresses_with_seed_as_json<F>(count: u32, mut get_seed: F) -> String 
+fn gen_addresses_with_seed_as_json<F>(zcount: u32, mut get_seed: F) -> String 
     where F: FnMut(u32) -> (Vec<u8>, u32)
 {
     let mut ans = array![];
 
-    for i in 0..count {
+    for i in 0..zcount {
         let (seed, child) = get_seed(i);
         let (addr, pk, path) = get_address(&seed, child);
         ans.push(object!{

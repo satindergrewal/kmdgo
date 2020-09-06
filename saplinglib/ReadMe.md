@@ -3,15 +3,9 @@
 
 This library is based on Zcash's [librustzcash](https://github.com/zcash/librustzcash), and parts of this library are taken from the [zecpaperwallet](https://github.com/adityapk00/zecpaperwallet).
 
-#### NOTE: System entropy is disabled for this library
-
-By default generating a zcash sapling address uses system entropy and in addition can also use a user specified entropy to make more randomness and use these bits to generate a HD wallet seed from which further addresses are generated.
-
-Since the idea of using this library is mainly to generate a shielded sappling address using just a user specified passphrase/seed which should always give the same address, the code to use system entropy is disabled, and only user specific entropy is accepted to generate a deterministic address.
-
 ### Compiling library
 
-To generate the linkable static library follow these stesp:
+To generate the linkable static library follow these steps:
 
 #### Step 0:
 
@@ -44,15 +38,22 @@ Save the following contents in `csapling.c` file:
 #include "saplinglib.h"
 
 int main() {
-	// rust_generate_wallet function takes two parameters
-	// parameter 1: the number of sapling addresses you want to generate
-	// parameter 2: the user specified passphrase, which gives the same address everytime if given the same passphrase
-	char * from_rust = rust_generate_wallet(1,"user-provided-passphrase");
-	char *stri = from_rust;
-	printf("%s", stri);
-	rust_free_string(from_rust);
-  	
-  	return 0;
+  // rust_generate_wallet function takes four parameters
+  // parameter 1 - nohd:          set it to false, if you don't want HD wallet
+  // parameter 2 - zcount:        the number of sapling addresses you want to generate
+  // parameter 3 - seed:          the user specified passphrase, which gives the same address everytime if given the same passphrase
+  // parameter 4 - iguana_seed:   set this to true if you want the output to always give a deterministic address based on user specified seed phrase
+  bool nohd = false;
+  int zcount = 1;
+  char *seed = "user specified seed phrase";
+  bool iguana_seed = true;
+
+  char * from_rust = rust_generate_wallet(nohd, zcount, seed, iguana_seed);
+  char *stri = from_rust;
+  printf("%s", stri);
+  rust_free_string(from_rust);
+
+  return 0;
 }
 ```
 
@@ -69,10 +70,10 @@ It will generate a binary named `csapling` which if you execute will give the fo
 [
   {
     "num": 0,
-    "address": "zs1zjenpjczvcn2sm3yllqyr3zcvzzu9l3sfttnh97zwxpz6wrgem697pjerx8c6gn840fjv9lsks8",
-    "private_key": "secret-extended-key-main1qw96tl5tqqqqpqqgdszc6p628dzxdaxzan8a8yk8jsdzdzzklcqu8u2eaqyv78nkhk02dfsn2f4t770ecs5huan4hralwzpmnu26u4rn3k59deq3x8asgtac5tlmrururs9uhp65298m5l7p20zwxy4ytvzvlshe8r6hn2qqg7s3lq37jg0kqdh32ksk9lmhzgxdkm2tcy6wz80ymsency0ym2ldhay4e47yjjnfntkjz5jvmmqvfyy9xtdfjpc7hufdpgmt4aldlnqlkjx8f",
+    "address": "zs1z6tqgxd5fekfya07rhg6p5amwfwkmh3xwp8dcfvwqy8x4vvq0sg473d0lmgz4qevm2l4zzkhfrv",
+    "private_key": "secret-extended-key-main1qwteh95uqqqqpqzv60m0kuuwrp2l0me3784kzctd6c3cfnsaflc4nw87p3huh8rp5cxy3kvuv453vsswsgfcf6kpj36az8t5qtt2u0lm2rf2auusny7qzvnxc9hn46erwzrkz9xhnk222qs7grye4qc4ulgh079xcvmmlcczpe9h4rg0385u4jfx2kutfxpx8jvjqlyf8u866c2n0j9sfc956nlwl07qy3a50vd2h6tdg2fsu5gksh25m46r7akwdxfcvc7f28mvx7s8ch3cp",
     "seed": {
-      "HDSeed": "92035c7f9b4db895f55ab6b00385451585a0c0470898fd4202717de46ee08e9c",
+      "HDSeed": "fe50eb2add6c3e1ecc550f901fa737cbebab7b7a1dbf6827d4b0fd3521d2f93e",
       "path": "m/32'/133'/0'"
     }
   }
@@ -106,11 +107,15 @@ import (
 )
 
 func main() {
-	foo := C.CString("")
-	defer C.free(unsafe.Pointer(foo))
-	foo = C.rust_generate_wallet(C.uint(1), C.CString("user-provided-passphrase"))
-	// fmt.Printf("%T", foo)
-	fmt.Println(C.GoString(foo))
+	nohd := C.bool(false)
+  zcount := C.uint(1)
+  seed := C.CString("user specified seed phrase")
+  iguana_seed := C.bool(true)
+
+  fromRust := C.CString("")
+  defer C.free(unsafe.Pointer(fromRust))
+  fromRust = C.rust_generate_wallet(nohd, zcount, seed, iguana_seed)
+  fmt.Println(C.GoString(fromRust))
 }
 ```
 
@@ -128,10 +133,10 @@ It will generate a binary named `gosapling` which if you execute will give the f
 [
   {
     "num": 0,
-    "address": "zs1zjenpjczvcn2sm3yllqyr3zcvzzu9l3sfttnh97zwxpz6wrgem697pjerx8c6gn840fjv9lsks8",
-    "private_key": "secret-extended-key-main1qw96tl5tqqqqpqqgdszc6p628dzxdaxzan8a8yk8jsdzdzzklcqu8u2eaqyv78nkhk02dfsn2f4t770ecs5huan4hralwzpmnu26u4rn3k59deq3x8asgtac5tlmrururs9uhp65298m5l7p20zwxy4ytvzvlshe8r6hn2qqg7s3lq37jg0kqdh32ksk9lmhzgxdkm2tcy6wz80ymsency0ym2ldhay4e47yjjnfntkjz5jvmmqvfyy9xtdfjpc7hufdpgmt4aldlnqlkjx8f",
+    "address": "zs1z6tqgxd5fekfya07rhg6p5amwfwkmh3xwp8dcfvwqy8x4vvq0sg473d0lmgz4qevm2l4zzkhfrv",
+    "private_key": "secret-extended-key-main1qwteh95uqqqqpqzv60m0kuuwrp2l0me3784kzctd6c3cfnsaflc4nw87p3huh8rp5cxy3kvuv453vsswsgfcf6kpj36az8t5qtt2u0lm2rf2auusny7qzvnxc9hn46erwzrkz9xhnk222qs7grye4qc4ulgh079xcvmmlcczpe9h4rg0385u4jfx2kutfxpx8jvjqlyf8u866c2n0j9sfc956nlwl07qy3a50vd2h6tdg2fsu5gksh25m46r7akwdxfcvc7f28mvx7s8ch3cp",
     "seed": {
-      "HDSeed": "92035c7f9b4db895f55ab6b00385451585a0c0470898fd4202717de46ee08e9c",
+      "HDSeed": "fe50eb2add6c3e1ecc550f901fa737cbebab7b7a1dbf6827d4b0fd3521d2f93e",
       "path": "m/32'/133'/0'"
     }
   }

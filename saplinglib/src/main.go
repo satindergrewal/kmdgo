@@ -16,9 +16,13 @@ import (
 )
 
 func main() {
-	foo := C.CString("")
-	defer C.free(unsafe.Pointer(foo))
-	foo = C.rust_generate_wallet(C.uint(1), C.CString("myverysecretandstrongpassphrase_noneabletobrute"))
-	// fmt.Printf("%T", foo)
-	fmt.Println(C.GoString(foo))
+	nohd := C.bool(false)
+	zcount := C.uint(1)
+	seed := C.CString("user specified seed phrase")
+	iguana_seed := C.bool(true)
+
+	fromRust := C.CString("")
+	defer C.free(unsafe.Pointer(fromRust))
+	fromRust = C.rust_generate_wallet(nohd, zcount, seed, iguana_seed)
+	fmt.Println(C.GoString(fromRust))
 }

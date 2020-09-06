@@ -8,14 +8,14 @@ use saplingrustlib;
  * after using it to free it properly
  */ 
 #[no_mangle]
-pub extern fn rust_generate_wallet(count: u32, entropy: *const c_char) -> *mut c_char {
+pub extern fn rust_generate_wallet(nohd: bool, zcount: u32, entropy: *const c_char, iguana_seed: bool) -> *mut c_char {
     let entropy_str = unsafe {
         assert!(!entropy.is_null());
 
         CStr::from_ptr(entropy)
     };
 
-    let c_str = CString::new(saplingrustlib::generate_wallet(false, count, entropy_str.to_bytes())).unwrap();
+    let c_str = CString::new(saplingrustlib::generate_wallet(nohd, zcount, entropy_str.to_bytes(), iguana_seed)).unwrap();
     return c_str.into_raw();
 }
 
