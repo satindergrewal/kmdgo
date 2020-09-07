@@ -13,13 +13,13 @@ target/release/saplinglib.$(EXT): src/lib.rs Cargo.toml
 	@rm -rf target
 
 cbin: target/release/saplinglib.$(EXT)
-	gcc src/main.c -L./ -lsaplinglib -lpthread -ldl -o csapling -framework Security
+	gcc src/C/main.c -L./ -lsaplinglib -lpthread -ldl -o csapling -framework Security
 	./csapling
 	@rm -rf target
 	@rm -rf Cargo.lock
 
 gobin: target/release/saplinglib.$(EXT)
-	go build -o gosapling src/main.go
+	go build -o gosapling src/Go/main.go
 	./gosapling
 	@rm -rf target
 	@rm -rf Cargo.lock
