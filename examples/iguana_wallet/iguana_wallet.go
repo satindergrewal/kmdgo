@@ -27,5 +27,10 @@ func main() {
 	// iguanaSeed := "user specified seed phrase"
 	var taddr kmdutil.IguanaTAddress
 	taddr = kmdutil.GetTAddress(iguanaSeed)
-	fmt.Println(taddr)
+	// fmt.Printf("%+v\n", taddr)
+	fmt.Println("Seed: \t\t\t", taddr.Seed)
+	fmt.Println("Transparent Address: \t", taddr.Address)
+	fmt.Println("Pubkey: \t\t", taddr.Pubkey)
+	fmt.Println("WifC: \t\t\t", taddr.WifC)
+	fmt.Println("WifU: \t\t\t", taddr.WifU)
 }
