@@ -12,11 +12,24 @@
 
 package kmdutil
 
+/*
+#cgo CFLAGS: -I../saplinglib/src
+#cgo LDFLAGS: -L../saplinglib -lsaplinglib -lpthread -ldl -framework Security
+#include "saplinglib.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+*/
+import "C"
+
 import (
 	"crypto/sha256"
+	"encoding/json"
 	"fmt"
 	"math/big"
+	"unsafe"
 
+	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -25,8 +38,8 @@ type IguanaParams struct {
 	VersionByte, PrivKeyVersionByte []byte
 }
 
-// IguanaTAddress type stores the public address info
-type IguanaTAddress struct {
+// IguanaPublicAddress type stores the public address info
+type IguanaPublicAddress struct {
 	// mnemonic for memorization or user-friendly seeds
 	Seed string
 	// Public Address
@@ -37,6 +50,24 @@ type IguanaTAddress struct {
 	WifC string
 	// Private Key in uncompressed WIF format
 	WifU string
+}
+
+// IguanaSaplingAddress data type to parse saping address output from saplinglib
+type IguanaSaplingAddress []struct {
+	Num        int    `json:"num"`
+	Address    string `json:"address"`
+	PrivateKey string `json:"private_key"`
+	Seed       struct {
+		HDSeed string `json:"HDSeed"`
+		Path   string `json:"path"`
+	} `json:"seed"`
+}
+
+// IguanaWallet data type to hold and parse both public and shielded addresses data
+type IguanaWallet struct {
+	IguanaPublicAddress
+	ZAddress    string
+	ZPrivateKey string
 }
 
 // Point type to store two big integer values
@@ -264,11 +295,11 @@ func base58Iguana(data []byte) string {
 }
 
 // GetTAddress generates a public address using a seed phrase
-func GetTAddress(iguanaSeed string) IguanaTAddress {
+func GetTAddress(iguanaSeed string) IguanaPublicAddress {
 	// btcVersionByte := []byte{0x0}
 	// btcPrivKeyVersionByte := []byte{0x80}
 
-	var tAddr IguanaTAddress
+	var tAddr IguanaPublicAddress
 	tAddr.Seed = iguanaSeed
 
 	var verBytes IguanaParams
@@ -402,4 +433,91 @@ func GetTAddress(iguanaSeed string) IguanaTAddress {
 	tAddr.WifC = wifCompressed
 
 	return tAddr
+}
+
+// GetZAddress generates a shielded sapling address using a seed phrase
+func GetZAddress(nohd bool, zcount uint, iguanaSeed string, isIguanaSeed bool) IguanaSaplingAddress {
+
+	var zaddrs IguanaSaplingAddress
+
+	// rust_generate_wallet function takes four parameters
+	// 1) nohd:				set it to false, if you don't want HD wallet
+	// 2) zcount:			the number of sapling addresses you want to generate
+	// 3) seed:				the user specified passphrase, which gives the same address everytime if given the same passphrase
+	// 4) isIguanaSeed:		set this to true if you want the output to always give a deterministic address based on user specified seed phrase
+	_nohd := C.bool(nohd)
+	_zcount := C.uint(zcount)
+	_seed := C.CString(iguanaSeed)
+	_isIguanaSeed := C.bool(isIguanaSeed)
+
+	fromRust := C.CString("")
+	defer C.free(unsafe.Pointer(fromRust))
+	fromRust = C.rust_generate_wallet(_nohd, _zcount, _seed, _isIguanaSeed)
+	// fmt.Println(C.GoString(fromRust))
+
+	zaddrBytes := []byte(C.GoString(fromRust))
+
+	if err := json.Unmarshal(zaddrBytes, &zaddrs); err != nil {
+		panic(err)
+	}
+	// fmt.Println(zaddrs)
+	return zaddrs
+}
+
+// NewBip39Seed returns a 256 byte mnemonic seed phrase
+func NewBip39Seed() string {
+	// Generate a mnemonic for memorization or user-friendly seeds
+	entropy, _ := bip39.NewEntropy(256)
+	iguanaSeed, _ := bip39.NewMnemonic(entropy)
+	return iguanaSeed
+}
+
+// GetIguanaWallet returns a set of public and shielded addresses generated based on a mnemonic seed phrase
+func GetIguanaWallet(walletSeed ...string) IguanaWallet {
+	// fmt.Println(walletSeed)
+
+	// Check and confirm the first object of the map is not empty
+	// If no seed is provided or the provided seed is empty string,
+	// generate a new mnemonic seed and return wallet addresses based on that seed
+	var seedPhrase string
+	if len(walletSeed) == 0 {
+		// fmt.Println("No seed provided")
+		seedPhrase = NewBip39Seed()
+	} else {
+		if len(walletSeed[0]) == 0 {
+			// fmt.Println("No seed provided")
+			seedPhrase = NewBip39Seed()
+		} else {
+			// fmt.Println("Here is the seed:")
+			// fmt.Println(walletSeed[0])
+			seedPhrase = walletSeed[0]
+		}
+	}
+
+	// fmt.Println("Seed phrase is: ", seedPhrase)
+
+	// wallet variable to hold public and shielded addresses info
+	var wallet IguanaWallet
+
+	// Get public address data using a seed phrase
+	var taddr IguanaPublicAddress
+	taddr = GetTAddress(seedPhrase)
+
+	// Get shielded address data using a seed phrase
+	var zaddr IguanaSaplingAddress
+	nohd := false
+	zcount := uint(1)
+	isIguanaSeed := true
+
+	zaddr = GetZAddress(nohd, zcount, seedPhrase, isIguanaSeed)
+
+	wallet.Seed = seedPhrase
+	wallet.Address = taddr.Address
+	wallet.Pubkey = taddr.Pubkey
+	wallet.WifC = taddr.WifC
+	wallet.WifU = taddr.WifU
+	wallet.ZAddress = zaddr[0].Address
+	wallet.ZPrivateKey = zaddr[0].PrivateKey
+
+	return wallet
 }
