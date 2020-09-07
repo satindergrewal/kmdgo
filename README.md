@@ -60,6 +60,8 @@ RPC Port: 27486
 - [x]	GetIguanaWallet - GetIguanaWallet returns a set of public and shielded addresses generated based on a mnemonic seed phrase
 - [x]	BytesToString - BytesToString converts and returns bytes to string
 
+##### NOTE: [saplinglib](saplinglib) is required for kmdutil methods `GetZAddress` and `GetIguanaWallet`
+
 
 #### CClib
 - [ ]	cclib method [evalcode] [JSON params]
