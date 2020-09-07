@@ -21,10 +21,12 @@ import (
 	"strings"
 )
 
+// BytesToString converts and returns bytes to string
 func BytesToString(data []byte) string {
 	return string(data[:])
 }
 
+// AppRPCInfo returns RPC username, password, port info for a specified Komodo Assetchain (Antara smartchain)
 func AppRPCInfo(appName string) (string, string, string) {
 	appDir := AppDataDir(appName, false)
 
@@ -64,20 +66,20 @@ func AppRPCInfo(appName string) (string, string, string) {
 
 	bytestr := BytesToString(confdata)
 
-	rpcuser_line := rpcu.FindString(bytestr)
-	rpcpass_line := rpcpass.FindString(bytestr)
-	rpcpport_line := rpcport.FindString(bytestr)
+	rpcuserLine := rpcu.FindString(bytestr)
+	rpcpassLine := rpcpass.FindString(bytestr)
+	rpcpportLine := rpcport.FindString(bytestr)
 
 	// fmt.Println(bytestr)
 
-	//AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuser_line,`rpcuser`),`=`)
-	//AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpass_line,`rpcpassword`),`=`)
-	AppRPCport := strings.TrimLeft(strings.TrimLeft(rpcpport_line, `rpcport`), `=`)
+	//AppRPCuser := strings.TrimLeft(strings.TrimLeft(rpcuserLine,`rpcuser`),`=`)
+	//AppRPCpass := strings.TrimLeft(strings.TrimLeft(rpcpassLine,`rpcpassword`),`=`)
+	AppRPCport := strings.TrimLeft(strings.TrimLeft(rpcpportLine, `rpcport`), `=`)
 
-	//AppRPCuser := rpcuser_line[8:]
-	AppRPCuser := strings.TrimLeft(rpcuser_line, `rpcuser`)[1:]
-	AppRPCpass := strings.TrimLeft(rpcpass_line, `rpcpassword`)[1:]
-	//AppRPCport := strings.TrimLeft(rpcpport_line,`rpcport`)[1:]
+	//AppRPCuser := rpcuserLine[8:]
+	AppRPCuser := strings.TrimLeft(rpcuserLine, `rpcuser`)[1:]
+	AppRPCpass := strings.TrimLeft(rpcpassLine, `rpcpassword`)[1:]
+	//AppRPCport := strings.TrimLeft(rpcpportLine,`rpcport`)[1:]
 
 	if AppRPCport == "" && appName == "komodo" {
 		AppRPCport = "7771"
