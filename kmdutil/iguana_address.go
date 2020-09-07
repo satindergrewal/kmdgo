@@ -27,6 +27,8 @@ type IguanaParams struct {
 
 // IguanaTAddress type stores the public address info
 type IguanaTAddress struct {
+	// mnemonic for memorization or user-friendly seeds
+	Seed string
 	// Public Address
 	Address string
 	// Public Key
@@ -261,11 +263,13 @@ func base58Iguana(data []byte) string {
 	return string(outputString)
 }
 
-func GetTAddress(iguana_seed string) IguanaTAddress {
+// GetTAddress generates a public address using a seed phrase
+func GetTAddress(iguanaSeed string) IguanaTAddress {
 	// btcVersionByte := []byte{0x0}
 	// btcPrivKeyVersionByte := []byte{0x80}
 
 	var tAddr IguanaTAddress
+	tAddr.Seed = iguanaSeed
 
 	var verBytes IguanaParams
 	verBytes.VersionByte = []byte{0x3C}
@@ -290,7 +294,7 @@ func GetTAddress(iguana_seed string) IguanaTAddress {
 
 	// Password string or Pass phrase
 	// passStr := "myverysecretandstrongpassphrase_noneabletobrute"
-	passStr := iguana_seed
+	passStr := iguanaSeed
 	hashByte := s256([]byte(passStr))
 
 	// The following is the method used by iguana password hashing algorigthm, as shown in existing seed to address/WIF generate examples of PHP and JavaScript

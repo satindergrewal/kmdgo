@@ -16,10 +16,15 @@ import (
 	"fmt"
 
 	"github.com/satindergrewal/kmdgo/kmdutil"
+	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
 )
 
 func main() {
-	iguanaSeed := "user specified seed phrase"
+	// Generate a mnemonic for memorization or user-friendly seeds
+	entropy, _ := bip39.NewEntropy(256)
+	iguanaSeed, _ := bip39.NewMnemonic(entropy)
+
+	// iguanaSeed := "user specified seed phrase"
 	var taddr kmdutil.IguanaTAddress
 	taddr = kmdutil.GetTAddress(iguanaSeed)
 	fmt.Println(taddr)
