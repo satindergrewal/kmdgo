@@ -49,14 +49,16 @@ RPC Port: 27486
 ```
 
 
-
-
 ## Supported API Calls
 
 #### KMDUtil Specific Methods
 
 - [x]	AppDataDir - Gives the path of cryptocurrency's Data directory based on it's symbol. Supports Only Komodo and Assetchains so far.
 - [x]	AppRPCInfo - Provides RPC username, password and it's port by reading it's config file from data directory.
+- [x]	GetTAddress - GetTAddress generates a public address using a seed phrase
+- [x]	GetZAddress - GetZAddress generates a shielded sapling address using a seed phrase
+- [x]	GetIguanaWallet - GetIguanaWallet returns a set of public and shielded addresses generated based on a mnemonic seed phrase
+- [x]	BytesToString - BytesToString converts and returns bytes to string
 
 
 #### CClib
