@@ -14,7 +14,7 @@ package kmdutil
 
 /*
 #cgo CFLAGS: -I../saplinglib/src
-#cgo LDFLAGS: -L../saplinglib -lsaplinglib -lpthread -ldl -framework Security
+#cgo LDFLAGS: -L../saplinglib -lsaplinglib -lpthread -ldl
 #include "saplinglib.h"
 #include <stdlib.h>
 #include <string.h>
