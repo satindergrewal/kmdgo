@@ -26,6 +26,30 @@ make
 It will generate a `libsaplinglib.a` file.
 
 
+### Redistributable static release libraries
+
+To compile a static redistributable libraries, just execute the following command:
+
+```shell
+make dist
+```
+
+It will compile and copy the static libraries for Windows, Linux and MacOS to a new directory named `dist/`
+
+```shell
+➜  dist git:(master) ✗ tree
+.
+├── darwin
+│   └── libsaplinglib.a
+├── linux
+│   └── libsaplinglib.a
+└── win64
+    └── saplinglib.lib
+
+3 directories, 3 files
+```
+
+
 ### C Example Code
 
 You can use following C example to use the library:
