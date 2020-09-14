@@ -24,12 +24,11 @@ import "C"
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 	"fmt"
 	"math/big"
-	"unsafe"
 
 	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
+	saplinggo "github.com/satindergrewal/kmdgo/saplinglib"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -50,17 +49,6 @@ type IguanaPublicAddress struct {
 	WifC string
 	// Private Key in uncompressed WIF format
 	WifU string
-}
-
-// IguanaSaplingAddress data type to parse saping address output from saplinglib
-type IguanaSaplingAddress []struct {
-	Num        int    `json:"num"`
-	Address    string `json:"address"`
-	PrivateKey string `json:"private_key"`
-	Seed       struct {
-		HDSeed string `json:"HDSeed"`
-		Path   string `json:"path"`
-	} `json:"seed"`
 }
 
 // IguanaWallet data type to hold and parse both public and shielded addresses data
@@ -435,35 +423,6 @@ func GetTAddress(iguanaSeed string) IguanaPublicAddress {
 	return tAddr
 }
 
-// GetZAddress generates a shielded sapling address using a seed phrase
-func GetZAddress(nohd bool, zcount uint, iguanaSeed string, isIguanaSeed bool) IguanaSaplingAddress {
-
-	var zaddrs IguanaSaplingAddress
-
-	// rust_generate_wallet function takes four parameters
-	// 1) nohd:				set it to false, if you don't want HD wallet
-	// 2) zcount:			the number of sapling addresses you want to generate
-	// 3) seed:				the user specified passphrase, which gives the same address everytime if given the same passphrase
-	// 4) isIguanaSeed:		set this to true if you want the output to always give a deterministic address based on user specified seed phrase
-	_nohd := C.bool(nohd)
-	_zcount := C.uint(zcount)
-	_seed := C.CString(iguanaSeed)
-	_isIguanaSeed := C.bool(isIguanaSeed)
-
-	fromRust := C.CString("")
-	defer C.free(unsafe.Pointer(fromRust))
-	fromRust = C.rust_generate_wallet(_nohd, _zcount, _seed, _isIguanaSeed)
-	// fmt.Println(C.GoString(fromRust))
-
-	zaddrBytes := []byte(C.GoString(fromRust))
-
-	if err := json.Unmarshal(zaddrBytes, &zaddrs); err != nil {
-		panic(err)
-	}
-	// fmt.Println(zaddrs)
-	return zaddrs
-}
-
 // NewBip39Seed returns a 256 byte mnemonic seed phrase
 func NewBip39Seed() string {
 	// Generate a mnemonic for memorization or user-friendly seeds
@@ -504,12 +463,12 @@ func GetIguanaWallet(walletSeed ...string) IguanaWallet {
 	taddr = GetTAddress(seedPhrase)
 
 	// Get shielded address data using a seed phrase
-	var zaddr IguanaSaplingAddress
+	var zaddr saplinggo.IguanaSaplingAddress
 	nohd := false
 	zcount := uint(1)
 	isIguanaSeed := true
 
-	zaddr = GetZAddress(nohd, zcount, seedPhrase, isIguanaSeed)
+	zaddr = saplinggo.GetZAddressOsx(nohd, zcount, seedPhrase, isIguanaSeed)
 
 	wallet.Seed = seedPhrase
 	wallet.Address = taddr.Address

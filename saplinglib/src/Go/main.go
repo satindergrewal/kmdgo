@@ -2,7 +2,7 @@ package main
 
 /*
 #cgo CFLAGS: -I../
-#cgo LDFLAGS: -L../../ -lsaplinglib -lpthread -ldl -framework Security
+#cgo LDFLAGS: -L../../dist/darwin -lsaplinglib -lpthread -ldl -framework Security
 #include "saplinglib.h"
 #include <stdlib.h>
 #include <string.h>
