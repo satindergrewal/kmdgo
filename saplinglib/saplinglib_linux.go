@@ -10,7 +10,7 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-package saplinggo
+package saplinglib
 
 /*
 #cgo CFLAGS: -Isrc

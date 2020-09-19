@@ -8,7 +8,7 @@ use saplingrustlib;
  * after using it to free it properly
  */ 
 #[no_mangle]
-pub extern fn rust_generate_wallet(nohd: bool, zcount: u32, entropy: *const c_char, is_iguana_seed: bool) -> *mut c_char {
+pub extern "C" fn rust_generate_wallet(nohd: bool, zcount: u32, entropy: *const c_char, is_iguana_seed: bool) -> *mut c_char {
     let entropy_str = unsafe {
         assert!(!entropy.is_null());
 
@@ -24,7 +24,7 @@ pub extern fn rust_generate_wallet(nohd: bool, zcount: u32, entropy: *const c_ch
  * back to rust, so it can be freed. Failure to call this function will result in a memory leak
  */ 
 #[no_mangle]
-pub extern fn rust_free_string(s: *mut c_char) {
+pub extern "C" fn rust_free_string(s: *mut c_char) {
     unsafe {
         if s.is_null() { return }
         CString::from_raw(s)

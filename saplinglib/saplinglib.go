@@ -10,7 +10,11 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-package saplinggo
+package saplinglib
+
+import (
+	"runtime"
+)
 
 // IguanaSaplingAddress data type to parse saping address output from saplinglib
 type IguanaSaplingAddress []struct {
@@ -21,4 +25,21 @@ type IguanaSaplingAddress []struct {
 		HDSeed string `json:"HDSeed"`
 		Path   string `json:"path"`
 	} `json:"seed"`
+}
+
+// GetZAddress detects the OS and triggers the appropriate function (based on the OS it is running on)
+// to generates a shielded sapling address using a seed phrase
+func GetZAddress(nohd bool, zcount uint, iguanaSeed string, isIguanaSeed bool) IguanaSaplingAddress {
+	var zaddr IguanaSaplingAddress
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		zaddr = GetZAddressOsx(nohd, zcount, iguanaSeed, isIguanaSeed)
+	case "linux":
+		zaddr = GetZAddressLinux(nohd, zcount, iguanaSeed, isIguanaSeed)
+	case "windows":
+		zaddr = GetZAddressWin(nohd, zcount, iguanaSeed, isIguanaSeed)
+	default:
+		return zaddr
+	}
+	return zaddr
 }
