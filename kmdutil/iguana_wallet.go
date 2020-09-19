@@ -18,7 +18,7 @@ import (
 	"math/big"
 
 	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
-	saplinglib "github.com/satindergrewal/kmdgo/saplinglib"
+	"github.com/satindergrewal/saplinglib"
 	"golang.org/x/crypto/ripemd160"
 )
 

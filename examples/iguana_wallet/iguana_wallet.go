@@ -16,7 +16,7 @@ import (
 	"fmt"
 
 	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
-	"github.com/satindergrewal/kmdgo/saplinglib"
+	"github.com/satindergrewal/saplinglib"
 )
 
 func main() {
