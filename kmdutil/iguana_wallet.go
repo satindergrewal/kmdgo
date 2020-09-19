@@ -12,23 +12,13 @@
 
 package kmdutil
 
-/*
-#cgo CFLAGS: -I../saplinglib/src
-#cgo LDFLAGS: -L../saplinglib -lsaplinglib -lpthread -ldl
-#include "saplinglib.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-*/
-import "C"
-
 import (
 	"crypto/sha256"
 	"fmt"
 	"math/big"
 
 	"github.com/satindergrewal/kmdgo/kmdutil/bip39"
-	saplinggo "github.com/satindergrewal/kmdgo/saplinglib"
+	saplinglib "github.com/satindergrewal/kmdgo/saplinglib"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -463,12 +453,12 @@ func GetIguanaWallet(walletSeed ...string) IguanaWallet {
 	taddr = GetTAddress(seedPhrase)
 
 	// Get shielded address data using a seed phrase
-	var zaddr saplinggo.IguanaSaplingAddress
+	var zaddr saplinglib.IguanaSaplingAddress
 	nohd := false
 	zcount := uint(1)
 	isIguanaSeed := true
 
-	zaddr = saplinggo.GetZAddressOsx(nohd, zcount, seedPhrase, isIguanaSeed)
+	zaddr = saplinglib.GetZAddress(nohd, zcount, seedPhrase, isIguanaSeed)
 
 	wallet.Seed = seedPhrase
 	wallet.Address = taddr.Address
