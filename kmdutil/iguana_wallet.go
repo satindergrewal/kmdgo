@@ -457,8 +457,9 @@ func GetIguanaWallet(walletSeed ...string) IguanaWallet {
 	nohd := false
 	zcount := uint(1)
 	isIguanaSeed := true
+	coinType := uint(141)
 
-	zaddr = saplinglib.GetZAddress(nohd, zcount, seedPhrase, isIguanaSeed)
+	zaddr = saplinglib.GetZAddress(nohd, zcount, seedPhrase, isIguanaSeed, coinType)
 
 	wallet.Seed = seedPhrase
 	wallet.Address = taddr.Address
