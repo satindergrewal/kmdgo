@@ -177,8 +177,7 @@ type RegisterNameCommitment struct {
 // registernamecommitment "name" "controladdress" ("referralidentity")
 //
 // Arguments
-// "name"                           (string, required)  the unique name to commit to. creating a name commitment is not a registration, and if one is
-//                                                        created for a name that exists, it may succeed, but will never be able to be used.
+// "name"                           (string, required)  the unique name to commit to. creating a name commitment is not a registration, and if one is created for a name that exists, it may succeed, but will never be able to be used.
 // "controladdress"                 (address, required) address that will control this commitment
 // "referralidentity"               (identity, optional)friendly name or identity address that is provided as a referral mechanism and to lower network cost of the ID
 func (appName AppType) RegisterNameCommitment(params APIParams) (RegisterNameCommitment, error) {
@@ -213,4 +212,93 @@ func (appName AppType) RegisterNameCommitment(params APIParams) (RegisterNameCom
 
 	json.Unmarshal([]byte(RegNameComitJSON), &RegNameComit)
 	return RegNameComit, nil
+}
+
+// RegisterIdentity type
+type RegisterIdentity struct {
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
+}
+
+// RegisterIdentityData holds the JSON data supplied for registering VerusID
+type RegisterIdentityData struct {
+	Txid            string `json:"txid"`
+	Namereservation struct {
+		Name     string `json:"name"`
+		Salt     string `json:"salt"`
+		Referral string `json:"referral"`
+		Parent   string `json:"parent"`
+		Nameid   string `json:"nameid"`
+	} `json:"namereservation"`
+	Identity struct {
+		Name                string   `json:"name"`
+		Primaryaddresses    []string `json:"primaryaddresses"`
+		Minimumsignatures   int      `json:"minimumsignatures"`
+		Revocationauthority string   `json:"revocationauthority"`
+		Recoveryauthority   string   `json:"recoveryauthority"`
+		Privateaddress      string   `json:"privateaddress"`
+	} `json:"identity"`
+}
+
+// RegisterIdentity gets the values from RegisterNameCommitment output and uses those to register VerusID
+//
+// registeridentity "jsonidregistration" feeoffer
+//
+// Arguments
+// {
+// 	"txid": "hexid",			(hex)    the transaction ID of the name committment for this ID name - Taken from RegisterNameCommitment's output - txid
+// 	"namereservation": {
+// 	  "name": "namestr",		(string) the unique name in this commitment - Taken from RegisterNameCommitment's output - name
+// 	  "salt": "hexstr",			(hex)    salt used to hide the commitment - Taken from RegisterNameCommitment's output - salt
+// 	  "referral": "identityID",	(name@ or address) must be a valid ID to use as a referrer to receive a discount - Taken from RegisterNameCommitment's output - referral
+// 	  "parent": "",				(name@ or address) must be a valid ID. This ID can be used to revoke and recover the nameID we regsiter with this current command - Taken from RegisterNameCommitment's output - parent
+// 	  "nameid": "nameID"		(base58) identity address for this identity if it is created - Taken from RegisterNameCommitment's output - nameid
+// 	},
+// 	"identity": {
+// 	  "name": "namestr",		(string) the unique name for this identity - Taken from RegisterNameCommitment's output - name
+// 	  "primaryaddresses": [		(array of strings) the trasparent/public address(es)
+// 		"hexstr"
+// 	  ],
+// 	  "minimumsignatures": 1,	(int) MofN signatures required out of the primary addresses list to sign transactions
+//    "revocationauthority": "namestr", (name@ or address) The ID entered here will be able to disable your created ID in case of loss or theft. It is some existing ID which either is under your own control or the ID you trust can help you revoke in case of this ID's theft.
+//    "recoveryauthority": "namestr",	(name@ or address) The ID entered here will be able to revive your created ID if it is revoked. It is some existing ID which either is under your own control or the ID you trust can help you revive in case of this ID's revoked.
+// 	  "privateaddress": "hexstr"	(string) shielded address associated with the VerusID being made
+// 	}
+// }
+// feeoffer                           (amount, optional) amount to offer miner/staker for the registration fee, if missing, uses standard price
+func (appName AppType) RegisterIdentity(params APIParams) (RegisterIdentity, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println("paramsJSON", string(paramsJSON))
+
+	query := APIQuery{
+		Method: `registeridentity`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var RegID RegisterIdentity
+
+	RegIDJSON := appName.APICall(&query)
+	if RegIDJSON == "EMPTY RPC INFO" {
+		return RegID, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(RegIDJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(RegIDJSON), &RegID)
+		return RegID, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(RegIDJSON), &RegID)
+	return RegID, nil
 }

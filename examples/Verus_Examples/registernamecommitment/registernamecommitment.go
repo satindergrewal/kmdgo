@@ -26,10 +26,11 @@ func main() {
 
 	var comit kmdgo.RegisterNameCommitment
 
-	args := make(kmdgo.APIParams, 3)
+	args := make(kmdgo.APIParams, 4)
 	args[0] = `sattest01`                          // name
 	args[1] = `RG7NakxGExpWphZRZtFyHSiBUx7itw8b4s` // controladdress
 	args[2] = `satinder@`                          // referralidentity
+	args[2] = `satinder@`                          // parent
 	// fmt.Println(args)
 
 	comit, err := appName.RegisterNameCommitment(args)
