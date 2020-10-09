@@ -13,6 +13,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -26,10 +27,10 @@ func main() {
 	var comit kmdgo.RegisterNameCommitment
 
 	args := make(kmdgo.APIParams, 3)
-	args[0] = `sattest01` // name
-	args[1] = `satinder@` // controladdress
-	args[2] = `satinder@` // referralidentity
-	fmt.Println(args)
+	args[0] = `sattest01`                          // name
+	args[1] = `RG7NakxGExpWphZRZtFyHSiBUx7itw8b4s` // controladdress
+	args[2] = `satinder@`                          // referralidentity
+	// fmt.Println(args)
 
 	comit, err := appName.RegisterNameCommitment(args)
 	if err != nil {
@@ -39,6 +40,8 @@ func main() {
 	}
 
 	// fmt.Println(comit.Result)
+	comitJSON, _ := json.MarshalIndent(comit.Result, "", "  ")
+	fmt.Println(string(comitJSON))
 	fmt.Println("Txid -", comit.Result.Txid)
 	fmt.Println("Namereservation -", comit.Result.Namereservation)
 	fmt.Println("Namereservation > Name -", comit.Result.Namereservation.Name)
@@ -50,10 +53,20 @@ func main() {
 
 // Example Output:
 //
-// Txid - 547514e2dd4483c719ef94e2d8171d9a445975a406264f4aea3008f2bb880d33
-// Namereservation - {sattest01 b0ef0c7ca7e9aafdd908b13c8e30ac1b38a95ad6f62c2fae9a70530815561d39 i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18  iG9h8GM17z1ZByGvKMF7CmF88NVCdgbpmr}
-// Namereservation > Name - sattest01
-// Namereservation > Salt - b0ef0c7ca7e9aafdd908b13c8e30ac1b38a95ad6f62c2fae9a70530815561d39
-// Namereservation > Referral - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
-// Namereservation > Parent -
-// Namereservation > Nameid - iG9h8GM17z1ZByGvKMF7CmF88NVCdgbpmr
+// {
+// 	"txid": "37f3a18769d72fa1c2c461853ab66d46bae809a5e9ac0178bd395d2333234852",
+// 	"namereservation": {
+// 	  "name": "sattest01",
+// 	  "salt": "9c98592e44017fb5ffcd3fcbb6e1e63fd18b25fcb34cffb4b5b03efdb1c17b61",
+// 	  "referral": "i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18",
+// 	  "parent": "",
+// 	  "nameid": "iG9h8GM17z1ZByGvKMF7CmF88NVCdgbpmr"
+// 	}
+//   }
+//   Txid - 37f3a18769d72fa1c2c461853ab66d46bae809a5e9ac0178bd395d2333234852
+//   Namereservation - {sattest01 9c98592e44017fb5ffcd3fcbb6e1e63fd18b25fcb34cffb4b5b03efdb1c17b61 i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18  iG9h8GM17z1ZByGvKMF7CmF88NVCdgbpmr}
+//   Namereservation > Name - sattest01
+//   Namereservation > Salt - 9c98592e44017fb5ffcd3fcbb6e1e63fd18b25fcb34cffb4b5b03efdb1c17b61
+//   Namereservation > Referral - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+//   Namereservation > Parent -
+//   Namereservation > Nameid - iG9h8GM17z1ZByGvKMF7CmF88NVCdgbpmr
