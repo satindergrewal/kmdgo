@@ -17,6 +17,7 @@ import (
 	"errors"
 )
 
+// DEXAnonsend type
 type DEXAnonsend struct {
 	Result struct {
 		Timestamp    int    `json:"timestamp"`
@@ -40,40 +41,47 @@ type DEXAnonsend struct {
 	ID    string `json:"id"`
 }
 
+// DEXAnonsend This method can be used by a user to broadcast any message to the p2p network
+// without revealing either the DEX_pubkeys involved
+// or the contents of the message to the network. The datablob so created will
+// be added to the "Data Mempools" of all the nodes with the parameter -dexp2p set to 1 or 2,
+// but can only be decrypted by the node whose DEX_pubkey is destpub33.
+// The recipient node can also see the DEX_pubkey of the sender.
 func (appName AppType) DEXAnonsend(params APIParams) (DEXAnonsend, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_anonsend`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexAnonsend DEXAnonsend
 
-	dexAnonsendJson := appName.APICall(&query)
-	if dexAnonsendJson == "EMPTY RPC INFO!" {
-		return dexAnonsend, errors.New("EMPTY RPC INFO!")
+	dexAnonsendJSON := appName.APICall(&query)
+	if dexAnonsendJSON == "EMPTY RPC INFO" {
+		return dexAnonsend, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexAnonsendJson), &result)
+	json.Unmarshal([]byte(dexAnonsendJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
-		return dexAnonsend, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexAnonsendJSON), &dexAnonsend)
+		return dexAnonsend, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexAnonsendJson), &dexAnonsend)
+	json.Unmarshal([]byte(dexAnonsendJSON), &dexAnonsend)
 	return dexAnonsend, nil
 }
 
+// DEXBroadcast type
 type DEXBroadcast struct {
 	Result struct {
 		Timestamp    int    `json:"timestamp"`
@@ -97,40 +105,43 @@ type DEXBroadcast struct {
 	ID    string `json:"id"`
 }
 
+// DEXBroadcast method can be used to broadcast any data to the p2p network,
+// which will be added to the "Data Mempools" of all the nodes with the parameter -dexp2p set to 1 or 2.
 func (appName AppType) DEXBroadcast(params APIParams) (DEXBroadcast, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_broadcast`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexBroadcast DEXBroadcast
 
-	dexBroadcastJson := appName.APICall(&query)
-	if dexBroadcastJson == "EMPTY RPC INFO!" {
-		return dexBroadcast, errors.New("EMPTY RPC INFO!")
+	dexBroadcastJSON := appName.APICall(&query)
+	if dexBroadcastJSON == "EMPTY RPC INFO" {
+		return dexBroadcast, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexBroadcastJson), &result)
+	json.Unmarshal([]byte(dexBroadcastJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexBroadcastJson), &dexBroadcast)
-		return dexBroadcast, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexBroadcastJSON), &dexBroadcast)
+		return dexBroadcast, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexBroadcastJson), &dexBroadcast)
+	json.Unmarshal([]byte(dexBroadcastJSON), &dexBroadcast)
 	return dexBroadcast, nil
 }
 
+// DEXCancel type
 type DEXCancel struct {
 	Result struct {
 		Timestamp    int    `json:"timestamp"`
@@ -153,40 +164,44 @@ type DEXCancel struct {
 	ID    string `json:"id"`
 }
 
+// DEXCancel This method can be used to cancel an order issued by the user's node.
+// A node can cancel only the orders that were broadcasted using its current DEX_pubkey.
+// Orders that are broadcasted without being authenticated by a pubkey can not be canceled.
 func (appName AppType) DEXCancel(params APIParams) (DEXCancel, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_cancel`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexCancel DEXCancel
 
-	dexCancelJson := appName.APICall(&query)
-	if dexCancelJson == "EMPTY RPC INFO!" {
-		return dexCancel, errors.New("EMPTY RPC INFO!")
+	dexCancelJSON := appName.APICall(&query)
+	if dexCancelJSON == "EMPTY RPC INFO" {
+		return dexCancel, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexCancelJson), &result)
+	json.Unmarshal([]byte(dexCancelJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexCancelJson), &dexCancel)
-		return dexCancel, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexCancelJSON), &dexCancel)
+		return dexCancel, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexCancelJson), &dexCancel)
+	json.Unmarshal([]byte(dexCancelJSON), &dexCancel)
 	return dexCancel, nil
 }
 
+// DEXGet type
 type DEXGet struct {
 	Result struct {
 		Timestamp    int    `json:"timestamp"`
@@ -210,40 +225,42 @@ type DEXGet struct {
 	ID    string `json:"id"`
 }
 
+// DEXGet method returns an order's data by its id.
 func (appName AppType) DEXGet(params APIParams) (DEXGet, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_get`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexGet DEXGet
 
-	dexGetJson := appName.APICall(&query)
-	if dexGetJson == "EMPTY RPC INFO!" {
-		return dexGet, errors.New("EMPTY RPC INFO!")
+	dexGetJSON := appName.APICall(&query)
+	if dexGetJSON == "EMPTY RPC INFO" {
+		return dexGet, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexGetJson), &result)
+	json.Unmarshal([]byte(dexGetJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexGetJson), &dexGet)
-		return dexGet, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexGetJSON), &dexGet)
+		return dexGet, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexGetJson), &dexGet)
+	json.Unmarshal([]byte(dexGetJSON), &dexGet)
 	return dexGet, nil
 }
 
+// DEXList type
 type DEXList struct {
 	Result struct {
 		Result  string `json:"result"`
@@ -275,40 +292,44 @@ type DEXList struct {
 	ID    string `json:"id"`
 }
 
+// DEXList method can be used to filter and list data from the "Data Mempool" of the node.
+// Each specified filter narrows the list down to the datablobs that match it exactly.
+// If a filter is specified as "" or 0, it matches all the values a datablob might have for the filter.
 func (appName AppType) DEXList(params APIParams) (DEXList, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_list`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexList DEXList
 
-	dexListJson := appName.APICall(&query)
-	if dexListJson == "EMPTY RPC INFO!" {
-		return dexList, errors.New("EMPTY RPC INFO!")
+	dexListJSON := appName.APICall(&query)
+	if dexListJSON == "EMPTY RPC INFO" {
+		return dexList, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexListJson), &result)
+	json.Unmarshal([]byte(dexListJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexListJson), &dexList)
-		return dexList, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexListJSON), &dexList)
+		return dexList, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexListJson), &dexList)
+	json.Unmarshal([]byte(dexListJSON), &dexList)
 	return dexList, nil
 }
 
+// DEXOrderbook type
 type DEXOrderbook struct {
 	Result struct {
 		Asks []struct {
@@ -338,40 +359,43 @@ type DEXOrderbook struct {
 	ID    string `json:"id"`
 }
 
+// DEXOrderbook method interprets the datablobs as orders for AtomicDEX
+// and displays relevant data for each order that matches the filters applied through the parameters.
 func (appName AppType) DEXOrderbook(params APIParams) (DEXOrderbook, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_orderbook`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexOrderbook DEXOrderbook
 
-	dexOrderbookJson := appName.APICall(&query)
-	if dexOrderbookJson == "EMPTY RPC INFO!" {
-		return dexOrderbook, errors.New("EMPTY RPC INFO!")
+	dexOrderbookJSON := appName.APICall(&query)
+	if dexOrderbookJSON == "EMPTY RPC INFO" {
+		return dexOrderbook, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexOrderbookJson), &result)
+	json.Unmarshal([]byte(dexOrderbookJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexOrderbookJson), &dexOrderbook)
-		return dexOrderbook, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexOrderbookJSON), &dexOrderbook)
+		return dexOrderbook, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexOrderbookJson), &dexOrderbook)
+	json.Unmarshal([]byte(dexOrderbookJSON), &dexOrderbook)
 	return dexOrderbook, nil
 }
 
+// DEXPublish type
 type DEXPublish struct {
 	Result struct {
 		Fname       string `json:"fname"`
@@ -395,38 +419,39 @@ type DEXPublish struct {
 // Windows: %AppData% directory path = %AppData%\dexp2p = example: C:\Users\satinder\AppData\dexp2p
 func (appName AppType) DEXPublish(params APIParams) (DEXPublish, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_publish`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexPublish DEXPublish
 
-	dexPublishJson := appName.APICall(&query)
-	if dexPublishJson == "EMPTY RPC INFO!" {
-		return dexPublish, errors.New("EMPTY RPC INFO!")
+	dexPublishJSON := appName.APICall(&query)
+	if dexPublishJSON == "EMPTY RPC INFO" {
+		return dexPublish, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexPublishJson), &result)
+	json.Unmarshal([]byte(dexPublishJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexPublishJson), &dexPublish)
-		return dexPublish, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexPublishJSON), &dexPublish)
+		return dexPublish, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexPublishJson), &dexPublish)
+	json.Unmarshal([]byte(dexPublishJSON), &dexPublish)
 	return dexPublish, nil
 }
 
+// DEXSetPubKey type
 type DEXSetPubKey struct {
 	Result struct {
 		Result            string `json:"result"`
@@ -449,38 +474,39 @@ type DEXSetPubKey struct {
 // It is a pubkey value which is also displayed in output to method "validateaddress".
 func (appName AppType) DEXSetPubKey(params APIParams) (DEXSetPubKey, error) {
 
-	params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_setpubkey`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	// fmt.Println(query)
 
 	var dexSetPubKey DEXSetPubKey
 
-	dexSetPubKeyJson := appName.APICall(&query)
-	if dexSetPubKeyJson == "EMPTY RPC INFO!" {
-		return dexSetPubKey, errors.New("EMPTY RPC INFO!")
+	dexSetPubKeyJSON := appName.APICall(&query)
+	if dexSetPubKeyJSON == "EMPTY RPC INFO" {
+		return dexSetPubKey, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexSetPubKeyJson), &result)
+	json.Unmarshal([]byte(dexSetPubKeyJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexSetPubKeyJson), &dexSetPubKey)
-		return dexSetPubKey, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexSetPubKeyJSON), &dexSetPubKey)
+		return dexSetPubKey, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexSetPubKeyJson), &dexSetPubKey)
+	json.Unmarshal([]byte(dexSetPubKeyJSON), &dexSetPubKey)
 	return dexSetPubKey, nil
 }
 
+// DEXStats type
 type DEXStats struct {
 	Result struct {
 		Result            string `json:"result"`
@@ -502,8 +528,8 @@ type DEXStats struct {
 // DEXStats method gives info and stats related to the p2p data layer.
 func (appName AppType) DEXStats() (DEXStats, error) {
 
-	// params_json, _ := json.Marshal(params)
-	// fmt.Println(string(params_json))
+	// paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `DEX_stats`,
@@ -513,23 +539,23 @@ func (appName AppType) DEXStats() (DEXStats, error) {
 
 	var dexStats DEXStats
 
-	dexStatsJson := appName.APICall(&query)
-	if dexStatsJson == "EMPTY RPC INFO!" {
-		return dexStats, errors.New("EMPTY RPC INFO!")
+	dexStatsJSON := appName.APICall(&query)
+	if dexStatsJSON == "EMPTY RPC INFO" {
+		return dexStats, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(dexStatsJson), &result)
+	json.Unmarshal([]byte(dexStatsJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(dexStatsJson), &dexStats)
-		return dexStats, errors.New(string(answer_error))
+		json.Unmarshal([]byte(dexStatsJSON), &dexStats)
+		return dexStats, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(dexStatsJson), &dexStats)
+	json.Unmarshal([]byte(dexStatsJSON), &dexStats)
 	return dexStats, nil
 }

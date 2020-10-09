@@ -18,6 +18,7 @@ import (
 	"fmt"
 )
 
+// CCLibInfo type
 type CCLibInfo struct {
 	Result struct {
 		Result  string `json:"result"`
@@ -36,6 +37,8 @@ type CCLibInfo struct {
 	ID    string `json:"id"`
 }
 
+// CCLibInfo method displays all the methods of all the modules that are available in the current library.
+// The library is loaded at runtime using the -ac_cclib parameter.
 func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 	query := APIQuery{
 		Method: `cclibinfo`,
@@ -45,28 +48,29 @@ func (appName AppType) CCLibInfo() (CCLibInfo, error) {
 
 	var cclibinfo CCLibInfo
 
-	cclibinfoJson := appName.APICall(&query)
-	if cclibinfoJson == "EMPTY RPC INFO!" {
-		return cclibinfo, errors.New("EMPTY RPC INFO!")
+	cclibinfoJSON := appName.APICall(&query)
+	if cclibinfoJSON == "EMPTY RPC INFO" {
+		return cclibinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(cclibinfoJson)
+	//fmt.Println(cclibinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(cclibinfoJson), &result)
+	json.Unmarshal([]byte(cclibinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
-		return cclibinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(cclibinfoJSON), &cclibinfo)
+		return cclibinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(cclibinfoJson), &cclibinfo)
+	json.Unmarshal([]byte(cclibinfoJSON), &cclibinfo)
 	return cclibinfo, nil
 }
 
+// CCLibAddress type
 type CCLibAddress struct {
 	Result struct {
 		Result               string  `json:"result"`
@@ -85,38 +89,41 @@ type CCLibAddress struct {
 	ID    string `json:"id"`
 }
 
+// CCLibAddress method returns information about the addresses related to the specified pubkey,
+// and according to the Antara Module associated with the specified evalcode. If no pubkey is provided,
+// the pubkey used to the launch the daemon is the default.
 func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `cclibaddress`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var cclibaddr CCLibAddress
 
-	cclibaddrJson := appName.APICall(&query)
-	if cclibaddrJson == "EMPTY RPC INFO!" {
-		return cclibaddr, errors.New("EMPTY RPC INFO!")
+	cclibaddrJSON := appName.APICall(&query)
+	if cclibaddrJSON == "EMPTY RPC INFO" {
+		return cclibaddr, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(cclibaddrJson)
+	//fmt.Println(cclibaddrJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(cclibaddrJson), &result)
+	json.Unmarshal([]byte(cclibaddrJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(cclibaddrJson), &cclibaddr)
-		return cclibaddr, errors.New(string(answer_error))
+		json.Unmarshal([]byte(cclibaddrJSON), &cclibaddr)
+		return cclibaddr, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(cclibaddrJson), &cclibaddr)
+	json.Unmarshal([]byte(cclibaddrJSON), &cclibaddr)
 	return cclibaddr, nil
 }
 
@@ -136,12 +143,12 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 //		JSON Parameters passed for this crypto-conditions as string value: "[1]"
 /*func (appName AppType) CCLib(params APIParams) (interface{}, error) {
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery {
 		Method:	`cclib`,
-		Params:	string(params_json),
+		Params:	string(paramsJSON),
 	}
 	//fmt.Println(query)
 
@@ -155,11 +162,11 @@ func (appName AppType) CCLibAddress(params APIParams) (CCLibAddress, error) {
 	json.Unmarshal([]byte(cclbJson), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
 		json.Unmarshal([]byte(cclbJson), &cclb)
-		return cclb, errors.New(string(answer_error))
+		return cclb, errors.New(string(answerError))
 	}
 
 	json.Unmarshal([]byte(cclbJson), &cclb)

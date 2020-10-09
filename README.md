@@ -222,7 +222,7 @@ RPC Port: 27486
 
 #### Identity
 - [ ]	getidentity "name"
-- [ ]	listidentities (includecansign) (includewatchonly)
+- [x]	listidentities (includecansign) (includewatchonly)
 - [ ]	recoveridentity "jsonidentity" (returntx)
 - [ ]	registeridentity "jsonidregistration" feeoffer
 - [ ]	registernamecommitment "name" "controladdress" ("referralidentity")
