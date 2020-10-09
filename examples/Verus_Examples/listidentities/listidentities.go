@@ -64,3 +64,44 @@ func main() {
 
 	}
 }
+
+// Example Output:
+// -------
+// 0
+// Identity > Version - 2
+// Identity > Flags - 0
+// Identity > Primaryaddresses - [RLG8i7pX62iBcF15CP8mbT8ZmbyHtdqZMc]
+// Identity > Minimumsignatures - 1
+// Identity > Identityaddress - i5QMirsAsC6oRUCPF8HbF7mU2jUHzf6pdH
+// Identity > Parent - iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq
+// Identity > Name - grewal
+// Identity > Contentmap - {}
+// Identity > Revocationauthority - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+// Identity > Recoveryauthority - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+// Identity > Privateaddress - zs19eqgy366y5lhnvq8v2v7gaqa9uenjx2ryqf3guy34ffy9apdfcazflwyg8ncxk56dzvfz6xxc94
+// Identity > Timelock - 0
+// Blockheight - 20213
+// Txid - cc0f3c8fc6eeb7f097ae293359947a8b798614441090f5642df554cc95554cc3
+// Status - active
+// Canspendfor - true
+// Cansignfor - true
+
+// -------
+// 1
+// Identity > Version - 2
+// Identity > Flags - 0
+// Identity > Primaryaddresses - [RPi1Dm5czxzcSb3VZq9mtDD2dUw5xUq3qB]
+// Identity > Minimumsignatures - 1
+// Identity > Identityaddress - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+// Identity > Parent - iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq
+// Identity > Name - satinder
+// Identity > Contentmap - {}
+// Identity > Revocationauthority - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+// Identity > Recoveryauthority - i92G15J9LuimZ3ZtqQFnajDUsaaaC8qj18
+// Identity > Privateaddress - zs19eqgy366y5lhnvq8v2v7gaqa9uenjx2ryqf3guy34ffy9apdfcazflwyg8ncxk56dzvfz6xxc94
+// Identity > Timelock - 0
+// Blockheight - 20168
+// Txid - 8e28e30c03faf8a5b1562d4e320bfde6f222e94929b87263767133ba51b19351
+// Status - active
+// Canspendfor - true
+// Cansignfor - true
