@@ -9,6 +9,33 @@ As of this stage, this package is compatible with **Komodo and all of it's Asset
  - Examples: Each API call has it's own example file created under [examples](/examples) directory.
 
 
+### Install dependencies and setup environemnt
+This package depends on saplinglib, so you have to get that package and set environment variables.
+
+For Linux setup these environment variables:
+```shell
+export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
+export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/linux -lsaplinglib -lpthread -ldl -lm"
+```
+
+For MacOS setup these environment variables:
+```shell
+export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
+export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/darwin -lsaplinglib -framework Security"
+```
+
+For MingW cross-platform windows setup these environment variables:
+```shell
+export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
+export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/win64 -lsaplinglib -lws2_32 -luserenv"
+export CC="x86_64-w64-mingw32-gcc"
+```
+
+Install dependency:
+```shell
+go get -u github.com/satindergrewal/saplinglib
+```
+
 ### Quick Example
 To use this package do
 
