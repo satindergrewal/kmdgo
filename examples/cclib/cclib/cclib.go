@@ -10,35 +10,33 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-
-/*
 package main
 
-import (
-	"fmt"
-	"log"
-	"github.com/satindergrewal/kmdgo"
-)
+// import (
+// 	"fmt"
+// 	"log"
+// 	"github.com/satindergrewal/kmdgo"
+// )
 
-func main() {
-	appName := kmdgo.NewAppType(`ROGUE`)
+// func main() {
+// 	appName := kmdgo.NewAppType(`ROGUE`)
 
-	var clb kmdgo.RGGameInfo
+// 	var clb kmdgo.RGGameInfo
 
-	args := make(kmdgo.APIParams, 3)
-	args[0] = `gameinfo`
-	args[1] = `17`
-	args[2] = `["2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812"]`
-	fmt.Println(args)
+// 	args := make(kmdgo.APIParams, 3)
+// 	args[0] = `gameinfo`
+// 	args[1] = `17`
+// 	args[2] = `["2ad99222dedd2ed4439501df13e2451e1497e148e2116ba2bb9afd7d42797812"]`
+// 	fmt.Println(args)
 
-	clb, err := appName.CCLib(args, )
-	if err != nil {
-		fmt.Printf("Code: %v\n", clb.Error.Code)
-		fmt.Printf("Message: %v\n\n", clb.Error.Message)
-		log.Fatalln("Err happened", err)
-	}
+// 	clb, err := appName.CCLib(args, )
+// 	if err != nil {
+// 		fmt.Printf("Code: %v\n", clb.Error.Code)
+// 		fmt.Printf("Message: %v\n\n", clb.Error.Message)
+// 		log.Fatalln("Err happened", err)
+// 	}
 
-	fmt.Println("clb value", clb)
-	fmt.Println("-------")
-	fmt.Println(clb.Result)
-}*/
+// 	fmt.Println("clb value", clb)
+// 	fmt.Println("-------")
+// 	fmt.Println(clb.Result)
+// }

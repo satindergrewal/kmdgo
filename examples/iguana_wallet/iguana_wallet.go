@@ -38,8 +38,9 @@ func main() {
 	nohd := false
 	zcount := uint(1)
 	isIguanaSeed := true
+	coinType := uint(141)
 
-	zaddr = saplinglib.GetZAddress(nohd, zcount, iguanaSeed, isIguanaSeed)
+	zaddr = saplinglib.GetZAddress(nohd, zcount, iguanaSeed, isIguanaSeed, coinType)
 	// fmt.Println(zaddr)
 
 	fmt.Println(zaddr[0].Num)
