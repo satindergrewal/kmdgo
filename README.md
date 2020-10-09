@@ -219,6 +219,40 @@ RPC Port: 27486
 - [x]	prioritisetransaction <txid> <priority delta> <fee delta>
 - [x]	submitblock "hexdata" ( "jsonparametersobject" )
 
+
+#### Identity
+- [ ]	getidentity "name"
+- [ ]	listidentities (includecansign) (includewatchonly)
+- [ ]	recoveridentity "jsonidentity" (returntx)
+- [ ]	registeridentity "jsonidregistration" feeoffer
+- [ ]	registernamecommitment "name" "controladdress" ("referralidentity")
+- [ ]	revokeidentity "nameorID" (returntx)
+- [ ]	updateidentity "jsonidentity" (returntx)
+
+
+#### Multichain
+- [ ]	addmergedblock "hexdata" ( "jsonparametersobject" )
+- [ ]	definecurrency '{"name": "BAAS", ..., "nodes":[{"networkaddress":"identity"},..]}'
+- [ ]	getcrossnotarization "systemid" '["notarizationtxid1", "notarizationtxid2", ...]'
+- [ ]	getcurrency "chainname"
+- [ ]	getcurrencyconverters ["currency1","currency2",...]'
+- [ ]	getcurrencystate "n"
+- [ ]	getexports "chainname"
+- [ ]	getimports "chainname"
+- [ ]	getinitialcurrencystate "name"
+- [ ]	getlastimportin "fromname"
+- [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate"
+- [ ]	getblocktemplate ( "jsonrequestobject" )
+- [ ]	getnotarizationdata "currencyid" accepted
+- [ ]	getpendingtransfers "chainname"
+- [ ]	getsaplingtree "n"
+- [ ]	listcurrencies (includeexpired)
+- [ ]	paynotarizationrewards "currencyid" "amount" "billingperiod"
+- [ ]	refundfailedlaunch "currencyid"
+- [ ]	reserveexchange '[{"toreserve": 1, "recipient": "RRehdmUV7oEAqoZnzEGBH34XysnWaBatct", "amount": 5.0}]'
+- [ ]	sendcurrency "fromaddress" '[{"address":... ,"amount":...},...]' (returntx)
+- [ ]	submitacceptednotarization "hextx"
+
 #### Network
 - [x]	addnode "node" "add|remove|onetry"
 - [x]	clearbanned
