@@ -151,3 +151,66 @@ func (appName AppType) GetIdentity(params APIParams) (GetIdentity, error) {
 	json.Unmarshal([]byte(GetIDJSON), &GetID)
 	return GetID, nil
 }
+
+// RegisterNameCommitment type
+type RegisterNameCommitment struct {
+	Result struct {
+		Txid            string `json:"txid"`
+		Namereservation struct {
+			Name     string `json:"name"`
+			Salt     string `json:"salt"`
+			Referral string `json:"referral"`
+			Parent   string `json:"parent"`
+			Nameid   string `json:"nameid"`
+		} `json:"namereservation"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// RegisterNameCommitment - Registers a name commitment, which is required as a source for the name to be used when registering an identity. The name commitment hides the name itself
+// while ensuring that the miner who mines in the registration cannot front-run the name unless they have also registered a name commitment for the same name or
+// are willing to forfeit the offer of payment for the chance that a commitment made now will allow them to register the name in the future.
+//
+// NOTE: Invalid name for commitment. Names must not have leading or trailing spaces and must not include any of the following characters between parentheses (\/:*?"<>|@)
+//
+// registernamecommitment "name" "controladdress" ("referralidentity")
+//
+// Arguments
+// "name"                           (string, required)  the unique name to commit to. creating a name commitment is not a registration, and if one is
+//                                                        created for a name that exists, it may succeed, but will never be able to be used.
+// "controladdress"                 (address, required) address that will control this commitment
+// "referralidentity"               (identity, optional)friendly name or identity address that is provided as a referral mechanism and to lower network cost of the ID
+func (appName AppType) RegisterNameCommitment(params APIParams) (RegisterNameCommitment, error) {
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `registernamecommitment`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var RegNameComit RegisterNameCommitment
+
+	RegNameComitJSON := appName.APICall(&query)
+	if RegNameComitJSON == "EMPTY RPC INFO" {
+		return RegNameComit, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(RegNameComitJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(RegNameComitJSON), &RegNameComit)
+		return RegNameComit, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(RegNameComitJSON), &RegNameComit)
+	return RegNameComit, nil
+}
