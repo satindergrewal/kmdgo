@@ -67,8 +67,8 @@ func (appName AppType) ListIdentities(params APIParams) (ListIdentities, error) 
 	var ListIDs ListIdentities
 
 	ListIDsJSON := appName.APICall(&query)
-	if ListIDsJSON == "EMPTY RPC INFO!" {
-		return ListIDs, errors.New("EMPTY RPC INFO!")
+	if ListIDsJSON == "EMPTY RPC INFO" {
+		return ListIDs, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
@@ -85,4 +85,69 @@ func (appName AppType) ListIdentities(params APIParams) (ListIdentities, error) 
 
 	json.Unmarshal([]byte(ListIDsJSON), &ListIDs)
 	return ListIDs, nil
+}
+
+// GetIdentity type
+type GetIdentity struct {
+	Result struct {
+		Identity struct {
+			Version           int      `json:"version"`
+			Flags             int      `json:"flags"`
+			Primaryaddresses  []string `json:"primaryaddresses"`
+			Minimumsignatures int      `json:"minimumsignatures"`
+			Identityaddress   string   `json:"identityaddress"`
+			Parent            string   `json:"parent"`
+			Name              string   `json:"name"`
+			Contentmap        struct {
+			} `json:"contentmap"`
+			Revocationauthority string `json:"revocationauthority"`
+			Recoveryauthority   string `json:"recoveryauthority"`
+			Privateaddress      string `json:"privateaddress"`
+			Timelock            int    `json:"timelock"`
+		} `json:"identity"`
+		Status      string `json:"status"`
+		Canspendfor bool   `json:"canspendfor"`
+		Cansignfor  bool   `json:"cansignfor"`
+		Blockheight int    `json:"blockheight"`
+		Txid        string `json:"txid"`
+		Vout        int    `json:"vout"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetIdentity searches blockchain and returns if there's matching VerusID found.
+// getidentity "name"
+func (appName AppType) GetIdentity(params APIParams) (GetIdentity, error) {
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getidentity`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetID GetIdentity
+
+	GetIDJSON := appName.APICall(&query)
+	if GetIDJSON == "EMPTY RPC INFO" {
+		return GetID, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetIDJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetIDJSON), &GetID)
+		return GetID, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetIDJSON), &GetID)
+	return GetID, nil
 }
