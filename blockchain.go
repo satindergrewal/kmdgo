@@ -19,6 +19,7 @@ import (
 	"strconv"
 )
 
+// CoinSupply type
 type CoinSupply struct {
 	Result struct {
 		Result string  `json:"result"`
@@ -33,48 +34,52 @@ type CoinSupply struct {
 	ID    string `json:"id"`
 }
 
+// CoinSupply method returns the coin supply information for the indicated block height.
+// If no height is given, the method defaults to the blockchain's current height.
 func (appName AppType) CoinSupply(params APIParams) (CoinSupply, error) {
 	if params[0] == nil {
 		params[0] = 100
 	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `coinsupply`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var coinsupply CoinSupply
 
-	coinsupplyJson := appName.APICall(&query)
-	if coinsupplyJson == "EMPTY RPC INFO!" {
-		return coinsupply, errors.New("EMPTY RPC INFO!")
+	coinsupplyJSON := appName.APICall(&query)
+	if coinsupplyJSON == "EMPTY RPC INFO" {
+		return coinsupply, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(coinsupplyJson), &result)
+	json.Unmarshal([]byte(coinsupplyJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(coinsupplyJson), &coinsupply)
-		return coinsupply, errors.New(string(answer_error))
+		json.Unmarshal([]byte(coinsupplyJSON), &coinsupply)
+		return coinsupply, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(coinsupplyJson), &coinsupply)
+	json.Unmarshal([]byte(coinsupplyJSON), &coinsupply)
 	return coinsupply, nil
 }
 
+// GetBestBlockhash type
 type GetBestBlockhash struct {
 	Result interface{} `json:"result"`
 	Error  Error       `json:"error"`
 	ID     string      `json:"id"`
 }
 
+// GetBestBlockhash method returns the hash of the best (tip) block in the longest block chain.
 func (appName AppType) GetBestBlockhash() (GetBestBlockhash, error) {
 	query := APIQuery{
 		Method: `getbestblockhash`,
@@ -83,27 +88,28 @@ func (appName AppType) GetBestBlockhash() (GetBestBlockhash, error) {
 
 	var getbestblockhash GetBestBlockhash
 
-	getbestblockhashJson := appName.APICall(&query)
-	if getbestblockhashJson == "EMPTY RPC INFO!" {
-		return getbestblockhash, errors.New("EMPTY RPC INFO!")
+	getbestblockhashJSON := appName.APICall(&query)
+	if getbestblockhashJSON == "EMPTY RPC INFO" {
+		return getbestblockhash, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getbestblockhashJson), &result)
+	json.Unmarshal([]byte(getbestblockhashJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getbestblockhashJson), &getbestblockhash)
-		return getbestblockhash, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getbestblockhashJSON), &getbestblockhash)
+		return getbestblockhash, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getbestblockhashJson), &getbestblockhash)
+	json.Unmarshal([]byte(getbestblockhashJSON), &getbestblockhash)
 	return getbestblockhash, nil
 }
 
+// GetBlock type
 type GetBlock struct {
 	Result struct {
 		Hash             string `json:"hash"`
@@ -161,42 +167,48 @@ type GetBlock struct {
 	ID    string `json:"id"`
 }
 
+// GetBlock method returns the block's relevant state information.
+// The verbose input is optional. The default value is true, and it will return
+// a json object with information about the indicated block.
+// If verbose is false, the command returns a string that is
+// serialized hex-encoded data for the indicated block.
 func (appName AppType) GetBlock(params APIParams) (GetBlock, error) {
 	if params[1] == nil {
 		params[1] = 1
 	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getblock`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getblock GetBlock
 
-	getblockJson := appName.APICall(&query)
-	if getblockJson == "EMPTY RPC INFO!" {
-		return getblock, errors.New("EMPTY RPC INFO!")
+	getblockJSON := appName.APICall(&query)
+	if getblockJSON == "EMPTY RPC INFO" {
+		return getblock, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblockJson), &result)
+	json.Unmarshal([]byte(getblockJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblockJson), &getblock)
-		return getblock, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblockJSON), &getblock)
+		return getblock, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblockJson), &getblock)
+	json.Unmarshal([]byte(getblockJSON), &getblock)
 	return getblock, nil
 }
 
+// GetBlockchainInfo type
 type GetBlockchainInfo struct {
 	Result struct {
 		Chain                string  `json:"chain"`
@@ -253,6 +265,7 @@ type GetBlockchainInfo struct {
 	ID    string `json:"id"`
 }
 
+// GetBlockchainInfo method returns a json object containing state information about blockchain processing.
 func (appName AppType) GetBlockchainInfo() (GetBlockchainInfo, error) {
 	query := APIQuery{
 		Method: `getblockchaininfo`,
@@ -262,33 +275,35 @@ func (appName AppType) GetBlockchainInfo() (GetBlockchainInfo, error) {
 
 	var getblockchaininfo GetBlockchainInfo
 
-	getblockchaininfoJson := appName.APICall(&query)
-	if getblockchaininfoJson == "EMPTY RPC INFO!" {
-		return getblockchaininfo, errors.New("EMPTY RPC INFO!")
+	getblockchaininfoJSON := appName.APICall(&query)
+	if getblockchaininfoJSON == "EMPTY RPC INFO" {
+		return getblockchaininfo, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblockchaininfoJson), &result)
+	json.Unmarshal([]byte(getblockchaininfoJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblockchaininfoJson), &getblockchaininfo)
-		return getblockchaininfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblockchaininfoJSON), &getblockchaininfo)
+		return getblockchaininfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblockchaininfoJson), &getblockchaininfo)
+	json.Unmarshal([]byte(getblockchaininfoJSON), &getblockchaininfo)
 	return getblockchaininfo, nil
 }
 
+// GetBlockCount type
 type GetBlockCount struct {
 	Result int64  `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// GetBlockCount method returns the number of blocks in the best valid block chain.
 func (appName AppType) GetBlockCount() (GetBlockCount, error) {
 	query := APIQuery{
 		Method: `getblockcount`,
@@ -297,33 +312,35 @@ func (appName AppType) GetBlockCount() (GetBlockCount, error) {
 
 	var getblockcount GetBlockCount
 
-	getbestblockhashJson := appName.APICall(&query)
-	if getbestblockhashJson == "EMPTY RPC INFO!" {
-		return getblockcount, errors.New("EMPTY RPC INFO!")
+	getbestblockhashJSON := appName.APICall(&query)
+	if getbestblockhashJSON == "EMPTY RPC INFO" {
+		return getblockcount, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getbestblockhashJson), &result)
+	json.Unmarshal([]byte(getbestblockhashJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getbestblockhashJson), &getblockcount)
-		return getblockcount, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getbestblockhashJSON), &getblockcount)
+		return getblockcount, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getbestblockhashJson), &getblockcount)
+	json.Unmarshal([]byte(getbestblockhashJSON), &getblockcount)
 	return getblockcount, nil
 }
 
+// GetBlockHash type
 type GetBlockHash struct {
 	Result string `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// GetBlockHash method returns the hash of the indicated block index, according to the best blockchain at the time provided.
 func (appName AppType) GetBlockHash(h int) (GetBlockHash, error) {
 	query := APIQuery{
 		Method: `getblockhash`,
@@ -333,27 +350,28 @@ func (appName AppType) GetBlockHash(h int) (GetBlockHash, error) {
 
 	var getblockhash GetBlockHash
 
-	getblockhashJson := appName.APICall(&query)
-	if getblockhashJson == "EMPTY RPC INFO!" {
-		return getblockhash, errors.New("EMPTY RPC INFO!")
+	getblockhashJSON := appName.APICall(&query)
+	if getblockhashJSON == "EMPTY RPC INFO" {
+		return getblockhash, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblockhashJson), &result)
+	json.Unmarshal([]byte(getblockhashJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblockhashJson), &getblockhash)
-		return getblockhash, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblockhashJSON), &getblockhash)
+		return getblockhash, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblockhashJson), &getblockhash)
+	json.Unmarshal([]byte(getblockhashJSON), &getblockhash)
 	return getblockhash, nil
 }
 
+// GetBlockHeader type
 type GetBlockHeader struct {
 	Result struct {
 		Hash              string  `json:"hash"`
@@ -376,42 +394,47 @@ type GetBlockHeader struct {
 	ID    string `json:"id"`
 }
 
+// GetBlockHeader method returns information about the indicated block.
+// The verbose input is optional. If verbose is false, the method returns a string that is serialized,
+// hex-encoded data for the indicated blockheader. If verbose is true,
+// the method returns a json object with information about the indicated blockheader.
 func (appName AppType) GetBlockHeader(params APIParams) (GetBlockHeader, error) {
 	if params[1] == nil {
 		params[1] = true
 	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getblockheader`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getblockheader GetBlockHeader
 
-	getblockheaderJson := appName.APICall(&query)
-	if getblockheaderJson == "EMPTY RPC INFO!" {
-		return getblockheader, errors.New("EMPTY RPC INFO!")
+	getblockheaderJSON := appName.APICall(&query)
+	if getblockheaderJSON == "EMPTY RPC INFO" {
+		return getblockheader, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblockheaderJson), &result)
+	json.Unmarshal([]byte(getblockheaderJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblockheaderJson), &getblockheader)
-		return getblockheader, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblockheaderJSON), &getblockheader)
+		return getblockheader, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblockheaderJson), &getblockheader)
+	json.Unmarshal([]byte(getblockheaderJSON), &getblockheader)
 	return getblockheader, nil
 }
 
+// GetChainTips type
 type GetChainTips struct {
 	Result []struct {
 		Height    int    `json:"height"`
@@ -423,6 +446,8 @@ type GetChainTips struct {
 	ID    string `json:"id"`
 }
 
+// GetChainTips method returns information about all known tips in the block tree,
+// including the main chain and any orphaned branches.
 func (appName AppType) GetChainTips() (GetChainTips, error) {
 	query := APIQuery{
 		Method: `getchaintips`,
@@ -432,33 +457,35 @@ func (appName AppType) GetChainTips() (GetChainTips, error) {
 
 	var getchaintips GetChainTips
 
-	getchaintipsJson := appName.APICall(&query)
-	if getchaintipsJson == "EMPTY RPC INFO!" {
-		return getchaintips, errors.New("EMPTY RPC INFO!")
+	getchaintipsJSON := appName.APICall(&query)
+	if getchaintipsJSON == "EMPTY RPC INFO" {
+		return getchaintips, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getchaintipsJson), &result)
+	json.Unmarshal([]byte(getchaintipsJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getchaintipsJson), &getchaintips)
-		return getchaintips, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getchaintipsJSON), &getchaintips)
+		return getchaintips, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getchaintipsJson), &getchaintips)
+	json.Unmarshal([]byte(getchaintipsJSON), &getchaintips)
 	return getchaintips, nil
 }
 
+// GetDifficulty type
 type GetDifficulty struct {
 	Result float64 `json:"result"`
 	Error  Error   `json:"error"`
 	ID     string  `json:"id"`
 }
 
+// GetDifficulty method returns the proof-of-work difficulty as a multiple of the minimum difficulty.
 func (appName AppType) GetDifficulty() (GetDifficulty, error) {
 	query := APIQuery{
 		Method: `getdifficulty`,
@@ -468,27 +495,28 @@ func (appName AppType) GetDifficulty() (GetDifficulty, error) {
 
 	var getdifficulty GetDifficulty
 
-	getdifficultyJson := appName.APICall(&query)
-	if getdifficultyJson == "EMPTY RPC INFO!" {
-		return getdifficulty, errors.New("EMPTY RPC INFO!")
+	getdifficultyJSON := appName.APICall(&query)
+	if getdifficultyJSON == "EMPTY RPC INFO" {
+		return getdifficulty, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getdifficultyJson), &result)
+	json.Unmarshal([]byte(getdifficultyJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getdifficultyJson), &getdifficulty)
-		return getdifficulty, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getdifficultyJSON), &getdifficulty)
+		return getdifficulty, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getdifficultyJson), &getdifficulty)
+	json.Unmarshal([]byte(getdifficultyJSON), &getdifficulty)
 	return getdifficulty, nil
 }
 
+// GetMempoolInfo type
 type GetMempoolInfo struct {
 	Result struct {
 		Size  int `json:"size"`
@@ -499,6 +527,7 @@ type GetMempoolInfo struct {
 	ID    string `json:"id"`
 }
 
+// GetMempoolInfo method returns details on the active state of the transaction memory pool.
 func (appName AppType) GetMempoolInfo() (GetMempoolInfo, error) {
 	query := APIQuery{
 		Method: `getmempoolinfo`,
@@ -508,33 +537,35 @@ func (appName AppType) GetMempoolInfo() (GetMempoolInfo, error) {
 
 	var getmempoolinfo GetMempoolInfo
 
-	getmempoolinfoJson := appName.APICall(&query)
-	if getmempoolinfoJson == "EMPTY RPC INFO!" {
-		return getmempoolinfo, errors.New("EMPTY RPC INFO!")
+	getmempoolinfoJSON := appName.APICall(&query)
+	if getmempoolinfoJSON == "EMPTY RPC INFO" {
+		return getmempoolinfo, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getmempoolinfoJson), &result)
+	json.Unmarshal([]byte(getmempoolinfoJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getmempoolinfoJson), &getmempoolinfo)
-		return getmempoolinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getmempoolinfoJSON), &getmempoolinfo)
+		return getmempoolinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getmempoolinfoJson), &getmempoolinfo)
+	json.Unmarshal([]byte(getmempoolinfoJSON), &getmempoolinfo)
 	return getmempoolinfo, nil
 }
 
+// GetRawMempoolTrue type
 type GetRawMempoolTrue struct {
 	Result map[string]RawMempoolTrue `json:"result"`
 	Error  Error                     `json:"error"`
 	ID     string                    `json:"id"`
 }
 
+// RawMempoolTrue type
 type RawMempoolTrue struct {
 	Size             int           `json:"size"`
 	Fee              float64       `json:"fee"`
@@ -545,12 +576,16 @@ type RawMempoolTrue struct {
 	Depends          []interface{} `json:"depends"`
 }
 
+// GetRawMempoolFalse type
 type GetRawMempoolFalse struct {
 	Result []string `json:"result"`
 	Error  Error    `json:"error"`
 	ID     string   `json:"id"`
 }
 
+// GetRawMempoolTrue method returns all transaction ids in the memory pool as a json array of transaction ids.
+// The verbose input is optional and is false by default.
+// When it is true, the method instead returns a json object with various related data.
 func (appName AppType) GetRawMempoolTrue(b bool) (GetRawMempoolTrue, error) {
 	query := APIQuery{
 		Method: `getrawmempool`,
@@ -560,28 +595,31 @@ func (appName AppType) GetRawMempoolTrue(b bool) (GetRawMempoolTrue, error) {
 
 	var getrawmempool GetRawMempoolTrue
 
-	getrawmempoolJson := appName.APICall(&query)
-	if getrawmempoolJson == "EMPTY RPC INFO!" {
-		return getrawmempool, errors.New("EMPTY RPC INFO!")
+	getrawmempoolJSON := appName.APICall(&query)
+	if getrawmempoolJSON == "EMPTY RPC INFO" {
+		return getrawmempool, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getrawmempoolJson)
+	//fmt.Println(getrawmempoolJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getrawmempoolJson), &result)
+	json.Unmarshal([]byte(getrawmempoolJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getrawmempoolJson), &getrawmempool)
-		return getrawmempool, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getrawmempoolJSON), &getrawmempool)
+		return getrawmempool, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getrawmempoolJson), &getrawmempool)
+	json.Unmarshal([]byte(getrawmempoolJSON), &getrawmempool)
 	return getrawmempool, nil
 }
 
+// GetRawMempoolFalse method returns all transaction ids in the memory pool as a json array of transaction ids.
+// The verbose input is optional and is false by default.
+// When it is true, the method instead returns a json object with various related data.
 func (appName AppType) GetRawMempoolFalse(b bool) (GetRawMempoolFalse, error) {
 	query := APIQuery{
 		Method: `getrawmempool`,
@@ -591,28 +629,29 @@ func (appName AppType) GetRawMempoolFalse(b bool) (GetRawMempoolFalse, error) {
 
 	var getrawmempool GetRawMempoolFalse
 
-	getrawmempoolJson := appName.APICall(&query)
-	if getrawmempoolJson == "EMPTY RPC INFO!" {
-		return getrawmempool, errors.New("EMPTY RPC INFO!")
+	getrawmempoolJSON := appName.APICall(&query)
+	if getrawmempoolJSON == "EMPTY RPC INFO" {
+		return getrawmempool, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getrawmempoolJson)
+	//fmt.Println(getrawmempoolJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getrawmempoolJson), &result)
+	json.Unmarshal([]byte(getrawmempoolJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getrawmempoolJson), &getrawmempool)
-		return getrawmempool, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getrawmempoolJSON), &getrawmempool)
+		return getrawmempool, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getrawmempoolJson), &getrawmempool)
+	json.Unmarshal([]byte(getrawmempoolJSON), &getrawmempool)
 	return getrawmempool, nil
 }
 
+// GetTxOut type
 type GetTxOut struct {
 	Result struct {
 		Bestblock        string  `json:"bestblock"`
@@ -633,48 +672,51 @@ type GetTxOut struct {
 	ID    string `json:"id"`
 }
 
+// GetTxOut method returns details about an unspent transaction output.
 func (appName AppType) GetTxOut(params APIParams) (GetTxOut, error) {
 	if params[2] == nil {
 		params[2] = false
 	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `gettxout`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var gettxout GetTxOut
 
-	gettxoutJson := appName.APICall(&query)
-	if gettxoutJson == "EMPTY RPC INFO!" {
-		return gettxout, errors.New("EMPTY RPC INFO!")
+	gettxoutJSON := appName.APICall(&query)
+	if gettxoutJSON == "EMPTY RPC INFO" {
+		return gettxout, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(gettxoutJson), &result)
+	json.Unmarshal([]byte(gettxoutJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(gettxoutJson), &gettxout)
-		return gettxout, errors.New(string(answer_error))
+		json.Unmarshal([]byte(gettxoutJSON), &gettxout)
+		return gettxout, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(gettxoutJson), &gettxout)
+	json.Unmarshal([]byte(gettxoutJSON), &gettxout)
 	return gettxout, nil
 }
 
+// GetTxOutProof type
 type GetTxOutProof struct {
 	Result string `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// GetTxOutProof method returns a hex-encoded proof showing that the indicated transaction was included in a block.
 func (appName AppType) GetTxOutProof(txids string) (GetTxOutProof, error) {
 	query := APIQuery{
 		Method: `gettxoutproof`,
@@ -684,27 +726,28 @@ func (appName AppType) GetTxOutProof(txids string) (GetTxOutProof, error) {
 
 	var gettxoutproof GetTxOutProof
 
-	gettxoutproofJson := appName.APICall(&query)
-	if gettxoutproofJson == "EMPTY RPC INFO!" {
-		return gettxoutproof, errors.New("EMPTY RPC INFO!")
+	gettxoutproofJSON := appName.APICall(&query)
+	if gettxoutproofJSON == "EMPTY RPC INFO" {
+		return gettxoutproof, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(gettxoutproofJson), &result)
+	json.Unmarshal([]byte(gettxoutproofJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(gettxoutproofJson), &gettxoutproof)
-		return gettxoutproof, errors.New(string(answer_error))
+		json.Unmarshal([]byte(gettxoutproofJSON), &gettxoutproof)
+		return gettxoutproof, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(gettxoutproofJson), &gettxoutproof)
+	json.Unmarshal([]byte(gettxoutproofJSON), &gettxoutproof)
 	return gettxoutproof, nil
 }
 
+// GetTxOutSetInfo type
 type GetTxOutSetInfo struct {
 	Result struct {
 		Height          int     `json:"height"`
@@ -719,6 +762,7 @@ type GetTxOutSetInfo struct {
 	ID    string `json:"id"`
 }
 
+// GetTxOutSetInfo method returns statistics about the unspent transaction output set.
 func (appName AppType) GetTxOutSetInfo() (GetTxOutSetInfo, error) {
 	query := APIQuery{
 		Method: `gettxoutsetinfo`,
@@ -728,27 +772,28 @@ func (appName AppType) GetTxOutSetInfo() (GetTxOutSetInfo, error) {
 
 	var gettxoutsetinfo GetTxOutSetInfo
 
-	gettxoutsetinfoJson := appName.APICall(&query)
-	if gettxoutsetinfoJson == "EMPTY RPC INFO!" {
-		return gettxoutsetinfo, errors.New("EMPTY RPC INFO!")
+	gettxoutsetinfoJSON := appName.APICall(&query)
+	if gettxoutsetinfoJSON == "EMPTY RPC INFO" {
+		return gettxoutsetinfo, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(gettxoutsetinfoJson), &result)
+	json.Unmarshal([]byte(gettxoutsetinfoJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(gettxoutsetinfoJson), &gettxoutsetinfo)
-		return gettxoutsetinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(gettxoutsetinfoJSON), &gettxoutsetinfo)
+		return gettxoutsetinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(gettxoutsetinfoJson), &gettxoutsetinfo)
+	json.Unmarshal([]byte(gettxoutsetinfoJSON), &gettxoutsetinfo)
 	return gettxoutsetinfo, nil
 }
 
+// MinerIDs type
 type MinerIDs struct {
 	Result struct {
 		Mined []struct {
@@ -763,6 +808,8 @@ type MinerIDs struct {
 	ID    string `json:"id"`
 }
 
+// MinerIDs method returns information about the notary nodes and external miners at a specific block height.
+// The response will calculate results according to the 2000 blocks proceeding the indicated "height" block.
 func (appName AppType) MinerIDs(ht string) (MinerIDs, error) {
 	query := APIQuery{
 		Method: `minerids`,
@@ -772,27 +819,28 @@ func (appName AppType) MinerIDs(ht string) (MinerIDs, error) {
 
 	var minerids MinerIDs
 
-	mineridsJson := appName.APICall(&query)
-	if mineridsJson == "EMPTY RPC INFO!" {
-		return minerids, errors.New("EMPTY RPC INFO!")
+	mineridsJSON := appName.APICall(&query)
+	if mineridsJSON == "EMPTY RPC INFO" {
+		return minerids, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(mineridsJson), &result)
+	json.Unmarshal([]byte(mineridsJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(mineridsJson), &minerids)
-		return minerids, errors.New(string(answer_error))
+		json.Unmarshal([]byte(mineridsJSON), &minerids)
+		return minerids, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(mineridsJson), &minerids)
+	json.Unmarshal([]byte(mineridsJSON), &minerids)
 	return minerids, nil
 }
 
+// Notaries type
 type Notaries struct {
 	Result struct {
 		Notaries []struct {
@@ -808,6 +856,8 @@ type Notaries struct {
 	ID    string `json:"id"`
 }
 
+// Notaries method returns the public key, BTC address, and KMD address for each Komodo notary node.
+// Either or both of the height and timestamp parameters will suffice
 func (appName AppType) Notaries(ht string) (Notaries, error) {
 	query := APIQuery{
 		Method: `notaries`,
@@ -817,33 +867,35 @@ func (appName AppType) Notaries(ht string) (Notaries, error) {
 
 	var notaries Notaries
 
-	notariesJson := appName.APICall(&query)
-	if notariesJson == "EMPTY RPC INFO!" {
-		return notaries, errors.New("EMPTY RPC INFO!")
+	notariesJSON := appName.APICall(&query)
+	if notariesJSON == "EMPTY RPC INFO" {
+		return notaries, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(notariesJson), &result)
+	json.Unmarshal([]byte(notariesJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(notariesJson), &notaries)
-		return notaries, errors.New(string(answer_error))
+		json.Unmarshal([]byte(notariesJSON), &notaries)
+		return notaries, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(notariesJson), &notaries)
+	json.Unmarshal([]byte(notariesJSON), &notaries)
 	return notaries, nil
 }
 
+// VerifyChain type
 type VerifyChain struct {
 	Result bool   `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// VerifyChain method verifies the coin daemon's blockchain database.
 func (appName AppType) VerifyChain(params APIParams) (VerifyChain, error) {
 	if params[0] == nil {
 		params[0] = 3
@@ -851,44 +903,48 @@ func (appName AppType) VerifyChain(params APIParams) (VerifyChain, error) {
 	if params[1] == nil {
 		params[1] = 288
 	}
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `verifychain`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var verifychain VerifyChain
 
-	verifychainJson := appName.APICall(&query)
-	if verifychainJson == "EMPTY RPC INFO!" {
-		return verifychain, errors.New("EMPTY RPC INFO!")
+	verifychainJSON := appName.APICall(&query)
+	if verifychainJSON == "EMPTY RPC INFO" {
+		return verifychain, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(verifychainJson), &result)
+	json.Unmarshal([]byte(verifychainJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(verifychainJson), &verifychain)
-		return verifychain, errors.New(string(answer_error))
+		json.Unmarshal([]byte(verifychainJSON), &verifychain)
+		return verifychain, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(verifychainJson), &verifychain)
+	json.Unmarshal([]byte(verifychainJSON), &verifychain)
 	return verifychain, nil
 }
 
+// VerifyTxOutProof type
 type VerifyTxOutProof struct {
 	Result []string `json:"result"`
 	Error  Error    `json:"error"`
 	ID     string   `json:"id"`
 }
 
+// VerifyTxOutProof method verifies that a proof points to a transaction in a block.
+// It returns the transaction to which the proof is committed,
+// or it will throw an RPC error if the block is not in the current best chain
 func (appName AppType) VerifyTxOutProof(pf string) (VerifyTxOutProof, error) {
 	query := APIQuery{
 		Method: `verifytxoutproof`,
@@ -898,23 +954,23 @@ func (appName AppType) VerifyTxOutProof(pf string) (VerifyTxOutProof, error) {
 
 	var verifytxoutproof VerifyTxOutProof
 
-	verifytxoutproofJson := appName.APICall(&query)
-	if verifytxoutproofJson == "EMPTY RPC INFO!" {
-		return verifytxoutproof, errors.New("EMPTY RPC INFO!")
+	verifytxoutproofJSON := appName.APICall(&query)
+	if verifytxoutproofJSON == "EMPTY RPC INFO" {
+		return verifytxoutproof, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(verifytxoutproofJson), &result)
+	json.Unmarshal([]byte(verifytxoutproofJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(verifytxoutproofJson), &verifytxoutproof)
-		return verifytxoutproof, errors.New(string(answer_error))
+		json.Unmarshal([]byte(verifytxoutproofJSON), &verifytxoutproof)
+		return verifytxoutproof, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(verifytxoutproofJson), &verifytxoutproof)
+	json.Unmarshal([]byte(verifytxoutproofJSON), &verifytxoutproof)
 	return verifytxoutproof, nil
 }

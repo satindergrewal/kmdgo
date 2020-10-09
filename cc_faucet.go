@@ -18,6 +18,7 @@ import (
 	"errors"
 )
 
+// FaucetAddress type
 type FaucetAddress struct {
 	Result struct {
 		Result          string `json:"result"`
@@ -32,48 +33,51 @@ type FaucetAddress struct {
 	ID    string `json:"id"`
 }
 
+// FaucetAddress method returns the Antara address information for the specified pubkey.
+// If no pubkey is provided, the method returns information for the pubkey used to launch the daemon
 func (appName AppType) FaucetAddress(params APIParams) (FaucetAddress, error) {
-	var params_json string
+	var paramsJSON string
 
 	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
+		paramsJSON = `[]`
+		//fmt.Println(paramsJSON)
 	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		//fmt.Println(params_json)
+		paramsBytes, _ := json.Marshal(params)
+		paramsJSON = string(paramsBytes)
+		//fmt.Println(paramsJSON)
 	}
 
 	query := APIQuery{
 		Method: `faucetaddress`,
-		Params: params_json,
+		Params: paramsJSON,
 	}
 	//fmt.Println(query)
 
 	var faucetaddress FaucetAddress
 
-	faucetaddressJson := appName.APICall(&query)
-	if faucetaddressJson == "EMPTY RPC INFO!" {
-		return faucetaddress, errors.New("EMPTY RPC INFO!")
+	faucetaddressJSON := appName.APICall(&query)
+	if faucetaddressJSON == "EMPTY RPC INFO" {
+		return faucetaddress, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(faucetaddressJson)
+	//fmt.Println(faucetaddressJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(faucetaddressJson), &result)
+	json.Unmarshal([]byte(faucetaddressJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(faucetaddressJson), &faucetaddress)
-		return faucetaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(faucetaddressJSON), &faucetaddress)
+		return faucetaddress, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(faucetaddressJson), &faucetaddress)
+	json.Unmarshal([]byte(faucetaddressJSON), &faucetaddress)
 	return faucetaddress, nil
 }
 
+// FaucetFund type
 // This should have been a `int` value or `float64` value.
 // But since the API only accepts string, for now this is input as string.
 type FaucetFund struct {
@@ -85,41 +89,44 @@ type FaucetFund struct {
 	ID    string `json:"id"`
 }
 
+// FaucetFund method funds the on-chain faucet.
+// The method returns a hex value which must then be broadcast using the sendrawtransaction method
 func (appName AppType) FaucetFund(params APIParams) (FaucetFund, error) {
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `faucetfund`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var faucetfund FaucetFund
 
-	faucetfundJson := appName.APICall(&query)
-	if faucetfundJson == "EMPTY RPC INFO!" {
-		return faucetfund, errors.New("EMPTY RPC INFO!")
+	faucetfundJSON := appName.APICall(&query)
+	if faucetfundJSON == "EMPTY RPC INFO" {
+		return faucetfund, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(faucetfundJson)
+	//fmt.Println(faucetfundJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(faucetfundJson), &result)
+	json.Unmarshal([]byte(faucetfundJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(faucetfundJson), &faucetfund)
-		return faucetfund, errors.New(string(answer_error))
+		json.Unmarshal([]byte(faucetfundJSON), &faucetfund)
+		return faucetfund, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(faucetfundJson), &faucetfund)
+	json.Unmarshal([]byte(faucetfundJSON), &faucetfund)
 	return faucetfund, nil
 }
 
+// FaucetGet type
 type FaucetGet struct {
 	Result struct {
 		Result string `json:"result"`
@@ -129,6 +136,9 @@ type FaucetGet struct {
 	ID    string `json:"id"`
 }
 
+// FaucetGet method requests the faucet module to send coins.
+// The method returns a hex value which must then be broadcast using the sendrawtransaction method.
+// The faucetget command yields 0.1 coins and requires about 30 seconds of CPU time to execute
 func (appName AppType) FaucetGet() (FaucetGet, error) {
 	query := APIQuery{
 		Method: `faucetget`,
@@ -138,28 +148,29 @@ func (appName AppType) FaucetGet() (FaucetGet, error) {
 
 	var faucetget FaucetGet
 
-	faucetgetJson := appName.APICall(&query)
-	if faucetgetJson == "EMPTY RPC INFO!" {
-		return faucetget, errors.New("EMPTY RPC INFO!")
+	faucetgetJSON := appName.APICall(&query)
+	if faucetgetJSON == "EMPTY RPC INFO" {
+		return faucetget, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(faucetgetJson)
+	//fmt.Println(faucetgetJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(faucetgetJson), &result)
+	json.Unmarshal([]byte(faucetgetJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(faucetgetJson), &faucetget)
-		return faucetget, errors.New(string(answer_error))
+		json.Unmarshal([]byte(faucetgetJSON), &faucetget)
+		return faucetget, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(faucetgetJson), &faucetget)
+	json.Unmarshal([]byte(faucetgetJSON), &faucetget)
 	return faucetget, nil
 }
 
+// FaucetInfo type
 // This should have been a `int` value or `float64` value.
 // But since the API only accepts string, for now this is input as string.
 type FaucetInfo struct {
@@ -172,6 +183,7 @@ type FaucetInfo struct {
 	ID    string `json:"id"`
 }
 
+// FaucetInfo method displays the balance of funds in the chain's faucet.
 func (appName AppType) FaucetInfo() (FaucetInfo, error) {
 	query := APIQuery{
 		Method: `faucetinfo`,
@@ -181,24 +193,24 @@ func (appName AppType) FaucetInfo() (FaucetInfo, error) {
 
 	var faucetinfo FaucetInfo
 
-	faucetinfoJson := appName.APICall(&query)
-	if faucetinfoJson == "EMPTY RPC INFO!" {
-		return faucetinfo, errors.New("EMPTY RPC INFO!")
+	faucetinfoJSON := appName.APICall(&query)
+	if faucetinfoJSON == "EMPTY RPC INFO" {
+		return faucetinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(faucetinfoJson)
+	//fmt.Println(faucetinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(faucetinfoJson), &result)
+	json.Unmarshal([]byte(faucetinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(faucetinfoJson), &faucetinfo)
-		return faucetinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(faucetinfoJSON), &faucetinfo)
+		return faucetinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(faucetinfoJson), &faucetinfo)
+	json.Unmarshal([]byte(faucetinfoJSON), &faucetinfo)
 	return faucetinfo, nil
 }
