@@ -383,7 +383,7 @@ RPC Port: 27486
 - [x]	getidentity "name"
 - [x]	listidentities (includecansign) (includewatchonly)
 - [ ]	recoveridentity "jsonidentity" (returntx)
-- [ ]	registeridentity "jsonidregistration" feeoffer
+- [x]	registeridentity "jsonidregistration" feeoffer
 - [x]	registernamecommitment "name" "controladdress" ("referralidentity")
 - [ ]	revokeidentity "nameorID" (returntx)
 - [ ]	updateidentity "jsonidentity" (returntx)
