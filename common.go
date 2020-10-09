@@ -29,28 +29,35 @@ import (
 	"github.com/satindergrewal/kmdgo/kmdutil"
 )
 
-const KMDGO_VERSION = `0.1.0`
+// KMDGoVersion records the version of KMD Go package
+const KMDGoVersion = `0.1.0`
 
+// AppType holds the smart chain's name
 type AppType string
 
+// APIParams holds the set of parameters passed along methods to smart chain RPC API queries
 type APIParams []interface{}
 
+// APIResult data type for holding returned results of API queries
 type APIResult struct {
 	Result interface{} `json:"result"`
 	Error  interface{} `json:"error"`
 	ID     string      `json:"id"`
 }
 
+// APIQuery holds the methods and params which is sent with body of RPC API queries
 type APIQuery struct {
 	Method string `json:"method"`
 	Params string `json:"params"`
 }
 
+// Error data type to store/format the errors resturned from smart chain API queries
 type Error struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
+// NewAppType returns the smart chain as variable type AppType
 func NewAppType(app AppType) *AppType {
 	return &app
 }
@@ -109,13 +116,13 @@ func (appName AppType) APICall(q *APIQuery) string {
 	url := rpcurl + rpcport
 	// fmt.Println(url)
 
-	var query_str string
-	query_str = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
-	// fmt.Println("query_str: ", query_str)
+	var queryStr string
+	queryStr = `{"jsonrpc": "1.0", "id":"kmdgo", "method": "` + q.Method + `", "params": ` + q.Params + ` }`
+	// fmt.Println("queryStr: ", queryStr)
 
-	query_byte := []byte(query_str)
+	queryByte := []byte(queryStr)
 
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(query_byte))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(queryByte))
 	req.Header.Set("Content-Type", "application/json")
 
 	//req, err := http.NewRequest("POST", , nil)
@@ -173,8 +180,8 @@ func (appName AppType) APICall(q *APIQuery) string {
 	// fmt.Println("err2: ", err2)
 	// fmt.Println("rspbody: ", rspbody)
 
-	var query_result map[string]interface{}
-	if err := json.Unmarshal(bodyText, &query_result); err != nil {
+	var queryResult map[string]interface{}
+	if err := json.Unmarshal(bodyText, &queryResult); err != nil {
 		fmt.Println("bodyText on json marshel: ", string(bodyText))
 		fmt.Println("resp.Body: ", resp.Body)
 		fmt.Println("bodyText Bytes: ", bodyText)
