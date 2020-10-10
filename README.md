@@ -413,7 +413,7 @@ RPC Port: 27486
 - [x]	registeridentity "jsonidregistration" feeoffer
 - [x]	registernamecommitment "name" "controladdress" ("referralidentity")
 - [ ]	revokeidentity "nameorID" (returntx)
-- [ ]	updateidentity "jsonidentity" (returntx)
+- [x]	updateidentity "jsonidentity" (returntx)
 
 #### Verus Multichain
 - [ ]	addmergedblock "hexdata" ( "jsonparametersobject" )

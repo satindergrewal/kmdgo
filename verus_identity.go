@@ -302,3 +302,77 @@ func (appName AppType) RegisterIdentity(params APIParams) (RegisterIdentity, err
 	json.Unmarshal([]byte(RegIDJSON), &RegID)
 	return RegID, nil
 }
+
+// UpdateIdentity type
+type UpdateIdentity struct {
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
+}
+
+// UpdateIdentityData type
+type UpdateIdentityData struct {
+	Parent            string   `json:"parent"`
+	Name              string   `json:"name"`
+	Primaryaddresses  []string `json:"primaryaddresses"`
+	Minimumsignatures int      `json:"minimumsignatures"`
+	Contentmap        struct {
+	} `json:"contentmap"`
+	Revocationauthority string `json:"revocationauthority"`
+	Recoveryauthority   string `json:"recoveryauthority"`
+	Privateaddress      string `json:"privateaddress"`
+}
+
+// UpdateIdentity gets the values from GetIdentity output and uses those to update VerusID
+//
+// updateidentity "jsonidregistration" (returntx)
+//
+// Arguments
+// {
+// 	"parent": "address",		(name@ or address) must be a valid ID. This ID can be used to revoke and recover the nameID we regsiter with this current command - Taken from GetIdentity's output - parent
+// 	"name": "namestr",			(string) the unique name in this commitment - Taken from GetIdentity's output - name
+// 	"primaryaddresses": [		(array of strings) the trasparent/public address(es)
+// 		"hexstr"
+// 	],
+// 	"minimumsignatures": 1,		(int) MofN signatures required out of the primary addresses list to sign transactions
+//	"contentmap": {},			(string) this can be any arbitray data of size about ___ bits (need to verify bits size)
+// 	"revocationauthority": "namestr",	(name@ or address) The ID entered here will be able to disable your created ID in case of loss or theft. It is some existing ID which either is under your own control or the ID you trust can help you revoke in case of this ID's theft.
+// 	"recoveryauthority": "namestr",		(name@ or address) The ID entered here will be able to revive your created ID if it is revoked. It is some existing ID which either is under your own control or the ID you trust can help you revive in case of this ID's revoked.
+// 	"privateaddress": "hexstr"			(string) shielded address associated with the VerusID being made
+// }
+// "returntx"					(bool,   optional) defaults to false and transaction is sent, if true, transaction is signed by this wallet and returned
+func (appName AppType) UpdateIdentity(params APIParams) (UpdateIdentity, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println("paramsJSON", string(paramsJSON))
+
+	query := APIQuery{
+		Method: `updateidentity`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var RegID UpdateIdentity
+
+	RegIDJSON := appName.APICall(&query)
+	if RegIDJSON == "EMPTY RPC INFO" {
+		return RegID, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(RegIDJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(RegIDJSON), &RegID)
+		return RegID, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(RegIDJSON), &RegID)
+	return RegID, nil
+}
