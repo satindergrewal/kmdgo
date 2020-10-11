@@ -1,4 +1,4 @@
-// Copyright © 2018-2019 Satinderjit Singh.
+// Copyright © 2018-2020 Satinderjit Singh.
 //
 // See the AUTHORS, DEVELOPER-AGREEMENT and LICENSE files at
 // the top-level directory of this distribution for the individual copyright

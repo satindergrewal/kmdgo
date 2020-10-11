@@ -10,28 +10,4 @@
 //
 // Removal or modification of this copyright notice is prohibited.
 
-package main
-
-import (
-	"fmt"
-	"github.com/satindergrewal/kmdgo"
-	"log"
-)
-
-func main() {
-	var appName kmdgo.AppType
-	appName = `komodo`
-
-	var clrbnd kmdgo.ClearBanned
-
-	clrbnd, err := appName.ClearBanned()
-	if err != nil {
-		fmt.Printf("Code: %v\n", clrbnd.Error.Code)
-		fmt.Printf("Message: %v\n\n", clrbnd.Error.Message)
-		log.Fatalln("Err happened", err)
-	}
-
-	fmt.Println("clrbnd value", clrbnd)
-	fmt.Println("-------")
-	fmt.Println(clrbnd.Result)
-}
+package kmdgo
