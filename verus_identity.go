@@ -312,15 +312,16 @@ type UpdateIdentity struct {
 
 // UpdateIdentityData type
 type UpdateIdentityData struct {
-	Parent            string   `json:"parent"`
-	Name              string   `json:"name"`
-	Primaryaddresses  []string `json:"primaryaddresses"`
-	Minimumsignatures int      `json:"minimumsignatures"`
-	Contentmap        struct {
-	} `json:"contentmap"`
-	Revocationauthority string `json:"revocationauthority"`
-	Recoveryauthority   string `json:"recoveryauthority"`
-	Privateaddress      string `json:"privateaddress"`
+	Parent              string                 `json:"parent"`
+	Name                string                 `json:"name"`
+	Flags               int                    `json:"flags"`
+	Timelock            int                    `json:"timelock,omitempty"`
+	Primaryaddresses    []string               `json:"primaryaddresses"`
+	Minimumsignatures   int                    `json:"minimumsignatures"`
+	Contentmap          map[string]interface{} `json:"contentmap"`
+	Revocationauthority string                 `json:"revocationauthority"`
+	Recoveryauthority   string                 `json:"recoveryauthority"`
+	Privateaddress      string                 `json:"privateaddress"`
 }
 
 // UpdateIdentity gets the values from GetIdentity output and uses those to update VerusID
@@ -331,16 +332,25 @@ type UpdateIdentityData struct {
 // {
 // 	"parent": "address",		(name@ or address) must be a valid ID. This ID can be used to revoke and recover the nameID we regsiter with this current command - Taken from GetIdentity's output - parent
 // 	"name": "namestr",			(string) the unique name in this commitment - Taken from GetIdentity's output - name
+//	"flags": number,			(int) default value is 0.
+//	"timelock": 1219040,		(int) block height to define.
 // 	"primaryaddresses": [		(array of strings) the trasparent/public address(es)
 // 		"hexstr"
 // 	],
 // 	"minimumsignatures": 1,		(int) MofN signatures required out of the primary addresses list to sign transactions
-//	"contentmap": {},			(string) this can be any arbitray data of size about ___ bits (need to verify bits size)
+//	"contentmap": {},			(string) it takes a 20 byte key and 32 byte value, expected to be a key hash and whatever other hash for value you want for content addressable storage.
 // 	"revocationauthority": "namestr",	(name@ or address) The ID entered here will be able to disable your created ID in case of loss or theft. It is some existing ID which either is under your own control or the ID you trust can help you revoke in case of this ID's theft.
 // 	"recoveryauthority": "namestr",		(name@ or address) The ID entered here will be able to revive your created ID if it is revoked. It is some existing ID which either is under your own control or the ID you trust can help you revive in case of this ID's revoked.
 // 	"privateaddress": "hexstr"			(string) shielded address associated with the VerusID being made
 // }
 // "returntx"					(bool,   optional) defaults to false and transaction is sent, if true, transaction is signed by this wallet and returned
+//
+// ## Command Examples
+// Time Lock: The timelock parameter defines the unlock height of the identity.
+// 	verus -chain=VRSCTEST updateidentity '{"name": "ID@", "flags": 0, "timelock": <Unlock block height>, "minimumsignatures": 1, "primaryaddresses": ["t-address"]}'
+//
+// Time Delay: The timelock parameter defines how many blocks to delay an ID's unlock when the flags are set back to an unlocked state.
+//	verus -chain=VRSCTEST updateidentity '{"name": "ID@", "flags": 2, "timelock": <Unlock block delay>, "minimumsignatures": 1, "primaryaddresses": ["t-address"]}'
 func (appName AppType) UpdateIdentity(params APIParams) (UpdateIdentity, error) {
 
 	// fmt.Println("params[0]", params[0])

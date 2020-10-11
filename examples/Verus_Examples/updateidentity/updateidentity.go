@@ -13,6 +13,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -53,13 +54,23 @@ func main() {
 	// "vout": 0
 	// }
 	var UpdateIDData kmdgo.UpdateIdentityData
-	UpdateIDData.Parent = "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq"                                                           // from getidentity output
-	UpdateIDData.Name = "sattest01"                                                                                      // name ID you are registering
+	UpdateIDData.Parent = "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq" // from getidentity output
+	UpdateIDData.Name = "sattest01"                            // name ID you are registering
+	// UpdateIDData.Flags = 2
+	// UpdateIDData.Timelock = 1219040
 	UpdateIDData.Primaryaddresses = []string{"RCGQNeJNBaueVVGorbuAXKVEJxKEwfSdkV", "RYbMjn1tpn9LLteodFX6p1XoY3VSHzMnv5"} // List of addresses which you can make a list of multisig address too
 	UpdateIDData.Minimumsignatures = 1                                                                                   // MofN signatures required from Primary addresses list
 	UpdateIDData.Revocationauthority = "grewal@"                                                                         // Recovaction ID
 	UpdateIDData.Recoveryauthority = "satinder@"                                                                         // Recovery ID
 	UpdateIDData.Privateaddress = "zs19eqgy366y5lhnvq8v2v7gaqa9uenjx2ryqf3guy34ffy9apdfcazflwyg8ncxk56dzvfz6xxc94"       // Shielded Address
+
+	cmap := make(map[string]interface{})
+	cmap["key1"] = "ehlo value"
+	// fmt.Println("map:", cmap)
+	// UpdateIDData.Contentmap = cmap
+
+	paramsJSON, _ := json.MarshalIndent(UpdateIDData, "", "  ")
+	fmt.Println(string(paramsJSON))
 
 	args := make(kmdgo.APIParams, 1)
 	args[0] = UpdateIDData
