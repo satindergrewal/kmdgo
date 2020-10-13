@@ -117,3 +117,67 @@ func (appName AppType) GetCurrency(params APIParams) (GetCurrency, error) {
 	json.Unmarshal([]byte(GetCrncyJSON), &GetCrncy)
 	return GetCrncy, nil
 }
+
+// GetCurrencyState type
+type GetCurrencyState struct {
+	Result struct {
+		Height        int `json:"height"`
+		Blocktime     int `json:"blocktime"`
+		Currencystate struct {
+			Flags         int     `json:"flags"`
+			Currencyid    string  `json:"currencyid"`
+			Initialsupply float64 `json:"initialsupply"`
+			Emitted       float64 `json:"emitted"`
+			Supply        float64 `json:"supply"`
+			Currencies    struct {
+			} `json:"currencies"`
+			Nativefees           int `json:"nativefees"`
+			Nativeconversionfees int `json:"nativeconversionfees"`
+		} `json:"currencystate"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetCurrencyState returns the total amount of preconversions that have been confirmed on the blockchain for the specified chain.
+//
+// getcurrencystate "n"
+//
+// Arguments
+//    "n" or "m,n" or "m,n,o"         (int or string, optional) height or inclusive range with optional step at which to get the currency state. If not specified, the latest currency state and height is returned
+//
+func (appName AppType) GetCurrencyState(params APIParams) (GetCurrencyState, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getcurrencystate`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetCurSt GetCurrencyState
+
+	GetCurStJSON := appName.APICall(&query)
+	if GetCurStJSON == "EMPTY RPC INFO" {
+		return GetCurSt, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetCurStJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetCurStJSON), &GetCurSt)
+		return GetCurSt, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetCurStJSON), &GetCurSt)
+	return GetCurSt, nil
+}

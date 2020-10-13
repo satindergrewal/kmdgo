@@ -419,9 +419,9 @@ RPC Port: 27486
 - [ ]	addmergedblock "hexdata" ( "jsonparametersobject" )
 - [ ]	definecurrency '{"name": "BAAS", ..., "nodes":[{"networkaddress":"identity"},..]}'
 - [ ]	getcrossnotarization "systemid" '["notarizationtxid1", "notarizationtxid2", ...]'
-- [ ]	getcurrency "chainname"
+- [x]	getcurrency "chainname"
 - [ ]	getcurrencyconverters ["currency1","currency2",...]'
-- [ ]	getcurrencystate "n"
+- [x]	getcurrencystate "n"
 - [ ]	getexports "chainname"
 - [ ]	getimports "chainname"
 - [ ]	getinitialcurrencystate "name"
