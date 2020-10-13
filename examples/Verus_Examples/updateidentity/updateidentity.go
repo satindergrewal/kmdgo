@@ -13,7 +13,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 
@@ -65,12 +64,41 @@ func main() {
 	UpdateIDData.Privateaddress = "zs19eqgy366y5lhnvq8v2v7gaqa9uenjx2ryqf3guy34ffy9apdfcazflwyg8ncxk56dzvfz6xxc94"       // Shielded Address
 
 	cmap := make(map[string]interface{})
-	cmap["key1"] = "ehlo value"
-	// fmt.Println("map:", cmap)
-	// UpdateIDData.Contentmap = cmap
 
-	paramsJSON, _ := json.MarshalIndent(UpdateIDData, "", "  ")
-	fmt.Println(string(paramsJSON))
+	// keyStr := "hello"
+	// valueStr := "world!"
+	// cmapKeyStr := []byte(keyStr)
+	// cmapValueStr := []byte(valueStr)
+	// fmt.Println("Key String -", keyStr)
+	// fmt.Println("Value String -", valueStr)
+
+	// cmapKeyHex := make([]byte, hex.EncodedLen(len(cmapKeyStr)))
+	// hex.Encode(cmapKeyHex, cmapKeyStr)
+
+	// cmapValueHex := make([]byte, hex.EncodedLen(len(cmapValueStr)))
+	// hex.Encode(cmapValueHex, cmapValueStr)
+
+	// fmt.Println("Key Hex -", string(cmapValueHex))
+	// fmt.Println("Value Hex -", string(cmapValueHex))
+
+	// cmap[string(cmapKeyHex)] = string(cmapValueHex)
+
+	// contentmaps value must be exactly 20 byte (40 char)hex value key and a 32 byte (64) hex value value
+	// using small byte values for key/value errors as invalid JSON
+	TwentyByteStr := "3b57841d360f070e000809e4d6090094cb8b69bc"
+	FortyByteStr := "f45608bd4c7f1b5750ced247072ac289deb5eb9ce169dafc5a80b428e001a82e22e7d45b530c2707"
+
+	fmt.Println("TwentyByteStr -", TwentyByteStr)
+	fmt.Println("FortyByteStr -", FortyByteStr)
+
+	cmap[TwentyByteStr] = FortyByteStr
+
+	// fmt.Println("map:", cmap)
+	UpdateIDData.Contentmap = cmap
+
+	// paramsJSON, _ := json.MarshalIndent(UpdateIDData, "", "  ")
+	// paramsJSON, _ := json.Marshal(UpdateIDData)
+	// fmt.Println(string(paramsJSON))
 
 	args := make(kmdgo.APIParams, 1)
 	args[0] = UpdateIDData

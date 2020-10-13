@@ -15,6 +15,7 @@ package kmdgo
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 // ListIdentities struct type to render result for ListIdentities func
@@ -338,7 +339,7 @@ type UpdateIdentityData struct {
 // 		"hexstr"
 // 	],
 // 	"minimumsignatures": 1,		(int) MofN signatures required out of the primary addresses list to sign transactions
-//	"contentmap": {},			(string) it takes a 20 byte key and 32 byte value, expected to be a key hash and whatever other hash for value you want for content addressable storage.
+//	"contentmap": {},			(string) it takes a 20 byte key and 32 byte value, expected to be a key hash and whatever other hash for value you want for content addressable storage. It needs to be a 20 byte (40 char)hex value key and a 32 byte (64) hex value value. It is an object of key/values.
 // 	"revocationauthority": "namestr",	(name@ or address) The ID entered here will be able to disable your created ID in case of loss or theft. It is some existing ID which either is under your own control or the ID you trust can help you revoke in case of this ID's theft.
 // 	"recoveryauthority": "namestr",		(name@ or address) The ID entered here will be able to revive your created ID if it is revoked. It is some existing ID which either is under your own control or the ID you trust can help you revive in case of this ID's revoked.
 // 	"privateaddress": "hexstr"			(string) shielded address associated with the VerusID being made
@@ -362,7 +363,7 @@ func (appName AppType) UpdateIdentity(params APIParams) (UpdateIdentity, error) 
 		Method: `updateidentity`,
 		Params: string(paramsJSON),
 	}
-	// fmt.Println(query)
+	fmt.Println(query)
 
 	var RegID UpdateIdentity
 
