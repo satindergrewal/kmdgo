@@ -181,3 +181,144 @@ func (appName AppType) GetCurrencyState(params APIParams) (GetCurrencyState, err
 	json.Unmarshal([]byte(GetCurStJSON), &GetCurSt)
 	return GetCurSt, nil
 }
+
+// CurrencyInfo type
+type CurrencyInfo struct {
+	Name                 string        `json:"name"`
+	Version              int           `json:"version"`
+	Options              int           `json:"options"`
+	Parent               string        `json:"parent"`
+	Systemid             string        `json:"systemid"`
+	Currencyid           string        `json:"currencyid"`
+	Notarizationprotocol int           `json:"notarizationprotocol"`
+	Proofprotocol        int           `json:"proofprotocol"`
+	Idregistrationprice  int           `json:"idregistrationprice"`
+	Idreferrallevels     int           `json:"idreferrallevels"`
+	Minnotariesconfirm   int           `json:"minnotariesconfirm"`
+	Billingperiod        int           `json:"billingperiod"`
+	Notarizationreward   int           `json:"notarizationreward"`
+	Startblock           int           `json:"startblock"`
+	Endblock             int           `json:"endblock"`
+	Currencies           []string      `json:"currencies"`
+	Weights              []float64     `json:"weights"`
+	Conversions          []float64     `json:"conversions"`
+	Initialsupply        float64       `json:"initialsupply"`
+	Prelaunchcarveout    float64       `json:"prelaunchcarveout"`
+	Initialcontributions []float64     `json:"initialcontributions"`
+	Preconversions       []float64     `json:"preconversions"`
+	Eras                 []interface{} `json:"eras"`
+}
+
+// GetCurrencyConverter type
+type GetCurrencyConverter struct {
+	CurrencyInfo     map[string]CurrencyInfo `json:"-"`
+	Lastnotarization struct {
+		Version             int    `json:"version"`
+		Currencyid          string `json:"currencyid"`
+		Notaryaddress       string `json:"notaryaddress"`
+		Notarizationheight  int    `json:"notarizationheight"`
+		Mmrroot             string `json:"mmrroot"`
+		Notarizationprehash string `json:"notarizationprehash"`
+		Work                string `json:"work"`
+		Stake               string `json:"stake"`
+		Currencystate       struct {
+			Flags             int    `json:"flags"`
+			Currencyid        string `json:"currencyid"`
+			Reservecurrencies []struct {
+				Currencyid     string  `json:"currencyid"`
+				Weight         float64 `json:"weight"`
+				Reserves       float64 `json:"reserves"`
+				Priceinreserve float64 `json:"priceinreserve"`
+			} `json:"reservecurrencies"`
+			Initialsupply        float64               `json:"initialsupply"`
+			Emitted              float64               `json:"emitted"`
+			Supply               float64               `json:"supply"`
+			Currencies           map[string]Currencies `json:"currencies"`
+			Nativefees           int64                 `json:"nativefees"`
+			Nativeconversionfees int64                 `json:"nativeconversionfees"`
+		} `json:"currencystate"`
+		Prevnotarization  string        `json:"prevnotarization"`
+		Prevheight        int           `json:"prevheight"`
+		Crossnotarization string        `json:"crossnotarization"`
+		Crossheight       int           `json:"crossheight"`
+		Nodes             []interface{} `json:"nodes"`
+	} `json:"lastnotarization"`
+	Multifractional struct {
+		Name                 string        `json:"name"`
+		Version              int           `json:"version"`
+		Options              int           `json:"options"`
+		Parent               string        `json:"parent"`
+		Systemid             string        `json:"systemid"`
+		Currencyid           string        `json:"currencyid"`
+		Notarizationprotocol int           `json:"notarizationprotocol"`
+		Proofprotocol        int           `json:"proofprotocol"`
+		Idregistrationprice  int           `json:"idregistrationprice"`
+		Idreferrallevels     int           `json:"idreferrallevels"`
+		Minnotariesconfirm   int           `json:"minnotariesconfirm"`
+		Billingperiod        int           `json:"billingperiod"`
+		Notarizationreward   int           `json:"notarizationreward"`
+		Startblock           int           `json:"startblock"`
+		Endblock             int           `json:"endblock"`
+		Currencies           []string      `json:"currencies"`
+		Weights              []float64     `json:"weights"`
+		Conversions          []float64     `json:"conversions"`
+		Initialsupply        float64       `json:"initialsupply"`
+		Prelaunchcarveout    float64       `json:"prelaunchcarveout"`
+		Initialcontributions []float64     `json:"initialcontributions"`
+		Preconversions       []float64     `json:"preconversions"`
+		Eras                 []interface{} `json:"eras"`
+	} `json:"multifractional,omitempty"`
+}
+
+// GetCurrencyConverters array type
+type GetCurrencyConverters struct {
+	Result []GetCurrencyConverter `json:"result"`
+	Error  Error                  `json:"error"`
+	ID     string                 `json:"id"`
+}
+
+// GetCurrencyConverters Retrieves all currencies that have at least 1000 VRSC in reserve, are >10% VRSC reserve ratio, and have all listed currencies as reserves
+//
+// getcurrencyconverters currency1 currency2
+// Arguments
+//        ["currencyname"    : "string", ...]  (string list, one or more) all selected currencies are returned with their current state
+// Result:
+//        "[{currency1}, {currency2}]" : "array of objects" (string) All currencies and the last notarization, which are valid converters.
+//
+// Examples:
+// > verus getcurrencyconverters currency1 currency2 ...
+func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConverters, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getcurrencyconverters`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetCurCovrts GetCurrencyConverters
+
+	GetCurCovrtsJSON := appName.APICall(&query)
+	if GetCurCovrtsJSON == "EMPTY RPC INFO" {
+		return GetCurCovrts, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetCurCovrtsJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetCurCovrtsJSON), &GetCurCovrts)
+		return GetCurCovrts, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetCurCovrtsJSON), &GetCurCovrts)
+	return GetCurCovrts, nil
+}
