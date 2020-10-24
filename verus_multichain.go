@@ -351,9 +351,6 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 	for k, v := range o {
 		// fmt.Printf("k -- %+v\n", k)
 		// fmt.Println("v --- ", v)
-		if _, ok := v.(map[string]interface{})["result"]; ok {
-
-		}
 		p := v.(map[string]interface{})
 		if _, ok := v.(map[string]interface{})["lastnotarization"]; ok {
 			// fmt.Println("lastnotarization ---", val)
@@ -515,7 +512,6 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 				}
 			}
 		}
-		// break
 	}
 	return GetCurCovrts, nil
 }
