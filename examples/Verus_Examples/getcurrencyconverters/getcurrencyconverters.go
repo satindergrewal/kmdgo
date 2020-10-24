@@ -41,6 +41,12 @@ func main() {
 	for i, v := range GetCurncyCnvrts.Result {
 		fmt.Println("------")
 		fmt.Println(i)
-		fmt.Println(v.CurrencyInfo)
+		if v.CurrencyInfo.Name != "" {
+			fmt.Println("v.CurrencyInfo -- ", v.CurrencyInfo)
+		}
+		if v.Multifractional.Name != "" {
+			fmt.Println("v.Multifractional -- ", v.Multifractional)
+		}
+		fmt.Println("v.Lastnotarization -- ", v.Lastnotarization)
 	}
 }

@@ -15,6 +15,8 @@ package kmdgo
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"log"
 )
 
 // GetCurrency type
@@ -211,7 +213,7 @@ type CurrencyInfo struct {
 
 // GetCurrencyConverter type
 type GetCurrencyConverter struct {
-	CurrencyInfo     map[string]CurrencyInfo `json:"-"`
+	CurrencyInfo     CurrencyInfo `json:"-"`
 	Lastnotarization struct {
 		Version             int    `json:"version"`
 		Currencyid          string `json:"currencyid"`
@@ -320,5 +322,200 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 	}
 
 	json.Unmarshal([]byte(GetCurCovrtsJSON), &GetCurCovrts)
+	// fmt.Println(GetCurCovrtsJSON)
+
+	var f interface{}
+	// m := f.(map[string]interface{})
+	err := json.Unmarshal([]byte(GetCurCovrtsJSON), &f)
+	if err != nil {
+		log.Printf("%v", err)
+	}
+	// fmt.Printf("%+v\n", f)
+
+	// fmt.Printf("%T\n", f)
+
+	m := f.(map[string]interface{})
+
+	var n interface{}
+	for k, v := range m {
+		// fmt.Printf("k -- %+v\n", k)
+		// fmt.Println("v --- ", v)
+		if k == "result" {
+			n = v
+		}
+	}
+	// fmt.Println("n -- ", n)
+
+	o := n.([]interface{})
+
+	for k, v := range o {
+		// fmt.Printf("k -- %+v\n", k)
+		// fmt.Println("v --- ", v)
+		if _, ok := v.(map[string]interface{})["result"]; ok {
+
+		}
+		p := v.(map[string]interface{})
+		if _, ok := v.(map[string]interface{})["lastnotarization"]; ok {
+			// fmt.Println("lastnotarization ---", val)
+			delete(v.(map[string]interface{}), "lastnotarization")
+		}
+		if _, ok := v.(map[string]interface{})["multifractional"]; ok {
+			// fmt.Println("multifractional ---", val)
+			delete(v.(map[string]interface{}), "multifractional")
+		}
+		for pk, pv := range p {
+			// fmt.Printf("pk - %+v\n", pk)
+			// fmt.Printf("pv - %T\n", pv)
+			switch vv := pv.(type) {
+			case string:
+				fmt.Println(pk, "is string", vv)
+			case float64:
+				fmt.Println(pk, "is float64", vv)
+			case []interface{}:
+				fmt.Println(pk, "is an array:")
+				for i, u := range vv {
+					fmt.Println(i, u)
+				}
+			default:
+				// fmt.Println(pk, "is of a type I don't know how to handle")
+				// fmt.Printf("%T\n", vv)
+				// fmt.Printf("vv -- %+v\n", vv)
+				if val, ok := vv.(map[string]interface{})["name"]; ok {
+					// fmt.Println("name ---", val)
+					GetCurCovrts.Result[0].CurrencyInfo.Name = val.(string)
+				}
+				if val, ok := vv.(map[string]interface{})["version"]; ok {
+					// fmt.Println("version ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Version = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["options"]; ok {
+					// fmt.Println("options ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Options = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["parent"]; ok {
+					// fmt.Println("parent ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Parent = val.(string)
+				}
+				if val, ok := vv.(map[string]interface{})["systemid"]; ok {
+					// fmt.Println("systemid ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Systemid = val.(string)
+				}
+				if val, ok := vv.(map[string]interface{})["currencyid"]; ok {
+					// fmt.Println("currencyid ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Currencyid = val.(string)
+				}
+				if val, ok := vv.(map[string]interface{})["notarizationprotocol"]; ok {
+					// fmt.Println("notarizationprotocol ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Notarizationprotocol = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["proofprotocol"]; ok {
+					// fmt.Println("proofprotocol ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Proofprotocol = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["idregistrationprice"]; ok {
+					// fmt.Println("idregistrationprice ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Idregistrationprice = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["idreferrallevels"]; ok {
+					// fmt.Println("idreferrallevels ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Idreferrallevels = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["minnotariesconfirm"]; ok {
+					// fmt.Println("minnotariesconfirm ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Minnotariesconfirm = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["billingperiod"]; ok {
+					// fmt.Println("billingperiod ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Billingperiod = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["notarizationreward"]; ok {
+					// fmt.Println("notarizationreward ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Notarizationreward = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["startblock"]; ok {
+					// fmt.Println("startblock ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Startblock = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["endblock"]; ok {
+					// fmt.Println("endblock ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Endblock = int(val.(float64))
+				}
+				if val, ok := vv.(map[string]interface{})["currencies"]; ok {
+					// fmt.Printf("currencies type --- %T\n", val)
+					// fmt.Println("currencies ---", val)
+					var _tmpCurrencies []string
+					for _, curv := range val.([]interface{}) {
+						// fmt.Println(curv)
+						// fmt.Printf("curv -- %T\n", curv)
+						_tmpCurrencies = append(_tmpCurrencies, fmt.Sprintf("%v", curv))
+					}
+					// fmt.Printf("%T\n", _tmpCurrencies)
+					// fmt.Printf("%+v\n", _tmpCurrencies)
+					GetCurCovrts.Result[k].CurrencyInfo.Currencies = _tmpCurrencies
+				}
+				if val, ok := vv.(map[string]interface{})["weights"]; ok {
+					// fmt.Println("weights ---", val)
+					var _tmpWeights []float64
+					for _, wghtv := range val.([]interface{}) {
+						// fmt.Println(wghtv)
+						// fmt.Printf("wghtv -- %T\n", wghtv)
+						_tmpWeights = append(_tmpWeights, wghtv.(float64))
+					}
+					// fmt.Printf("%T\n", _tmpWeights)
+					// fmt.Printf("%+v\n", _tmpWeights)
+					GetCurCovrts.Result[k].CurrencyInfo.Weights = _tmpWeights
+				}
+				if val, ok := vv.(map[string]interface{})["conversions"]; ok {
+					// fmt.Println("conversions ---", val)
+					var _tmpConversions []float64
+					for _, cnvrsv := range val.([]interface{}) {
+						// fmt.Println(cnvrsv)
+						// fmt.Printf("cnvrsv -- %T\n", cnvrsv)
+						_tmpConversions = append(_tmpConversions, cnvrsv.(float64))
+					}
+					// fmt.Printf("%T\n", _tmpConversions)
+					// fmt.Printf("%+v\n", _tmpConversions)
+					GetCurCovrts.Result[k].CurrencyInfo.Conversions = _tmpConversions
+				}
+				if val, ok := vv.(map[string]interface{})["initialsupply"]; ok {
+					// fmt.Println("initialsupply ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Initialsupply = val.(float64)
+				}
+				if val, ok := vv.(map[string]interface{})["prelaunchcarveout"]; ok {
+					// fmt.Println("prelaunchcarveout ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Prelaunchcarveout = val.(float64)
+				}
+				if val, ok := vv.(map[string]interface{})["initialcontributions"]; ok {
+					// fmt.Println("initialcontributions ---", val)
+					var _tmpInitContri []float64
+					for _, initcontv := range val.([]interface{}) {
+						// fmt.Println(initcontv)
+						// fmt.Printf("initcontv -- %T\n", initcontv)
+						_tmpInitContri = append(_tmpInitContri, initcontv.(float64))
+					}
+					// fmt.Printf("%T\n", _tmpInitContri)
+					// fmt.Printf("%+v\n", _tmpInitContri)
+					GetCurCovrts.Result[k].CurrencyInfo.Initialcontributions = _tmpInitContri
+				}
+				if val, ok := vv.(map[string]interface{})["preconversions"]; ok {
+					// fmt.Println("preconversions ---", val)
+					var _tmpPreConv []float64
+					for _, preconv := range val.([]interface{}) {
+						// fmt.Println(preconv)
+						// fmt.Printf("preconv -- %T\n", preconv)
+						_tmpPreConv = append(_tmpPreConv, preconv.(float64))
+					}
+					// fmt.Printf("%T\n", _tmpPreConv)
+					// fmt.Printf("%+v\n", _tmpPreConv)
+					GetCurCovrts.Result[k].CurrencyInfo.Preconversions = _tmpPreConv
+				}
+				if val, ok := vv.(map[string]interface{})["eras"]; ok {
+					// fmt.Println("eras ---", val)
+					GetCurCovrts.Result[k].CurrencyInfo.Eras = val.([]interface{})
+				}
+			}
+		}
+		// break
+	}
 	return GetCurCovrts, nil
 }
