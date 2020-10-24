@@ -420,7 +420,7 @@ RPC Port: 27486
 - [ ]	definecurrency '{"name": "BAAS", ..., "nodes":[{"networkaddress":"identity"},..]}'
 - [ ]	getcrossnotarization "systemid" '["notarizationtxid1", "notarizationtxid2", ...]'
 - [x]	getcurrency "chainname"
-- [ ]	getcurrencyconverters ["currency1","currency2",...]'
+- [x]	getcurrencyconverters ["currency1","currency2",...]'
 - [x]	getcurrencystate "n"
 - [ ]	getexports "chainname"
 - [ ]	getimports "chainname"
