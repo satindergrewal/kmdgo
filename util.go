@@ -19,6 +19,7 @@ import (
 	//"strconv"
 )
 
+// ValidateAddress struct type to store validate address API output
 type ValidateAddress struct {
 	Result struct {
 		Isvalid      bool   `json:"isvalid"`
@@ -36,6 +37,7 @@ type ValidateAddress struct {
 	ID    string `json:"id"`
 }
 
+// ValidateAddress method allows to check the information about a single wallet address's status
 func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
 	query := APIQuery{
 		Method: `validateaddress`,
@@ -45,66 +47,81 @@ func (appName AppType) ValidateAddress(taddr string) (ValidateAddress, error) {
 
 	var validateaddress ValidateAddress
 
-	validateaddressJson := appName.APICall(&query)
-	if validateaddressJson == "EMPTY RPC INFO!" {
-		return validateaddress, errors.New("EMPTY RPC INFO!")
+	validateaddressJSON := appName.APICall(&query)
+	if validateaddressJSON == "EMPTY RPC INFO" {
+		return validateaddress, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(validateaddressJson), &result)
+	json.Unmarshal([]byte(validateaddressJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(validateaddressJson), &validateaddress)
-		return validateaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(validateaddressJSON), &validateaddress)
+		return validateaddress, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(validateaddressJson), &validateaddress)
+	json.Unmarshal([]byte(validateaddressJSON), &validateaddress)
 	return validateaddress, nil
 }
 
+// VerifyMessage type
 type VerifyMessage struct {
 	Result bool   `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// VerifyMessage - Verify a signed message
+//
+// verifymessage "address or identity" "signature" "message" "checklatest"
+//
+// Arguments:
+// 1. "t-addr or identity" (string, required) The transparent address or identity that signed the message.
+// 2. "signature"       (string, required) The signature provided by the signer in base 64 encoding (see signmessage).
+// 3. "message"         (string, required) The message that was signed.
+// 3. "checklatest"     (bool, optional)   If true, checks signature validity based on latest identity. defaults to false,
+//                                           which determines validity of signing height stored in signature.
+//
+// Result:
+// true|false   (boolean) If the signature is verified or not.
 func (appName AppType) VerifyMessage(params APIParams) (VerifyMessage, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `verifymessage`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var verifymessage VerifyMessage
 
-	verifymessageJson := appName.APICall(&query)
-	if verifymessageJson == "EMPTY RPC INFO!" {
-		return verifymessage, errors.New("EMPTY RPC INFO!")
+	verifymessageJSON := appName.APICall(&query)
+	if verifymessageJSON == "EMPTY RPC INFO" {
+		return verifymessage, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(verifymessageJson), &result)
+	json.Unmarshal([]byte(verifymessageJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(verifymessageJson), &verifymessage)
-		return verifymessage, errors.New(string(answer_error))
+		json.Unmarshal([]byte(verifymessageJSON), &verifymessage)
+		return verifymessage, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(verifymessageJson), &verifymessage)
+	json.Unmarshal([]byte(verifymessageJSON), &verifymessage)
 	return verifymessage, nil
 }
 
+// ZValidateAddress type
 type ZValidateAddress struct {
 	Result struct {
 		Isvalid                    bool   `json:"isvalid"`
@@ -118,6 +135,24 @@ type ZValidateAddress struct {
 	ID    string `json:"id"`
 }
 
+// ZValidateAddress returns information about the given z address.
+//
+// z_validateaddress "zaddr"
+//
+// Arguments:
+// 1. "zaddr"     (string, required) The z address to validate
+//
+// Result:
+// {
+//   "isvalid" : true|false,      (boolean) If the address is valid or not. If not, this is the only property returned.
+//   "address" : "zaddr",         (string) The z address validated
+//   "type" : "xxxx",             (string) "sprout" or "sapling"
+//   "ismine" : true|false,       (boolean) If the address is yours or not
+//   "payingkey" : "hex",         (string) [sprout] The hex value of the paying key, a_pk
+//   "transmissionkey" : "hex",   (string) [sprout] The hex value of the transmission key, pk_enc
+//   "diversifier" : "hex",       (string) [sapling] The hex value of the diversifier, d
+//   "diversifiedtransmissionkey" : "hex", (string) [sapling] The hex value of pk_d
+// }
 func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) {
 	query := APIQuery{
 		Method: `z_validateaddress`,
@@ -127,23 +162,23 @@ func (appName AppType) ZValidateAddress(zaddr string) (ZValidateAddress, error) 
 
 	var zvalidateaddress ZValidateAddress
 
-	zvalidateaddressJson := appName.APICall(&query)
-	if zvalidateaddressJson == "EMPTY RPC INFO!" {
-		return zvalidateaddress, errors.New("EMPTY RPC INFO!")
+	zvalidateaddressJSON := appName.APICall(&query)
+	if zvalidateaddressJSON == "EMPTY RPC INFO" {
+		return zvalidateaddress, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(zvalidateaddressJson), &result)
+	json.Unmarshal([]byte(zvalidateaddressJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(zvalidateaddressJson), &zvalidateaddress)
-		return zvalidateaddress, errors.New(string(answer_error))
+		json.Unmarshal([]byte(zvalidateaddressJSON), &zvalidateaddress)
+		return zvalidateaddress, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(zvalidateaddressJson), &zvalidateaddress)
+	json.Unmarshal([]byte(zvalidateaddressJSON), &zvalidateaddress)
 	return zvalidateaddress, nil
 }

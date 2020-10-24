@@ -17,6 +17,7 @@ import (
 	"errors"
 )
 
+// GetInfo struct type to store getinfo API output
 type GetInfo struct {
 	Result struct {
 		Version             int     `json:"version"`
@@ -58,6 +59,7 @@ type GetInfo struct {
 	ID    string `json:"id"`
 }
 
+// GetInfo gets some basic and essential information about local node's blockchain, wallet, and network specific info
 func (appName AppType) GetInfo() (GetInfo, error) {
 
 	query := new(APIQuery)
@@ -68,35 +70,37 @@ func (appName AppType) GetInfo() (GetInfo, error) {
 
 	var getinfo GetInfo
 
-	getinfoJson := appName.APICall(query)
-	if getinfoJson == "EMPTY RPC INFO!" {
-		return getinfo, errors.New("EMPTY RPC INFO!")
+	getinfoJSON := appName.APICall(query)
+	if getinfoJSON == "EMPTY RPC INFO" {
+		return getinfo, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	// fmt.Println("returned getinfoJson: ", string(getinfoJson))
+	// fmt.Println("returned getinfoJson: ", string(getinfoJSON))
 
-	json.Unmarshal([]byte(getinfoJson), &result)
+	json.Unmarshal([]byte(getinfoJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getinfoJson), &getinfo)
-		return getinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getinfoJSON), &getinfo)
+		return getinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getinfoJson), &getinfo)
+	json.Unmarshal([]byte(getinfoJSON), &getinfo)
 	return getinfo, nil
 }
 
+// Stop struct type to store output of chain stop command
 type Stop struct {
 	Result string `json:"result"`
 	Error  Error  `json:"error"`
 	ID     string `json:"id"`
 }
 
+// Stop method allows to issue a blockchain daemon service shutdown command
 func (appName AppType) Stop() (Stop, error) {
 	query := new(APIQuery)
 	query = &APIQuery{
@@ -106,23 +110,23 @@ func (appName AppType) Stop() (Stop, error) {
 
 	var stop Stop
 
-	stopJson := appName.APICall(query)
-	if stopJson == "EMPTY RPC INFO!" {
-		return stop, errors.New("EMPTY RPC INFO!")
+	stopJSON := appName.APICall(query)
+	if stopJSON == "EMPTY RPC INFO" {
+		return stop, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(stopJson), &result)
+	json.Unmarshal([]byte(stopJSON), &result)
 
 	if result.Result == nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(stopJson), &stop)
-		return stop, errors.New(string(answer_error))
+		json.Unmarshal([]byte(stopJSON), &stop)
+		return stop, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(stopJson), &stop)
+	json.Unmarshal([]byte(stopJSON), &stop)
 	return stop, nil
 }

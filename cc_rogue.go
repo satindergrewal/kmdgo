@@ -19,10 +19,11 @@ import (
 )
 
 const (
-	CCLIB_METHOD   = `cclib`
-	ROGUE_EVALCODE = `17`
+	ccLibMethod   = `cclib`
+	rogueEvalCode = `17`
 )
 
+// RGNewGame type
 type RGNewGame struct {
 	Result struct {
 		Name       string  `json:"name"`
@@ -38,6 +39,7 @@ type RGNewGame struct {
 	ID    string `json:"id"`
 }
 
+// RGNewGame - Crypto-Conditions (CC) specific method. You can see all available methods via cclib with following command
 // Method: newgame
 // Params: maxplayers buyin
 // Params Required: 0
@@ -50,7 +52,6 @@ type RGNewGame struct {
 //
 // cclib: API call method.
 //
-// newgame: Crypto-Conditions (CC) specific method. You can see all available methods via cclib with following command
 //		./komodo-cli -ac_name=ROGUE cclibinfo
 //
 // 17: Evalcode for this CC method
@@ -72,43 +73,44 @@ func (appName AppType) RGNewGame(params APIParams) (RGNewGame, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var newgame RGNewGame
 
-	newgameJson := appName.APICall(&query)
-	if newgameJson == "EMPTY RPC INFO!" {
-		return newgame, errors.New("EMPTY RPC INFO!")
+	newgameJSON := appName.APICall(&query)
+	if newgameJSON == "EMPTY RPC INFO" {
+		return newgame, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(newgameJson)
+	//fmt.Println(newgameJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(newgameJson), &result)
+	json.Unmarshal([]byte(newgameJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(newgameJson), &newgame)
-		return newgame, errors.New(string(answer_error))
+		json.Unmarshal([]byte(newgameJSON), &newgame)
+		return newgame, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(newgameJson), &newgame)
+	json.Unmarshal([]byte(newgameJSON), &newgame)
 	return newgame, nil
 }
 
+// RGGameInfo type
 type RGGameInfo struct {
 	Result struct {
 		Name       string  `json:"name"`
@@ -141,6 +143,7 @@ type RGGameInfo struct {
 	ID    string `json:"id"`
 }
 
+// RGGameInfo ...
 func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -150,43 +153,44 @@ func (appName AppType) RGGameInfo(params APIParams) (RGGameInfo, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var gameinfo RGGameInfo
 
-	gameinfoJson := appName.APICall(&query)
-	if gameinfoJson == "EMPTY RPC INFO!" {
-		return gameinfo, errors.New("EMPTY RPC INFO!")
+	gameinfoJSON := appName.APICall(&query)
+	if gameinfoJSON == "EMPTY RPC INFO" {
+		return gameinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(gameinfoJson)
+	//fmt.Println(gameinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(gameinfoJson), &result)
+	json.Unmarshal([]byte(gameinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(gameinfoJson), &gameinfo)
-		return gameinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(gameinfoJSON), &gameinfo)
+		return gameinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(gameinfoJson), &gameinfo)
+	json.Unmarshal([]byte(gameinfoJSON), &gameinfo)
 	return gameinfo, nil
 }
 
+// RGRegister type
 type RGRegister struct {
 	Result struct {
 		Name       string  `json:"name"`
@@ -204,6 +208,7 @@ type RGRegister struct {
 	ID    string `json:"id"`
 }
 
+// RGRegister ...
 func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -213,43 +218,44 @@ func (appName AppType) RGRegister(params APIParams) (RGRegister, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var reg RGRegister
 
-	regJson := appName.APICall(&query)
-	if regJson == "EMPTY RPC INFO!" {
-		return reg, errors.New("EMPTY RPC INFO!")
+	regJSON := appName.APICall(&query)
+	if regJSON == "EMPTY RPC INFO" {
+		return reg, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(regJson)
+	//fmt.Println(regJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(regJson), &result)
+	json.Unmarshal([]byte(regJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(regJson), &reg)
-		return reg, errors.New(string(answer_error))
+		json.Unmarshal([]byte(regJSON), &reg)
+		return reg, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(regJson), &reg)
+	json.Unmarshal([]byte(regJSON), &reg)
 	return reg, nil
 }
 
+// RGPending type
 type RGPending struct {
 	Result struct {
 		Result     string   `json:"result"`
@@ -262,44 +268,46 @@ type RGPending struct {
 	ID    string `json:"id"`
 }
 
+// RGPending ...
 func (appName AppType) RGPending() (RGPending, error) {
 	params := make(APIParams, 2)
 	params[0] = `pending`
-	params[1] = ROGUE_EVALCODE
+	params[1] = rogueEvalCode
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var pending RGPending
 
-	pendingJson := appName.APICall(&query)
-	if pendingJson == "EMPTY RPC INFO!" {
-		return pending, errors.New("EMPTY RPC INFO!")
+	pendingJSON := appName.APICall(&query)
+	if pendingJSON == "EMPTY RPC INFO" {
+		return pending, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(pendingJson)
+	//fmt.Println(pendingJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(pendingJson), &result)
+	json.Unmarshal([]byte(pendingJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(pendingJson), &pending)
-		return pending, errors.New(string(answer_error))
+		json.Unmarshal([]byte(pendingJSON), &pending)
+		return pending, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(pendingJson), &pending)
+	json.Unmarshal([]byte(pendingJSON), &pending)
 	return pending, nil
 }
 
+// RGBailout type
 type RGBailout struct {
 	Result struct {
 		Name        string `json:"name"`
@@ -314,6 +322,7 @@ type RGBailout struct {
 	ID    string `json:"id"`
 }
 
+// RGBailout ...
 func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -323,43 +332,44 @@ func (appName AppType) RGBailout(params APIParams) (RGBailout, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var bail RGBailout
 
-	bailJson := appName.APICall(&query)
-	if bailJson == "EMPTY RPC INFO!" {
-		return bail, errors.New("EMPTY RPC INFO!")
+	bailJSON := appName.APICall(&query)
+	if bailJSON == "EMPTY RPC INFO" {
+		return bail, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(bailJson)
+	//fmt.Println(bailJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(bailJson), &result)
+	json.Unmarshal([]byte(bailJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(bailJson), &bail)
-		return bail, errors.New(string(answer_error))
+		json.Unmarshal([]byte(bailJSON), &bail)
+		return bail, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(bailJson), &bail)
+	json.Unmarshal([]byte(bailJSON), &bail)
 	return bail, nil
 }
 
+// RGHighLander type
 type RGHighLander struct {
 	Result struct {
 		Name        string `json:"name"`
@@ -374,6 +384,7 @@ type RGHighLander struct {
 	ID    string `json:"id"`
 }
 
+// RGHighLander ...
 func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -383,43 +394,44 @@ func (appName AppType) RGHighLander(params APIParams) (RGHighLander, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var hland RGHighLander
 
-	hlandJson := appName.APICall(&query)
-	if hlandJson == "EMPTY RPC INFO!" {
-		return hland, errors.New("EMPTY RPC INFO!")
+	hlandJSON := appName.APICall(&query)
+	if hlandJSON == "EMPTY RPC INFO" {
+		return hland, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(hlandJson)
+	//fmt.Println(hlandJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(hlandJson), &result)
+	json.Unmarshal([]byte(hlandJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(hlandJson), &hland)
-		return hland, errors.New(string(answer_error))
+		json.Unmarshal([]byte(hlandJSON), &hland)
+		return hland, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(hlandJson), &hland)
+	json.Unmarshal([]byte(hlandJSON), &hland)
 	return hland, nil
 }
 
+// RGPlayers type
 type RGPlayers struct {
 	Result struct {
 		Name          string   `json:"name"`
@@ -431,44 +443,46 @@ type RGPlayers struct {
 	ID    string `json:"id"`
 }
 
+// RGPlayers ...
 func (appName AppType) RGPlayers() (RGPlayers, error) {
 	params := make(APIParams, 2)
 	params[0] = `players`
-	params[1] = ROGUE_EVALCODE
+	params[1] = rogueEvalCode
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var players RGPlayers
 
-	playersJson := appName.APICall(&query)
-	if playersJson == "EMPTY RPC INFO!" {
-		return players, errors.New("EMPTY RPC INFO!")
+	playersJSON := appName.APICall(&query)
+	if playersJSON == "EMPTY RPC INFO" {
+		return players, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(playersJson)
+	//fmt.Println(playersJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(playersJson), &result)
+	json.Unmarshal([]byte(playersJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(playersJson), &players)
-		return players, errors.New(string(answer_error))
+		json.Unmarshal([]byte(playersJSON), &players)
+		return players, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(playersJson), &players)
+	json.Unmarshal([]byte(playersJSON), &players)
 	return players, nil
 }
 
+// RGSetName type
 type RGSetName struct {
 	Result struct {
 		Name   string `json:"name"`
@@ -479,6 +493,7 @@ type RGSetName struct {
 	ID    string `json:"id"`
 }
 
+// RGSetName ...
 func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -488,43 +503,44 @@ func (appName AppType) RGSetName(params APIParams) (RGSetName, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var pname RGSetName
 
-	pnameJson := appName.APICall(&query)
-	if pnameJson == "EMPTY RPC INFO!" {
-		return pname, errors.New("EMPTY RPC INFO!")
+	pnameJSON := appName.APICall(&query)
+	if pnameJSON == "EMPTY RPC INFO" {
+		return pname, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(pnameJson)
+	//fmt.Println(pnameJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(pnameJson), &result)
+	json.Unmarshal([]byte(pnameJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(pnameJson), &pname)
-		return pname, errors.New(string(answer_error))
+		json.Unmarshal([]byte(pnameJSON), &pname)
+		return pname, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(pnameJson), &pname)
+	json.Unmarshal([]byte(pnameJSON), &pname)
 	return pname, nil
 }
 
+// RGPlayerInfo type
 type RGPlayerInfo struct {
 	Result struct {
 		Result string `json:"result"`
@@ -549,6 +565,7 @@ type RGPlayerInfo struct {
 	ID    string `json:"id"`
 }
 
+// RGPlayerInfo ...
 func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 	if len(params) >= 1 {
 		if params[0] == nil {
@@ -558,43 +575,44 @@ func (appName AppType) RGPlayerInfo(params APIParams) (RGPlayerInfo, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var pinfo RGPlayerInfo
 
-	pinfoJson := appName.APICall(&query)
-	if pinfoJson == "EMPTY RPC INFO!" {
-		return pinfo, errors.New("EMPTY RPC INFO!")
+	pinfoJSON := appName.APICall(&query)
+	if pinfoJSON == "EMPTY RPC INFO" {
+		return pinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(pinfoJson)
+	//fmt.Println(pinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(pinfoJson), &result)
+	json.Unmarshal([]byte(pinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(pinfoJson), &pinfo)
-		return pinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(pinfoJSON), &pinfo)
+		return pinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(pinfoJson), &pinfo)
+	json.Unmarshal([]byte(pinfoJSON), &pinfo)
 	return pinfo, nil
 }
 
+// RGGames type
 type RGGames struct {
 	Result struct {
 		Name      string   `json:"name"`
@@ -607,6 +625,7 @@ type RGGames struct {
 	ID    string `json:"id"`
 }
 
+// RGGames ...
 func (appName AppType) RGGames() (RGGames, error) {
 	params := make(APIParams, 2)
 
@@ -618,39 +637,39 @@ func (appName AppType) RGGames() (RGGames, error) {
 
 	if len(params) >= 2 {
 		if params[1] == nil {
-			params[1] = ROGUE_EVALCODE
+			params[1] = rogueEvalCode
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
-		Method: CCLIB_METHOD,
-		Params: string(params_json),
+		Method: ccLibMethod,
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var gms RGGames
 
-	gmsJson := appName.APICall(&query)
-	if gmsJson == "EMPTY RPC INFO!" {
-		return gms, errors.New("EMPTY RPC INFO!")
+	gmsJSON := appName.APICall(&query)
+	if gmsJSON == "EMPTY RPC INFO" {
+		return gms, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(gmsJson)
+	//fmt.Println(gmsJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(gmsJson), &result)
+	json.Unmarshal([]byte(gmsJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(gmsJson), &gms)
-		return gms, errors.New(string(answer_error))
+		json.Unmarshal([]byte(gmsJSON), &gms)
+		return gms, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(gmsJson), &gms)
+	json.Unmarshal([]byte(gmsJSON), &gms)
 	return gms, nil
 }
