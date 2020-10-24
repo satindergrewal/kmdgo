@@ -37,35 +37,35 @@ func (appName AppType) CreateRawTransaction(params APIParams) (CreateRawTransact
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `createrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var createrawtransaction CreateRawTransaction
 
-	createrawtransactionJson := appName.APICall(&query)
-	if createrawtransactionJson == "EMPTY RPC INFO!" {
-		return createrawtransaction, errors.New("EMPTY RPC INFO!")
+	createrawtransactionJSON := appName.APICall(&query)
+	if createrawtransactionJSON == "EMPTY RPC INFO" {
+		return createrawtransaction, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(createrawtransactionJson), &result)
+	json.Unmarshal([]byte(createrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(createrawtransactionJson), &createrawtransaction)
-		return createrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(createrawtransactionJSON), &createrawtransaction)
+		return createrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(createrawtransactionJson), &createrawtransaction)
+	json.Unmarshal([]byte(createrawtransactionJSON), &createrawtransaction)
 	return createrawtransaction, nil
 }
 
@@ -103,35 +103,35 @@ type DecodeRawTransaction struct {
 }
 
 func (appName AppType) DecodeRawTransaction(params APIParams) (DecodeRawTransaction, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `decoderawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var decoderawtransaction DecodeRawTransaction
 
-	decoderawtransactionJson := appName.APICall(&query)
-	if decoderawtransactionJson == "EMPTY RPC INFO!" {
-		return decoderawtransaction, errors.New("EMPTY RPC INFO!")
+	decoderawtransactionJSON := appName.APICall(&query)
+	if decoderawtransactionJSON == "EMPTY RPC INFO" {
+		return decoderawtransaction, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(decoderawtransactionJson), &result)
+	json.Unmarshal([]byte(decoderawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(decoderawtransactionJson), &decoderawtransaction)
-		return decoderawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(decoderawtransactionJSON), &decoderawtransaction)
+		return decoderawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(decoderawtransactionJson), &decoderawtransaction)
+	json.Unmarshal([]byte(decoderawtransactionJSON), &decoderawtransaction)
 	return decoderawtransaction, nil
 }
 
@@ -146,35 +146,35 @@ type DecodeScript struct {
 }
 
 func (appName AppType) DecodeScript(params APIParams) (DecodeScript, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `decodescript`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var decodescript DecodeScript
 
-	decodescriptJson := appName.APICall(&query)
-	if decodescriptJson == "EMPTY RPC INFO!" {
-		return decodescript, errors.New("EMPTY RPC INFO!")
+	decodescriptJSON := appName.APICall(&query)
+	if decodescriptJSON == "EMPTY RPC INFO" {
+		return decodescript, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(decodescriptJson), &result)
+	json.Unmarshal([]byte(decodescriptJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(decodescriptJson), &decodescript)
-		return decodescript, errors.New(string(answer_error))
+		json.Unmarshal([]byte(decodescriptJSON), &decodescript)
+		return decodescript, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(decodescriptJson), &decodescript)
+	json.Unmarshal([]byte(decodescriptJSON), &decodescript)
 	return decodescript, nil
 }
 
@@ -189,35 +189,35 @@ type FundRawTransaction struct {
 }
 
 func (appName AppType) FundRawTransaction(params APIParams) (FundRawTransaction, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `fundrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var fundrawtransaction FundRawTransaction
 
-	fundrawtransactionJson := appName.APICall(&query)
-	if fundrawtransactionJson == "EMPTY RPC INFO!" {
-		return fundrawtransaction, errors.New("EMPTY RPC INFO!")
+	fundrawtransactionJSON := appName.APICall(&query)
+	if fundrawtransactionJSON == "EMPTY RPC INFO" {
+		return fundrawtransaction, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(fundrawtransactionJson), &result)
+	json.Unmarshal([]byte(fundrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(fundrawtransactionJson), &fundrawtransaction)
-		return fundrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(fundrawtransactionJSON), &fundrawtransaction)
+		return fundrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(fundrawtransactionJson), &fundrawtransaction)
+	json.Unmarshal([]byte(fundrawtransactionJSON), &fundrawtransaction)
 	return fundrawtransaction, nil
 }
 
@@ -279,36 +279,36 @@ func (appName AppType) GetRawTransaction(params APIParams) (GetRawTransaction, e
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getrawtransaction GetRawTransaction
 
-	getrawtransactionJson := appName.APICall(&query)
-	if getrawtransactionJson == "EMPTY RPC INFO!" {
-		return getrawtransaction, errors.New("EMPTY RPC INFO!")
+	getrawtransactionJSON := appName.APICall(&query)
+	if getrawtransactionJSON == "EMPTY RPC INFO" {
+		return getrawtransaction, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getrawtransactionJson)
+	//fmt.Println(getrawtransactionJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getrawtransactionJson), &result)
+	json.Unmarshal([]byte(getrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getrawtransactionJson), &getrawtransaction)
-		return getrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getrawtransactionJSON), &getrawtransaction)
+		return getrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getrawtransactionJson), &getrawtransaction)
+	json.Unmarshal([]byte(getrawtransactionJSON), &getrawtransaction)
 	return getrawtransaction, nil
 }
 
@@ -320,36 +320,36 @@ func (appName AppType) GetRawTransactionDetailed(params APIParams) (GetRawTransa
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getrawtransaction GetRawTransactionDetailed
 
-	getrawtransactionJson := appName.APICall(&query)
-	if getrawtransactionJson == "EMPTY RPC INFO!" {
-		return getrawtransaction, errors.New("EMPTY RPC INFO!")
+	getrawtransactionJSON := appName.APICall(&query)
+	if getrawtransactionJSON == "EMPTY RPC INFO" {
+		return getrawtransaction, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getrawtransactionJson)
+	//fmt.Println(getrawtransactionJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getrawtransactionJson), &result)
+	json.Unmarshal([]byte(getrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getrawtransactionJson), &getrawtransaction)
-		return getrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getrawtransactionJSON), &getrawtransaction)
+		return getrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getrawtransactionJson), &getrawtransaction)
+	json.Unmarshal([]byte(getrawtransactionJSON), &getrawtransaction)
 	return getrawtransaction, nil
 }
 
@@ -367,36 +367,36 @@ func (appName AppType) SendRawTransaction(params APIParams) (SendRawTransaction,
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `sendrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var sendrawtransaction SendRawTransaction
 
-	sendrawtransactionJson := appName.APICall(&query)
-	if sendrawtransactionJson == "EMPTY RPC INFO!" {
-		return sendrawtransaction, errors.New("EMPTY RPC INFO!")
+	sendrawtransactionJSON := appName.APICall(&query)
+	if sendrawtransactionJSON == "EMPTY RPC INFO" {
+		return sendrawtransaction, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(sendrawtransactionJson)
+	//fmt.Println(sendrawtransactionJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(sendrawtransactionJson), &result)
+	json.Unmarshal([]byte(sendrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(sendrawtransactionJson), &sendrawtransaction)
-		return sendrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(sendrawtransactionJSON), &sendrawtransaction)
+		return sendrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(sendrawtransactionJson), &sendrawtransaction)
+	json.Unmarshal([]byte(sendrawtransactionJSON), &sendrawtransaction)
 	return sendrawtransaction, nil
 }
 
@@ -418,35 +418,35 @@ type SignRawTransaction struct {
 
 func (appName AppType) SignRawTransaction(params APIParams) (SignRawTransaction, error) {
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `signrawtransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var signrawtransaction SignRawTransaction
 
-	signrawtransactionJson := appName.APICall(&query)
-	if signrawtransactionJson == "EMPTY RPC INFO!" {
-		return signrawtransaction, errors.New("EMPTY RPC INFO!")
+	signrawtransactionJSON := appName.APICall(&query)
+	if signrawtransactionJSON == "EMPTY RPC INFO" {
+		return signrawtransaction, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(signrawtransactionJson)
+	//fmt.Println(signrawtransactionJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(signrawtransactionJson), &result)
+	json.Unmarshal([]byte(signrawtransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(signrawtransactionJson), &signrawtransaction)
-		return signrawtransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(signrawtransactionJSON), &signrawtransaction)
+		return signrawtransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(signrawtransactionJson), &signrawtransaction)
+	json.Unmarshal([]byte(signrawtransactionJSON), &signrawtransaction)
 	return signrawtransaction, nil
 }

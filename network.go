@@ -25,36 +25,36 @@ type AddNode struct {
 }
 
 func (appName AppType) AddNode(params APIParams) (AddNode, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `addnode`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var addnode AddNode
 
-	addnodeJson := appName.APICall(&query)
-	if addnodeJson == "EMPTY RPC INFO!" {
-		return addnode, errors.New("EMPTY RPC INFO!")
+	addnodeJSON := appName.APICall(&query)
+	if addnodeJSON == "EMPTY RPC INFO" {
+		return addnode, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(addnodeJson)
+	//fmt.Println(addnodeJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(addnodeJson), &result)
+	json.Unmarshal([]byte(addnodeJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(addnodeJson), &addnode)
-		return addnode, errors.New(string(answer_error))
+		json.Unmarshal([]byte(addnodeJSON), &addnode)
+		return addnode, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(addnodeJson), &addnode)
+	json.Unmarshal([]byte(addnodeJSON), &addnode)
 	return addnode, nil
 }
 
@@ -73,25 +73,25 @@ func (appName AppType) ClearBanned() (ClearBanned, error) {
 
 	var clearbanned ClearBanned
 
-	clearbannedJson := appName.APICall(&query)
-	if clearbannedJson == "EMPTY RPC INFO!" {
-		return clearbanned, errors.New("EMPTY RPC INFO!")
+	clearbannedJSON := appName.APICall(&query)
+	if clearbannedJSON == "EMPTY RPC INFO" {
+		return clearbanned, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(clearbannedJson)
+	//fmt.Println(clearbannedJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(clearbannedJson), &result)
+	json.Unmarshal([]byte(clearbannedJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(clearbannedJson), &clearbanned)
-		return clearbanned, errors.New(string(answer_error))
+		json.Unmarshal([]byte(clearbannedJSON), &clearbanned)
+		return clearbanned, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(clearbannedJson), &clearbanned)
+	json.Unmarshal([]byte(clearbannedJSON), &clearbanned)
 	return clearbanned, nil
 }
 
@@ -110,25 +110,25 @@ func (appName AppType) DisconnectNode(node string) (DisconnectNode, error) {
 
 	var disconnectnode DisconnectNode
 
-	disconnectnodeJson := appName.APICall(&query)
-	if disconnectnodeJson == "EMPTY RPC INFO!" {
-		return disconnectnode, errors.New("EMPTY RPC INFO!")
+	disconnectnodeJSON := appName.APICall(&query)
+	if disconnectnodeJSON == "EMPTY RPC INFO" {
+		return disconnectnode, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(disconnectnodeJson)
+	//fmt.Println(disconnectnodeJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(disconnectnodeJson), &result)
+	json.Unmarshal([]byte(disconnectnodeJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(disconnectnodeJson), &disconnectnode)
-		return disconnectnode, errors.New(string(answer_error))
+		json.Unmarshal([]byte(disconnectnodeJSON), &disconnectnode)
+		return disconnectnode, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(disconnectnodeJson), &disconnectnode)
+	json.Unmarshal([]byte(disconnectnodeJSON), &disconnectnode)
 	return disconnectnode, nil
 }
 
@@ -146,36 +146,36 @@ type GetAddedNodeInfo struct {
 }
 
 func (appName AppType) GetAddedNodeInfo(params APIParams) (GetAddedNodeInfo, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getaddednodeinfo`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getaddednodeinfo GetAddedNodeInfo
 
-	getaddednodeinfoJson := appName.APICall(&query)
-	if getaddednodeinfoJson == "EMPTY RPC INFO!" {
-		return getaddednodeinfo, errors.New("EMPTY RPC INFO!")
+	getaddednodeinfoJSON := appName.APICall(&query)
+	if getaddednodeinfoJSON == "EMPTY RPC INFO" {
+		return getaddednodeinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getaddednodeinfoJson)
+	//fmt.Println(getaddednodeinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getaddednodeinfoJson), &result)
+	json.Unmarshal([]byte(getaddednodeinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getaddednodeinfoJson), &getaddednodeinfo)
-		return getaddednodeinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getaddednodeinfoJSON), &getaddednodeinfo)
+		return getaddednodeinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getaddednodeinfoJson), &getaddednodeinfo)
+	json.Unmarshal([]byte(getaddednodeinfoJSON), &getaddednodeinfo)
 	return getaddednodeinfo, nil
 }
 
@@ -194,25 +194,25 @@ func (appName AppType) GetConnectionCount() (GetConnectionCount, error) {
 
 	var getconnectioncount GetConnectionCount
 
-	getconnectioncountJson := appName.APICall(&query)
-	if getconnectioncountJson == "EMPTY RPC INFO!" {
-		return getconnectioncount, errors.New("EMPTY RPC INFO!")
+	getconnectioncountJSON := appName.APICall(&query)
+	if getconnectioncountJSON == "EMPTY RPC INFO" {
+		return getconnectioncount, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getconnectioncountJson)
+	//fmt.Println(getconnectioncountJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getconnectioncountJson), &result)
+	json.Unmarshal([]byte(getconnectioncountJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getconnectioncountJson), &getconnectioncount)
-		return getconnectioncount, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getconnectioncountJSON), &getconnectioncount)
+		return getconnectioncount, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getconnectioncountJson), &getconnectioncount)
+	json.Unmarshal([]byte(getconnectioncountJSON), &getconnectioncount)
 	return getconnectioncount, nil
 }
 
@@ -235,25 +235,25 @@ func (appName AppType) GetDeprecationInfo() (GetDeprecationInfo, error) {
 
 	var getdeprecationinfo GetDeprecationInfo
 
-	getdeprecationinfoJson := appName.APICall(&query)
-	if getdeprecationinfoJson == "EMPTY RPC INFO!" {
-		return getdeprecationinfo, errors.New("EMPTY RPC INFO!")
+	getdeprecationinfoJSON := appName.APICall(&query)
+	if getdeprecationinfoJSON == "EMPTY RPC INFO" {
+		return getdeprecationinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getdeprecationinfoJson)
+	//fmt.Println(getdeprecationinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getdeprecationinfoJson), &result)
+	json.Unmarshal([]byte(getdeprecationinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getdeprecationinfoJson), &getdeprecationinfo)
-		return getdeprecationinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getdeprecationinfoJSON), &getdeprecationinfo)
+		return getdeprecationinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getdeprecationinfoJson), &getdeprecationinfo)
+	json.Unmarshal([]byte(getdeprecationinfoJSON), &getdeprecationinfo)
 	return getdeprecationinfo, nil
 }
 
@@ -276,25 +276,25 @@ func (appName AppType) GetNetTotals() (GetNetTotals, error) {
 
 	var getnettotals GetNetTotals
 
-	getnettotalsJson := appName.APICall(&query)
-	if getnettotalsJson == "EMPTY RPC INFO!" {
-		return getnettotals, errors.New("EMPTY RPC INFO!")
+	getnettotalsJSON := appName.APICall(&query)
+	if getnettotalsJSON == "EMPTY RPC INFO" {
+		return getnettotals, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getnettotalsJson)
+	//fmt.Println(getnettotalsJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnettotalsJson), &result)
+	json.Unmarshal([]byte(getnettotalsJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnettotalsJson), &getnettotals)
-		return getnettotals, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnettotalsJSON), &getnettotals)
+		return getnettotals, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getnettotalsJson), &getnettotals)
+	json.Unmarshal([]byte(getnettotalsJSON), &getnettotals)
 	return getnettotals, nil
 }
 
@@ -330,25 +330,25 @@ func (appName AppType) GetNetworkInfo() (GetNetworkInfo, error) {
 
 	var getnetworkinfo GetNetworkInfo
 
-	getnetworkinfoJson := appName.APICall(&query)
-	if getnetworkinfoJson == "EMPTY RPC INFO!" {
-		return getnetworkinfo, errors.New("EMPTY RPC INFO!")
+	getnetworkinfoJSON := appName.APICall(&query)
+	if getnetworkinfoJSON == "EMPTY RPC INFO" {
+		return getnetworkinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getnetworkinfoJson)
+	//fmt.Println(getnetworkinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnetworkinfoJson), &result)
+	json.Unmarshal([]byte(getnetworkinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnetworkinfoJson), &getnetworkinfo)
-		return getnetworkinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnetworkinfoJSON), &getnetworkinfo)
+		return getnetworkinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getnetworkinfoJson), &getnetworkinfo)
+	json.Unmarshal([]byte(getnetworkinfoJSON), &getnetworkinfo)
 	return getnetworkinfo, nil
 }
 
@@ -388,25 +388,25 @@ func (appName AppType) GetPeerInfo() (GetPeerInfo, error) {
 
 	var getpeerinfo GetPeerInfo
 
-	getpeerinfoJson := appName.APICall(&query)
-	if getpeerinfoJson == "EMPTY RPC INFO!" {
-		return getpeerinfo, errors.New("EMPTY RPC INFO!")
+	getpeerinfoJSON := appName.APICall(&query)
+	if getpeerinfoJSON == "EMPTY RPC INFO" {
+		return getpeerinfo, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(getpeerinfoJson)
+	//fmt.Println(getpeerinfoJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getpeerinfoJson), &result)
+	json.Unmarshal([]byte(getpeerinfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getpeerinfoJson), &getpeerinfo)
-		return getpeerinfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getpeerinfoJSON), &getpeerinfo)
+		return getpeerinfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getpeerinfoJson), &getpeerinfo)
+	json.Unmarshal([]byte(getpeerinfoJSON), &getpeerinfo)
 	return getpeerinfo, nil
 }
 
@@ -428,25 +428,25 @@ func (appName AppType) ListBanned() (ListBanned, error) {
 
 	var listbanned ListBanned
 
-	listbannedJson := appName.APICall(&query)
-	if listbannedJson == "EMPTY RPC INFO!" {
-		return listbanned, errors.New("EMPTY RPC INFO!")
+	listbannedJSON := appName.APICall(&query)
+	if listbannedJSON == "EMPTY RPC INFO" {
+		return listbanned, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(listbannedJson)
+	//fmt.Println(listbannedJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(listbannedJson), &result)
+	json.Unmarshal([]byte(listbannedJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(listbannedJson), &listbanned)
-		return listbanned, errors.New(string(answer_error))
+		json.Unmarshal([]byte(listbannedJSON), &listbanned)
+		return listbanned, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(listbannedJson), &listbanned)
+	json.Unmarshal([]byte(listbannedJSON), &listbanned)
 	return listbanned, nil
 }
 
@@ -465,25 +465,25 @@ func (appName AppType) Ping() (Ping, error) {
 
 	var ping Ping
 
-	pingJson := appName.APICall(&query)
-	if pingJson == "EMPTY RPC INFO!" {
-		return ping, errors.New("EMPTY RPC INFO!")
+	pingJSON := appName.APICall(&query)
+	if pingJSON == "EMPTY RPC INFO" {
+		return ping, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(pingJson)
+	//fmt.Println(pingJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(pingJson), &result)
+	json.Unmarshal([]byte(pingJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(pingJson), &ping)
-		return ping, errors.New(string(answer_error))
+		json.Unmarshal([]byte(pingJSON), &ping)
+		return ping, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(pingJson), &ping)
+	json.Unmarshal([]byte(pingJSON), &ping)
 	return ping, nil
 }
 
@@ -494,35 +494,35 @@ type SetBan struct {
 }
 
 func (appName AppType) SetBan(params APIParams) (SetBan, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `setban`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var setban SetBan
 
-	setbanJson := appName.APICall(&query)
-	if setbanJson == "EMPTY RPC INFO!" {
-		return setban, errors.New("EMPTY RPC INFO!")
+	setbanJSON := appName.APICall(&query)
+	if setbanJSON == "EMPTY RPC INFO" {
+		return setban, errors.New("EMPTY RPC INFO")
 	}
-	//fmt.Println(setbanJson)
+	//fmt.Println(setbanJSON)
 
 	var result APIResult
 
-	json.Unmarshal([]byte(setbanJson), &result)
+	json.Unmarshal([]byte(setbanJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(setbanJson), &setban)
-		return setban, errors.New(string(answer_error))
+		json.Unmarshal([]byte(setbanJSON), &setban)
+		return setban, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(setbanJson), &setban)
+	json.Unmarshal([]byte(setbanJSON), &setban)
 	return setban, nil
 }

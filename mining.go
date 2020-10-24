@@ -27,43 +27,43 @@ type GetBlockSubsidy struct {
 }
 
 func (appName AppType) GetBlockSubsidy(params APIParams) (GetBlockSubsidy, error) {
-	var params_json string
+	var paramsJSON string
 
 	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
+		paramsJSON = `[]`
+		//fmt.Println(paramsJSON)
 	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		//fmt.Println(params_json)
+		paramsBytes, _ := json.Marshal(params)
+		paramsJSON = string(paramsBytes)
+		//fmt.Println(paramsJSON)
 	}
 
 	query := APIQuery{
 		Method: `getblocksubsidy`,
-		Params: params_json,
+		Params: paramsJSON,
 	}
 	//fmt.Println(query)
 
 	var getblocksubsidy GetBlockSubsidy
 
-	getblocksubsidyJson := appName.APICall(&query)
-	if getblocksubsidyJson == "EMPTY RPC INFO!" {
-		return getblocksubsidy, errors.New("EMPTY RPC INFO!")
+	getblocksubsidyJSON := appName.APICall(&query)
+	if getblocksubsidyJSON == "EMPTY RPC INFO" {
+		return getblocksubsidy, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblocksubsidyJson), &result)
+	json.Unmarshal([]byte(getblocksubsidyJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblocksubsidyJson), &getblocksubsidy)
-		return getblocksubsidy, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblocksubsidyJSON), &getblocksubsidy)
+		return getblocksubsidy, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblocksubsidyJson), &getblocksubsidy)
+	json.Unmarshal([]byte(getblocksubsidyJSON), &getblocksubsidy)
 	return getblocksubsidy, nil
 }
 
@@ -104,43 +104,43 @@ type GetBlockTemplate struct {
 }
 
 func (appName AppType) GetBlockTemplate(params APIParams) (GetBlockTemplate, error) {
-	var params_json string
+	var paramsJSON string
 
 	if params[0] == "" || params[0] == nil {
-		params_json = `[]`
-		//fmt.Println(params_json)
+		paramsJSON = `[]`
+		//fmt.Println(paramsJSON)
 	} else {
-		params_bytes, _ := json.Marshal(params)
-		params_json = string(params_bytes)
-		//fmt.Println(params_json)
+		paramsBytes, _ := json.Marshal(params)
+		paramsJSON = string(paramsBytes)
+		//fmt.Println(paramsJSON)
 	}
 
 	query := APIQuery{
 		Method: `getblocktemplate`,
-		Params: params_json,
+		Params: paramsJSON,
 	}
 	//fmt.Println(query)
 
 	var getblocktemplate GetBlockTemplate
 
-	getblocktemplateJson := appName.APICall(&query)
-	if getblocktemplateJson == "EMPTY RPC INFO!" {
-		return getblocktemplate, errors.New("EMPTY RPC INFO!")
+	getblocktemplateJSON := appName.APICall(&query)
+	if getblocktemplateJSON == "EMPTY RPC INFO" {
+		return getblocktemplate, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getblocktemplateJson), &result)
+	json.Unmarshal([]byte(getblocktemplateJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getblocktemplateJson), &getblocktemplate)
-		return getblocktemplate, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getblocktemplateJSON), &getblocktemplate)
+		return getblocktemplate, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getblocktemplateJson), &getblocktemplate)
+	json.Unmarshal([]byte(getblocktemplateJSON), &getblocktemplate)
 	return getblocktemplate, nil
 }
 
@@ -159,24 +159,24 @@ func (appName AppType) GetLocalSolps() (GetLocalSolps, error) {
 
 	var getlocalsolps GetLocalSolps
 
-	getlocalsolpsJson := appName.APICall(&query)
-	if getlocalsolpsJson == "EMPTY RPC INFO!" {
-		return getlocalsolps, errors.New("EMPTY RPC INFO!")
+	getlocalsolpsJSON := appName.APICall(&query)
+	if getlocalsolpsJSON == "EMPTY RPC INFO" {
+		return getlocalsolps, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getlocalsolpsJson), &result)
+	json.Unmarshal([]byte(getlocalsolpsJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getlocalsolpsJson), &getlocalsolps)
-		return getlocalsolps, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getlocalsolpsJSON), &getlocalsolps)
+		return getlocalsolps, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getlocalsolpsJson), &getlocalsolps)
+	json.Unmarshal([]byte(getlocalsolpsJSON), &getlocalsolps)
 	return getlocalsolps, nil
 }
 
@@ -210,24 +210,24 @@ func (appName AppType) GetMiningInfo() (GetMiningInfo, error) {
 
 	var getmininginfo GetMiningInfo
 
-	getmininginfoJson := appName.APICall(&query)
-	if getmininginfoJson == "EMPTY RPC INFO!" {
-		return getmininginfo, errors.New("EMPTY RPC INFO!")
+	getmininginfoJSON := appName.APICall(&query)
+	if getmininginfoJSON == "EMPTY RPC INFO" {
+		return getmininginfo, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getmininginfoJson), &result)
+	json.Unmarshal([]byte(getmininginfoJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getmininginfoJson), &getmininginfo)
-		return getmininginfo, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getmininginfoJSON), &getmininginfo)
+		return getmininginfo, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getmininginfoJson), &getmininginfo)
+	json.Unmarshal([]byte(getmininginfoJSON), &getmininginfo)
 	return getmininginfo, nil
 }
 
@@ -250,35 +250,35 @@ func (appName AppType) GetNetworkHashps(params APIParams) (GetNetworkHashps, err
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getnetworkhashps`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getnetworkhashps GetNetworkHashps
 
-	getnetworkhashpsJson := appName.APICall(&query)
-	if getnetworkhashpsJson == "EMPTY RPC INFO!" {
-		return getnetworkhashps, errors.New("EMPTY RPC INFO!")
+	getnetworkhashpsJSON := appName.APICall(&query)
+	if getnetworkhashpsJSON == "EMPTY RPC INFO" {
+		return getnetworkhashps, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &result)
+	json.Unmarshal([]byte(getnetworkhashpsJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
-		return getnetworkhashps, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnetworkhashpsJSON), &getnetworkhashps)
+		return getnetworkhashps, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getnetworkhashpsJson), &getnetworkhashps)
+	json.Unmarshal([]byte(getnetworkhashpsJSON), &getnetworkhashps)
 	return getnetworkhashps, nil
 }
 
@@ -301,35 +301,35 @@ func (appName AppType) GetNetworkSolps(params APIParams) (GetNetworkSolps, error
 		}
 	}
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `getnetworksolps`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var getnetworksolps GetNetworkSolps
 
-	getnetworksolpsJson := appName.APICall(&query)
-	if getnetworksolpsJson == "EMPTY RPC INFO!" {
-		return getnetworksolps, errors.New("EMPTY RPC INFO!")
+	getnetworksolpsJSON := appName.APICall(&query)
+	if getnetworksolpsJSON == "EMPTY RPC INFO" {
+		return getnetworksolps, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(getnetworksolpsJson), &result)
+	json.Unmarshal([]byte(getnetworksolpsJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(getnetworksolpsJson), &getnetworksolps)
-		return getnetworksolps, errors.New(string(answer_error))
+		json.Unmarshal([]byte(getnetworksolpsJSON), &getnetworksolps)
+		return getnetworksolps, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(getnetworksolpsJson), &getnetworksolps)
+	json.Unmarshal([]byte(getnetworksolpsJSON), &getnetworksolps)
 	return getnetworksolps, nil
 }
 
@@ -340,35 +340,35 @@ type PrioritiseTransaction struct {
 }
 
 func (appName AppType) PrioritiseTransaction(params APIParams) (PrioritiseTransaction, error) {
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `prioritisetransaction`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var prioritisetransaction PrioritiseTransaction
 
-	prioritisetransactionJson := appName.APICall(&query)
-	if prioritisetransactionJson == "EMPTY RPC INFO!" {
-		return prioritisetransaction, errors.New("EMPTY RPC INFO!")
+	prioritisetransactionJSON := appName.APICall(&query)
+	if prioritisetransactionJSON == "EMPTY RPC INFO" {
+		return prioritisetransaction, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(prioritisetransactionJson), &result)
+	json.Unmarshal([]byte(prioritisetransactionJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(prioritisetransactionJson), &prioritisetransaction)
-		return prioritisetransaction, errors.New(string(answer_error))
+		json.Unmarshal([]byte(prioritisetransactionJSON), &prioritisetransaction)
+		return prioritisetransaction, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(prioritisetransactionJson), &prioritisetransaction)
+	json.Unmarshal([]byte(prioritisetransactionJSON), &prioritisetransaction)
 	return prioritisetransaction, nil
 }
 
@@ -380,34 +380,34 @@ type SubmitBlock struct {
 
 func (appName AppType) SubmitBlock(params APIParams) (SubmitBlock, error) {
 
-	params_json, _ := json.Marshal(params)
-	//fmt.Println(string(params_json))
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
 
 	query := APIQuery{
 		Method: `submitblock`,
-		Params: string(params_json),
+		Params: string(paramsJSON),
 	}
 	//fmt.Println(query)
 
 	var submitblock SubmitBlock
 
-	submitblockJson := appName.APICall(&query)
-	if submitblockJson == "EMPTY RPC INFO!" {
-		return submitblock, errors.New("EMPTY RPC INFO!")
+	submitblockJSON := appName.APICall(&query)
+	if submitblockJSON == "EMPTY RPC INFO" {
+		return submitblock, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(submitblockJson), &result)
+	json.Unmarshal([]byte(submitblockJSON), &result)
 
 	if result.Error != nil {
-		answer_error, err := json.Marshal(result.Error)
+		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(submitblockJson), &submitblock)
-		return submitblock, errors.New(string(answer_error))
+		json.Unmarshal([]byte(submitblockJSON), &submitblock)
+		return submitblock, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(submitblockJson), &submitblock)
+	json.Unmarshal([]byte(submitblockJSON), &submitblock)
 	return submitblock, nil
 }
