@@ -425,10 +425,10 @@ RPC Port: 27486
 - [x]	getexports "chainname"
 - [x]	getimports "chainname"
 - [x]	getinitialcurrencystate "name"
-- [ ]	getlastimportin "fromname"
+- [x]	getlastimportin "fromname"
 - [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate"
 - [ ]	getblocktemplate ( "jsonrequestobject" )
-- [ ]	getnotarizationdata "currencyid" accepted
+- [x]	getnotarizationdata "currencyid" accepted
 - [ ]	getpendingtransfers "chainname"
 - [ ]	getsaplingtree "n"
 - [ ]	listcurrencies (includeexpired)

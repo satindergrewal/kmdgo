@@ -889,3 +889,247 @@ func (appName AppType) GetInitialCurrencyState(params APIParams) (GetInitialCurr
 	json.Unmarshal([]byte(GetInCurStJSON), &GetInCurSt)
 	return GetInCurSt, nil
 }
+
+// GetLastImportin type
+type GetLastImportin struct {
+	Result struct {
+		Lastimporttransaction     string             `json:"lastimporttransaction"`
+		Lastconfirmednotarization string             `json:"lastconfirmednotarization"`
+		Importtxtemplate          string             `json:"importtxtemplate"`
+		Nativeimportavailable     int64              `json:"nativeimportavailable"`
+		Tokenimportavailable      map[string]float64 `json:"tokenimportavailable"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetLastImportin returns the last import transaction from the chain specified and a blank transaction template to use when making new
+// import transactions. Since the typical use for this call is to make new import transactions from the other chain that will be then
+// broadcast to this chain, we include the template by default.
+//
+// getlastimportin "fromname"
+//
+// Arguments
+//    "fromname"                (string, required) name of the chain to get the last import transaction in from
+//
+// Result:
+//    {
+//        "lastimporttransaction": "hex"      Hex encoded serialized import transaction
+//        "lastconfirmednotarization" : "hex" Hex encoded last confirmed notarization transaction
+//        "importtxtemplate": "hex"           Hex encoded import template for new import transactions
+//        "nativeimportavailable": "amount"   Total amount of native import currency available to import as native
+//        "tokenimportavailable": "array"     ([{"currencyid":amount},..], required) tokens available to import, if controlled by this chain
+//    }
+//
+// Examples:
+// > verus getlastimportin jsondefinition
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getlastimportin", "params": [jsondefinition] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) GetLastImportin(params APIParams) (GetLastImportin, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getlastimportin`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetLastImpIn GetLastImportin
+
+	GetLastImpInJSON := appName.APICall(&query)
+	if GetLastImpInJSON == "EMPTY RPC INFO" {
+		return GetLastImpIn, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetLastImpInJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetLastImpInJSON), &GetLastImpIn)
+		return GetLastImpIn, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetLastImpInJSON), &GetLastImpIn)
+	return GetLastImpIn, nil
+}
+
+// GetNotarizationData type
+type GetNotarizationData struct {
+	Result struct {
+		Version       int `json:"version"`
+		Notarizations []struct {
+			Index        int    `json:"index"`
+			Txid         string `json:"txid"`
+			Notarization struct {
+				Version             int    `json:"version"`
+				Currencyid          string `json:"currencyid"`
+				Notaryaddress       string `json:"notaryaddress"`
+				Notarizationheight  int    `json:"notarizationheight"`
+				Mmrroot             string `json:"mmrroot"`
+				Notarizationprehash string `json:"notarizationprehash"`
+				Work                string `json:"work"`
+				Stake               string `json:"stake"`
+				Currencystate       struct {
+					Flags             int    `json:"flags"`
+					Currencyid        string `json:"currencyid"`
+					Reservecurrencies []struct {
+						Currencyid     string  `json:"currencyid"`
+						Weight         float64 `json:"weight"`
+						Reserves       float64 `json:"reserves"`
+						Priceinreserve float64 `json:"priceinreserve"`
+					} `json:"reservecurrencies"`
+					Initialsupply        float64               `json:"initialsupply"`
+					Emitted              float64               `json:"emitted"`
+					Supply               float64               `json:"supply"`
+					Currencies           map[string]Currencies `json:"currencies"`
+					Nativefees           int                   `json:"nativefees"`
+					Nativeconversionfees int                   `json:"nativeconversionfees"`
+				} `json:"currencystate"`
+				Prevnotarization  string        `json:"prevnotarization"`
+				Prevheight        int           `json:"prevheight"`
+				Crossnotarization string        `json:"crossnotarization"`
+				Crossheight       int           `json:"crossheight"`
+				Nodes             []interface{} `json:"nodes"`
+			} `json:"notarization"`
+		} `json:"notarizations"`
+		Forks               [][]int `json:"forks"`
+		Lastconfirmedheight int     `json:"lastconfirmedheight"`
+		Lastconfirmed       int     `json:"lastconfirmed"`
+		Bestchain           int     `json:"bestchain"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetNotarizationData returns the latest PBaaS notarization data for the specifed currencyid.
+//
+// getnotarizationdata "currencyid" accepted
+//
+// Arguments
+// 1. "currencyid"                  (string, required) the hex-encoded ID or string name  search for notarizations on
+// 2. "accepted"                    (bool, optional) accepted, not earned notarizations, default: true if on
+//                                                     VRSC or VRSCTEST, false otherwise
+//
+// Example Result:
+// {
+// 	"version": 1,
+// 	"notarizations": [
+// 	  {
+// 		"index": 0,
+// 		"txid": "936e0f4f318bf21c0cd804037526e336f8162bdf2409f72134868119752efd8f",
+// 		"notarization": {
+// 		  "version": 1,
+// 		  "currencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+// 		  "notaryaddress": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+// 		  "notarizationheight": 31112,
+// 		  "mmrroot": "9f95c86ffc6d7f076370dcb27c198c18505281e1abbf4bac742e46a005597548",
+// 		  "notarizationprehash": "4cbe080e1d9c188ab1bd56f4915298b6671aa556be1161ed8b0bebb5085bc5d6",
+// 		  "work": "00000000000000000000000000000000000000000000000000000000195f61be",
+// 		  "stake": "0000000000000000000000000000000000000000000000000000000000000000",
+// 		  "currencystate": {
+// 			"flags": 3,
+// 			"currencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+// 			"reservecurrencies": [
+// 			  {
+// 				"currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+// 				"weight": 0.50000000,
+// 				"reserves": 999894.45679682,
+// 				"priceinreserve": 0.99983971
+// 			  },
+// 			  {
+// 				"currencyid": "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3",
+// 				"weight": 0.50000000,
+// 				"reserves": 94.15401986,
+// 				"priceinreserve": 0.00009414
+// 			  }
+// 			],
+// 			"initialsupply": 2000000.00000000,
+// 			"emitted": 0.00000000,
+// 			"supply": 2000109.49758289,
+// 			"currencies": {
+// 			  "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": {
+// 				"reservein": 0.00000000,
+// 				"nativein": 0.99923512,
+// 				"reserveout": 0.99907519,
+// 				"lastconversionprice": 0.99983995,
+// 				"viaconversionprice": 0.99982722,
+// 				"fees": 0.00000000,
+// 				"conversionfees": 0.00000000
+// 			  },
+// 			  "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": {
+// 				"reservein": 0.00000000,
+// 				"nativein": 0.00000000,
+// 				"reserveout": 0.00000000,
+// 				"lastconversionprice": 0.00009414,
+// 				"viaconversionprice": 0.00009414,
+// 				"fees": 0.00000000,
+// 				"conversionfees": 0.00000000
+// 			  }
+// 			},
+// 			"nativefees": 12490,
+// 			"nativeconversionfees": 0
+// 		  },
+// 		  "prevnotarization": "a694a22cc3aee0212105021f5363803f87ff2fc49689749d3feb563fd1c9c2ab",
+// 		  "prevheight": 31081,
+// 		  "crossnotarization": "0000000000000000000000000000000000000000000000000000000000000000",
+// 		  "crossheight": 0,
+// 		  "nodes": [
+// 		  ]
+// 		}
+// 	  }
+// 	],
+// 	"forks": [
+// 	  [
+// 		0
+// 	  ]
+// 	],
+// 	"lastconfirmedheight": 31112,
+// 	"lastconfirmed": 0,
+// 	"bestchain": 0
+// }
+//
+// Examples:
+// > verus getnotarizationdata "currencyid" true
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnotarizationdata", "params": ["currencyid"] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) GetNotarizationData(params APIParams) (GetNotarizationData, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getnotarizationdata`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetNotarData GetNotarizationData
+
+	GetNotarDataJSON := appName.APICall(&query)
+	if GetNotarDataJSON == "EMPTY RPC INFO" {
+		return GetNotarData, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetNotarDataJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetNotarDataJSON), &GetNotarData)
+		return GetNotarData, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetNotarDataJSON), &GetNotarData)
+	return GetNotarData, nil
+}
