@@ -515,3 +515,134 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 	}
 	return GetCurCovrts, nil
 }
+
+// GetExports type
+type GetExports struct {
+	Result []struct {
+		Blockheight int    `json:"blockheight"`
+		Exportid    string `json:"exportid"`
+		Description struct {
+			Version          int         `json:"version"`
+			Exportcurrencyid string      `json:"exportcurrencyid"`
+			Numinputs        int         `json:"numinputs"`
+			Totalamounts     interface{} `json:"totalamounts"`
+			Totalfees        interface{} `json:"totalfees"`
+		} `json:"description"`
+		Transfers []struct {
+			Version               int     `json:"version"`
+			Currencyid            string  `json:"currencyid"`
+			Value                 float64 `json:"value"`
+			Flags                 int     `json:"flags"`
+			Preconvert            bool    `json:"preconvert,omitempty"`
+			Fees                  float64 `json:"fees"`
+			Destinationcurrencyid string  `json:"destinationcurrencyid"`
+			Destination           string  `json:"destination"`
+			Feeoutput             bool    `json:"feeoutput,omitempty"`
+		} `json:"transfers"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetExports Returns all pending export transfers that are not yet provable with confirmed notarizations.
+// These are the transactions that are crossing from one to another currency. In other words: conversions
+// It's output behaves like a mempool transactions, and the output of results disappear after a while, and new ones shows up.
+//
+// getexports "chainname"
+//
+// Arguments
+// 1. "chainname"                     (string, optional) name of the chain to look for. no parameter returns current chain in daemon.
+//
+// Example Result:
+// [
+//   {
+//     "blockheight": 144,
+//     "exportid": "ea087427e81352bd84887ff90d370e8cf5c51b61f694c673b75b64696391d777",
+//     "description": {
+//       "version": 1,
+//       "exportcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//       "numinputs": 2,
+//       "totalamounts": {
+//         "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": 94.15731371,
+//         "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 1000250.06291562
+//       },
+//       "totalfees": {
+//         "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": 0.02353932,
+//         "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 250.06291562
+//       }
+//     },
+//     "transfers": [
+//       {
+//         "version": 1,
+//         "currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "value": 1000250.06251562,
+//         "flags": 4101,
+//         "preconvert": true,
+//         "fees": 0.0002,
+//         "destinationcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//         "destination": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt"
+//       },
+//       {
+//         "version": 1,
+//         "currencyid": "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3",
+//         "value": 94.15731371,
+//         "flags": 4101,
+//         "preconvert": true,
+//         "fees": 0.0002,
+//         "destinationcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//         "destination": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt"
+//       },
+//       {
+//         "version": 1,
+//         "currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "value": 0,
+//         "flags": 9,
+//         "feeoutput": true,
+//         "fees": 0,
+//         "destinationcurrencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "destination": "RCdrw4BL7B8rKJ2iQqftvBA4SAtwGA3eBc"
+//       }
+//     ]
+//   },
+//   {},
+//   ...
+// ]
+//
+// Examples:
+// > verus getexports "chainname"
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getexports", "params": ["chainname"] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) GetExports(params APIParams) (GetExports, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getexports`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetExp GetExports
+
+	GetExpJSON := appName.APICall(&query)
+	if GetExpJSON == "EMPTY RPC INFO" {
+		return GetExp, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetExpJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetExpJSON), &GetExp)
+		return GetExp, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetExpJSON), &GetExp)
+	return GetExp, nil
+}

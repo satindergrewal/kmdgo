@@ -418,11 +418,11 @@ RPC Port: 27486
 #### Verus Multichain
 - [ ]	addmergedblock "hexdata" ( "jsonparametersobject" )
 - [ ]	definecurrency '{"name": "BAAS", ..., "nodes":[{"networkaddress":"identity"},..]}'
-- [ ]	getcrossnotarization "systemid" '["notarizationtxid1", "notarizationtxid2", ...]'
+- [ ]	getcrossnotarization "systemid" '["notarizationtxid1", "notarizationtxid2", ...]' - TODO - Need example command/output
 - [x]	getcurrency "chainname"
 - [x]	getcurrencyconverters ["currency1","currency2",...]'
 - [x]	getcurrencystate "n"
-- [ ]	getexports "chainname"
+- [x]	getexports "chainname"
 - [ ]	getimports "chainname"
 - [ ]	getinitialcurrencystate "name"
 - [ ]	getlastimportin "fromname"
