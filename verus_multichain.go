@@ -97,27 +97,27 @@ func (appName AppType) GetCurrency(params APIParams) (GetCurrency, error) {
 	}
 	// fmt.Println(query)
 
-	var GetCrncy GetCurrency
+	var getCrncy GetCurrency
 
-	GetCrncyJSON := appName.APICall(&query)
-	if GetCrncyJSON == "EMPTY RPC INFO" {
-		return GetCrncy, errors.New("EMPTY RPC INFO")
+	getCrncyJSON := appName.APICall(&query)
+	if getCrncyJSON == "EMPTY RPC INFO" {
+		return getCrncy, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetCrncyJSON), &result)
+	json.Unmarshal([]byte(getCrncyJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetCrncyJSON), &GetCrncy)
-		return GetCrncy, errors.New(string(answerError))
+		json.Unmarshal([]byte(getCrncyJSON), &getCrncy)
+		return getCrncy, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetCrncyJSON), &GetCrncy)
-	return GetCrncy, nil
+	json.Unmarshal([]byte(getCrncyJSON), &getCrncy)
+	return getCrncy, nil
 }
 
 // GetCurrencyState type
@@ -161,27 +161,27 @@ func (appName AppType) GetCurrencyState(params APIParams) (GetCurrencyState, err
 	}
 	// fmt.Println(query)
 
-	var GetCurSt GetCurrencyState
+	var getCurSt GetCurrencyState
 
-	GetCurStJSON := appName.APICall(&query)
-	if GetCurStJSON == "EMPTY RPC INFO" {
-		return GetCurSt, errors.New("EMPTY RPC INFO")
+	getCurStJSON := appName.APICall(&query)
+	if getCurStJSON == "EMPTY RPC INFO" {
+		return getCurSt, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetCurStJSON), &result)
+	json.Unmarshal([]byte(getCurStJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetCurStJSON), &GetCurSt)
-		return GetCurSt, errors.New(string(answerError))
+		json.Unmarshal([]byte(getCurStJSON), &getCurSt)
+		return getCurSt, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetCurStJSON), &GetCurSt)
-	return GetCurSt, nil
+	json.Unmarshal([]byte(getCurStJSON), &getCurSt)
+	return getCurSt, nil
 }
 
 // CurrencyInfo type
@@ -302,31 +302,31 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 	}
 	// fmt.Println(query)
 
-	var GetCurCovrts GetCurrencyConverters
+	var getCurCovrts GetCurrencyConverters
 
-	GetCurCovrtsJSON := appName.APICall(&query)
-	if GetCurCovrtsJSON == "EMPTY RPC INFO" {
-		return GetCurCovrts, errors.New("EMPTY RPC INFO")
+	getCurCovrtsJSON := appName.APICall(&query)
+	if getCurCovrtsJSON == "EMPTY RPC INFO" {
+		return getCurCovrts, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetCurCovrtsJSON), &result)
+	json.Unmarshal([]byte(getCurCovrtsJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetCurCovrtsJSON), &GetCurCovrts)
-		return GetCurCovrts, errors.New(string(answerError))
+		json.Unmarshal([]byte(getCurCovrtsJSON), &getCurCovrts)
+		return getCurCovrts, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetCurCovrtsJSON), &GetCurCovrts)
-	// fmt.Println(GetCurCovrtsJSON)
+	json.Unmarshal([]byte(getCurCovrtsJSON), &getCurCovrts)
+	// fmt.Println(getCurCovrtsJSON)
 
 	var f interface{}
 	// m := f.(map[string]interface{})
-	err := json.Unmarshal([]byte(GetCurCovrtsJSON), &f)
+	err := json.Unmarshal([]byte(getCurCovrtsJSON), &f)
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -379,63 +379,63 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 				// fmt.Printf("vv -- %+v\n", vv)
 				if val, ok := vv.(map[string]interface{})["name"]; ok {
 					// fmt.Println("name ---", val)
-					GetCurCovrts.Result[0].CurrencyInfo.Name = val.(string)
+					getCurCovrts.Result[0].CurrencyInfo.Name = val.(string)
 				}
 				if val, ok := vv.(map[string]interface{})["version"]; ok {
 					// fmt.Println("version ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Version = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Version = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["options"]; ok {
 					// fmt.Println("options ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Options = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Options = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["parent"]; ok {
 					// fmt.Println("parent ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Parent = val.(string)
+					getCurCovrts.Result[k].CurrencyInfo.Parent = val.(string)
 				}
 				if val, ok := vv.(map[string]interface{})["systemid"]; ok {
 					// fmt.Println("systemid ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Systemid = val.(string)
+					getCurCovrts.Result[k].CurrencyInfo.Systemid = val.(string)
 				}
 				if val, ok := vv.(map[string]interface{})["currencyid"]; ok {
 					// fmt.Println("currencyid ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Currencyid = val.(string)
+					getCurCovrts.Result[k].CurrencyInfo.Currencyid = val.(string)
 				}
 				if val, ok := vv.(map[string]interface{})["notarizationprotocol"]; ok {
 					// fmt.Println("notarizationprotocol ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Notarizationprotocol = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Notarizationprotocol = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["proofprotocol"]; ok {
 					// fmt.Println("proofprotocol ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Proofprotocol = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Proofprotocol = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["idregistrationprice"]; ok {
 					// fmt.Println("idregistrationprice ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Idregistrationprice = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Idregistrationprice = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["idreferrallevels"]; ok {
 					// fmt.Println("idreferrallevels ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Idreferrallevels = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Idreferrallevels = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["minnotariesconfirm"]; ok {
 					// fmt.Println("minnotariesconfirm ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Minnotariesconfirm = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Minnotariesconfirm = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["billingperiod"]; ok {
 					// fmt.Println("billingperiod ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Billingperiod = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Billingperiod = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["notarizationreward"]; ok {
 					// fmt.Println("notarizationreward ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Notarizationreward = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Notarizationreward = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["startblock"]; ok {
 					// fmt.Println("startblock ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Startblock = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Startblock = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["endblock"]; ok {
 					// fmt.Println("endblock ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Endblock = int(val.(float64))
+					getCurCovrts.Result[k].CurrencyInfo.Endblock = int(val.(float64))
 				}
 				if val, ok := vv.(map[string]interface{})["currencies"]; ok {
 					// fmt.Printf("currencies type --- %T\n", val)
@@ -448,7 +448,7 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 					}
 					// fmt.Printf("%T\n", _tmpCurrencies)
 					// fmt.Printf("%+v\n", _tmpCurrencies)
-					GetCurCovrts.Result[k].CurrencyInfo.Currencies = _tmpCurrencies
+					getCurCovrts.Result[k].CurrencyInfo.Currencies = _tmpCurrencies
 				}
 				if val, ok := vv.(map[string]interface{})["weights"]; ok {
 					// fmt.Println("weights ---", val)
@@ -460,7 +460,7 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 					}
 					// fmt.Printf("%T\n", _tmpWeights)
 					// fmt.Printf("%+v\n", _tmpWeights)
-					GetCurCovrts.Result[k].CurrencyInfo.Weights = _tmpWeights
+					getCurCovrts.Result[k].CurrencyInfo.Weights = _tmpWeights
 				}
 				if val, ok := vv.(map[string]interface{})["conversions"]; ok {
 					// fmt.Println("conversions ---", val)
@@ -472,15 +472,15 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 					}
 					// fmt.Printf("%T\n", _tmpConversions)
 					// fmt.Printf("%+v\n", _tmpConversions)
-					GetCurCovrts.Result[k].CurrencyInfo.Conversions = _tmpConversions
+					getCurCovrts.Result[k].CurrencyInfo.Conversions = _tmpConversions
 				}
 				if val, ok := vv.(map[string]interface{})["initialsupply"]; ok {
 					// fmt.Println("initialsupply ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Initialsupply = val.(float64)
+					getCurCovrts.Result[k].CurrencyInfo.Initialsupply = val.(float64)
 				}
 				if val, ok := vv.(map[string]interface{})["prelaunchcarveout"]; ok {
 					// fmt.Println("prelaunchcarveout ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Prelaunchcarveout = val.(float64)
+					getCurCovrts.Result[k].CurrencyInfo.Prelaunchcarveout = val.(float64)
 				}
 				if val, ok := vv.(map[string]interface{})["initialcontributions"]; ok {
 					// fmt.Println("initialcontributions ---", val)
@@ -492,7 +492,7 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 					}
 					// fmt.Printf("%T\n", _tmpInitContri)
 					// fmt.Printf("%+v\n", _tmpInitContri)
-					GetCurCovrts.Result[k].CurrencyInfo.Initialcontributions = _tmpInitContri
+					getCurCovrts.Result[k].CurrencyInfo.Initialcontributions = _tmpInitContri
 				}
 				if val, ok := vv.(map[string]interface{})["preconversions"]; ok {
 					// fmt.Println("preconversions ---", val)
@@ -504,16 +504,16 @@ func (appName AppType) GetCurrencyConverters(params APIParams) (GetCurrencyConve
 					}
 					// fmt.Printf("%T\n", _tmpPreConv)
 					// fmt.Printf("%+v\n", _tmpPreConv)
-					GetCurCovrts.Result[k].CurrencyInfo.Preconversions = _tmpPreConv
+					getCurCovrts.Result[k].CurrencyInfo.Preconversions = _tmpPreConv
 				}
 				if val, ok := vv.(map[string]interface{})["eras"]; ok {
 					// fmt.Println("eras ---", val)
-					GetCurCovrts.Result[k].CurrencyInfo.Eras = val.([]interface{})
+					getCurCovrts.Result[k].CurrencyInfo.Eras = val.([]interface{})
 				}
 			}
 		}
 	}
-	return GetCurCovrts, nil
+	return getCurCovrts, nil
 }
 
 // GetExports type
@@ -624,27 +624,27 @@ func (appName AppType) GetExports(params APIParams) (GetExports, error) {
 	}
 	// fmt.Println(query)
 
-	var GetExp GetExports
+	var getExp GetExports
 
-	GetExpJSON := appName.APICall(&query)
-	if GetExpJSON == "EMPTY RPC INFO" {
-		return GetExp, errors.New("EMPTY RPC INFO")
+	getExpJSON := appName.APICall(&query)
+	if getExpJSON == "EMPTY RPC INFO" {
+		return getExp, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetExpJSON), &result)
+	json.Unmarshal([]byte(getExpJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetExpJSON), &GetExp)
-		return GetExp, errors.New(string(answerError))
+		json.Unmarshal([]byte(getExpJSON), &getExp)
+		return getExp, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetExpJSON), &GetExp)
-	return GetExp, nil
+	json.Unmarshal([]byte(getExpJSON), &getExp)
+	return getExp, nil
 }
 
 // GetImports type
@@ -753,27 +753,27 @@ func (appName AppType) GetImports(params APIParams) (GetImports, error) {
 	}
 	// fmt.Println(query)
 
-	var GetImp GetImports
+	var getImp GetImports
 
-	GetImpJSON := appName.APICall(&query)
-	if GetImpJSON == "EMPTY RPC INFO" {
-		return GetImp, errors.New("EMPTY RPC INFO")
+	getImpJSON := appName.APICall(&query)
+	if getImpJSON == "EMPTY RPC INFO" {
+		return getImp, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetImpJSON), &result)
+	json.Unmarshal([]byte(getImpJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetImpJSON), &GetImp)
-		return GetImp, errors.New(string(answerError))
+		json.Unmarshal([]byte(getImpJSON), &getImp)
+		return getImp, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetImpJSON), &GetImp)
-	return GetImp, nil
+	json.Unmarshal([]byte(getImpJSON), &getImp)
+	return getImp, nil
 }
 
 // GetInitialCurrencyState type
@@ -867,27 +867,27 @@ func (appName AppType) GetInitialCurrencyState(params APIParams) (GetInitialCurr
 	}
 	// fmt.Println(query)
 
-	var GetInCurSt GetInitialCurrencyState
+	var getInCurSt GetInitialCurrencyState
 
-	GetInCurStJSON := appName.APICall(&query)
-	if GetInCurStJSON == "EMPTY RPC INFO" {
-		return GetInCurSt, errors.New("EMPTY RPC INFO")
+	getInCurStJSON := appName.APICall(&query)
+	if getInCurStJSON == "EMPTY RPC INFO" {
+		return getInCurSt, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetInCurStJSON), &result)
+	json.Unmarshal([]byte(getInCurStJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetInCurStJSON), &GetInCurSt)
-		return GetInCurSt, errors.New(string(answerError))
+		json.Unmarshal([]byte(getInCurStJSON), &getInCurSt)
+		return getInCurSt, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetInCurStJSON), &GetInCurSt)
-	return GetInCurSt, nil
+	json.Unmarshal([]byte(getInCurStJSON), &getInCurSt)
+	return getInCurSt, nil
 }
 
 // GetLastImportin type
@@ -937,27 +937,27 @@ func (appName AppType) GetLastImportin(params APIParams) (GetLastImportin, error
 	}
 	// fmt.Println(query)
 
-	var GetLastImpIn GetLastImportin
+	var getLastImpIn GetLastImportin
 
-	GetLastImpInJSON := appName.APICall(&query)
-	if GetLastImpInJSON == "EMPTY RPC INFO" {
-		return GetLastImpIn, errors.New("EMPTY RPC INFO")
+	getLastImpInJSON := appName.APICall(&query)
+	if getLastImpInJSON == "EMPTY RPC INFO" {
+		return getLastImpIn, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetLastImpInJSON), &result)
+	json.Unmarshal([]byte(getLastImpInJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetLastImpInJSON), &GetLastImpIn)
-		return GetLastImpIn, errors.New(string(answerError))
+		json.Unmarshal([]byte(getLastImpInJSON), &getLastImpIn)
+		return getLastImpIn, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetLastImpInJSON), &GetLastImpIn)
-	return GetLastImpIn, nil
+	json.Unmarshal([]byte(getLastImpInJSON), &getLastImpIn)
+	return getLastImpIn, nil
 }
 
 // GetNotarizationData type
@@ -1111,25 +1111,151 @@ func (appName AppType) GetNotarizationData(params APIParams) (GetNotarizationDat
 	}
 	// fmt.Println(query)
 
-	var GetNotarData GetNotarizationData
+	var getNotarData GetNotarizationData
 
-	GetNotarDataJSON := appName.APICall(&query)
-	if GetNotarDataJSON == "EMPTY RPC INFO" {
-		return GetNotarData, errors.New("EMPTY RPC INFO")
+	getNotarDataJSON := appName.APICall(&query)
+	if getNotarDataJSON == "EMPTY RPC INFO" {
+		return getNotarData, errors.New("EMPTY RPC INFO")
 	}
 
 	var result APIResult
 
-	json.Unmarshal([]byte(GetNotarDataJSON), &result)
+	json.Unmarshal([]byte(getNotarDataJSON), &result)
 
 	if result.Result == nil {
 		answerError, err := json.Marshal(result.Error)
 		if err != nil {
 		}
-		json.Unmarshal([]byte(GetNotarDataJSON), &GetNotarData)
-		return GetNotarData, errors.New(string(answerError))
+		json.Unmarshal([]byte(getNotarDataJSON), &getNotarData)
+		return getNotarData, errors.New(string(answerError))
 	}
 
-	json.Unmarshal([]byte(GetNotarDataJSON), &GetNotarData)
-	return GetNotarData, nil
+	json.Unmarshal([]byte(getNotarDataJSON), &getNotarData)
+	return getNotarData, nil
+}
+
+// ListCurrencies type
+type ListCurrencies struct {
+	Result []struct {
+		Currencydefinition struct {
+			Name                 string               `json:"name"`
+			Version              int                  `json:"version"`
+			Options              int                  `json:"options"`
+			Parent               string               `json:"parent"`
+			Systemid             string               `json:"systemid"`
+			Currencyid           string               `json:"currencyid"`
+			Notarizationprotocol int                  `json:"notarizationprotocol"`
+			Proofprotocol        int                  `json:"proofprotocol"`
+			Idregistrationprice  int                  `json:"idregistrationprice"`
+			Idreferrallevels     int                  `json:"idreferrallevels"`
+			Minnotariesconfirm   int                  `json:"minnotariesconfirm"`
+			Billingperiod        int                  `json:"billingperiod"`
+			Notarizationreward   int                  `json:"notarizationreward"`
+			Startblock           int                  `json:"startblock"`
+			Endblock             int                  `json:"endblock"`
+			Currencies           []string             `json:"currencies"`
+			Weights              []float64            `json:"weights"`
+			Conversions          []float64            `json:"conversions"`
+			Initialsupply        float64              `json:"initialsupply"`
+			Minpreconversion     []float64            `json:"minpreconversion"`
+			Preallocation        []map[string]float64 `json:"preallocation"`
+			Prelaunchcarveout    float64              `json:"prelaunchcarveout"`
+			Initialcontributions []float64            `json:"initialcontributions"`
+			Preconversions       []float64            `json:"preconversions"`
+			Eras                 []interface{}        `json:"eras"`
+		} `json:"currencydefinition,omitempty"`
+		Bestheight        int    `json:"bestheight"`
+		Besttxid          string `json:"besttxid"`
+		Bestcurrencystate struct {
+			Flags             int    `json:"flags"`
+			Currencyid        string `json:"currencyid"`
+			Reservecurrencies []struct {
+				Currencyid     string  `json:"currencyid"`
+				Weight         float64 `json:"weight"`
+				Reserves       float64 `json:"reserves"`
+				Priceinreserve float64 `json:"priceinreserve"`
+			} `json:"reservecurrencies"`
+			Initialsupply        float64               `json:"initialsupply"`
+			Emitted              float64               `json:"emitted"`
+			Supply               float64               `json:"supply"`
+			Currencies           map[string]Currencies `json:"currencies"`
+			Nativefees           int                   `json:"nativefees"`
+			Nativeconversionfees int                   `json:"nativeconversionfees"`
+		} `json:"bestcurrencystate,omitempty"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// ListCurrencies returns a complete definition for any given chain if it is registered on the blockchain. If the chain requested
+// is NULL, chain definition of the current chain is returned.
+//
+// listcurrencies (includeexpired)
+//
+// Arguments
+// 1. "includeexpired"                (bool, optional) if true, include chains that are no longer active
+//
+// Result:
+// [
+//   {
+//     "version" : n,                 (int) version of this chain definition
+//     "name" : "string",           (string) name or symbol of the chain, same as passed
+//     "address" : "string",        (string) cryptocurrency address to send fee and non-converted premine
+//     "currencyid" : "hex-string", (string) i-address that represents the chain ID, same as the ID that launched the chain
+//     "premine" : n,                 (int) amount of currency paid out to the premine address in block #1, may be smart distribution
+//     "convertible" : "xxxx"       (bool) if this currency is a fractional reserve currency of Verus
+//     "startblock" : n,              (int) block # on this chain, which must be notarized into block one of the chain
+//     "endblock" : n,                (int) block # after which, this chain's useful life is considered to be over
+//     "eras" : "[obj, ...]",       (objarray) different chain phases of rewards and convertibility
+//     {
+//       "reward" : "[n, ...]",     (int) reward start for each era in native coin
+//       "decay" : "[n, ...]",      (int) exponential or linear decay of rewards during each era
+//       "halving" : "[n, ...]",    (int) blocks between halvings during each era
+//       "eraend" : "[n, ...]",     (int) block marking the end of each era
+//       "eraoptions" : "[n, ...]", (int) options (reserved)
+//     }
+//     "nodes"      : "[obj, ..]",  (objectarray, optional) up to 2 nodes that can be used to connect to the blockchain      [{
+//          "nodeaddress" : "txid", (string,  optional) internet, TOR, or other supported address for node
+//          "paymentaddress" : n,     (int,     optional) rewards payment address
+//        }, .. ]
+//   }, ...
+// ]
+//
+// Examples:
+// > verus listcurrencies true
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listcurrencies", "params": [true] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) ListCurrencies(params APIParams) (ListCurrencies, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `listcurrencies`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var listCur ListCurrencies
+
+	listCurJSON := appName.APICall(&query)
+	if listCurJSON == "EMPTY RPC INFO" {
+		return listCur, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(listCurJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(listCurJSON), &listCur)
+		return listCur, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(listCurJSON), &listCur)
+	return listCur, nil
 }

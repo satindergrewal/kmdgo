@@ -429,9 +429,9 @@ RPC Port: 27486
 - [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate"
 - [ ]	getblocktemplate ( "jsonrequestobject" )
 - [x]	getnotarizationdata "currencyid" accepted
-- [ ]	getpendingtransfers "chainname"
-- [ ]	getsaplingtree "n"
-- [ ]	listcurrencies (includeexpired)
+- [ ]	getpendingtransfers "chainname" - TODO - need example output
+- [ ]	getsaplingtree "n" - TODO - Need example command/output
+- [x]	listcurrencies (includeexpired)
 - [ ]	paynotarizationrewards "currencyid" "amount" "billingperiod"
 - [ ]	refundfailedlaunch "currencyid"
 - [ ]	reserveexchange '[{"toreserve": 1, "recipient": "RRehdmUV7oEAqoZnzEGBH34XysnWaBatct", "amount": 5.0}]'
