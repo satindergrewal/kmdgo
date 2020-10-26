@@ -423,8 +423,8 @@ RPC Port: 27486
 - [x]	getcurrencyconverters ["currency1","currency2",...]'
 - [x]	getcurrencystate "n"
 - [x]	getexports "chainname"
-- [ ]	getimports "chainname"
-- [ ]	getinitialcurrencystate "name"
+- [x]	getimports "chainname"
+- [x]	getinitialcurrencystate "name"
 - [ ]	getlastimportin "fromname"
 - [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate"
 - [ ]	getblocktemplate ( "jsonrequestobject" )

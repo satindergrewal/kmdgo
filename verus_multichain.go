@@ -544,7 +544,7 @@ type GetExports struct {
 	ID    string `json:"id"`
 }
 
-// GetExports Returns all pending export transfers that are not yet provable with confirmed notarizations.
+// GetExports returns all pending export transfers that are not yet provable with confirmed notarizations.
 // These are the transactions that are crossing from one to another currency. In other words: conversions
 // It's output behaves like a mempool transactions, and the output of results disappear after a while, and new ones shows up.
 //
@@ -645,4 +645,247 @@ func (appName AppType) GetExports(params APIParams) (GetExports, error) {
 
 	json.Unmarshal([]byte(GetExpJSON), &GetExp)
 	return GetExp, nil
+}
+
+// GetImports type
+type GetImports struct {
+	Result []struct {
+		Blockheight int    `json:"blockheight"`
+		Importid    string `json:"importid"`
+		Description struct {
+			Version          int         `json:"version"`
+			Sourcesystemid   string      `json:"sourcesystemid"`
+			Importcurrencyid string      `json:"importcurrencyid"`
+			Valuein          interface{} `json:"valuein"`
+			Tokensout        interface{} `json:"tokensout"`
+		} `json:"description"`
+		Transfers []struct {
+			Version               int     `json:"version"`
+			Currencyid            string  `json:"currencyid"`
+			Value                 float64 `json:"value"`
+			Flags                 int     `json:"flags"`
+			Preconvert            bool    `json:"preconvert,omitempty"`
+			Fees                  float64 `json:"fees"`
+			Destinationcurrencyid string  `json:"destinationcurrencyid"`
+			Destination           string  `json:"destination"`
+			Feeoutput             bool    `json:"feeoutput,omitempty"`
+		} `json:"transfers"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetImports returns all imports from a specific chain.
+//
+// getimports "chainname"
+//
+// Arguments
+// 1. "chainname"                     (string, optional) name of the chain to look for. no parameter returns current chain in daemon.
+//
+// Example Result:
+// [
+//   {
+//     "blockheight": 149,
+//     "importid": "c5b5aa070b57b6599ea8714692187f06261c215c641d13e06dacd74ed40272a3",
+//     "description": {
+//       "version": 1,
+//       "sourcesystemid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//       "importcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//       "valuein": {
+//         "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt": 1999933.86859995,
+//         "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": 94.15731371,
+//         "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": 1000500.06191861
+//       },
+//       "tokensout": {
+//         "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": 94.15731371
+//       }
+//     },
+//     "transfers": [
+//       {
+//         "version": 1,
+//         "currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "value": 1000250.06251562,
+//         "flags": 4101,
+//         "preconvert": true,
+//         "fees": 0.0002,
+//         "destinationcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//         "destination": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt"
+//       },
+//       {
+//         "version": 1,
+//         "currencyid": "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3",
+//         "value": 94.15731371,
+//         "flags": 4101,
+//         "preconvert": true,
+//         "fees": 0.0002,
+//         "destinationcurrencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+//         "destination": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt"
+//       },
+//       {
+//         "version": 1,
+//         "currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "value": 0,
+//         "flags": 9,
+//         "feeoutput": true,
+//         "fees": 0,
+//         "destinationcurrencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+//         "destination": "RCdrw4BL7B8rKJ2iQqftvBA4SAtwGA3eBc"
+//       }
+//     ]
+//   },
+//   {},
+//   ...
+// ]
+//
+// Examples:
+// > verus getimports "chainname"
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getimports", "params": ["chainname"] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) GetImports(params APIParams) (GetImports, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getimports`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetImp GetImports
+
+	GetImpJSON := appName.APICall(&query)
+	if GetImpJSON == "EMPTY RPC INFO" {
+		return GetImp, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetImpJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetImpJSON), &GetImp)
+		return GetImp, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetImpJSON), &GetImp)
+	return GetImp, nil
+}
+
+// GetInitialCurrencyState type
+type GetInitialCurrencyState struct {
+	Result struct {
+		Flags             int    `json:"flags"`
+		Currencyid        string `json:"currencyid"`
+		Reservecurrencies []struct {
+			Currencyid     string  `json:"currencyid"`
+			Weight         float64 `json:"weight"`
+			Reserves       float64 `json:"reserves"`
+			Priceinreserve float64 `json:"priceinreserve"`
+		} `json:"reservecurrencies"`
+		Initialsupply        float64               `json:"initialsupply"`
+		Emitted              float64               `json:"emitted"`
+		Supply               float64               `json:"supply"`
+		Currencies           map[string]Currencies `json:"currencies"`
+		Nativefees           int64                 `json:"nativefees"`
+		Nativeconversionfees int64                 `json:"nativeconversionfees"`
+	} `json:"result"`
+	Error Error  `json:"error"`
+	ID    string `json:"id"`
+}
+
+// GetInitialCurrencyState returns the total amount of preconversions that have been confirmed on the blockchain for the specified PBaaS chain.
+// This should be used to get information about chains that are not this chain, but are being launched by it.
+//
+// getinitialcurrencystate "name"
+//
+// Arguments
+//    "name"                    (string, required) name or chain ID of the chain to get the export transactions for
+//
+// Example Result:
+// {
+// 	"flags": 11,
+// 	"currencyid": "i84mndBk2Znydpgm9T9pTjVvBnHkhErzLt",
+// 	"reservecurrencies": [
+// 		{
+// 			"currencyid": "iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq",
+// 			"weight": 0.50000000,
+// 			"reserves": 999750.00099701,
+// 			"priceinreserve": 0.99975000
+// 		},
+// 		{
+// 			"currencyid": "iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3",
+// 			"weight": 0.50000000,
+// 			"reserves": 94.15731371,
+// 			"priceinreserve": 0.00009415
+// 		}
+// 	],
+// 	"initialsupply": 2000000.00000000,
+// 	"emitted": 0.00000000,
+// 	"supply": 2000000.00000000,
+// 	"currencies": {
+// 		"iJhCezBExJHvtyH3fGhNnt2NhU4Ztkf2yq": {
+// 			"reservein": 1000000.00000000,
+// 			"nativein": 0.00000000,
+// 			"reserveout": 249.99900299,
+// 			"lastconversionprice": 1.00000000,
+// 			"viaconversionprice": 0.99981249,
+// 			"fees": 250.06291562,
+// 			"conversionfees": 250.06251562
+// 		},
+// 		"iBBRjDbPf3wdFpghLotJQ3ESjtPBxn6NS3": {
+// 			"reservein": 94.15731371,
+// 			"nativein": 0.00000000,
+// 			"reserveout": 0.00000000,
+// 			"lastconversionprice": 0.00009414,
+// 			"viaconversionprice": 0.00009414,
+// 			"fees": 0.02353932,
+// 			"conversionfees": 0.02353932
+// 		}
+// 	},
+// 	"nativefees": 50006191861,
+// 	"nativeconversionfees": 50006151861
+// }
+//
+// Examples:
+// > verus getinitialcurrencystate name
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinitialcurrencystate", "params": [name] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) GetInitialCurrencyState(params APIParams) (GetInitialCurrencyState, error) {
+
+	// fmt.Println("params[0]", params[0])
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: `getinitialcurrencystate`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var GetInCurSt GetInitialCurrencyState
+
+	GetInCurStJSON := appName.APICall(&query)
+	if GetInCurStJSON == "EMPTY RPC INFO" {
+		return GetInCurSt, errors.New("EMPTY RPC INFO")
+	}
+
+	var result APIResult
+
+	json.Unmarshal([]byte(GetInCurStJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(GetInCurStJSON), &GetInCurSt)
+		return GetInCurSt, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(GetInCurStJSON), &GetInCurSt)
+	return GetInCurSt, nil
 }
