@@ -522,11 +522,11 @@ type GetExports struct {
 		Blockheight int    `json:"blockheight"`
 		Exportid    string `json:"exportid"`
 		Description struct {
-			Version          int         `json:"version"`
-			Exportcurrencyid string      `json:"exportcurrencyid"`
-			Numinputs        int         `json:"numinputs"`
-			Totalamounts     interface{} `json:"totalamounts"`
-			Totalfees        interface{} `json:"totalfees"`
+			Version          int                `json:"version"`
+			Exportcurrencyid string             `json:"exportcurrencyid"`
+			Numinputs        int                `json:"numinputs"`
+			Totalamounts     map[string]float64 `json:"totalamounts"`
+			Totalfees        map[string]float64 `json:"totalfees"`
 		} `json:"description"`
 		Transfers []struct {
 			Version               int     `json:"version"`
@@ -653,11 +653,11 @@ type GetImports struct {
 		Blockheight int    `json:"blockheight"`
 		Importid    string `json:"importid"`
 		Description struct {
-			Version          int         `json:"version"`
-			Sourcesystemid   string      `json:"sourcesystemid"`
-			Importcurrencyid string      `json:"importcurrencyid"`
-			Valuein          interface{} `json:"valuein"`
-			Tokensout        interface{} `json:"tokensout"`
+			Version          int                `json:"version"`
+			Sourcesystemid   string             `json:"sourcesystemid"`
+			Importcurrencyid string             `json:"importcurrencyid"`
+			Valuein          map[string]float64 `json:"valuein"`
+			Tokensout        map[string]float64 `json:"tokensout"`
 		} `json:"description"`
 		Transfers []struct {
 			Version               int     `json:"version"`
