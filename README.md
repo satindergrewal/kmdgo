@@ -426,16 +426,16 @@ RPC Port: 27486
 - [x]	getimports "chainname"
 - [x]	getinitialcurrencystate "name"
 - [x]	getlastimportin "fromname"
-- [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate"
-- [ ]	getblocktemplate ( "jsonrequestobject" )
+- [ ]	getlatestimportsout "name" "lastimporttransaction" "importtxtemplate" - TODO - Need example command/output
+- [ ]	getblocktemplate ( "jsonrequestobject" ) - TODO - Need example command/output
 - [x]	getnotarizationdata "currencyid" accepted
 - [ ]	getpendingtransfers "chainname" - TODO - need example output
 - [ ]	getsaplingtree "n" - TODO - Need example command/output
 - [x]	listcurrencies (includeexpired)
 - [ ]	paynotarizationrewards "currencyid" "amount" "billingperiod"
-- [ ]	refundfailedlaunch "currencyid"
+- [ ]	refundfailedlaunch "currencyid" - TODO - need example output
 - [ ]	reserveexchange '[{"toreserve": 1, "recipient": "RRehdmUV7oEAqoZnzEGBH34XysnWaBatct", "amount": 5.0}]'
-- [ ]	sendcurrency "fromaddress" '[{"address":... ,"amount":...},...]' (returntx)
+- [x]	sendcurrency "fromaddress" '[{"address":... ,"amount":...},...]' (returntx)
 - [ ]	submitacceptednotarization "hextx"
 
 #### Verus Wallet

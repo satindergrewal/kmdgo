@@ -1259,3 +1259,93 @@ func (appName AppType) ListCurrencies(params APIParams) (ListCurrencies, error) 
 	json.Unmarshal([]byte(listCurJSON), &listCur)
 	return listCur, nil
 }
+
+// SendCurrency type
+type SendCurrency struct {
+	Result string `json:"result"`
+	Error  Error  `json:"error"`
+	ID     string `json:"id"`
+}
+
+// SendCurrencyInput to generate JSON output which can be used as data input for SendCurrency API
+type SendCurrencyInput struct {
+	Address     string  `json:"address"`
+	Amount      float64 `json:"amount"`
+	Convertto   string  `json:"convertto,omitempty"`
+	Via         string  `json:"via,omitempty"`
+	Currency    string  `json:"currency,omitempty"`
+	Refundto    string  `json:"refundto,omitempty"`
+	Memo        string  `json:"memo,omitempty"`
+	Preconvert  bool    `json:"preconvert,omitempty"`
+	Subtractfee bool    `json:"subtractfee,omitempty"`
+}
+
+// SendCurrency sends one or many Verus outputs to one or many addresses on the same or another chain.
+// Funds are sourced automatically from the current wallet, which must be present, as in sendtoaddress.
+// If "fromaddress" is specified, all funds will be taken from that address, otherwise funds may come
+// from any source set of UTXOs controlled by the wallet.
+//
+// sendcurrency "fromaddress" '[{"address":... ,"amount":...},...]' (returntx)
+//
+// Arguments
+// 1. "fromaddress"             (string, required) The VerusID or address to send the funds from. "*" means all addresses
+// 2. "outputs"                 (array, required) An array of json objects representing currencies, amounts, and destinations to send.
+//     [{
+//       "currency": "name"   (string, required) Name of the source currency to send in this output, defaults to native of chain
+//       "amount":amount        (numeric, required) The numeric amount of currency, denominated in source currency
+//       "convertto":"name",  (string, optional) Valid currency to convert to, either a reserve of a fractional, or fractional
+//       "via":"name",        (string, optional) If source and destination currency are reserves, via is a common fractional to convert through
+//       "address":"dest"     (string, required) The address and optionally chain/system after the "@" as a system specific destination
+//       "refundto":"dest"    (string, optional) For pre-conversions, this is where refunds will go, defaults to fromaddress
+//       "memo":memo            (string, optional) If destination is a zaddr (not supported on testnet), a string message (not hexadecimal) to include.
+//       "preconvert":"false", (bool,   optional) auto-convert to PBaaS currency at market price, this only works if the order is mined before block start of the chain
+//       "subtractfee":"bool", (bool,   optional) if true, output must be of native or convertible reserve currency, and output will be reduced by share of fee
+//     }, ... ]
+// 3. "returntx"                (bool,   optional) defaults to false and transaction is sent, if true, transaction is signed and returned
+//
+// Result:
+//    "txid" : "transactionid" (string) The transaction id if (returntx) is false
+//    "hextx" : "hex"         (string) The hexadecimal, serialized transaction if (returntx) is true
+//
+// Examples:
+// > verus sendcurrency "*" '[{"currency":"btc","address":"RRehdmUV7oEAqoZnzEGBH34XysnWaBatct" ,"amount":500.0},...]'
+// > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendcurrency", "params": ["bob@" '[{"currency":"btc", "address":"alice@quad", "amount":500.0},...]'] }' -H 'content-type: text/plain;' http://127.0.0.1:27486/
+func (appName AppType) SendCurrency(params APIParams) (SendCurrency, error) {
+	if len(params) == 5 {
+		if params[4] == nil {
+			params[4] = false
+		}
+	}
+	paramsJSON, _ := json.Marshal(params)
+	//fmt.Println(string(paramsJSON))
+
+	query := new(APIQuery)
+	query = &APIQuery{
+		Method: `sendcurrency`,
+		Params: string(paramsJSON),
+	}
+	// fmt.Println(query)
+
+	var sndCur SendCurrency
+
+	sndCurJSON := appName.APICall(query)
+	if sndCurJSON == "EMPTY RPC INFO" {
+		return sndCur, errors.New("EMPTY RPC INFO")
+	}
+	// fmt.Println(sndCurJSON)
+
+	var result APIResult
+
+	json.Unmarshal([]byte(sndCurJSON), &result)
+
+	if result.Result == nil {
+		answerError, err := json.Marshal(result.Error)
+		if err != nil {
+		}
+		json.Unmarshal([]byte(sndCurJSON), &sndCur)
+		return sndCur, errors.New(string(answerError))
+	}
+
+	json.Unmarshal([]byte(sndCurJSON), &sndCur)
+	return sndCur, nil
+}
