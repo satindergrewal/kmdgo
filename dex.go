@@ -282,6 +282,8 @@ type DEXList struct {
 			Priority     int    `json:"priority"`
 			Recvtime     int    `json:"recvtime"`
 			Cancelled    int    `json:"cancelled"`
+			Anonmsg      string `json:"anonmsg,omitempty"`
+			Anonsender   string `json:"anonsender,omitempty"`
 		} `json:"matches"`
 		TagA   string `json:"tagA"`
 		TagB   string `json:"tagB"`
