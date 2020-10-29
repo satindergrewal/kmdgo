@@ -142,15 +142,30 @@ type GetBlock struct {
 			} `json:"vin"`
 			Vout []struct {
 				Value        float64 `json:"value"`
-				ValueZat     int64   `json:"valueZat"`
-				ValueSat     int64   `json:"valueSat"`
+				ValueZat     float64 `json:"valueZat"`
+				ValueSat     float64 `json:"valueSat"`
 				N            int     `json:"n"`
 				ScriptPubKey struct {
-					Type      string   `json:"type"`
+					Type            string `json:"type"`
+					Identityprimary struct {
+						Version           int      `json:"version"`
+						Flags             int      `json:"flags"`
+						Primaryaddresses  []string `json:"primaryaddresses"`
+						Minimumsignatures int      `json:"minimumsignatures"`
+						Identityaddress   string   `json:"identityaddress"`
+						Parent            string   `json:"parent"`
+						Name              string   `json:"name"`
+						Contentmap        struct {
+						} `json:"contentmap"`
+						Revocationauthority string `json:"revocationauthority"`
+						Recoveryauthority   string `json:"recoveryauthority"`
+						Privateaddress      string `json:"privateaddress"`
+					} `json:"identityprimary"`
 					ReqSigs   int      `json:"reqSigs"`
 					Addresses []string `json:"addresses"`
 					Asm       string   `json:"asm"`
 					Hex       string   `json:"hex"`
+					Hec       string   `json:"hec"`
 				} `json:"scriptPubKey"`
 				SpentTxID   string `json:"spentTxId"`
 				SpentIndex  int    `json:"spentIndex"`
