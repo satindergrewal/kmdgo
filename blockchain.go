@@ -123,6 +123,7 @@ type GetBlock struct {
 		Posrewardpk      string `json:"posrewardpk"`
 		Postxddest       string `json:"postxddest"`
 		Confirmations    int    `json:"confirmations"`
+		Rawconfirmations int    `json:"rawconfirmations"`
 		Size             int    `json:"size"`
 		Height           int    `json:"height"`
 		Version          int    `json:"version"`
