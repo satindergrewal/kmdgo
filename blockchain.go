@@ -113,8 +113,16 @@ func (appName AppType) GetBestBlockhash() (GetBestBlockhash, error) {
 type GetBlock struct {
 	Result struct {
 		Hash             string `json:"hash"`
+		Validationtype   string `json:"validationtype"`
+		Postarget        string `json:"postarget"`
+		Poshashbh        string `json:"poshashbh"`
+		Poshashtx        string `json:"poshashtx"`
+		Possourcetxid    string `json:"possourcetxid"`
+		Possourcevoutnum int    `json:"possourcevoutnum"`
+		Posrewarddest    string `json:"posrewarddest"`
+		Posrewardpk      string `json:"posrewardpk"`
+		Postxddest       string `json:"postxddest"`
 		Confirmations    int    `json:"confirmations"`
-		Rawconfirmations int    `json:"rawconfirmations"`
 		Size             int    `json:"size"`
 		Height           int    `json:"height"`
 		Version          int    `json:"version"`
@@ -122,41 +130,52 @@ type GetBlock struct {
 		Segid            int    `json:"segid"`
 		Finalsaplingroot string `json:"finalsaplingroot"`
 		Tx               []struct {
-			Txid         string `json:"txid"`
-			Overwintered bool   `json:"overwintered"`
-			Version      int    `json:"version"`
-			Locktime     int    `json:"locktime"`
-			Vin          []struct {
+			Txid           string `json:"txid"`
+			Overwintered   bool   `json:"overwintered"`
+			Version        int    `json:"version"`
+			Versiongroupid string `json:"versiongroupid"`
+			Locktime       int    `json:"locktime"`
+			Expiryheight   int    `json:"expiryheight"`
+			Vin            []struct {
 				Coinbase string `json:"coinbase"`
 				Sequence int64  `json:"sequence"`
 			} `json:"vin"`
 			Vout []struct {
 				Value        float64 `json:"value"`
-				ValueZat     int     `json:"valueZat"`
+				ValueZat     int64   `json:"valueZat"`
+				ValueSat     int64   `json:"valueSat"`
 				N            int     `json:"n"`
 				ScriptPubKey struct {
+					Type      string   `json:"type"`
+					ReqSigs   int      `json:"reqSigs"`
+					Addresses []string `json:"addresses"`
 					Asm       string   `json:"asm"`
 					Hex       string   `json:"hex"`
-					ReqSigs   int      `json:"reqSigs"`
-					Type      string   `json:"type"`
-					Addresses []string `json:"addresses"`
 				} `json:"scriptPubKey"`
+				SpentTxID   string `json:"spentTxId"`
+				SpentIndex  int    `json:"spentIndex"`
+				SpentHeight int    `json:"spentHeight"`
 			} `json:"vout"`
-			Vjoinsplit []interface{} `json:"vjoinsplit"`
+			Vjoinsplit      []interface{} `json:"vjoinsplit"`
+			ValueBalance    float64       `json:"valueBalance"`
+			ValueBalanceZat int           `json:"valueBalanceZat"`
+			VShieldedSpend  []interface{} `json:"vShieldedSpend"`
+			VShieldedOutput []interface{} `json:"vShieldedOutput"`
 		} `json:"tx"`
-		Time       int    `json:"time"`
-		Nonce      string `json:"nonce"`
-		Solution   string `json:"solution"`
-		Bits       string `json:"bits"`
-		Difficulty int    `json:"difficulty"`
-		Chainwork  string `json:"chainwork"`
-		Anchor     string `json:"anchor"`
-		Blocktype  string `json:"blocktype"`
+		Time       int     `json:"time"`
+		Nonce      string  `json:"nonce"`
+		Solution   string  `json:"solution"`
+		Bits       string  `json:"bits"`
+		Difficulty float64 `json:"difficulty"`
+		Chainwork  string  `json:"chainwork"`
+		Chainstake string  `json:"chainstake"`
+		Anchor     string  `json:"anchor"`
+		Blocktype  string  `json:"blocktype"`
 		ValuePools []struct {
 			ID            string  `json:"id"`
 			Monitored     bool    `json:"monitored"`
 			ChainValue    float64 `json:"chainValue"`
-			ChainValueZat int     `json:"chainValueZat"`
+			ChainValueZat int64   `json:"chainValueZat"`
 			ValueDelta    float64 `json:"valueDelta"`
 			ValueDeltaZat int     `json:"valueDeltaZat"`
 		} `json:"valuePools"`
@@ -191,6 +210,8 @@ func (appName AppType) GetBlock(params APIParams) (GetBlock, error) {
 	if getblockJSON == "EMPTY RPC INFO" {
 		return getblock, errors.New("EMPTY RPC INFO")
 	}
+
+	// fmt.Println(getblockJSON)
 
 	var result APIResult
 
