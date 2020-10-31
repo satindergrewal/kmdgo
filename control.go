@@ -23,6 +23,7 @@ type GetInfo struct {
 		Version             int     `json:"version"`
 		Protocolversion     int     `json:"protocolversion"`
 		KMDversion          string  `json:"KMDversion"`
+		VRSCversion         string  `rethinkdb:"VRSCversion"`
 		Notarized           int     `json:"notarized"`
 		PrevMoMheight       int     `json:"prevMoMheight"`
 		Notarizedhash       string  `json:"notarizedhash"`
