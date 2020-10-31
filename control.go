@@ -53,6 +53,10 @@ type GetInfo struct {
 		Premine             int     `json:"premine"`
 		Reward              int64   `json:"reward"`
 		Halving             int     `json:"halving"`
+		Decay               string  `json:"decay"`
+		Endsubsidy          string  `json:"endsubsidy"`
+		Isreserve           string  `json:"isreserve"`
+		Veruspos            int     `json:"veruspos"`
 		Commission          int     `json:"commission"`
 	} `json:"result"`
 	Error Error  `json:"error"`
