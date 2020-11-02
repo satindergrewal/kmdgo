@@ -16,6 +16,7 @@ import (
 	//"fmt"
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -190,4 +191,32 @@ func (appName AppType) APICall(q *APIQuery) string {
 
 	s := string(bodyText)
 	return s
+}
+
+// RPCJSON using golang's own http package
+func (appName AppType) RPCJSON(method string, params interface{}) (interface{}, error) {
+
+	// fmt.Printf("params -- %+v\n", params)
+
+	paramsJSON, _ := json.Marshal(params)
+	// fmt.Println(string(paramsJSON))
+
+	query := APIQuery{
+		Method: method,
+		Params: string(paramsJSON),
+	}
+	// fmt.Printf("%+v\n", query)
+
+	getJSON := appName.APICall(&query)
+	if getJSON == "EMPTY RPC INFO" {
+		fmt.Println("EMPTY RPC INFO")
+		return nil, errors.New("EMPTY RPC INFO")
+	}
+
+	// fmt.Printf("%v\n", getJSON)
+	var result APIResult
+	json.Unmarshal([]byte(getJSON), &result)
+	// fmt.Printf("%T\n", result.Result)
+	return result.Result, nil
+	// return "", nil
 }

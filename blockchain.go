@@ -138,29 +138,38 @@ type GetBlock struct {
 			Locktime       int    `json:"locktime"`
 			Expiryheight   int    `json:"expiryheight"`
 			Vin            []struct {
-				Coinbase string `json:"coinbase"`
-				Sequence int64  `json:"sequence"`
+				Txid      string `json:"txid"`
+				Vout      int    `json:"vout"`
+				ScriptSig struct {
+					Asm string `json:"asm"`
+					Hex string `json:"hex"`
+				} `json:"scriptSig"`
+				Value    float64 `json:"value"`
+				ValueSat int     `json:"valueSat"`
+				Address  string  `json:"address"`
+				Coinbase string  `json:"coinbase"`
+				Sequence int64   `json:"sequence"`
 			} `json:"vin"`
 			Vout []struct {
 				Value        float64 `json:"value"`
-				ValueZat     float64 `json:"valueZat"`
-				ValueSat     float64 `json:"valueSat"`
+				ValueZat     int     `json:"valueZat"`
+				ValueSat     int     `json:"valueSat"`
 				N            int     `json:"n"`
 				ScriptPubKey struct {
 					Type            string `json:"type"`
 					Identityprimary struct {
-						Version           int      `json:"version"`
-						Flags             int      `json:"flags"`
-						Primaryaddresses  []string `json:"primaryaddresses"`
-						Minimumsignatures int      `json:"minimumsignatures"`
-						Identityaddress   string   `json:"identityaddress"`
-						Parent            string   `json:"parent"`
-						Name              string   `json:"name"`
-						Contentmap        struct {
-						} `json:"contentmap"`
-						Revocationauthority string `json:"revocationauthority"`
-						Recoveryauthority   string `json:"recoveryauthority"`
-						Privateaddress      string `json:"privateaddress"`
+						Version             int         `json:"version"`
+						Flags               int         `json:"flags"`
+						Primaryaddresses    []string    `json:"primaryaddresses"`
+						Minimumsignatures   int         `json:"minimumsignatures"`
+						Identityaddress     string      `json:"identityaddress"`
+						Parent              string      `json:"parent"`
+						Name                string      `json:"name"`
+						Contentmap          interface{} `json:"contentmap"`
+						Revocationauthority string      `json:"revocationauthority"`
+						Recoveryauthority   string      `json:"recoveryauthority"`
+						Privateaddress      string      `json:"privateaddress"`
+						Timelock            float64     `json:"timelock"`
 					} `json:"identityprimary"`
 					ReqSigs   int      `json:"reqSigs"`
 					Addresses []string `json:"addresses"`
