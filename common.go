@@ -193,8 +193,8 @@ func (appName AppType) APICall(q *APIQuery) string {
 	return s
 }
 
-// RPCJSON using golang's own http package
-func (appName AppType) RPCJSON(method string, params interface{}) (interface{}, error) {
+// RPCResultMap using golang's own http package
+func (appName AppType) RPCResultMap(method string, params interface{}) (interface{}, error) {
 
 	// fmt.Printf("params -- %+v\n", params)
 
