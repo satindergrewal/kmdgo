@@ -212,11 +212,14 @@ func (appName AppType) RPCResultMap(method string, params interface{}) (interfac
 		fmt.Println("EMPTY RPC INFO")
 		return nil, errors.New("EMPTY RPC INFO")
 	}
-
 	// fmt.Printf("%v\n", getJSON)
-	var result APIResult
+
+	var result map[string]interface{}
 	json.Unmarshal([]byte(getJSON), &result)
-	// fmt.Printf("%T\n", result.Result)
-	return result.Result, nil
+	if result["error"] != nil {
+		// fmt.Printf("%v\n", result["error"].(map[string]interface{})["message"])
+		return nil, errors.New(result["error"].(map[string]interface{})["message"].(string))
+	}
+	return result["result"], nil
 	// return "", nil
 }
