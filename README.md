@@ -18,10 +18,16 @@ export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
 export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/linux -lsaplinglib -lpthread -ldl -lm"
 ```
 
-For MacOS setup these environment variables:
+For macOS x86_64 setup these environment variables:
 ```shell
 export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
 export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/darwin -lsaplinglib -framework Security"
+```
+
+For macOS arm64 setup these environment variables:
+```shell
+export CGO_CFLAGS="-I$HOME/go/src/github.com/satindergrewal/saplinglib/src/"
+export CGO_LDFLAGS="-L$HOME/go/src/github.com/satindergrewal/saplinglib/dist/darwin_arm64/ -lsaplinglib -framework Security"
 ```
 
 For MingW cross-platform windows setup these environment variables:
